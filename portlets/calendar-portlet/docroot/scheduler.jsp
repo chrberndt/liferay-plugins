@@ -147,7 +147,7 @@ String viewCalendarBookingURL = ParamUtil.getString(request, "viewCalendarBookin
 			date: new Date(<%= dateYear %>, <%= dateMonth %>, <%= dateDay %>),
 
 			<c:if test="<%= !themeDisplay.isSignedIn() %>">
-				disabled: true,
+				// disabled: true,
 			</c:if>
 
 			eventRecorder: window.<portlet:namespace />eventRecorder,
