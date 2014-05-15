@@ -62,6 +62,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "user-settings");
 				</aui:select>
 
 				<aui:select label="default-view" name="defaultView">
+					<aui:option label="agenda" selected='<%= defaultView.equals("agenda") %>' value="agenda" />
 					<aui:option label="day" selected='<%= defaultView.equals("day") %>' value="day" />
 					<aui:option label="month" selected='<%= defaultView.equals("month") %>' value="month" />
 					<aui:option label="week" selected='<%= defaultView.equals("week") %>' value="week" />
