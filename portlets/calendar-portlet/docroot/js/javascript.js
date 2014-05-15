@@ -375,9 +375,10 @@ AUI.add(
 			getCalendarName: function(name, calendarResourceName) {
 				var instance = this;
 
-				if (name !== calendarResourceName) {
-					name = [calendarResourceName, STR_DASH, name].join(STR_SPACE);
-				}
+				// Do not prepend the resource name
+				// if (name !== calendarResourceName) {
+				// 	name = [calendarResourceName, STR_DASH, name].join(STR_SPACE);
+				// }
 
 				return name;
 			},
