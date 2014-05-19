@@ -61,6 +61,7 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 		%>
 
 		<c:if test="<%= !childCalendarBookings.isEmpty() %>">
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
 			<dt>
 				<liferay-ui:message key="resources" />:
 			</dt>
@@ -78,6 +79,7 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 
 				<%= HtmlUtil.escape(StringUtil.merge(calendarResourcesNames, ", ")) %>
 			</dd>
+			</c:if>
 		</c:if>
 		<c:if test="<%= Validator.isNotNull(calendarBooking.getLocation()) %>">
 			<dt>
@@ -89,6 +91,8 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 		</c:if>
 	</dl>
 
+	<c:if test="<%= themeDisplay.isSignedIn() %>">
+
 	<liferay-ui:custom-attributes-available className="<%= CalendarBooking.class.getName() %>">
 		<liferay-ui:custom-attribute-list
 			className="<%= CalendarBooking.class.getName() %>"
@@ -97,6 +101,38 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 			label="<%= true %>"
 		/>
 	</liferay-ui:custom-attributes-available>
+	
+	</c:if>
+	
+	<c:if test="<%= !themeDisplay.isSignedIn() %>">
+<%
+	String className = CalendarBooking.class.getName(); 
+
+	long classPK = calendarBooking.getCalendarBookingId();
+	
+// 	ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
+	
+// 	String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
+	
+// 	List<String> attributeNames = ListUtil.remove(Collections.list(expandoBridge.getAttributeNames()), ListUtil.fromString(ignoreAttributeNames, StringPool.COMMA));
+%>
+
+	<%
+// 	for (String attributeName : attributeNames) {
+	%>
+			<dt>
+				TODO: get attribute name
+<%-- 				<%= attributeName %> --%>
+			</dt>
+			<dd>
+				TODO: get attribute value
+			</dd>		
+	<%
+// 	}
+	%>
+
+	
+	</c:if>
 
 	<p>
 		<%= calendarBooking.getDescription(locale) %>
