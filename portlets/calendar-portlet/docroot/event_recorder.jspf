@@ -38,6 +38,7 @@
 
 		<div class="scheduler-event-recorder-body">
 			<table>
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
 				<tpl if="values.permissions.MANAGE_BOOKINGS && (status != Liferay.CalendarWorkflow.STATUS_DRAFT)">
 					<tr class="calendar-portlet-event-recorder-status-row">
 						<td>
@@ -56,6 +57,7 @@
 						</td>
 					</tr>
 				</tpl>
+			</c:if>
 				<tr>
 					<td>
 						<liferay-ui:message key="when" />:
@@ -65,6 +67,7 @@
 					</td>
 				</tr>
 
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
 				<tr class="calendar-portlet-event-recorder-calendar-row">
 					<td>
 						<liferay-ui:message key="calendar" />:
@@ -89,7 +92,9 @@
 						</tpl>
 					</td>
 				</tr>
+			  </c:if>
 
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
 				<tpl if="values.editing && values.permissions.VIEW_BOOKING_DETAILS">
 					<tr id="<portlet:namespace />eventRecorderUsers">
 						<td>
@@ -108,6 +113,31 @@
 						</td>
 					</tr>
 				</tpl>
+			</c:if>
+
+					<tr id="<portlet:namespace />eventRecorderLocation">
+						<td>
+							<liferay-ui:message key="location" />:
+						</td>
+						<td>
+							TODO: add location
+						<%--
+							<label class="calendar-portlet-location"><liferay-ui:message key="loading" /></label>
+						--%>
+						</td>
+					</tr>
+
+					<tr id="<portlet:namespace />eventRecorderEventURL">
+						<td>
+							<liferay-ui:message key="link" />:
+						</td>
+						<td>
+							TODO: add event-url
+						<%--
+							<label class="calendar-portlet-location"><liferay-ui:message key="loading" /></label>
+						--%>
+						</td>
+					</tr>
 			</table>
 		</div>
 	</div>
