@@ -93,46 +93,73 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 
 	<c:if test="<%= themeDisplay.isSignedIn() %>">
 
+		<liferay-ui:custom-attributes-available className="<%= CalendarBooking.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= CalendarBooking.class.getName() %>"
+				classPK="<%= calendarBooking.getCalendarBookingId() %>"
+				editable="<%= false %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
+	
+	</c:if>
+	
 	<liferay-ui:custom-attributes-available className="<%= CalendarBooking.class.getName() %>">
-		<liferay-ui:custom-attribute-list
-			className="<%= CalendarBooking.class.getName() %>"
-			classPK="<%= calendarBooking.getCalendarBookingId() %>"
-			editable="<%= false %>"
-			label="<%= true %>"
-		/>
+
+<%-- Customized code starts here --%>		
+<%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
+<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
+<%@ page import="java.io.Serializable"%>
+
+
+		
+		<%
+		String className = CalendarBooking.class.getName(); 
+		long classPK = calendarBooking.getCalendarBookingId(); 
+		boolean editable = false; 
+		String ignoreAttributeNames = "lastImport,resourceUid"; 
+		boolean label = true; 
+		
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
+				
+		List<String> attributeNames = ListUtil.remove(Collections.list(expandoBridge.getAttributeNames()), ListUtil.fromString(ignoreAttributeNames, StringPool.COMMA));
+		%>
+		
+		<div class="taglib-custom-attributes-list">
+		
+			<dl>				
+				<%
+				for (String attributeName : attributeNames) {
+					
+					String name = attributeName;
+					Serializable value = expandoBridge.getAttribute(attributeName);
+
+					if ("eventURL".equals(attributeName)) {
+						
+						name = "Link"; 
+						value = "<a href=\"" + value.toString() + "\" target=\"_blank\">" + value.toString() + "</a>"; 
+					}
+				%>
+				
+				<dt>
+					<%= name %>:
+				</dt>
+				<dd>
+					<%= value %>
+				</dd>
+	
+				<%
+				}
+				%>
+			</dl>
+		
+		
+		</div>
+
+<%-- Customized code ends here --%>		
+		
 	</liferay-ui:custom-attributes-available>
-	
-	</c:if>
-	
-	<c:if test="<%= !themeDisplay.isSignedIn() %>">
-<%
-	String className = CalendarBooking.class.getName(); 
-
-	long classPK = calendarBooking.getCalendarBookingId();
-	
-// 	ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
-	
-// 	String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
-	
-// 	List<String> attributeNames = ListUtil.remove(Collections.list(expandoBridge.getAttributeNames()), ListUtil.fromString(ignoreAttributeNames, StringPool.COMMA));
-%>
-
-	<%
-// 	for (String attributeName : attributeNames) {
-	%>
-			<dt>
-				TODO: get attribute name
-<%-- 				<%= attributeName %> --%>
-			</dt>
-			<dd>
-				TODO: get attribute value
-			</dd>		
-	<%
-// 	}
-	%>
-
-	
-	</c:if>
 
 	<p>
 		<%= calendarBooking.getDescription(locale) %>
