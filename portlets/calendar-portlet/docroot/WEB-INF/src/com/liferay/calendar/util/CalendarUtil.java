@@ -35,6 +35,13 @@ import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 
+// Custom imports
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import java.io.Serializable;
+// Custom imports
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -214,7 +221,26 @@ public class CalendarUtil {
 			ThemeDisplay themeDisplay, CalendarBooking calendarBooking,
 			TimeZone timeZone)
 		throws SystemException {
+		
+// Custom code - retrieve the calendaBookings's custom fields
+		String className = CalendarBooking.class.getName();
+		long classPK = calendarBooking.getCalendarBookingId();
 
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil
+				.getExpandoBridge(calendarBooking.getCompanyId(), className, classPK);
+		
+		String eventURL = (String)expandoBridge.getAttribute("eventURL"); 
+		
+		if (eventURL != null) {
+			// Limit length of displayed eventURL to reasonable length
+			String linkLabel = eventURL; 
+			if (eventURL.length() > 50) {
+				linkLabel = eventURL.substring(0, 50) + " ..."; 
+			}
+			eventURL = "<a href=\"" + eventURL + "\" target=\"blank\">" + linkLabel + "</a>"; 
+		}
+// Custom code ends here
+		
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("allDay", calendarBooking.isAllDay());
@@ -233,6 +259,9 @@ public class CalendarUtil {
 			calendarBooking.getEndTime(), timeZone);
 
 		_addTimeProperties(jsonObject, "endTime", endTimeJCalendar);
+		
+// custom property
+		jsonObject.put("eventURL", eventURL); 
 
 		jsonObject.put("firstReminder", calendarBooking.getFirstReminder());
 		jsonObject.put(

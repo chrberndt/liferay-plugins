@@ -265,6 +265,8 @@ AUI.add(
 						content: calendarBooking.title,
 						description: calendarBooking.description,
 						endDate: endDate.getTime(),
+						// custom property: 
+						eventURL: calendarBooking.eventURL, 
 						firstReminder: calendarBooking.firstReminder,
 						firstReminderType: calendarBooking.firstReminderType,
 						location: calendarBooking.location,
@@ -1839,6 +1841,11 @@ AUI.add(
 								declineLinkEnabled: instance._hasWorkflowStatusPermission(schedulerEvent, CalendarWorkflow.STATUS_DENIED),
 								editing: editing,
 								endTime: templateData.endDate,
+								// start custom attributes
+//								eventURL: 'TODO: retrieve eventURL',
+								eventURL: schedulerEvent.get('eventURL'),
+								location: schedulerEvent.get('location'),
+								// end custom attributes
 								maybeLinkEnabled: instance._hasWorkflowStatusPermission(schedulerEvent, CalendarWorkflow.STATUS_MAYBE),
 								permissions: permissions,
 								startTime: templateData.startDate,

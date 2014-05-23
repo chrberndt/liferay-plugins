@@ -120,10 +120,7 @@
 							<liferay-ui:message key="location" />:
 						</td>
 						<td>
-							TODO: add location
-						<%--
-							<label class="calendar-portlet-location"><liferay-ui:message key="loading" /></label>
-						--%>
+							<label class="scheduler-event-recorder-location">{location}</label>
 						</td>
 					</tr>
 
@@ -132,7 +129,7 @@
 							<liferay-ui:message key="link" />:
 						</td>
 						<td>
-							TODO: add event-url
+							<label class="scheduler-event-recorder-event-url">{eventURL}</label>
 						<%--
 							<label class="calendar-portlet-location"><liferay-ui:message key="loading" /></label>
 						--%>
