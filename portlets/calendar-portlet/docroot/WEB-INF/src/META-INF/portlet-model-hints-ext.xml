@@ -8,4 +8,12 @@
 			<validator name="required" />
 		</field>
 	</model>
+	<!-- Start custom hints -->
+	<model name="com.liferay.calendar.model.CalendarBooking">
+		<field name="title" type="String" localized="true" >
+			<hint name="display-width">250</hint>
+			<hint name="max-length">255</hint>
+		</field>
+	</model>
+	<!-- End custom hints -->
 </model-hints>
