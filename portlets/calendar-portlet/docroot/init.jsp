@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="java.util.Locale"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
@@ -117,7 +118,7 @@ page import="java.util.TimeZone" %>
 <liferay-theme:defineObjects />
 
 <%
-String currentURL = PortalUtil.getCurrentURL(request);
+	String currentURL = PortalUtil.getCurrentURL(request);
 
 CalendarResource groupCalendarResource = CalendarResourceUtil.getGroupCalendarResource(liferayPortletRequest, scopeGroupId);
 CalendarResource userCalendarResource = CalendarResourceUtil.getUserCalendarResource(liferayPortletRequest, themeDisplay.getUserId());
@@ -161,6 +162,18 @@ if (isoTimeFormat) {
 	dateFormatTime = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", locale, timeZone);
 }
 else {
-	dateFormatTime = FastDateFormatFactoryUtil.getSimpleDateFormat("hh:mm a", locale, timeZone);
-}
+		// Custom check as requested by henrike 2014/07/29
+		// if am-pm, only with english locales
+		if (Locale.CANADA.equals(locale) 
+				|| Locale.ENGLISH.equals(locale)
+				|| Locale.UK.equals(locale)
+				|| Locale.US.equals(locale)) {
+			dateFormatTime = FastDateFormatFactoryUtil
+					.getSimpleDateFormat("hh:mm a", locale, timeZone);
+		} else {
+			dateFormatTime = FastDateFormatFactoryUtil
+					.getSimpleDateFormat("HH:mm", locale, timeZone);
+			isoTimeFormat = true; 
+		}
+	}
 %>
