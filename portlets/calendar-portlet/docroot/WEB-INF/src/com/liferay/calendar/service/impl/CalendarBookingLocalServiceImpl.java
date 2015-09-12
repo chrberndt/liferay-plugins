@@ -64,6 +64,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.social.model.SocialActivityConstants;
@@ -111,6 +112,8 @@ public class CalendarBookingLocalServiceImpl
 
 			descriptionMap.put(locale, sanitizedDescription);
 		}
+		
+        titleMap = fixTitleMap(titleMap, calendar.getGroupId()); 
 
 		java.util.Calendar startTimeJCalendar = JCalendarUtil.getJCalendar(
 			startTime);
@@ -238,6 +241,7 @@ public class CalendarBookingLocalServiceImpl
 			}
 		}
 	}
+
 
 	@Indexable(type = IndexableType.DELETE)
 	@Override
@@ -400,6 +404,41 @@ public class CalendarBookingLocalServiceImpl
 
 		return calendarBookingPersistence.fetchByUUID_G(uuid, groupId);
 	}
+	
+	   
+    /**
+     * 
+     * @param titleMap
+     * @return
+     */
+    private Map<Locale, String> fixTitleMap(Map<Locale, String> titleMap,
+            long groupId) throws PortalException, SystemException {
+
+        // Check whether a title for the site's default locale was provided.
+        // Otherwise set the site's default locale title with the title
+        // value provided. This a fix for wrong entries, which my occur
+        // if the calendar's event-recorder is used by an an user, whose
+        // display locale does not match the current site's default locale.
+
+        Locale defaultLocale = PortalUtil.getSiteDefaultLocale(groupId);
+
+        String defaultTitle = titleMap.get(defaultLocale);
+
+        Set<Locale> keySet = titleMap.keySet();
+
+        for (Locale locale : keySet) {
+
+            // System.out.println("addCB.locale = " + locale);
+            // System.out.println("addCB.value = " + titleMap.get(locale));
+
+            // This happens only, when the event-recorder is used
+            if (Validator.isNull(defaultTitle)) {
+                titleMap.put(defaultLocale, titleMap.get(locale));
+            }
+        }
+
+        return titleMap;
+    }
 
 	@Override
 	public CalendarBooking getCalendarBooking(long calendarBookingId)
@@ -750,6 +789,8 @@ public class CalendarBookingLocalServiceImpl
 		}
 
 		validate(titleMap, startTimeJCalendar, endTimeJCalendar);
+		
+		titleMap = fixTitleMap(titleMap, calendar.getGroupId()); 
 
 		calendarBooking.setGroupId(calendar.getGroupId());
 		calendarBooking.setCompanyId(user.getCompanyId());
