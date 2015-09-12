@@ -37,21 +37,33 @@ public final class ExtRepositoryObjectType<T extends ExtRepositoryModel> {
 	 * ExtRepositoryFileEntry}.
 	 */
 	public static final ExtRepositoryObjectType<ExtRepositoryFileEntry> FILE =
+<<<<<<< HEAD
 		new ExtRepositoryObjectType<ExtRepositoryFileEntry>("FILE");
+=======
+		new ExtRepositoryObjectType<>("FILE");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	/**
 	 * An {@link ExtRepositoryObjectType} constant referring to interface {@link
 	 * ExtRepositoryFolder}.
 	 */
 	public static final ExtRepositoryObjectType<ExtRepositoryFolder> FOLDER =
+<<<<<<< HEAD
 		new ExtRepositoryObjectType<ExtRepositoryFolder>("FOLDER");
+=======
+		new ExtRepositoryObjectType<>("FOLDER");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	/**
 	 * An {@link ExtRepositoryObjectType} constant referring to interface {@link
 	 * ExtRepositoryObject} (includes both files and folders).
 	 */
 	public static final ExtRepositoryObjectType<ExtRepositoryObject> OBJECT =
+<<<<<<< HEAD
 		new ExtRepositoryObjectType<ExtRepositoryObject>("OBJECT");
+=======
+		new ExtRepositoryObjectType<>("OBJECT");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public String toString() {

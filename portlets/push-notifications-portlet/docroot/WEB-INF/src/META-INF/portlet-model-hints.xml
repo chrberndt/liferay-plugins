@@ -6,6 +6,12 @@
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="platform" type="String" />
+<<<<<<< HEAD
 		<field name="token" type="String" />
+=======
+		<field name="token" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</model>
 </model-hints>

@@ -14,10 +14,10 @@
 
 package com.liferay.knowledgebase.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.knowledgebase.model.KBTemplate;
 import com.liferay.knowledgebase.service.KBTemplateLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the KBTemplate service. Represents a row in the &quot;KBTemplate&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see KBTemplateImpl
- * @see com.liferay.knowledgebase.model.KBTemplate
+ * @see KBTemplate
  * @generated
  */
+@ProviderType
 public abstract class KBTemplateBaseImpl extends KBTemplateModelImpl
 	implements KBTemplate {
 	/*
@@ -39,7 +40,7 @@ public abstract class KBTemplateBaseImpl extends KBTemplateModelImpl
 	 * Never modify or reference this class directly. All methods that expect a k b template model instance should use the {@link KBTemplate} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			KBTemplateLocalServiceUtil.addKBTemplate(this);
 		}

@@ -79,6 +79,7 @@ if (Validator.isNotNull(editorGadgetURL)) {
 	<aui:fieldset>
 		<c:choose>
 			<c:when test="<%= editorGadget %>">
+<<<<<<< HEAD
 				<aui:input name="url" type="hidden" value="<%= editorGadgetURL %>" />
 
 				<aui:field-wrapper label="url">
@@ -91,6 +92,12 @@ if (Validator.isNotNull(editorGadgetURL)) {
 				<aui:field-wrapper label="url">
 					<liferay-ui:input-resource url="<%= gadget.getUrl() %>" />
 				</aui:field-wrapper>
+=======
+				<aui:input name="url" type="resource" value="<%= editorGadgetURL %>" />
+			</c:when>
+			<c:when test="<%= gadget != null %>">
+				<aui:input name="url" type="resource" value="<%= gadget.getUrl() %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</c:when>
 			<c:otherwise>
 				<aui:input name="url" />
@@ -143,10 +150,10 @@ if (Validator.isNotNull(editorGadgetURL)) {
 	);
 
 	var onCheckedChange = function(event) {
-		var category = event.target.get('category')
+		var category = event.target.get('category');
 
 		if (event.newVal) {
-			if (A.Array.indexOf(selectedPortletCategoryNames, category) == -1) {
+			if (selectedPortletCategoryNames.indexOf(category) == -1) {
 				selectedPortletCategoryNames.push(category);
 
 				selectedPortletCategoryNamesNode.val(selectedPortletCategoryNames.join());
@@ -183,15 +190,15 @@ if (Validator.isNotNull(editorGadgetURL)) {
 
 		var category = '<%= treeNodeView.getObjId() %>';
 
-		var checked = ((<%= gadget == null %> && category == 'root//category.gadgets') || A.Array.indexOf(selectedPortletCategoryNames, category) > -1);
+		var checked = <%= gadget == null %> && category == 'root//category.gadgets' || selectedPortletCategoryNames.indexOf(category) > -1;
 
 		var categoryTreeNode = new CategoryTreeNode(
 			{
 				alwaysShowHitArea: false,
-				checked: checked,
 				category: category,
+				checked: checked,
 				id: '<%= treeNodeView.getId() %>',
-				label: '<%= UnicodeFormatter.toString(LanguageUtil.get(user.getLocale(), treeNodeView.getName())) %>',
+				label: '<%= UnicodeFormatter.toString(LanguageUtil.get(request, treeNodeView.getName())) %>',
 				leaf: false
 			}
 		);
@@ -209,9 +216,9 @@ if (Validator.isNotNull(editorGadgetURL)) {
 
 <%
 if (gadget == null) {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "publish-gadget"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "publish-gadget"), currentURL);
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "edit"), currentURL);
 }
 %>

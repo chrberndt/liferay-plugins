@@ -14,20 +14,26 @@
 
 package com.liferay.so.activities.hook.social;
 
+import com.liferay.portal.NoSuchModelException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutConstants;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -35,13 +41,14 @@ import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivitySet;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivitySetLocalServiceUtil;
-import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.WikiPageResource;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.so.activities.util.SocialActivityKeyConstants;
+import com.liferay.wiki.constants.WikiPortletKeys;
+import com.liferay.wiki.model.WikiNode;
+import com.liferay.wiki.model.WikiPage;
+import com.liferay.wiki.model.WikiPageResource;
+import com.liferay.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.wiki.service.WikiPageResourceLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -57,9 +64,7 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 	}
 
 	@Override
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException {
-
+	public void updateActivitySet(long activityId) throws PortalException {
 		SocialActivity activity =
 			SocialActivityLocalServiceUtil.fetchSocialActivity(activityId);
 
@@ -93,16 +98,15 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 					extraDataJSONObject = JSONFactoryUtil.createJSONObject();
 
 					extraDataJSONObject.put(
-						"sourceVersion", wikiPage.getVersion());
+						"sourceVersion",
+						MathUtil.format(wikiPage.getVersion() - 0.1, 1, 1));
 				}
 				else {
 					extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 						activitySet.getExtraData());
 				}
 
-				extraDataJSONObject.put(
-					"targetVersion",
-					MathUtil.format(wikiPage.getVersion() + 0.1, 1, 1));
+				extraDataJSONObject.put("targetVersion", wikiPage.getVersion());
 
 				activitySet.setExtraData(extraDataJSONObject.toString());
 
@@ -127,10 +131,10 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 				JSONObject extraDataJSONObject =
 					JSONFactoryUtil.createJSONObject();
 
-				extraDataJSONObject.put("sourceVersion", wikiPage.getVersion());
 				extraDataJSONObject.put(
-					"targetVersion",
-					MathUtil.format(wikiPage.getVersion() + 0.1, 1, 1));
+					"sourceVersion",
+					MathUtil.format(wikiPage.getVersion() - 0.1, 1, 1));
+				extraDataJSONObject.put("targetVersion", wikiPage.getVersion());
 
 				activitySet.setExtraData(extraDataJSONObject.toString());
 
@@ -204,6 +208,59 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 	}
 
 	@Override
+	protected String getAttachmentTitle(
+			SocialActivity activity, WikiPageResource pageResource,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		int activityType = activity.getType();
+
+		if ((activityType == SocialActivityConstants.TYPE_ADD_ATTACHMENT) ||
+			(activityType ==
+				SocialActivityConstants.TYPE_MOVE_ATTACHMENT_TO_TRASH) ||
+			(activityType ==
+				SocialActivityConstants.TYPE_RESTORE_ATTACHMENT_FROM_TRASH)) {
+
+			String link = null;
+
+			FileEntry fileEntry = null;
+
+			try {
+				long fileEntryId = GetterUtil.getLong(
+					activity.getExtraDataValue("fileEntryId"));
+
+				fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
+					fileEntryId);
+			}
+			catch (NoSuchModelException nsme) {
+			}
+
+			String fileEntryTitle = activity.getExtraDataValue(
+				"fileEntryTitle");
+
+			if ((fileEntry != null) && !fileEntry.isInTrash()) {
+				StringBundler sb = new StringBundler(9);
+
+				sb.append(serviceContext.getPathMain());
+				sb.append("/wiki/get_page_attachment?p_l_id=");
+				sb.append(serviceContext.getPlid());
+				sb.append("&nodeId=");
+				sb.append(pageResource.getNodeId());
+				sb.append("&title=");
+				sb.append(HttpUtil.encodeURL(pageResource.getTitle()));
+				sb.append("&fileName=");
+				sb.append(fileEntryTitle);
+
+				link = sb.toString();
+			}
+
+			return wrapLink(link, fileEntryTitle);
+		}
+
+		return StringPool.BLANK;
+	}
+
+	@Override
 	protected String getBody(
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
@@ -246,7 +303,7 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 
 		sb.append(
 			StringUtil.shorten(
-				assetRenderer.getSummary(serviceContext.getLocale()), 200));
+				HtmlUtil.escape(assetRenderer.getSummary(), 200)));
 
 		sb.append("</div></div>");
 
@@ -265,15 +322,20 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 			return null;
 		}
 
+<<<<<<< HEAD
 		long plid = PortalUtil.getPlidFromPortletId(groupId, PortletKeys.WIKI);
+=======
+		long plid = PortalUtil.getPlidFromPortletId(
+			groupId, WikiPortletKeys.WIKI);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			return null;
 		}
 
 		PortletURL diffsURL = PortletURLFactoryUtil.create(
-			serviceContext.getLiferayPortletRequest(), PortletKeys.WIKI, plid,
-			PortletRequest.RENDER_PHASE);
+			serviceContext.getLiferayPortletRequest(), WikiPortletKeys.WIKI,
+			plid, PortletRequest.RENDER_PHASE);
 
 		diffsURL.setParameter("struts_action", "/wiki/compare_versions");
 		diffsURL.setParameter(
@@ -375,15 +437,20 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 			return null;
 		}
 
+<<<<<<< HEAD
 		long plid = PortalUtil.getPlidFromPortletId(groupId, PortletKeys.WIKI);
+=======
+		long plid = PortalUtil.getPlidFromPortletId(
+			groupId, WikiPortletKeys.WIKI);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
 			return HtmlUtil.escape(node.getName());
 		}
 
 		PortletURL nodeURL = PortletURLFactoryUtil.create(
-			serviceContext.getLiferayPortletRequest(), PortletKeys.WIKI, plid,
-			PortletRequest.RENDER_PHASE);
+			serviceContext.getLiferayPortletRequest(), WikiPortletKeys.WIKI,
+			plid, PortletRequest.RENDER_PHASE);
 
 		nodeURL.setParameter("struts_action", "/wiki/view");
 		nodeURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
@@ -397,10 +464,16 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 			String title, ServiceContext serviceContext)
 		throws Exception {
 
+		WikiPageResource pageResource =
+			WikiPageResourceLocalServiceUtil.fetchWikiPageResource(
+				activity.getClassPK());
+
 		String nodeTitle = getNodeTitle(
 			activity.getClassPK(), activity.getGroupId(), serviceContext);
 
-		return new Object[] {nodeTitle};
+		return new Object[] {
+			nodeTitle,
+			getAttachmentTitle(activity, pageResource, serviceContext)};
 	}
 
 	@Override
@@ -431,11 +504,27 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-		if ((activity.getType() ==
-				SocialActivityKeyConstants.WIKI_ADD_COMMENT) ||
-			(activity.getType() == SocialActivityConstants.TYPE_ADD_COMMENT)) {
+		if ((activity.getType() == SocialActivityConstants.TYPE_ADD_COMMENT) ||
+			(activity.getType() ==
+				SocialActivityKeyConstants.WIKI_ADD_COMMENT)) {
 
 			titlePattern = "commented-on-a-wiki-page";
+		}
+		else if (activity.getType() ==
+					SocialActivityConstants.TYPE_ADD_ATTACHMENT) {
+
+			titlePattern = "added-an-attachment-x-to-a-wiki-page";
+		}
+		else if (activity.getType() ==
+					SocialActivityConstants.TYPE_MOVE_ATTACHMENT_TO_TRASH) {
+
+			titlePattern = "removed-an-attachment-x-from-a-wiki-page";
+		}
+		else if (activity.getType() ==
+					SocialActivityConstants.
+						TYPE_RESTORE_ATTACHMENT_FROM_TRASH) {
+
+			titlePattern = "restored-an-attachment-x-to-a-wiki-page";
 		}
 		else if (activity.getType() ==
 					SocialActivityKeyConstants.WIKI_ADD_PAGE) {
@@ -462,11 +551,27 @@ public class WikiActivityInterpreter extends SOSocialActivityInterpreter {
 		String titlePattern = null;
 
 		if ((activitySet.getType() ==
-				SocialActivityKeyConstants.WIKI_ADD_COMMENT) ||
+				SocialActivityConstants.TYPE_ADD_COMMENT) ||
 			(activitySet.getType() ==
-				SocialActivityConstants.TYPE_ADD_COMMENT)) {
+				SocialActivityKeyConstants.WIKI_ADD_COMMENT)) {
 
 			titlePattern = "commented-on-a-wiki-page";
+		}
+		else if (activitySet.getType() ==
+					SocialActivityConstants.TYPE_ADD_ATTACHMENT) {
+
+			titlePattern = "added-x-attachments-to-a-wiki-page";
+		}
+		else if (activitySet.getType() ==
+					SocialActivityConstants.TYPE_MOVE_ATTACHMENT_TO_TRASH) {
+
+			titlePattern = "removed-x-attachments-from-a-wiki-page";
+		}
+		else if (activitySet.getType() ==
+					SocialActivityConstants.
+						TYPE_RESTORE_ATTACHMENT_FROM_TRASH) {
+
+			titlePattern = "restored-x-attachments-to-a-wiki-page";
 		}
 		else if (activitySet.getType() ==
 					SocialActivityKeyConstants.WIKI_ADD_PAGE) {

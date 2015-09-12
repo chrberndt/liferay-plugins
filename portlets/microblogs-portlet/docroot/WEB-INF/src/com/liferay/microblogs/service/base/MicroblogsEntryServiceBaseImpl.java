@@ -21,12 +21,15 @@ import com.liferay.microblogs.service.persistence.MicroblogsEntryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.sql.DataSource;
 
@@ -74,7 +77,7 @@ public abstract class MicroblogsEntryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the microblogs entry remote service
 	 */
-	public com.liferay.microblogs.service.MicroblogsEntryService getMicroblogsEntryService() {
+	public MicroblogsEntryService getMicroblogsEntryService() {
 		return microblogsEntryService;
 	}
 
@@ -84,7 +87,7 @@ public abstract class MicroblogsEntryServiceBaseImpl extends BaseServiceImpl
 	 * @param microblogsEntryService the microblogs entry remote service
 	 */
 	public void setMicroblogsEntryService(
-		com.liferay.microblogs.service.MicroblogsEntryService microblogsEntryService) {
+		MicroblogsEntryService microblogsEntryService) {
 		this.microblogsEntryService = microblogsEntryService;
 	}
 
@@ -336,13 +339,18 @@ public abstract class MicroblogsEntryServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = microblogsEntryPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -356,8 +364,8 @@ public abstract class MicroblogsEntryServiceBaseImpl extends BaseServiceImpl
 
 	@BeanReference(type = com.liferay.microblogs.service.MicroblogsEntryLocalService.class)
 	protected com.liferay.microblogs.service.MicroblogsEntryLocalService microblogsEntryLocalService;
-	@BeanReference(type = com.liferay.microblogs.service.MicroblogsEntryService.class)
-	protected com.liferay.microblogs.service.MicroblogsEntryService microblogsEntryService;
+	@BeanReference(type = MicroblogsEntryService.class)
+	protected MicroblogsEntryService microblogsEntryService;
 	@BeanReference(type = MicroblogsEntryPersistence.class)
 	protected MicroblogsEntryPersistence microblogsEntryPersistence;
 	@BeanReference(type = MicroblogsEntryFinder.class)

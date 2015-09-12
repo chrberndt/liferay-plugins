@@ -18,7 +18,8 @@
 package com.liferay.so.hook.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -26,7 +27,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
@@ -53,7 +53,7 @@ public class SOAnnouncementsEntryServiceImpl
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, int priority,
 			boolean alert)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		AnnouncementsEntry announcementEntry = null;
 
@@ -72,9 +72,12 @@ public class SOAnnouncementsEntryServiceImpl
 				PermissionChecker permissionChecker =
 					PermissionThreadLocal.getPermissionChecker();
 
+				String portletId = PortletProviderUtil.getPortletId(
+					AnnouncementsEntry.class.getName(),
+					PortletProvider.Action.EDIT);
+
 				PortletPermissionUtil.check(
-					permissionChecker, plid, PortletKeys.ANNOUNCEMENTS,
-					ActionKeys.ADD_ENTRY);
+					permissionChecker, plid, portletId, ActionKeys.ADD_ENTRY);
 
 				announcementEntry = AnnouncementsEntryLocalServiceUtil.addEntry(
 					permissionChecker.getUserId(), classNameId, classPK, title,

@@ -18,15 +18,16 @@ import com.liferay.knowledgebase.model.KBTemplate;
 import com.liferay.knowledgebase.service.KBTemplateLocalServiceUtil;
 
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @deprecated As of 7.0.0, replaced by {@link KBTemplateLocalServiceUtil#getActionableDynamicQuery()}
  * @generated
  */
+@Deprecated
 public abstract class KBTemplateActionableDynamicQuery
 	extends BaseActionableDynamicQuery {
-	public KBTemplateActionableDynamicQuery() throws SystemException {
+	public KBTemplateActionableDynamicQuery() {
 		setBaseLocalService(KBTemplateLocalServiceUtil.getService());
 		setClass(KBTemplate.class);
 

@@ -14,19 +14,25 @@
 
 package com.liferay.chat.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 /**
  * @author Brian Wing Shun Chan
+ * @generated
  */
+@ProviderType
 public interface StatusFinder {
 	public java.util.List<java.lang.Object[]> findByModifiedDate(
-		long companyId, long userId, long modifiedDate, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		long companyId, long userId, long modifiedDate, int start, int end);
 
 	public java.util.List<java.lang.Object[]> findBySocialRelationTypes(
+<<<<<<< HEAD
 		long userId, int[] types, long modifiedDate, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
+=======
+		long userId, int[] types, long modifiedDate, int start, int end);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	public java.util.List<java.lang.Object[]> findByUsersGroups(long userId,
-		long modifiedDate, java.lang.String[] groupNames, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		long modifiedDate, java.lang.String[] groupNames, int start, int end);
 }

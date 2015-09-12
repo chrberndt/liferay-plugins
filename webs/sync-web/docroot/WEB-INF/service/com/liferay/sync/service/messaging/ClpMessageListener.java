@@ -14,6 +14,11 @@
 
 package com.liferay.sync.service.messaging;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
@@ -21,10 +26,18 @@ import com.liferay.sync.service.ClpSerializer;
 import com.liferay.sync.service.SyncDLFileVersionDiffLocalServiceUtil;
 import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
 import com.liferay.sync.service.SyncDLObjectServiceUtil;
+<<<<<<< HEAD
+=======
+import com.liferay.sync.service.SyncPreferencesLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class ClpMessageListener extends BaseMessageListener {
 	public static String getServletContextName() {
 		return ClpSerializer.getServletContextName();
@@ -42,6 +55,10 @@ public class ClpMessageListener extends BaseMessageListener {
 			SyncDLObjectLocalServiceUtil.clearService();
 
 			SyncDLObjectServiceUtil.clearService();
+<<<<<<< HEAD
+=======
+			SyncPreferencesLocalServiceUtil.clearService();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 }

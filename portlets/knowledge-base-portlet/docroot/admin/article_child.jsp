@@ -17,11 +17,21 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
+<<<<<<< HEAD
 int status = (Integer)request.getAttribute(WebKeys.KNOWLEDGE_BASE_STATUS);
 
 KBArticle kbArticle = (KBArticle)request.getAttribute(WebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
 
 List<KBArticle> childKBArticles = KBArticleServiceUtil.getKBArticles(scopeGroupId, kbArticle.getResourcePrimKey(), status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new KBArticlePriorityComparator(true));
+=======
+KBArticle kbArticle = (KBArticle)request.getAttribute(WebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
+
+int status = (Integer)request.getAttribute(WebKeys.KNOWLEDGE_BASE_STATUS);
+
+List<KBArticle> childKBArticles = KBArticleServiceUtil.getKBArticles(scopeGroupId, kbArticle.getResourcePrimKey(), status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new KBArticlePriorityComparator(true));
+
+KBArticleURLHelper kbArticleURLHelper = new KBArticleURLHelper(renderRequest, renderResponse, templatePath);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 %>
 
 <c:if test="<%= !childKBArticles.isEmpty() %>">
@@ -32,6 +42,7 @@ List<KBArticle> childKBArticles = KBArticleServiceUtil.getKBArticles(scopeGroupI
 			for (KBArticle childrenKBArticle : childKBArticles) {
 			%>
 
+<<<<<<< HEAD
 				<div class="kb-element-header">
 					<liferay-portlet:renderURL var="viewKBArticleURL">
 						<portlet:param name="mvcPath" value='<%= templatePath + "view_article.jsp" %>' />
@@ -64,6 +75,38 @@ List<KBArticle> childKBArticles = KBArticleServiceUtil.getKBArticles(scopeGroupI
 						</c:otherwise>
 					</c:choose>
 				</div>
+=======
+				<section class="kb-element">
+					<h2 class="kb-element-header">
+
+						<%
+						PortletURL viewKBArticleURL = null;
+
+						if (rootPortletId.equals(PortletKeys.KNOWLEDGE_BASE_SECTION)) {
+							viewKBArticleURL = kbArticleURLHelper.createViewWithRedirectURL(childrenKBArticle, currentURL);
+						}
+						else {
+							viewKBArticleURL = kbArticleURLHelper.createViewURL(childrenKBArticle);
+						}
+						%>
+
+						<aui:a href="<%= viewKBArticleURL.toString() %>"><%= childrenKBArticle.getTitle() %></aui:a>
+					</h2>
+
+					<div class="kb-element-body">
+						<c:choose>
+							<c:when test="<%= Validator.isNotNull(childrenKBArticle.getDescription()) %>">
+								<%= childrenKBArticle.getDescription() %>
+							</c:when>
+							<c:otherwise>
+								<p><%= StringUtil.shorten(HtmlUtil.extractText(childrenKBArticle.getContent()), 200) %></p>
+
+								<aui:a href="<%= viewKBArticleURL.toString() %>"><liferay-ui:message key="read-more" /></aui:a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</section>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			<%
 			}

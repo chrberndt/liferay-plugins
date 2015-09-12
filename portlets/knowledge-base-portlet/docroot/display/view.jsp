@@ -16,6 +16,7 @@
 
 <%@ include file="/display/init.jsp" %>
 
+<<<<<<< HEAD
 <liferay-util:include page="/display/top_links.jsp" servletContext="<%= application %>" />
 
 <liferay-portlet:renderURL varImpl="iteratorURL">
@@ -136,3 +137,44 @@
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+=======
+<%
+KBArticle kbArticle = (KBArticle)request.getAttribute(WebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
+
+KBNavigationDisplayContext kbNavigationDisplayContext = new KBNavigationDisplayContext(renderRequest, portalPreferences, portletPreferences, kbArticle);
+
+request.setAttribute(WebKeys.KNOWLEDGE_BASE_KB_NAVIGATION_DISPLAY_CONTEXT, kbNavigationDisplayContext);
+%>
+
+<c:choose>
+	<c:when test="<%= kbArticle != null %>">
+		<div class="row">
+			<c:if test="<%= kbNavigationDisplayContext.isLeftNavigationVisible() %>">
+				<div class="col-md-3">
+					<liferay-util:include page="/display/view_navigation.jsp" servletContext="<%= application %>" />
+				</div>
+			</c:if>
+
+			<div class='<%= kbNavigationDisplayContext.isLeftNavigationVisible() ? "col-md-9" : "col-md-12" %>'>
+				<c:if test="<%= kbNavigationDisplayContext.isTopNavigationVisible() %>">
+					<div class="kbarticle-navigation">
+						<liferay-util:include page="/display/content_root_selector.jsp" servletContext="<%= application %>" />
+					</div>
+				</c:if>
+
+				<liferay-util:include page="/display/view_article.jsp" servletContext="<%= application %>" />
+			</div>
+		</div>
+	</c:when>
+	<c:otherwise>
+
+		<%
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+		%>
+
+		<div class="alert alert-info portlet-configuration">
+			<aui:a href="<%= portletDisplay.getURLConfiguration() %>" label="please-configure-this-portlet-to-make-it-visible-to-all-users" onClick="<%= portletDisplay.getURLConfigurationJS() %>" />
+		</div>
+	</c:otherwise>
+</c:choose>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

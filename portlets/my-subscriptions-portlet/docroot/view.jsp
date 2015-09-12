@@ -26,6 +26,8 @@
 	<liferay-ui:error exception="<%= NoSuchSubscriptionException.class %>" message="the-subscription-could-not-be-found" />
 	<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
 
+	<liferay-ui:error-principal />
+
 	<aui:fieldset>
 		<liferay-portlet:renderURL varImpl="iteratorURL" />
 
@@ -98,6 +100,7 @@
 
 				<liferay-ui:search-container-column-jsp
 					align="right"
+					cssClass="entry-action"
 					path="/subscription_action.jsp"
 				/>
 			</liferay-ui:search-container-row>

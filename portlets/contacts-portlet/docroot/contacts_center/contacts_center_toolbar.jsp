@@ -89,7 +89,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-plus-sign',
 				id: '<portlet:namespace />addConnectionButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "connect") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "connect") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showAddAsConnectionButton %>
 			}
@@ -106,7 +110,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-minus-sign',
 				id: '<portlet:namespace />removeConnectionButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "disconnect") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "disconnect") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showRemoveAsConnectionButton %>
 			}
@@ -124,7 +132,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-plus-sign',
 				id: '<portlet:namespace />followButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "follow") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "follow") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showFollowButton %>
 			}
@@ -142,7 +154,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-minus-sign',
 				id: '<portlet:namespace />unfollowButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "unfollow") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "unfollow") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showUnFollowButton %>
 			}
@@ -160,7 +176,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-ban-circle',
 				id: '<portlet:namespace />blockButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "block") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "block") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showBlockButton %>
 			}
@@ -178,7 +198,11 @@ if (user2 != null) {
 				},
 				icon: 'icon-ok',
 				id: '<portlet:namespace />unblockButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "unblock") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "unblock") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				render: true,
 				visible: <%= showUnBlockButton %>
 			}
@@ -194,7 +218,11 @@ if (user2 != null) {
 			{
 				icon: 'icon-envelope',
 				id: '<portlet:namespace />sendMessageButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "message") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "message") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				on: {
 					click: function(event) {
 						<portlet:renderURL var="redirectURL" windowState="<%= LiferayWindowState.NORMAL.toString() %>" />
@@ -225,7 +253,11 @@ if (user2 != null) {
 									width: 600
 								},
 								id: '<%= PortalUtil.getPortletNamespace(PortletKeys.PRIVATE_MESSAGING) %>Dialog',
+<<<<<<< HEAD
 								title: '<%= UnicodeLanguageUtil.get(pageContext, "new-message") %>',
+=======
+								title: '<%= UnicodeLanguageUtil.get(request, "new-message") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								uri: uri
 							}
 						);
@@ -241,7 +273,11 @@ if (user2 != null) {
 				cssClass: 'more',
 				icon: 'icon-save',
 				id: '<portlet:namespace />exportButton',
+<<<<<<< HEAD
 				label: '<%= UnicodeLanguageUtil.get(pageContext, "vcard") %>',
+=======
+				label: '<%= UnicodeLanguageUtil.get(request, "vcard") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				on: {
 					click: function(event) {
 						<c:choose>
@@ -335,7 +371,7 @@ if (user2 != null) {
 					<portlet:namespace />start: 0,
 					<portlet:namespace />userIds: userIds.join()
 				},
-				dataType: 'json'
+				dataType: 'JSON'
 			}
 		);
 	}

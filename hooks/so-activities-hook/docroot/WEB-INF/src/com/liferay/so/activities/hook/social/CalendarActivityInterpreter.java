@@ -14,9 +14,18 @@
 
 package com.liferay.so.activities.hook.social;
 
+<<<<<<< HEAD
 import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
 import com.liferay.calendar.service.permission.CalendarPermission;
+=======
+import com.liferay.calendar.constants.CalendarPortletKeys;
+import com.liferay.calendar.model.CalendarBooking;
+import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
+import com.liferay.calendar.service.permission.CalendarPermission;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -32,8 +41,14 @@ import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivitySetLocalServiceUtil;
 import com.liferay.so.activities.util.SocialActivityKeyConstants;
 
+import java.text.DateFormat;
 import java.text.Format;
 
+<<<<<<< HEAD
+=======
+import java.util.TimeZone;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
@@ -112,12 +127,28 @@ public class CalendarActivityInterpreter extends SOSocialActivityInterpreter {
 		sb.append(serviceContext.translate("date"));
 		sb.append(": </strong>");
 
-		Format dateFormatDate = getFormatDateTime(
-			serviceContext.getLocale(), serviceContext.getTimeZone());
-
 		CalendarBooking calendarBooking =
 			CalendarBookingLocalServiceUtil.fetchCalendarBooking(classPK);
 
+<<<<<<< HEAD
+		CalendarBooking calendarBooking =
+			CalendarBookingLocalServiceUtil.fetchCalendarBooking(classPK);
+
+=======
+		Format dateFormatDate = null;
+
+		if (calendarBooking.isAllDay()) {
+			dateFormatDate = FastDateFormatFactoryUtil.getDateTime(
+				DateFormat.FULL, DateFormat.SHORT, serviceContext.getLocale(),
+				TimeZone.getTimeZone(StringPool.UTC));
+		}
+		else {
+			dateFormatDate = FastDateFormatFactoryUtil.getDateTime(
+				DateFormat.FULL, DateFormat.SHORT, serviceContext.getLocale(),
+				serviceContext.getTimeZone());
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(dateFormatDate.format(calendarBooking.getStartTime()));
 
 		sb.append("</div><div class=\"location\"><strong>");
@@ -132,7 +163,7 @@ public class CalendarActivityInterpreter extends SOSocialActivityInterpreter {
 
 		sb.append(
 			StringUtil.shorten(
-				assetRenderer.getSummary(serviceContext.getLocale()), 200));
+				HtmlUtil.escape(assetRenderer.getSummary(), 200)));
 
 		sb.append("</div></div>");
 
@@ -148,10 +179,17 @@ public class CalendarActivityInterpreter extends SOSocialActivityInterpreter {
 			CalendarBookingLocalServiceUtil.fetchCalendarBooking(classPK);
 
 		long plid = PortalUtil.getPlidFromPortletId(
+<<<<<<< HEAD
 			calendarBooking.getGroupId(), "1_WAR_calendarportlet");
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			serviceContext.getRequest(), "1_WAR_calendarportlet", plid,
+=======
+			calendarBooking.getGroupId(), CalendarPortletKeys.CALENDAR);
+
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			serviceContext.getRequest(), CalendarPortletKeys.CALENDAR, plid,
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/view_calendar_booking.jsp");

@@ -14,6 +14,11 @@
 
 package com.liferay.contacts.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
@@ -23,6 +28,10 @@ import com.liferay.portal.service.ServiceWrapper;
  * @see EntryService
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class EntryServiceWrapper implements EntryService,
 	ServiceWrapper<EntryService> {
 	public EntryServiceWrapper(EntryService entryService) {
@@ -39,6 +48,7 @@ public class EntryServiceWrapper implements EntryService,
 		return _entryService.getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -49,6 +59,8 @@ public class EntryServiceWrapper implements EntryService,
 		_entryService.setBeanIdentifier(beanIdentifier);
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
@@ -59,15 +71,35 @@ public class EntryServiceWrapper implements EntryService,
 	@Override
 	public com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _entryService.searchUsersAndContacts(companyId, keywords, start,
 			end);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+=======
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	@Override
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_entryService.setBeanIdentifier(beanIdentifier);
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public EntryService getWrappedEntryService() {
 		return _entryService;
 	}
@@ -75,6 +107,10 @@ public class EntryServiceWrapper implements EntryService,
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setWrappedEntryService(EntryService entryService) {
 		_entryService = entryService;
 	}

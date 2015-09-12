@@ -31,10 +31,17 @@ public static class AssetIndexer extends BaseAlloyIndexer {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected Document doGetDocument(Object obj) throws Exception {
 		Asset asset = (Asset)obj;
 
 		Document document = getBaseModelDocument(portletId, asset);
+=======
+	protected Document doGetDocument(BaseModel<?> baseModel) throws Exception {
+		Asset asset = (Asset)baseModel;
+
+		Document document = getBaseModelDocument(className, asset);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (asset.isActive()) {
 			document.addText("active", "active");
@@ -62,6 +69,7 @@ public static class AssetIndexer extends BaseAlloyIndexer {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected Summary doGetSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
 		String title = document.get(Field.ENTRY_CLASS_PK);
 
@@ -74,11 +82,18 @@ public static class AssetIndexer extends BaseAlloyIndexer {
 		portletURL.setParameter("id", assetId);
 
 		return new Summary(title, content, portletURL);
+=======
+	protected Summary doGetSummary(Document document, Locale locale, String snippet, PortletRequest portletRequest, PortletResponse portletResponse) {
+		return new Summary(document.get(Field.ENTRY_CLASS_PK), null);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	private AssetIndexer() {
 		setClassName(Asset.class.getName());
+<<<<<<< HEAD
 		setPortletId(PortletKeys.AMS);
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	private static AssetIndexer _instance = new AssetIndexer();

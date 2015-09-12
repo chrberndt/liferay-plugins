@@ -24,6 +24,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+<<<<<<< HEAD
+=======
+ * Manages <a href="http://en.wikipedia.org/wiki/WebRTC">Web Real-Time
+ * Communication</a> (WebRTC) clients by connecting them, checking and updating
+ * client connection states, and managing client mail.
+ *
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @author Philippe Proulx
  */
 public class WebRTCManager {
@@ -134,6 +141,13 @@ public class WebRTCManager {
 			sourceWebRTCClient, destinationWebRTCClient, messageJSONObject);
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Checks the presence of all registered WebRTC clients. This method should
+	 * be called by a message listener.
+	 */
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void checkWebRTCClients() {
 		long time = System.currentTimeMillis();
 
@@ -150,6 +164,13 @@ public class WebRTCManager {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Checks the WebRTC client connection states for timeout handling. This
+	 * method should be called by a message listener.
+	 */
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void checkWebRTCConnectionsStates() {
 		for (WebRTCClient webRTCClient : _webRTCClients.values()) {
 			for (WebRTCClient otherWebRTCClient :
@@ -185,7 +206,11 @@ public class WebRTCManager {
 	}
 
 	public List<Long> getAvailableWebRTCClientIds() {
+<<<<<<< HEAD
 		List<Long> availableUserIds = new ArrayList<Long>();
+=======
+		List<Long> availableUserIds = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		for (long userId : _webRTCClients.keySet()) {
 			if (hasAvailableWebRTCClient(userId)) {
@@ -437,7 +462,11 @@ public class WebRTCManager {
 
 	private static long _PRESENCE_TIMEOUT_DURATION_TIME = 30000;
 
+<<<<<<< HEAD
 	private Map<Long, WebRTCClient> _webRTCClients =
 		new ConcurrentHashMap<Long, WebRTCClient>();
+=======
+	private Map<Long, WebRTCClient> _webRTCClients = new ConcurrentHashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

@@ -42,10 +42,14 @@ public class VerseWebCacheItem implements WebCacheItem {
 			Verse verse = null;
 
 			if (StringUtil.equalsIgnoreCase(_language, "fi")) {
+<<<<<<< HEAD
 				verse = _getUskonkirjat(verse);
+=======
+				verse = _getUskonkirjat();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			}
 			else {
-				verse = _getBiblegateway(verse);
+				verse = _getBiblegateway();
 			}
 
 			return verse;
@@ -61,7 +65,7 @@ public class VerseWebCacheItem implements WebCacheItem {
 		return _REFRESH_TIME;
 	}
 
-	private Verse _getBiblegateway(Verse verse) throws Exception {
+	private Verse _getBiblegateway() throws Exception {
 		StringBundler sb = new StringBundler();
 
 		sb.append("http://www.biblegateway.com/passage/?search=");
@@ -136,7 +140,7 @@ public class VerseWebCacheItem implements WebCacheItem {
 		return new Verse(_location, text);
 	}
 
-	private Verse _getUskonkirjat(Verse verse) throws Exception {
+	private Verse _getUskonkirjat() throws Exception {
 		StringBundler sb = new StringBundler();
 
 		sb.append("http://raamattu.uskonkirjat.net/servlet/biblesite.Bible?");

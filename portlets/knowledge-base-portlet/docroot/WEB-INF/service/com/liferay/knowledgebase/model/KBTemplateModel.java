@@ -14,8 +14,9 @@
 
 package com.liferay.knowledgebase.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.StagedGroupedModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.knowledgebase.model.impl.KBTemplateModelImpl
  * @generated
  */
+@ProviderType
 public interface KBTemplateModel extends BaseModel<KBTemplate>,
 	StagedGroupedModel {
 	/*
@@ -145,10 +147,9 @@ public interface KBTemplateModel extends BaseModel<KBTemplate>,
 	 * Returns the user uuid of this k b template.
 	 *
 	 * @return the user uuid of this k b template
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this k b template.
@@ -237,6 +238,22 @@ public interface KBTemplateModel extends BaseModel<KBTemplate>,
 	 */
 	public void setContent(String content);
 
+	/**
+	 * Returns the last publish date of this k b template.
+	 *
+	 * @return the last publish date of this k b template
+	 */
+	@Override
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this k b template.
+	 *
+	 * @param lastPublishDate the last publish date of this k b template
+	 */
+	@Override
+	public void setLastPublishDate(Date lastPublishDate);
+
 	@Override
 	public boolean isNew();
 
@@ -274,19 +291,19 @@ public interface KBTemplateModel extends BaseModel<KBTemplate>,
 	public Object clone();
 
 	@Override
-	public int compareTo(KBTemplate kbTemplate);
+	public int compareTo(com.liferay.knowledgebase.model.KBTemplate kbTemplate);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<KBTemplate> toCacheModel();
+	public CacheModel<com.liferay.knowledgebase.model.KBTemplate> toCacheModel();
 
 	@Override
-	public KBTemplate toEscapedModel();
+	public com.liferay.knowledgebase.model.KBTemplate toEscapedModel();
 
 	@Override
-	public KBTemplate toUnescapedModel();
+	public com.liferay.knowledgebase.model.KBTemplate toUnescapedModel();
 
 	@Override
 	public String toString();

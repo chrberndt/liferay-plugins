@@ -17,9 +17,15 @@
 
 package com.liferay.so.announcements.notifications;
 
+<<<<<<< HEAD
 import com.liferay.compat.portal.kernel.notifications.BaseUserNotificationHandler;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+=======
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -27,6 +33,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationEvent;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.service.GroupLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -81,7 +91,13 @@ public class SOAnnouncementsUserNotificationHandler
 		return StringUtil.replace(
 			getBodyTemplate(), new String[] {"[$BODY$]", "[$TITLE$]"},
 			new String[] {
+<<<<<<< HEAD
 				StringUtil.shorten(announcementEntry.getContent(), 50), title
+=======
+				HtmlUtil.escape(
+					StringUtil.shorten(announcementEntry.getTitle(), 70)),
+				title
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			});
 	}
 
@@ -107,11 +123,29 @@ public class SOAnnouncementsUserNotificationHandler
 			return null;
 		}
 
+<<<<<<< HEAD
 		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 
 		User user = themeDisplay.getUser();
 
 		Group group = user.getGroup();
+=======
+		Group group = null;
+
+		String entryClassName = announcementEntry.getClassName();
+
+		if (entryClassName.equals(Group.class.getName())) {
+			group = GroupLocalServiceUtil.getGroup(
+				announcementEntry.getClassPK());
+		}
+		else {
+			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+			User user = themeDisplay.getUser();
+
+			group = user.getGroup();
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		long portletPlid = PortalUtil.getPlidFromPortletId(
 			group.getGroupId(), true, PortletKeys.SO_ANNOUNCEMENTS);

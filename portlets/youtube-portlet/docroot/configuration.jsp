@@ -28,16 +28,20 @@
 			</div>
 
 			<div class="field-row">
+<<<<<<< HEAD
 				<aui:select cssClass="preset-size" inlineField="true" label="preset-frame-size" name="preferences--presetSize--">
+=======
+				<aui:select cssClass="preset-size" inlineField="true" label="preset-frame-size" name="preferences--presetSize--" value="<%= presetSize %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<aui:option label="Custom" value="custom" />
-					<aui:option label="Standard 360 4:3" selected='<%= presetSize.equals("480x360") %>' value="480x360" />
-					<aui:option label="Standard 360 16:9" selected='<%= presetSize.equals("640x360") %>' value="640x360" />
-					<aui:option label="Enhanced 480 4:3" selected='<%= presetSize.equals("640x480") %>' value="640x480" />
-					<aui:option label="Enhanced 480 16:9" selected='<%= presetSize.equals("854x480") %>' value="854x480" />
-					<aui:option label="HD 720 4:3" selected='<%= presetSize.equals("960x720") %>' value="960x720" />
-					<aui:option label="HD 720 16:9" selected='<%= presetSize.equals("1280x720") %>' value="1280x720" />
-					<aui:option label="Full HD 1080 4:3" selected='<%= presetSize.equals("1440x1080") %>' value="1440x1080" />
-					<aui:option label="Full HD 1080 16:9" selected='<%= presetSize.equals("1920x1080") %>' value="1920x1080" />
+					<aui:option label="Standard 360 4:3" value="480x360" />
+					<aui:option label="Standard 360 16:9" value="640x360" />
+					<aui:option label="Enhanced 480 4:3" value="640x480" />
+					<aui:option label="Enhanced 480 16:9" value="854x480" />
+					<aui:option label="HD 720 4:3" value="960x720" />
+					<aui:option label="HD 720 16:9" value="1280x720" />
+					<aui:option label="Full HD 1080 4:3" value="1440x1080" />
+					<aui:option label="Full HD 1080 16:9" value="1920x1080" />
 				</aui:select>
 
 				<aui:input cssClass="width" inlineField="true" label="frame-width" name="preferences--width--" value="<%= width %>" wrapperCssClass="invisible" />
@@ -110,7 +114,7 @@
 		}
 
 		if (id) {
-			previewNode.setContent(['<a href="', watchURL, id, '" rel="external" title="watch-this-video-at-youtube"><img src="', imageURL.replace('<%= id %>', id), '" alt="youtube-video" width="100%" height="100%" /></a>'].join(''));
+			previewNode.setContent(['<a href="', watchURL, id, '" rel="external" title="watch-this-video-at-youtube"><img alt="youtube-video" height="100%" src="', imageURL.replace('<%= id %>', id), '" width="100%" /></a>'].join(''));
 
 			new A.SWF(
 				{

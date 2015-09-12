@@ -4,7 +4,11 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<display-name>Test JSR 286 PLT.26.6</display-name>
+<<<<<<< HEAD
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+=======
+		<portlet-class>com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet</portlet-class>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>

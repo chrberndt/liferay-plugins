@@ -20,7 +20,10 @@ import com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil;
 import com.liferay.microblogs.service.permission.MicroblogsEntryPermission;
 import com.liferay.microblogs.util.MicroblogsUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -47,9 +50,7 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 	}
 
 	@Override
-	public void updateActivitySet(long activityId)
-		throws PortalException, SystemException {
-
+	public void updateActivitySet(long activityId) throws PortalException {
 		SocialActivity activity =
 			SocialActivityLocalServiceUtil.fetchSocialActivity(activityId);
 
@@ -60,11 +61,19 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 		JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 			activity.getExtraData());
 
+<<<<<<< HEAD
 		long receiverMicroblogsEntryId = extraDataJSONObject.getLong(
 			"receiverMicroblogsEntryId");
 
 		long activitySetId = getActivitySetId(
 			activityId, receiverMicroblogsEntryId);
+=======
+		long parentMicroblogsEntryId = extraDataJSONObject.getLong(
+			"parentMicroblogsEntryId");
+
+		long activitySetId = getActivitySetId(
+			activityId, parentMicroblogsEntryId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (activitySetId > 0) {
 			SocialActivitySetLocalServiceUtil.incrementActivityCount(
@@ -77,7 +86,11 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 			if (activity.getType() ==
 					SocialActivityKeyConstants.MICROBLOGS_REPLY_ENTRY) {
 
+<<<<<<< HEAD
 				activitySet.setClassPK(receiverMicroblogsEntryId);
+=======
+				activitySet.setClassPK(parentMicroblogsEntryId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				SocialActivitySetLocalServiceUtil.updateSocialActivitySet(
 					activitySet);
@@ -86,7 +99,11 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 	}
 
 	protected long getActivitySetId(
+<<<<<<< HEAD
 		long activityId, long receiverMicroblogsEntryId) {
+=======
+		long activityId, long parentMicroblogsEntryId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		try {
 			SocialActivitySet activitySet = null;
@@ -99,7 +116,11 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 
 				activitySet =
 					SocialActivitySetLocalServiceUtil.getClassActivitySet(
+<<<<<<< HEAD
 						activity.getClassNameId(), receiverMicroblogsEntryId,
+=======
+						activity.getClassNameId(), parentMicroblogsEntryId,
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						activity.getType());
 			}
 
@@ -128,10 +149,10 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 			return StringPool.BLANK;
 		}
 
-		if (microblogsEntry.getReceiverMicroblogsEntryId() > 0) {
+		if (microblogsEntry.getParentMicroblogsEntryId() > 0) {
 			microblogsEntry =
 				MicroblogsEntryLocalServiceUtil.fetchMicroblogsEntry(
-					microblogsEntry.getReceiverMicroblogsEntryId());
+					microblogsEntry.getParentMicroblogsEntryId());
 
 			if (microblogsEntry == null) {
 				return StringPool.BLANK;
@@ -154,7 +175,11 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 		sb.append("\"><img alt=\"");
 
 		if (user != null) {
+<<<<<<< HEAD
 			sb.append(HtmlUtil.escape(user.getFullName()));
+=======
+			sb.append(HtmlUtil.escapeAttribute(user.getFullName()));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		sb.append("\" src=");
@@ -165,7 +190,8 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 
 		sb.append("\"/></a></span></div><span class=\"microblog-content\">");
 		sb.append(
-			MicroblogsUtil.getTaggedContent(microblogsEntry, serviceContext));
+			MicroblogsUtil.getProcessedContent(
+				microblogsEntry, serviceContext));
 		sb.append("</span></div></div>");
 
 		return sb.toString();
@@ -240,7 +266,7 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 					SocialActivityKeyConstants.MICROBLOGS_ADD_ENTRY) {
 
 				sb.append(
-					MicroblogsUtil.getTaggedContent(
+					MicroblogsUtil.getProcessedContent(
 						microblogsEntry, serviceContext));
 			}
 			else if (activityType ==
@@ -250,7 +276,7 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 					serviceContext.translate(
 						"reposted-a-microblog-entry-from-x",
 						getUserName(
-							microblogsEntry.getReceiverUserId(),
+							microblogsEntry.getParentMicroblogsEntryUserId(),
 							serviceContext)));
 			}
 			else {
@@ -297,6 +323,7 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 				activity.getClassPK());
 
 		if (microblogsEntry.getType() == MicroblogsEntryConstants.TYPE_REPLY) {
+<<<<<<< HEAD
 			MicroblogsEntry receiverMicroblogsEntry =
 				MicroblogsEntryLocalServiceUtil.fetchMicroblogsEntry(
 					microblogsEntry.getReceiverMicroblogsEntryId());
@@ -304,6 +331,15 @@ public class MicroblogsActivityInterpreter extends SOSocialActivityInterpreter {
 			if ((receiverMicroblogsEntry == null) ||
 				!MicroblogsEntryPermission.contains(
 					permissionChecker, receiverMicroblogsEntry,
+=======
+			MicroblogsEntry parentMicroblogsEntry =
+				MicroblogsEntryLocalServiceUtil.fetchMicroblogsEntry(
+					microblogsEntry.getParentMicroblogsEntryId());
+
+			if ((parentMicroblogsEntry == null) ||
+				!MicroblogsEntryPermission.contains(
+					permissionChecker, parentMicroblogsEntry,
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					ActionKeys.VIEW)) {
 
 				return false;

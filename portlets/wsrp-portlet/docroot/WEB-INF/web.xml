@@ -7,7 +7,11 @@
 	</context-param>
 	<context-param>
 		<param-name>portalContextConfigLocation</param-name>
+<<<<<<< HEAD
 		<param-value>/WEB-INF/classes/META-INF/management-spring.xml,/WEB-INF/classes/META-INF/messaging-spring.xml</param-value>
+=======
+		<param-value>/WEB-INF/classes/META-INF/messaging-spring.xml</param-value>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</context-param>
 	<filter>
 		<filter-name>Axis Clean Up Filter</filter-name>

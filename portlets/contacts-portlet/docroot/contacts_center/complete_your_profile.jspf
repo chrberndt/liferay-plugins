@@ -18,12 +18,20 @@
 --%>
 
 <div class="profile-actions">
+<<<<<<< HEAD
 	<p class="portlet-msg alert alert-info"><liferay-ui:message key="to-complete-your-profile-please-add" /></p>
+=======
+	<p class="alert alert-info portlet-msg"><liferay-ui:message key="to-complete-your-profile-please-add" /></p>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	<div class="field-actions-toolbar">
 		<ul class="settings-actions">
 			<c:if test="<%= Validator.isNull(user2.getComments()) %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="comments" data-title="<%= LanguageUtil.get(pageContext, "introduction") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="comments" data-title="<%= LanguageUtil.get(request, "introduction") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -33,7 +41,11 @@
 			</c:if>
 
 			<c:if test="<%= assetTags.isEmpty() %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="categorization" data-title="<%= LanguageUtil.get(pageContext, "tags") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="categorization" data-title="<%= LanguageUtil.get(request, "tags") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -43,7 +55,11 @@
 			</c:if>
 
 			<c:if test="<%= phones.isEmpty() %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="phoneNumbers" data-title="<%= LanguageUtil.get(pageContext, "phone-numbers") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="phoneNumbers" data-title="<%= LanguageUtil.get(request, "phone-numbers") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -53,7 +69,11 @@
 			</c:if>
 
 			<c:if test="<%= emailAddresses.isEmpty() %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="additionalEmailAddresses" data-title="<%= LanguageUtil.get(pageContext, "additional-email-addresses") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="additionalEmailAddresses" data-title="<%= LanguageUtil.get(request, "additional-email-addresses") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -63,7 +83,11 @@
 			</c:if>
 
 			<c:if test="<%= Validator.isNull(aim) && Validator.isNull(icq) && Validator.isNull(jabber) && Validator.isNull(msn) && Validator.isNull(skype) && Validator.isNull(ym) %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="instantMessenger" data-title="<%= LanguageUtil.get(pageContext, "instant-messenger") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="instantMessenger" data-title="<%= LanguageUtil.get(request, "instant-messenger") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -73,7 +97,11 @@
 			</c:if>
 
 			<c:if test="<%= addresses.isEmpty() %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="addresses" data-title="<%= LanguageUtil.get(pageContext, "addresses") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="addresses" data-title="<%= LanguageUtil.get(request, "addresses") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -83,7 +111,11 @@
 			</c:if>
 
 			<c:if test="<%= websites.isEmpty() %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="websites" data-title="<%= LanguageUtil.get(pageContext, "websites") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="websites" data-title="<%= LanguageUtil.get(request, "websites") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -93,7 +125,11 @@
 			</c:if>
 
 			<c:if test="<%= Validator.isNull(facebook) && Validator.isNull(twitter) %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="socialNetwork" data-title="<%= LanguageUtil.get(pageContext, "social-network") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="socialNetwork" data-title="<%= LanguageUtil.get(request, "social-network") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 
@@ -103,7 +139,11 @@
 			</c:if>
 
 			<c:if test="<%= Validator.isNull(contact2.getSmsSn()) %>">
+<<<<<<< HEAD
 				<li class="action-field component settings-field lfr-token" data-sectionId="sms" data-title="<%= LanguageUtil.get(pageContext, "sms") %>">
+=======
+				<li class="action-field component lfr-token settings-field" data-sectionId="sms" data-title="<%= LanguageUtil.get(request, "sms") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 

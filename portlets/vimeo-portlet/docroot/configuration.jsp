@@ -28,16 +28,20 @@
 			</div>
 
 			<div class="field-row">
+<<<<<<< HEAD
 				<aui:select cssClass="preset-size" inlineField="true" label="preset-frame-size" name="preferences--presetSize--">
+=======
+				<aui:select cssClass="preset-size" inlineField="true" label="preset-frame-size" name="preferences--presetSize--" value="<%= presetSize %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<aui:option label="Custom" value="custom" />
-					<aui:option label="Standard 360 4:3" selected='<%= presetSize.equals("480x360") %>' value="480x360" />
-					<aui:option label="Standard 360 16:9" selected='<%= presetSize.equals("640x360") %>' value="640x360" />
-					<aui:option label="Enhanced 480 4:3" selected='<%= presetSize.equals("640x480") %>' value="640x480" />
-					<aui:option label="Enhanced 480 16:9" selected='<%= presetSize.equals("854x480") %>' value="854x480" />
-					<aui:option label="HD 720 4:3" selected='<%= presetSize.equals("960x720") %>' value="960x720" />
-					<aui:option label="HD 720 16:9" selected='<%= presetSize.equals("1280x720") %>' value="1280x720" />
-					<aui:option label="Full HD 1080 4:3" selected='<%= presetSize.equals("1440x1080") %>' value="1440x1080" />
-					<aui:option label="Full HD 1080 16:9" selected='<%= presetSize.equals("1920x1080") %>' value="1920x1080" />
+					<aui:option label="Standard 360 4:3" value="480x360" />
+					<aui:option label="Standard 360 16:9" value="640x360" />
+					<aui:option label="Enhanced 480 4:3" value="640x480" />
+					<aui:option label="Enhanced 480 16:9" value="854x480" />
+					<aui:option label="HD 720 4:3" value="960x720" />
+					<aui:option label="HD 720 16:9" value="1280x720" />
+					<aui:option label="Full HD 1080 4:3" value="1440x1080" />
+					<aui:option label="Full HD 1080 16:9" value="1920x1080" />
 				</aui:select>
 
 				<aui:input cssClass="width" inlineField="true" label="frame-width" name="preferences--width--" value="<%= width %>" wrapperCssClass="invisible" />
@@ -104,6 +108,8 @@
 	var urlNode = A.one('#<portlet:namespace />url');
 	var widthNode = A.one('#<portlet:namespace />width');
 
+	var player;
+
 	function presetChange(e) {
 		if (this.val().indexOf('x') < 0) {
 			A.one('#<portlet:namespace />height').ancestor('.control-group').removeClass('invisible');
@@ -161,13 +167,13 @@
 		}
 
 		if (id) {
-			new A.SWF(
+			player = new A.SWF(
 				{
 					boundingBox: previewNode,
 					height: height,
 					url: playerOptionsCompiled.join('&'),
-					width: width,
-					version: 0
+					version: 0,
+					width: width
 				}
 			).render();
 		}
@@ -249,6 +255,22 @@
 	if (presetSizeNode.val() == 'custom') {
 		A.one('#<portlet:namespace />height').ancestor('.control-group').removeClass('invisible');
 		A.one('#<portlet:namespace />width').ancestor('.control-group').removeClass('invisible');
+<<<<<<< HEAD
+=======
+	}
+
+	var dialog = Liferay.Util.getWindow();
+
+	if (dialog !== A.config.win) {
+		dialog.once(
+			'visibleChange',
+			function(event) {
+				if (player && !event.newVal) {
+					player.destroy();
+				}
+			}
+		);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	createPlayer();

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <projectDescription>
+<<<<<<< HEAD
 	<name>google-login-hook-6.2.x</name>
+=======
+	<name>google-login-hook-master</name>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<comment></comment>
 	<projects></projects>
 	<buildSpec>

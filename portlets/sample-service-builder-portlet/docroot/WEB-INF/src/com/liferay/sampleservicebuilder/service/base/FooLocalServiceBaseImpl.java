@@ -14,10 +14,16 @@
 
 package com.liferay.sampleservicebuilder.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -31,6 +37,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
@@ -57,6 +64,7 @@ import javax.sql.DataSource;
  * @see com.liferay.sampleservicebuilder.service.FooLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements FooLocalService, IdentifiableBean {
 	/*
@@ -70,11 +78,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param foo the foo
 	 * @return the foo that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Foo addFoo(Foo foo) throws SystemException {
+	public Foo addFoo(Foo foo) {
 		foo.setNew(true);
 
 		return fooPersistence.update(foo);
@@ -97,11 +104,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param fooId the primary key of the foo
 	 * @return the foo that was removed
 	 * @throws PortalException if a foo with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Foo deleteFoo(long fooId) throws PortalException, SystemException {
+	public Foo deleteFoo(long fooId) throws PortalException {
 		return fooPersistence.remove(fooId);
 	}
 
@@ -110,11 +116,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param foo the foo
 	 * @return the foo that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Foo deleteFoo(Foo foo) throws SystemException {
+	public Foo deleteFoo(Foo foo) {
 		return fooPersistence.remove(foo);
 	}
 
@@ -131,12 +136,9 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return fooPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -151,12 +153,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return fooPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -172,60 +172,41 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return fooPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return fooPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return fooPersistence.countWithDynamicQuery(dynamicQuery, projection);
 	}
 
 	@Override
-	public Foo fetchFoo(long fooId) throws SystemException {
+	public Foo fetchFoo(long fooId) {
 		return fooPersistence.fetchByPrimaryKey(fooId);
-	}
-
-	/**
-	 * Returns the foo with the matching UUID and company.
-	 *
-	 * @param uuid the foo's UUID
-	 * @param  companyId the primary key of the company
-	 * @return the matching foo, or <code>null</code> if a matching foo could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public Foo fetchFooByUuidAndCompanyId(String uuid, long companyId)
-		throws SystemException {
-		return fooPersistence.fetchByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -234,11 +215,9 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param uuid the foo's UUID
 	 * @param groupId the primary key of the group
 	 * @return the matching foo, or <code>null</code> if a matching foo could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Foo fetchFooByUuidAndGroupId(String uuid, long groupId)
-		throws SystemException {
+	public Foo fetchFooByUuidAndGroupId(String uuid, long groupId) {
 		return fooPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
@@ -248,32 +227,76 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param fooId the primary key of the foo
 	 * @return the foo
 	 * @throws PortalException if a foo with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Foo getFoo(long fooId) throws PortalException, SystemException {
+	public Foo getFoo(long fooId) throws PortalException {
 		return fooPersistence.findByPrimaryKey(fooId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.sampleservicebuilder.service.FooLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Foo.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("fooId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.sampleservicebuilder.service.FooLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Foo.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("fooId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return fooLocalService.deleteFoo((Foo)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return fooPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
 	/**
-	 * Returns the foo with the matching UUID and company.
+	 * Returns all the foos matching the UUID and company.
 	 *
-	 * @param uuid the foo's UUID
-	 * @param  companyId the primary key of the company
-	 * @return the matching foo
-	 * @throws PortalException if a matching foo could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param uuid the UUID of the foos
+	 * @param companyId the primary key of the company
+	 * @return the matching foos, or an empty list if no matches were found
 	 */
 	@Override
-	public Foo getFooByUuidAndCompanyId(String uuid, long companyId)
-		throws PortalException, SystemException {
-		return fooPersistence.findByUuid_C_First(uuid, companyId, null);
+	public List<Foo> getFoosByUuidAndCompanyId(String uuid, long companyId) {
+		return fooPersistence.findByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of foos matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the foos
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of foos
+	 * @param end the upper bound of the range of foos (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching foos, or an empty list if no matches were found
+	 */
+	@Override
+	public List<Foo> getFoosByUuidAndCompanyId(String uuid, long companyId,
+		int start, int end, OrderByComparator<Foo> orderByComparator) {
+		return fooPersistence.findByUuid_C(uuid, companyId, start, end,
+			orderByComparator);
 	}
 
 	/**
@@ -283,11 +306,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param groupId the primary key of the group
 	 * @return the matching foo
 	 * @throws PortalException if a matching foo could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Foo getFooByUuidAndGroupId(String uuid, long groupId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return fooPersistence.findByUUID_G(uuid, groupId);
 	}
 
@@ -301,10 +323,9 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of foos
 	 * @param end the upper bound of the range of foos (not inclusive)
 	 * @return the range of foos
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Foo> getFoos(int start, int end) throws SystemException {
+	public List<Foo> getFoos(int start, int end) {
 		return fooPersistence.findAll(start, end);
 	}
 
@@ -312,10 +333,9 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * Returns the number of foos.
 	 *
 	 * @return the number of foos
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getFoosCount() throws SystemException {
+	public int getFoosCount() {
 		return fooPersistence.countAll();
 	}
 
@@ -324,11 +344,10 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param foo the foo
 	 * @return the foo that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Foo updateFoo(Foo foo) throws SystemException {
+	public Foo updateFoo(Foo foo) {
 		return fooPersistence.update(foo);
 	}
 
@@ -337,7 +356,7 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the foo local service
 	 */
-	public com.liferay.sampleservicebuilder.service.FooLocalService getFooLocalService() {
+	public FooLocalService getFooLocalService() {
 		return fooLocalService;
 	}
 
@@ -346,8 +365,7 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param fooLocalService the foo local service
 	 */
-	public void setFooLocalService(
-		com.liferay.sampleservicebuilder.service.FooLocalService fooLocalService) {
+	public void setFooLocalService(FooLocalService fooLocalService) {
 		this.fooLocalService = fooLocalService;
 	}
 
@@ -716,13 +734,18 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = fooPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -735,7 +758,7 @@ public abstract class FooLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@BeanReference(type = com.liferay.sampleservicebuilder.service.FooLocalService.class)
-	protected com.liferay.sampleservicebuilder.service.FooLocalService fooLocalService;
+	protected FooLocalService fooLocalService;
 	@BeanReference(type = com.liferay.sampleservicebuilder.service.FooService.class)
 	protected com.liferay.sampleservicebuilder.service.FooService fooService;
 	@BeanReference(type = FooPersistence.class)

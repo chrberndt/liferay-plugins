@@ -14,8 +14,9 @@
 
 package com.liferay.privatemessaging.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.privatemessaging.model.impl.UserThreadModelImpl
  * @generated
  */
+@ProviderType
 public interface UserThreadModel extends AuditedModel, BaseModel<UserThread> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -111,10 +113,9 @@ public interface UserThreadModel extends AuditedModel, BaseModel<UserThread> {
 	 * Returns the user uuid of this user thread.
 	 *
 	 * @return the user uuid of this user thread
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this user thread.
@@ -280,19 +281,20 @@ public interface UserThreadModel extends AuditedModel, BaseModel<UserThread> {
 	public Object clone();
 
 	@Override
-	public int compareTo(UserThread userThread);
+	public int compareTo(
+		com.liferay.privatemessaging.model.UserThread userThread);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<UserThread> toCacheModel();
+	public CacheModel<com.liferay.privatemessaging.model.UserThread> toCacheModel();
 
 	@Override
-	public UserThread toEscapedModel();
+	public com.liferay.privatemessaging.model.UserThread toEscapedModel();
 
 	@Override
-	public UserThread toUnescapedModel();
+	public com.liferay.privatemessaging.model.UserThread toUnescapedModel();
 
 	@Override
 	public String toString();

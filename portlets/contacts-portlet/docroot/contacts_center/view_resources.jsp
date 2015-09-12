@@ -65,12 +65,16 @@ boolean portalUser = ParamUtil.getBoolean(request, "portalUser");
 							{
 								on: {
 									click: function(event) {
+<<<<<<< HEAD
 										Liferay.component('contactsCenter').showPopup('<%= UnicodeLanguageUtil.get(pageContext, "update-contact") %>', '<%= viewEntryURL %>');
+=======
+										Liferay.component('contactsCenter').showPopup('<%= UnicodeLanguageUtil.get(request, "update-contact") %>', '<%= viewEntryURL %>');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									}
 								},
 								icon: 'icon-edit',
 								id: '<portlet:namespace />edit',
-								label: '<%= UnicodeLanguageUtil.get(pageContext, "edit") %>'
+								label: '<%= UnicodeLanguageUtil.get(request, "edit") %>'
 							}
 						);
 
@@ -78,7 +82,11 @@ boolean portalUser = ParamUtil.getBoolean(request, "portalUser");
 							{
 								on: {
 									click: function(event) {
+<<<<<<< HEAD
 										var confirmMessage = '<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-delete-x-from-your-contacts", entry.getFullName(), false) %>';
+=======
+										var confirmMessage = '<%= UnicodeLanguageUtil.format(request, "are-you-sure-you-want-to-delete-x-from-your-contacts", entry.getFullName(), false) %>';
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 										if (confirm(confirmMessage)) {
 											A.io.request(
@@ -102,7 +110,7 @@ boolean portalUser = ParamUtil.getBoolean(request, "portalUser");
 								},
 								icon: 'icon-remove',
 								id: '<portlet:namespace />delete',
-								label: '<%= UnicodeLanguageUtil.get(pageContext, "delete") %>'
+								label: '<%= UnicodeLanguageUtil.get(request, "delete") %>'
 							}
 						);
 
@@ -158,7 +166,11 @@ boolean portalUser = ParamUtil.getBoolean(request, "portalUser");
 								{
 									icon: 'icon-chevron-sign-left',
 									id: '<portlet:namespace />backSelection',
+<<<<<<< HEAD
 									label: '<%= UnicodeLanguageUtil.get(pageContext, "back-to-selection") %>',
+=======
+									label: '<%= UnicodeLanguageUtil.get(request, "back-to-selection") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									on: {
 										click: function(event) {
 											Liferay.component('contactsCenter')._setVisibleSelectedUsersView();

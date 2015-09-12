@@ -14,11 +14,12 @@
 
 package com.liferay.ams.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.ams.model.Checkout;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
@@ -26,7 +27,7 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * The persistence utility for the checkout service. This utility wraps {@link CheckoutPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the checkout service. This utility wraps {@link com.liferay.ams.service.persistence.impl.CheckoutPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -34,9 +35,10 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see CheckoutPersistence
- * @see CheckoutPersistenceImpl
+ * @see com.liferay.ams.service.persistence.impl.CheckoutPersistenceImpl
  * @generated
  */
+@ProviderType
 public class CheckoutUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -61,16 +63,19 @@ public class CheckoutUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
+<<<<<<< HEAD
 	public static long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
+=======
+	public static long countWithDynamicQuery(DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getPersistence().countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
-	public static List<Checkout> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public static List<Checkout> findWithDynamicQuery(DynamicQuery dynamicQuery) {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -78,8 +83,7 @@ public class CheckoutUtil {
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
 	 */
 	public static List<Checkout> findWithDynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+		DynamicQuery dynamicQuery, int start, int end) {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -88,7 +92,7 @@ public class CheckoutUtil {
 	 */
 	public static List<Checkout> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator<Checkout> orderByComparator) {
 		return getPersistence()
 				   .findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
@@ -97,7 +101,7 @@ public class CheckoutUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel)
 	 */
-	public static Checkout update(Checkout checkout) throws SystemException {
+	public static Checkout update(Checkout checkout) {
 		return getPersistence().update(checkout);
 	}
 
@@ -105,7 +109,7 @@ public class CheckoutUtil {
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, ServiceContext)
 	 */
 	public static Checkout update(Checkout checkout,
-		ServiceContext serviceContext) throws SystemException {
+		ServiceContext serviceContext) {
 		return getPersistence().update(checkout, serviceContext);
 	}
 
@@ -114,7 +118,7 @@ public class CheckoutUtil {
 	*
 	* @param checkout the checkout
 	*/
-	public static void cacheResult(com.liferay.ams.model.Checkout checkout) {
+	public static void cacheResult(Checkout checkout) {
 		getPersistence().cacheResult(checkout);
 	}
 
@@ -123,8 +127,7 @@ public class CheckoutUtil {
 	*
 	* @param checkouts the checkouts
 	*/
-	public static void cacheResult(
-		java.util.List<com.liferay.ams.model.Checkout> checkouts) {
+	public static void cacheResult(List<Checkout> checkouts) {
 		getPersistence().cacheResult(checkouts);
 	}
 
@@ -134,7 +137,7 @@ public class CheckoutUtil {
 	* @param checkoutId the primary key for the new checkout
 	* @return the new checkout
 	*/
-	public static com.liferay.ams.model.Checkout create(long checkoutId) {
+	public static Checkout create(long checkoutId) {
 		return getPersistence().create(checkoutId);
 	}
 
@@ -143,33 +146,26 @@ public class CheckoutUtil {
 	*
 	* @param checkoutId the primary key of the checkout
 	* @return the checkout that was removed
-	* @throws com.liferay.ams.NoSuchCheckoutException if a checkout with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchCheckoutException if a checkout with the primary key could not be found
 	*/
-	public static com.liferay.ams.model.Checkout remove(long checkoutId)
-		throws com.liferay.ams.NoSuchCheckoutException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Checkout remove(long checkoutId)
+		throws com.liferay.ams.NoSuchCheckoutException {
 		return getPersistence().remove(checkoutId);
 	}
 
-	public static com.liferay.ams.model.Checkout updateImpl(
-		com.liferay.ams.model.Checkout checkout)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Checkout updateImpl(Checkout checkout) {
 		return getPersistence().updateImpl(checkout);
 	}
 
 	/**
-	* Returns the checkout with the primary key or throws a {@link com.liferay.ams.NoSuchCheckoutException} if it could not be found.
+	* Returns the checkout with the primary key or throws a {@link NoSuchCheckoutException} if it could not be found.
 	*
 	* @param checkoutId the primary key of the checkout
 	* @return the checkout
-	* @throws com.liferay.ams.NoSuchCheckoutException if a checkout with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchCheckoutException if a checkout with the primary key could not be found
 	*/
-	public static com.liferay.ams.model.Checkout findByPrimaryKey(
-		long checkoutId)
-		throws com.liferay.ams.NoSuchCheckoutException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Checkout findByPrimaryKey(long checkoutId)
+		throws com.liferay.ams.NoSuchCheckoutException {
 		return getPersistence().findByPrimaryKey(checkoutId);
 	}
 
@@ -178,22 +174,22 @@ public class CheckoutUtil {
 	*
 	* @param checkoutId the primary key of the checkout
 	* @return the checkout, or <code>null</code> if a checkout with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.ams.model.Checkout fetchByPrimaryKey(
-		long checkoutId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Checkout fetchByPrimaryKey(long checkoutId) {
 		return getPersistence().fetchByPrimaryKey(checkoutId);
+	}
+
+	public static java.util.Map<java.io.Serializable, Checkout> fetchByPrimaryKeys(
+		java.util.Set<java.io.Serializable> primaryKeys) {
+		return getPersistence().fetchByPrimaryKeys(primaryKeys);
 	}
 
 	/**
 	* Returns all the checkouts.
 	*
 	* @return the checkouts
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.ams.model.Checkout> findAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Checkout> findAll() {
 		return getPersistence().findAll();
 	}
 
@@ -201,17 +197,14 @@ public class CheckoutUtil {
 	* Returns a range of all the checkouts.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.ams.model.impl.CheckoutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CheckoutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of checkouts
 	* @param end the upper bound of the range of checkouts (not inclusive)
 	* @return the range of checkouts
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.ams.model.Checkout> findAll(
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Checkout> findAll(int start, int end) {
 		return getPersistence().findAll(start, end);
 	}
 
@@ -219,29 +212,23 @@ public class CheckoutUtil {
 	* Returns an ordered range of all the checkouts.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.ams.model.impl.CheckoutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link CheckoutModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of checkouts
 	* @param end the upper bound of the range of checkouts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of checkouts
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.ams.model.Checkout> findAll(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Checkout> findAll(int start, int end,
+		OrderByComparator<Checkout> orderByComparator) {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**
 	* Removes all the checkouts from the database.
-	*
-	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
@@ -249,10 +236,8 @@ public class CheckoutUtil {
 	* Returns the number of checkouts.
 	*
 	* @return the number of checkouts
-	* @throws SystemException if a system exception occurred
 	*/
-	public static int countAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int countAll() {
 		return getPersistence().countAll();
 	}
 
@@ -271,6 +256,7 @@ public class CheckoutUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+	@Deprecated
 	public void setPersistence(CheckoutPersistence persistence) {
 	}
 

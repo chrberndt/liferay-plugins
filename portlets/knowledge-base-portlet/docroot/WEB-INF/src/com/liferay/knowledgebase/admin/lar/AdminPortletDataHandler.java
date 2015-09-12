@@ -17,8 +17,12 @@ package com.liferay.knowledgebase.admin.lar;
 import com.liferay.knowledgebase.model.KBArticle;
 import com.liferay.knowledgebase.model.KBComment;
 import com.liferay.knowledgebase.model.KBTemplate;
+import com.liferay.knowledgebase.model.impl.KBArticleImpl;
+import com.liferay.knowledgebase.model.impl.KBCommentImpl;
+import com.liferay.knowledgebase.model.impl.KBTemplateImpl;
 import com.liferay.knowledgebase.service.KBArticleLocalServiceUtil;
 import com.liferay.knowledgebase.service.KBTemplateLocalServiceUtil;
+<<<<<<< HEAD
 import com.liferay.knowledgebase.service.persistence.KBArticleExportActionableDynamicQuery;
 import com.liferay.knowledgebase.service.persistence.KBCommentExportActionableDynamicQuery;
 import com.liferay.knowledgebase.service.persistence.KBTemplateExportActionableDynamicQuery;
@@ -34,6 +38,22 @@ import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.PortalUtil;
+=======
+import com.liferay.knowledgebase.util.comparator.KBArticleVersionComparator;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.exportimport.lar.BasePortletDataHandler;
+import com.liferay.portlet.exportimport.lar.DataLevel;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.PortletDataHandlerBoolean;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+import com.liferay.portlet.exportimport.xstream.XStreamAliasRegistryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.util.List;
 
@@ -63,6 +83,13 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "kb-comments", true, true, null,
 				KBComment.class.getName()));
+<<<<<<< HEAD
+=======
+
+		XStreamAliasRegistryUtil.register(KBArticleImpl.class, "KBArticle");
+		XStreamAliasRegistryUtil.register(KBCommentImpl.class, "KBComment");
+		XStreamAliasRegistryUtil.register(KBTemplateImpl.class, "KBTemplate");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -105,7 +132,12 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 		kbArticleActionableDynamicQuery.performActions();
 
 		ActionableDynamicQuery kbTemplateActionableDynamicQuery =
+<<<<<<< HEAD
 			new KBTemplateExportActionableDynamicQuery(portletDataContext);
+=======
+			KBTemplateLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		kbTemplateActionableDynamicQuery.performActions();
 
@@ -134,12 +166,21 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, kbArticleElement);
 		}
+<<<<<<< HEAD
 
 		Element kbTemplatesElement =
 			portletDataContext.getImportDataGroupElement(KBTemplate.class);
 
 		List<Element> kbTemplateElements = kbTemplatesElement.elements();
 
+=======
+
+		Element kbTemplatesElement =
+			portletDataContext.getImportDataGroupElement(KBTemplate.class);
+
+		List<Element> kbTemplateElements = kbTemplatesElement.elements();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		for (Element kbTemplateElement : kbTemplateElements) {
 			StagedModelDataHandlerUtil.importStagedModel(
 				portletDataContext, kbTemplateElement);
@@ -165,12 +206,22 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		ActionableDynamicQuery kbArticleActionableDynamicQuery =
+<<<<<<< HEAD
 			new KBArticleExportActionableDynamicQuery(portletDataContext);
+=======
+			KBArticleLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		kbArticleActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery kbTemplateActionableDynamicQuery =
+<<<<<<< HEAD
 			new KBTemplateExportActionableDynamicQuery(portletDataContext);
+=======
+			KBTemplateLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		kbTemplateActionableDynamicQuery.performCount();
 
@@ -184,6 +235,7 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 			final PortletDataContext portletDataContext)
 		throws Exception {
 
+<<<<<<< HEAD
 		return new KBArticleExportActionableDynamicQuery(portletDataContext) {
 
 			@Override
@@ -211,6 +263,45 @@ public class AdminPortletDataHandler extends BasePortletDataHandler {
 			}
 
 		};
+=======
+		ExportActionableDynamicQuery exportActionableDynamicQuery =
+			KBArticleLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
+
+		final ActionableDynamicQuery.AddCriteriaMethod addCriteriaMethod =
+			exportActionableDynamicQuery.getAddCriteriaMethod();
+
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					addCriteriaMethod.addCriteria(dynamicQuery);
+
+					OrderFactoryUtil.addOrderByComparator(
+						dynamicQuery, new KBArticleVersionComparator(true));
+				}
+
+			});
+
+		return exportActionableDynamicQuery;
+	}
+
+	protected ActionableDynamicQuery getKBCommentActionableDynamicQuery(
+			PortletDataContext portletDataContext)
+		throws Exception {
+
+		ExportActionableDynamicQuery exportActionableDynamicQuery =
+			KBCommentLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
+
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
+				PortalUtil.getClassNameId(KBComment.class),
+				StagedModelType.REFERRER_CLASS_NAME_ID_ALL));
+
+		return exportActionableDynamicQuery;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	protected static final String RESOURCE_NAME =

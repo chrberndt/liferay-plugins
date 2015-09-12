@@ -24,8 +24,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.notifications.UserNotificationManagerUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FastDateFormatConstants;
@@ -51,7 +54,6 @@ import com.liferay.portal.webserver.WebServerServletTokenUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.portlet.PrivateMessagingPortlet;
 import com.liferay.privatemessaging.service.UserThreadLocalServiceUtil;
@@ -80,7 +82,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 			String body,
 			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		long parentMBMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 
@@ -113,14 +115,14 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 			long userId, long parentMBMessageId, String body,
 			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		long mbThreadId = 0;
 
 		MBMessage parentMessage = MBMessageLocalServiceUtil.getMBMessage(
 			parentMBMessageId);
 
-		List<User> recipients = new ArrayList<User>();
+		List<User> recipients = new ArrayList<>();
 
 		recipients.add(UserLocalServiceUtil.getUser(parentMessage.getUserId()));
 
@@ -132,7 +134,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 	public void addUserThread(
 			long userId, long mbThreadId, long topMBMessageId, boolean read,
 			boolean deleted)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		long userThreadId = counterLocalService.increment();
 
@@ -153,21 +155,17 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 		userThreadPersistence.update(userThread);
 	}
 
-	public void deleteUser(long userId)
-		throws PortalException, SystemException {
-
+	public void deleteUser(long userId) throws PortalException {
 		List<UserThread> userThreads = userThreadPersistence.findByUserId(
 			userId);
 
 		for (UserThread userThread : userThreads) {
-			MBThreadLocalServiceUtil.deleteMBThread(userThread.getMbThreadId());
-
 			userThreadPersistence.remove(userThread.getUserThreadId());
 		}
 	}
 
 	public void deleteUserThread(long userId, long mbThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		UserThread userThread = userThreadPersistence.findByU_M(
 			userId, mbThreadId);
@@ -178,6 +176,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 	}
 
 	public UserThread fetchUserThread(long userId, long mbThreadId)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
 
 		return userThreadPersistence.fetchByU_M(userId, mbThreadId);
@@ -185,51 +184,51 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 
 	public List<UserThread> getMBThreadUserThreads(long mbThreadId)
 		throws SystemException {
+=======
+		throws PortalException {
 
+		return userThreadPersistence.fetchByU_M(userId, mbThreadId);
+	}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
+
+	public List<UserThread> getMBThreadUserThreads(long mbThreadId) {
 		return userThreadPersistence.findByMBThreadId(mbThreadId);
 	}
 
 	public UserThread getUserThread(long userId, long mbThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return userThreadPersistence.findByU_M(userId, mbThreadId);
 	}
 
-	public int getUserUserThreadCount(long userId, boolean deleted)
-		throws SystemException {
-
+	public int getUserUserThreadCount(long userId, boolean deleted) {
 		return userThreadPersistence.countByU_D(userId, deleted);
 	}
 
 	public int getUserUserThreadCount(
-			long userId, boolean read, boolean deleted)
-		throws SystemException {
+		long userId, boolean read, boolean deleted) {
 
 		return userThreadPersistence.countByU_R_D(userId, read, deleted);
 	}
 
-	public List<UserThread> getUserUserThreads(long userId, boolean deleted)
-		throws SystemException {
-
+	public List<UserThread> getUserUserThreads(long userId, boolean deleted) {
 		return userThreadPersistence.findByU_D(userId, deleted);
 	}
 
 	public List<UserThread> getUserUserThreads(
-			long userId, boolean read, boolean deleted)
-		throws SystemException {
+		long userId, boolean read, boolean deleted) {
 
 		return userThreadPersistence.findByU_R_D(userId, read, deleted);
 	}
 
 	public List<UserThread> getUserUserThreads(
-			long userId, boolean deleted, int start, int end)
-		throws SystemException {
+		long userId, boolean deleted, int start, int end) {
 
 		return userThreadPersistence.findByU_D(userId, deleted, start, end);
 	}
 
 	public void markUserThreadAsRead(long userId, long mbThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		UserThread userThread = userThreadPersistence.findByU_M(
 			userId, mbThreadId);
@@ -240,7 +239,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 	}
 
 	public void markUserThreadAsUnread(long userId, long mbThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		UserThread userThread = userThreadPersistence.findByU_M(
 			userId, mbThreadId);
@@ -250,7 +249,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 		userThreadPersistence.update(userThread);
 	}
 
-	public void updateUserName(User user) throws SystemException {
+	public void updateUserName(User user) {
 		String userName = user.getFullName();
 
 		List<UserThread> userThreads = userThreadPersistence.findByUserId(
@@ -270,7 +269,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 			List<User> recipients, String subject, String body,
 			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 		Group group = GroupLocalServiceUtil.getCompanyGroup(
@@ -366,13 +365,13 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 	}
 
 	protected List<User> parseRecipients(long userId, String to)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
 		String[] recipients = StringUtil.split(to);
 
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 
 		for (String recipient : recipients) {
 			int x = recipient.indexOf(CharPool.LESS_THAN);
@@ -417,13 +416,8 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 				"dependencies/notification_message_subject.tmpl"));
 
 		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$COMPANY_NAME$]", "[$FROM_NAME$]"
-			},
-			new String[] {
-				company.getName(), sender.getFullName()
-			});
+			subject, new String[] {"[$COMPANY_NAME$]", "[$FROM_NAME$]"},
+			new String[] {company.getName(), sender.getFullName()});
 
 		String body = StringUtil.read(
 			PrivateMessagingPortlet.class.getResourceAsStream(
@@ -481,10 +475,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 				recipient.getLocale(), recipient.getTimeZone());
 
 			String userThreadBody = StringUtil.replace(
-				body,
-				new String[] {
-					"[$SENT_DATE$]", "[$THREAD_URL$]"
-				},
+				body, new String[] {"[$SENT_DATE$]", "[$THREAD_URL$]"},
 				new String[] {
 					dateFormatDateTime.format(mbMessage.getCreateDate()),
 					threadURL
@@ -499,7 +490,7 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 	}
 
 	protected void sendNotificationEvent(MBMessage mbMessage)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		JSONObject notificationEventJSONObject =
 			JSONFactoryUtil.createJSONObject();
@@ -515,13 +506,20 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 			if ((userThread.getUserId() == mbMessage.getUserId()) ||
 				((userThread.getUserId() != mbMessage.getUserId()) &&
 				 !UserNotificationManagerUtil.isDeliver(
+<<<<<<< HEAD
 					userThread.getUserId(), PortletKeys.PRIVATE_MESSAGING, 0,
 					PrivateMessagingConstants.NEW_MESSAGE,
 					UserNotificationDeliveryConstants.TYPE_WEBSITE))) {
+=======
+					 userThread.getUserId(), PortletKeys.PRIVATE_MESSAGING, 0,
+					 PrivateMessagingConstants.NEW_MESSAGE,
+					 UserNotificationDeliveryConstants.TYPE_WEBSITE))) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				continue;
 			}
 
+<<<<<<< HEAD
 			NotificationEvent notificationEvent =
 				NotificationEventFactoryUtil.createNotificationEvent(
 					System.currentTimeMillis(), PortletKeys.PRIVATE_MESSAGING,
@@ -531,6 +529,12 @@ public class UserThreadLocalServiceImpl extends UserThreadLocalServiceBaseImpl {
 
 			UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
 				userThread.getUserId(), notificationEvent);
+=======
+			UserNotificationEventLocalServiceUtil.sendUserNotificationEvents(
+				userThread.getUserId(), PortletKeys.PRIVATE_MESSAGING,
+				UserNotificationDeliveryConstants.TYPE_WEBSITE,
+				notificationEventJSONObject);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 

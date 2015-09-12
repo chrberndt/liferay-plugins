@@ -34,13 +34,18 @@ import java.util.List;
 /**
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
 public abstract class BaseAlloyIndexer extends BaseIndexer {
+=======
+public abstract class BaseAlloyIndexer extends BaseIndexer<BaseModel<?>> {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	public AlloyServiceInvoker getAlloyServiceInvoker() {
 		return alloyServiceInvoker;
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String[] getClassNames() {
 		return classNames;
 	}
@@ -48,6 +53,10 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	@Override
 	public String getPortletId() {
 		return portletId;
+=======
+	public String getClassName() {
+		return className;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -65,6 +74,7 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected void doDelete(Object obj) throws Exception {
 		BaseModel<?> baseModel = (BaseModel<?>)obj;
 
@@ -74,6 +84,15 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 			portletId, String.valueOf(baseModel.getPrimaryKeyObj()));
 
 		AuditedModel auditedModel = (AuditedModel)obj;
+=======
+	protected void doDelete(BaseModel<?> baseModel) throws Exception {
+		Document document = new DocumentImpl();
+
+		document.addUID(
+			className, String.valueOf(baseModel.getPrimaryKeyObj()));
+
+		AuditedModel auditedModel = (AuditedModel)baseModel;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		SearchEngineUtil.deleteDocument(
 			getSearchEngineId(), auditedModel.getCompanyId(),
@@ -81,10 +100,17 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected void doReindex(Object obj) throws Exception {
 		Document document = getDocument(obj);
 
 		AuditedModel auditedModel = (AuditedModel)obj;
+=======
+	protected void doReindex(BaseModel<?> baseModel) throws Exception {
+		Document document = getDocument(baseModel);
+
+		AuditedModel auditedModel = (AuditedModel)baseModel;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		SearchEngineUtil.updateDocument(
 			getSearchEngineId(), auditedModel.getCompanyId(), document);
@@ -92,10 +118,17 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
+<<<<<<< HEAD
 		Object model = alloyServiceInvoker.fetchModel(classPK);
 
 		if (model != null) {
 			doReindex(model);
+=======
+		BaseModel<?> baseModel = alloyServiceInvoker.fetchModel(classPK);
+
+		if (baseModel != null) {
+			doReindex(baseModel);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
@@ -107,8 +140,20 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected String getPortletId(SearchContext searchContext) {
 		return portletId;
+=======
+	protected Document getBaseModelDocument(
+		String portletId, BaseModel<?> baseModel) {
+
+		Document document = super.getBaseModelDocument(portletId, baseModel);
+
+		document.remove(Field.USER_ID);
+		document.remove(Field.USER_NAME);
+
+		return document;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	protected void reindexModels(long companyId) throws Exception {
@@ -128,6 +173,7 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	protected void reindexModels(long companyId, int start, int end)
 		throws Exception {
 
+<<<<<<< HEAD
 		List<Object> models = alloyServiceInvoker.executeDynamicQuery(
 			new Object[] {"companyId", companyId}, start, end);
 
@@ -139,6 +185,19 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 
 		for (Object model : models) {
 			Document document = getDocument(model);
+=======
+		List<BaseModel<?>> baseModels = alloyServiceInvoker.executeDynamicQuery(
+			new Object[] {"companyId", companyId}, start, end);
+
+		if (baseModels.isEmpty()) {
+			return;
+		}
+
+		Collection<Document> documents = new ArrayList<>(baseModels.size());
+
+		for (BaseModel<?> baseModel : baseModels) {
+			Document document = getDocument(baseModel);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			documents.add(document);
 		}
@@ -154,6 +213,7 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	}
 
 	protected void setClassName(String className) {
+<<<<<<< HEAD
 		if (this.classNames == null) {
 			classNames = new String[] {className};
 		}
@@ -162,11 +222,19 @@ public abstract class BaseAlloyIndexer extends BaseIndexer {
 	protected void setPortletId(String portletId) {
 		if (this.portletId == null) {
 			this.portletId = portletId;
+=======
+		if (this.className == null) {
+			this.className = className;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	protected AlloyServiceInvoker alloyServiceInvoker;
+<<<<<<< HEAD
 	protected String[] classNames;
 	protected String portletId;
+=======
+	protected String className;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

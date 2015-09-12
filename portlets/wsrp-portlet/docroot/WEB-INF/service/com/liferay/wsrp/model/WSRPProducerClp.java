@@ -14,14 +14,17 @@
 
 package com.liferay.wsrp.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.lar.StagedModelType;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.exportimport.lar.StagedModelType;
 
 import com.liferay.wsrp.service.ClpSerializer;
 import com.liferay.wsrp.service.WSRPProducerLocalServiceUtil;
@@ -37,6 +40,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 	implements WSRPProducer {
 	public WSRPProducerClp() {
@@ -85,6 +89,10 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 		attributes.put("name", getName());
 		attributes.put("version", getVersion());
 		attributes.put("portletIds", getPortletIds());
+		attributes.put("lastPublishDate", getLastPublishDate());
+
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
 
 		return attributes;
 	}
@@ -144,6 +152,15 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 		if (portletIds != null) {
 			setPortletIds(portletIds);
 		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -354,6 +371,29 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 	}
 
 	@Override
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+
+		if (_wsrpProducerRemoteModel != null) {
+			try {
+				Class<?> clazz = _wsrpProducerRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLastPublishDate", Date.class);
+
+				method.invoke(_wsrpProducerRemoteModel, lastPublishDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String getURL(java.lang.String portalURL) {
 		try {
 			String methodName = "getURL";
@@ -428,7 +468,7 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			WSRPProducerLocalServiceUtil.addWSRPProducer(this);
 		}
@@ -456,6 +496,7 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 		clone.setName(getName());
 		clone.setVersion(getVersion());
 		clone.setPortletIds(getPortletIds());
+		clone.setLastPublishDate(getLastPublishDate());
 
 		return clone;
 	}
@@ -495,14 +536,28 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
 	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -522,6 +577,8 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 		sb.append(getVersion());
 		sb.append(", portletIds=");
 		sb.append(getPortletIds());
+		sb.append(", lastPublishDate=");
+		sb.append(getLastPublishDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -529,7 +586,7 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.wsrp.model.WSRPProducer");
@@ -571,6 +628,10 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 			"<column><column-name>portletIds</column-name><column-value><![CDATA[");
 		sb.append(getPortletIds());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -586,5 +647,9 @@ public class WSRPProducerClp extends BaseModelImpl<WSRPProducer>
 	private String _name;
 	private String _version;
 	private String _portletIds;
+	private Date _lastPublishDate;
 	private BaseModel<?> _wsrpProducerRemoteModel;
+	private Class<?> _clpSerializerClass = com.liferay.wsrp.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

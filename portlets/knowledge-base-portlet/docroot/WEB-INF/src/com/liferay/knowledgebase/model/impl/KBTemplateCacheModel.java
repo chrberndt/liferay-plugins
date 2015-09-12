@@ -14,8 +14,11 @@
 
 package com.liferay.knowledgebase.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.knowledgebase.model.KBTemplate;
 
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
@@ -34,11 +37,36 @@ import java.util.Date;
  * @see KBTemplate
  * @generated
  */
+@ProviderType
 public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 	Externalizable {
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof KBTemplateCacheModel)) {
+			return false;
+		}
+
+		KBTemplateCacheModel kbTemplateCacheModel = (KBTemplateCacheModel)obj;
+
+		if (kbTemplateId == kbTemplateCacheModel.kbTemplateId) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, kbTemplateId);
+	}
+
+	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -60,6 +88,8 @@ public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 		sb.append(title);
 		sb.append(", content=");
 		sb.append(content);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -116,6 +146,13 @@ public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 			kbTemplateImpl.setContent(content);
 		}
 
+		if (lastPublishDate == Long.MIN_VALUE) {
+			kbTemplateImpl.setLastPublishDate(null);
+		}
+		else {
+			kbTemplateImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
 		kbTemplateImpl.resetOriginalValues();
 
 		return kbTemplateImpl;
@@ -133,6 +170,7 @@ public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 		modifiedDate = objectInput.readLong();
 		title = objectInput.readUTF();
 		content = objectInput.readUTF();
+		lastPublishDate = objectInput.readLong();
 	}
 
 	@Override
@@ -173,6 +211,8 @@ public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 		else {
 			objectOutput.writeUTF(content);
 		}
+
+		objectOutput.writeLong(lastPublishDate);
 	}
 
 	public String uuid;
@@ -185,4 +225,5 @@ public class KBTemplateCacheModel implements CacheModel<KBTemplate>,
 	public long modifiedDate;
 	public String title;
 	public String content;
+	public long lastPublishDate;
 }

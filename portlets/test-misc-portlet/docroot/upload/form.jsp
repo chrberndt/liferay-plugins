@@ -22,7 +22,11 @@ String actionName = ParamUtil.getString(renderRequest, ActionRequest.ACTION_NAME
 
 <portlet:actionURL name="<%= actionName %>" var="submitURL" />
 
+<<<<<<< HEAD
 <aui:form action="<%= submitURL %>" method="post" name="fm">
+=======
+<aui:form action="<%= submitURL %>" enctype="multipart/form-data" method="post" name="fm">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<aui:fieldset>
 		<aui:input label="title" name="title" />
 		<aui:input label="file" name="fileName" size="50" type="file" />

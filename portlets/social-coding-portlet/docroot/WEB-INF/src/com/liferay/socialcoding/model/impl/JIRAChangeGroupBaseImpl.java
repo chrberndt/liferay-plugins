@@ -14,7 +14,7 @@
 
 package com.liferay.socialcoding.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.socialcoding.model.JIRAChangeGroup;
 import com.liferay.socialcoding.service.JIRAChangeGroupLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.socialcoding.service.JIRAChangeGroupLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see JIRAChangeGroupImpl
- * @see com.liferay.socialcoding.model.JIRAChangeGroup
+ * @see JIRAChangeGroup
  * @generated
  */
+@ProviderType
 public abstract class JIRAChangeGroupBaseImpl extends JIRAChangeGroupModelImpl
 	implements JIRAChangeGroup {
 	/*
@@ -39,7 +40,7 @@ public abstract class JIRAChangeGroupBaseImpl extends JIRAChangeGroupModelImpl
 	 * Never modify or reference this class directly. All methods that expect a j i r a change group model instance should use the {@link JIRAChangeGroup} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			JIRAChangeGroupLocalServiceUtil.addJIRAChangeGroup(this);
 		}

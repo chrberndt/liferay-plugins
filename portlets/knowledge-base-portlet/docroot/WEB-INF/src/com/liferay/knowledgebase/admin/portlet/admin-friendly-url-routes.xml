@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+=======
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <routes>
 	<route>
@@ -13,6 +17,7 @@
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 	</route>
 	<route>
+<<<<<<< HEAD
 		<pattern>/article/{resourcePrimKey:\d+}</pattern>
 		<implicit-parameter name="mvcPath">/admin/view_article.jsp</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
@@ -30,6 +35,37 @@
 	<route>
 		<pattern>/article/{resourcePrimKey:\d+}/{status:-?\d+}/history/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/admin/history.jsp</implicit-parameter>
+=======
+		<pattern>/articles/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/suggestions/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_suggestions.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/templates/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_templates.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/suggestions/completed/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_suggestions.jsp</implicit-parameter>
+		<implicit-parameter name="navItem">viewCompletedSuggestions</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/suggestions/in_progress/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_suggestions.jsp</implicit-parameter>
+		<implicit-parameter name="navItem">viewInProgressSuggestions</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/suggestions/new/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_suggestions.jsp</implicit-parameter>
+		<implicit-parameter name="navItem">viewNewSuggestions</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/article/{resourcePrimKey:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_article.jsp</implicit-parameter>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</route>
 	<route>
 		<pattern>/article/{resourcePrimKey:\d+}/{p_p_state}</pattern>
@@ -40,11 +76,25 @@
 		<implicit-parameter name="mvcPath">/admin/view_template.jsp</implicit-parameter>
 	</route>
 	<route>
+<<<<<<< HEAD
 		<pattern>/articles/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/admin/view.jsp</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/templates/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/admin/view_templates.jsp</implicit-parameter>
+=======
+		<pattern>/template/{kbTemplateId:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/view_template.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/article/{resourcePrimKey:\d+}/{status:-?\d+}/history</pattern>
+		<implicit-parameter name="mvcPath">/admin/history.jsp</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/article/{resourcePrimKey:\d+}/{status:-?\d+}/history/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/admin/history.jsp</implicit-parameter>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</route>
 </routes>

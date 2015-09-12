@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TransientValue;
 
+<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicInteger;
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,15 +33,26 @@ import javax.servlet.http.HttpSession;
 public class ConnectionCache<T> {
 
 	public ConnectionCache(
+<<<<<<< HEAD
 		Class<T> connectionClass, ConnectionBuilder<T> connectionBuilder) {
+=======
+		Class<T> connectionClass, long repositoryId,
+		ConnectionBuilder<T> connectionBuilder) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		_connectionBuilder = connectionBuilder;
 
 		_sessionKey =
+<<<<<<< HEAD
 			ConnectionCache.class.getName() + StringPool.POUND +
 				_sessionKeyIndexGenerator.getAndIncrement();
 
 		_connectionThreadLocal = new AutoResetThreadLocal<T>(
+=======
+			ConnectionCache.class.getName() + StringPool.POUND + repositoryId;
+
+		_connectionThreadLocal = new AutoResetThreadLocal<>(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			connectionClass.getName());
 	}
 
@@ -66,8 +80,12 @@ public class ConnectionCache<T> {
 		connection = _connectionBuilder.buildConnection();
 
 		if (httpSession != null) {
+<<<<<<< HEAD
 			TransientValue<T> transientValue = new TransientValue<T>(
 				connection);
+=======
+			TransientValue<T> transientValue = new TransientValue<>(connection);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			httpSession.setAttribute(_sessionKey, transientValue);
 		}
@@ -77,9 +95,12 @@ public class ConnectionCache<T> {
 		return connection;
 	}
 
+<<<<<<< HEAD
 	private static AtomicInteger _sessionKeyIndexGenerator =
 		new AtomicInteger();
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private ConnectionBuilder<T> _connectionBuilder;
 	private ThreadLocal<T> _connectionThreadLocal;
 	private String _sessionKey;

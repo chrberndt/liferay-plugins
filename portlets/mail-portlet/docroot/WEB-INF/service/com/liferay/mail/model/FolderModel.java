@@ -14,8 +14,9 @@
 
 package com.liferay.mail.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.mail.model.impl.FolderModelImpl
  * @generated
  */
+@ProviderType
 public interface FolderModel extends AuditedModel, BaseModel<Folder> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -111,10 +113,9 @@ public interface FolderModel extends AuditedModel, BaseModel<Folder> {
 	 * Returns the user uuid of this folder.
 	 *
 	 * @return the user uuid of this folder
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this folder.
@@ -268,19 +269,19 @@ public interface FolderModel extends AuditedModel, BaseModel<Folder> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Folder folder);
+	public int compareTo(com.liferay.mail.model.Folder folder);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Folder> toCacheModel();
+	public CacheModel<com.liferay.mail.model.Folder> toCacheModel();
 
 	@Override
-	public Folder toEscapedModel();
+	public com.liferay.mail.model.Folder toEscapedModel();
 
 	@Override
-	public Folder toUnescapedModel();
+	public com.liferay.mail.model.Folder toUnescapedModel();
 
 	@Override
 	public String toString();

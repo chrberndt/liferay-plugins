@@ -14,6 +14,8 @@
 
 package com.liferay.ams.service;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableLocalService;
@@ -32,6 +34,7 @@ import com.liferay.portal.service.InvokableLocalService;
  * @see com.liferay.ams.service.impl.AssetLocalServiceImpl
  * @generated
  */
+@ProviderType
 public class AssetLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -44,11 +47,9 @@ public class AssetLocalServiceUtil {
 	*
 	* @param asset the asset
 	* @return the asset that was added
-	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.ams.model.Asset addAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.ams.model.Asset asset) {
 		return getService().addAsset(asset);
 	}
 
@@ -63,30 +64,35 @@ public class AssetLocalServiceUtil {
 	}
 
 	/**
+	* Deletes the asset from the database. Also notifies the appropriate model listeners.
+	*
+	* @param asset the asset
+	* @return the asset that was removed
+	*/
+	public static com.liferay.ams.model.Asset deleteAsset(
+		com.liferay.ams.model.Asset asset) {
+		return getService().deleteAsset(asset);
+	}
+
+	/**
 	* Deletes the asset with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param assetId the primary key of the asset
 	* @return the asset that was removed
 	* @throws PortalException if a asset with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.ams.model.Asset deleteAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteAsset(assetId);
 	}
 
 	/**
-	* Deletes the asset from the database. Also notifies the appropriate model listeners.
-	*
-	* @param asset the asset
-	* @return the asset that was removed
-	* @throws SystemException if a system exception occurred
+	* @throws PortalException
 	*/
-	public static com.liferay.ams.model.Asset deleteAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteAsset(asset);
+	public static com.liferay.portal.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePersistedModel(persistedModel);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
@@ -98,12 +104,9 @@ public class AssetLocalServiceUtil {
 	*
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
-	* @throws SystemException if a system exception occurred
 	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
@@ -118,12 +121,10 @@ public class AssetLocalServiceUtil {
 	* @param start the lower bound of the range of model instances
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
-	* @throws SystemException if a system exception occurred
 	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
+	public static <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		int end) {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -139,49 +140,45 @@ public class AssetLocalServiceUtil {
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
-	* @throws SystemException if a system exception occurred
 	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
+	public static <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return getService()
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns the number of rows that match the dynamic query.
+	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
-	* @return the number of rows that match the dynamic query
-	* @throws SystemException if a system exception occurred
+	* @return the number of rows matching the dynamic query
 	*/
 	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
-	* Returns the number of rows that match the dynamic query.
+	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
 	* @param projection the projection to apply to the query
-	* @return the number of rows that match the dynamic query
-	* @throws SystemException if a system exception occurred
+	* @return the number of rows matching the dynamic query
 	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
-		com.liferay.portal.kernel.dao.orm.Projection projection)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.liferay.ams.model.Asset fetchAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static com.liferay.ams.model.Asset fetchAsset(long assetId) {
 		return getService().fetchAsset(assetId);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return getService().getActionableDynamicQuery();
 	}
 
 	/**
@@ -190,19 +187,10 @@ public class AssetLocalServiceUtil {
 	* @param assetId the primary key of the asset
 	* @return the asset
 	* @throws PortalException if a asset with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.ams.model.Asset getAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getAsset(assetId);
-	}
-
-	public static com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getPersistedModel(primaryKeyObj);
 	}
 
 	/**
@@ -215,11 +203,9 @@ public class AssetLocalServiceUtil {
 	* @param start the lower bound of the range of assets
 	* @param end the upper bound of the range of assets (not inclusive)
 	* @return the range of assets
-	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.ams.model.Asset> getAssets(
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		int start, int end) {
 		return getService().getAssets(start, end);
 	}
 
@@ -227,24 +213,9 @@ public class AssetLocalServiceUtil {
 	* Returns the number of assets.
 	*
 	* @return the number of assets
-	* @throws SystemException if a system exception occurred
 	*/
-	public static int getAssetsCount()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int getAssetsCount() {
 		return getService().getAssetsCount();
-	}
-
-	/**
-	* Updates the asset in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param asset the asset
-	* @return the asset that was updated
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.ams.model.Asset updateAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateAsset(asset);
 	}
 
 	/**
@@ -256,6 +227,18 @@ public class AssetLocalServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
+	public static com.liferay.portal.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -265,10 +248,15 @@ public class AssetLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return getService().invokeMethod(name, parameterTypes, arguments);
+	/**
+	* Updates the asset in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param asset the asset
+	* @return the asset that was updated
+	*/
+	public static com.liferay.ams.model.Asset updateAsset(
+		com.liferay.ams.model.Asset asset) {
+		return getService().updateAsset(asset);
 	}
 
 	public static void clearService() {
@@ -297,6 +285,7 @@ public class AssetLocalServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+	@Deprecated
 	public void setService(AssetLocalService service) {
 	}
 

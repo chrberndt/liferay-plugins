@@ -16,6 +16,10 @@ package com.liferay.alloy.mvc;
 
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Portlet;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.model.User;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +38,11 @@ public interface AlloyController {
 
 	public HttpServletRequest getRequest();
 
+<<<<<<< HEAD
+=======
+	public String getResponseContent();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public ThemeDisplay getThemeDisplay();
 
 	public long increment() throws Exception;
@@ -47,6 +56,13 @@ public interface AlloyController {
 
 	public void setPageContext(PageContext pageContext);
 
+<<<<<<< HEAD
+=======
+	public void setUser(User user);
+
+	public String translate(String pattern, Object... arguments);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void updateModel(BaseModel<?> baseModel, Object... properties)
 		throws Exception;
 

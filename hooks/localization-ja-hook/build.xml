@@ -2,10 +2,9 @@
 <!DOCTYPE project>
 
 <project name="localization-ja-hook" basedir="." default="deploy">
-	<import file="../build-common-hook.xml" />
-
 	<property name="import.shared" value="localization-shared" />
 
+<<<<<<< HEAD
 	<target name="update-from-portal">
 		<copy overwrite="true" preservelastmodified="true" todir="docroot/META-INF/custom_jsps">
 			<fileset
@@ -38,4 +37,7 @@
 			/>
 		</copy>
 	</target>
+=======
+	<import file="../build-common-hook.xml" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </project>

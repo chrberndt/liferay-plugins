@@ -14,6 +14,11 @@
 
 package com.liferay.sync.service.http;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -23,7 +28,11 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
+<<<<<<< HEAD
  * {@link com.liferay.sync.service.SyncDLObjectServiceUtil} service utility. The
+=======
+ * {@link SyncDLObjectServiceUtil} service utility. The
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -58,9 +67,16 @@ import java.rmi.RemoteException;
  * @author Brian Wing Shun Chan
  * @see SyncDLObjectServiceHttp
  * @see com.liferay.sync.model.SyncDLObjectSoap
+<<<<<<< HEAD
  * @see com.liferay.sync.service.SyncDLObjectServiceUtil
  * @generated
  */
+=======
+ * @see SyncDLObjectServiceUtil
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLObjectServiceSoap {
 	public static com.liferay.sync.model.SyncDLObjectSoap addFolder(
 		long repositoryId, long parentFolderId, java.lang.String name,
@@ -145,6 +161,7 @@ public class SyncDLObjectServiceSoap {
 		}
 	}
 
+<<<<<<< HEAD
 	/**
 	* @deprecated As of 7.0.0, with no direct replacement
 	*/
@@ -155,6 +172,33 @@ public class SyncDLObjectServiceSoap {
 					folderId);
 
 			return returnValue;
+=======
+	public static com.liferay.sync.model.SyncDLObjectSoap copyFileEntry(
+		long sourceFileEntryId, long repositoryId, long folderId,
+		java.lang.String sourceFileName, java.lang.String title,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.sync.model.SyncDLObject returnValue = SyncDLObjectServiceUtil.copyFileEntry(sourceFileEntryId,
+					repositoryId, folderId, sourceFileName, title,
+					serviceContext);
+
+			return com.liferay.sync.model.SyncDLObjectSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.sync.model.SyncDLObjectSoap[] getAllFolderSyncDLObjects(
+		long repositoryId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.sync.model.SyncDLObject> returnValue = SyncDLObjectServiceUtil.getAllFolderSyncDLObjects(repositoryId);
+
+			return com.liferay.sync.model.SyncDLObjectSoap.toSoapModels(returnValue);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -164,10 +208,17 @@ public class SyncDLObjectServiceSoap {
 	}
 
 	public static com.liferay.sync.model.SyncDLObjectSoap getFileEntrySyncDLObject(
+<<<<<<< HEAD
 		long groupId, long folderId, java.lang.String title)
 		throws RemoteException {
 		try {
 			com.liferay.sync.model.SyncDLObject returnValue = SyncDLObjectServiceUtil.getFileEntrySyncDLObject(groupId,
+=======
+		long repositoryId, long folderId, java.lang.String title)
+		throws RemoteException {
+		try {
+			com.liferay.sync.model.SyncDLObject returnValue = SyncDLObjectServiceUtil.getFileEntrySyncDLObject(repositoryId,
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					folderId, title);
 
 			return com.liferay.sync.model.SyncDLObjectSoap.toSoapModel(returnValue);
@@ -208,6 +259,25 @@ public class SyncDLObjectServiceSoap {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public static com.liferay.sync.model.SyncDLObjectSoap getFolderSyncDLObject(
+		long repositoryId, long parentFolderId, java.lang.String name)
+		throws RemoteException {
+		try {
+			com.liferay.sync.model.SyncDLObject returnValue = SyncDLObjectServiceUtil.getFolderSyncDLObject(repositoryId,
+					parentFolderId, name);
+
+			return com.liferay.sync.model.SyncDLObjectSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static com.liferay.sync.model.SyncDLObjectSoap[] getFolderSyncDLObjects(
 		long repositoryId, long parentFolderId) throws RemoteException {
 		try {
@@ -250,10 +320,32 @@ public class SyncDLObjectServiceSoap {
 		}
 	}
 
+<<<<<<< HEAD
 	public static com.liferay.sync.model.SyncContext getSyncContext(
 		java.lang.String uuid) throws RemoteException {
 		try {
 			com.liferay.sync.model.SyncContext returnValue = SyncDLObjectServiceUtil.getSyncContext(uuid);
+=======
+	public static com.liferay.sync.model.SyncContext getSyncContext()
+		throws RemoteException {
+		try {
+			com.liferay.sync.model.SyncContext returnValue = SyncDLObjectServiceUtil.getSyncContext();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getSyncDLObjectUpdate(long repositoryId,
+		long lastAccessTime, int max) throws RemoteException {
+		try {
+			java.lang.String returnValue = SyncDLObjectServiceUtil.getSyncDLObjectUpdate(repositoryId,
+					lastAccessTime, max);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			return returnValue;
 		}
@@ -265,11 +357,19 @@ public class SyncDLObjectServiceSoap {
 	}
 
 	public static com.liferay.sync.model.SyncDLObjectUpdate getSyncDLObjectUpdate(
+<<<<<<< HEAD
 		long companyId, long repositoryId, long lastAccessTime)
 		throws RemoteException {
 		try {
 			com.liferay.sync.model.SyncDLObjectUpdate returnValue = SyncDLObjectServiceUtil.getSyncDLObjectUpdate(companyId,
 					repositoryId, lastAccessTime);
+=======
+		long repositoryId, long parentFolderId, long lastAccessTime)
+		throws RemoteException {
+		try {
+			com.liferay.sync.model.SyncDLObjectUpdate returnValue = SyncDLObjectServiceUtil.getSyncDLObjectUpdate(repositoryId,
+					parentFolderId, lastAccessTime);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			return returnValue;
 		}

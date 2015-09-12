@@ -4,7 +4,11 @@
 	<portlet>
 		<portlet-name>1</portlet-name>
 		<display-name>Push Notifications</display-name>
+<<<<<<< HEAD
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+=======
+		<portlet-class>com.liferay.pushnotifications.portlet.AdminPortlet</portlet-class>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
@@ -22,6 +26,7 @@
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
+<<<<<<< HEAD
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>
@@ -31,5 +36,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</portlet>
 </portlet-app>

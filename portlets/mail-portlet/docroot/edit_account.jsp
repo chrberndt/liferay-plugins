@@ -103,7 +103,7 @@ Account mailAccount = AccountLocalServiceUtil.getAccount(accountId);
 			A.io.request(
 				themeDisplay.getLayoutURL() + '/-/mail/update_account',
 				{
-					dataType: 'json',
+					dataType: 'JSON',
 					form: {
 						id: form.getDOMNode()
 					},
@@ -140,7 +140,11 @@ Account mailAccount = AccountLocalServiceUtil.getAccount(accountId);
 							accountId: <%= accountId %>
 						}
 					),
+<<<<<<< HEAD
 					dataType: 'json',
+=======
+					dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					method: 'POST',
 					on: {
 						failure: function(event, id, obj) {
@@ -173,7 +177,11 @@ Account mailAccount = AccountLocalServiceUtil.getAccount(accountId);
 							accountId: <%= accountId %>
 						}
 					),
+<<<<<<< HEAD
 					dataType: 'json',
+=======
+					dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					method: 'POST',
 					on: {
 						failure: function(event, id, obj) {

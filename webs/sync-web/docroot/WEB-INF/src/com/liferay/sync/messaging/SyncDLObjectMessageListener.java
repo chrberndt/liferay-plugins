@@ -14,19 +14,43 @@
 
 package com.liferay.sync.messaging;
 
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
+<<<<<<< HEAD
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+=======
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLSyncEvent;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLSyncEventLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.sync.model.SyncConstants;
 import com.liferay.sync.model.SyncDLObject;
 import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
 import com.liferay.sync.util.SyncUtil;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /**
  * @author Dennis Ju
  */
@@ -37,11 +61,33 @@ public class SyncDLObjectMessageListener extends BaseMessageListener {
 		throws Exception {
 
 		if (event.equals(SyncConstants.EVENT_DELETE)) {
+<<<<<<< HEAD
 			SyncDLObjectLocalServiceUtil.addSyncDLObject(
 				0, modifiedTime, 0, 0, StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
 				StringPool.BLANK, StringPool.BLANK, 0, StringPool.BLANK, event,
 				null, 0, StringPool.BLANK, type, typePK, StringPool.BLANK);
+=======
+			long userId = 0;
+			String userName = StringPool.BLANK;
+
+			PermissionChecker permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			if (permissionChecker != null) {
+				User user = permissionChecker.getUser();
+
+				userId = user.getUserId();
+				userName = user.getFullName();
+			}
+
+			SyncDLObjectLocalServiceUtil.addSyncDLObject(
+				0, userId, userName, modifiedTime, 0, 0, StringPool.BLANK,
+				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
+				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
+				StringPool.BLANK, 0, 0, StringPool.BLANK, event, null, 0,
+				StringPool.BLANK, type, typePK, StringPool.BLANK);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			return;
 		}
@@ -58,7 +104,11 @@ public class SyncDLObjectMessageListener extends BaseMessageListener {
 				return;
 			}
 
+<<<<<<< HEAD
 			syncDLObject = SyncUtil.toSyncDLObject(fileEntry, event);
+=======
+			syncDLObject = SyncUtil.toSyncDLObject(fileEntry, event, true);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 		else {
 			Folder folder = null;
@@ -78,26 +128,111 @@ public class SyncDLObjectMessageListener extends BaseMessageListener {
 		}
 
 		SyncDLObjectLocalServiceUtil.addSyncDLObject(
+<<<<<<< HEAD
 			syncDLObject.getCompanyId(), modifiedTime,
 			syncDLObject.getRepositoryId(), syncDLObject.getParentFolderId(),
 			syncDLObject.getName(), syncDLObject.getExtension(),
 			syncDLObject.getMimeType(), syncDLObject.getDescription(),
 			syncDLObject.getChangeLog(), syncDLObject.getExtraSettings(),
 			syncDLObject.getVersion(), syncDLObject.getSize(),
+=======
+			syncDLObject.getCompanyId(), syncDLObject.getUserId(),
+			syncDLObject.getUserName(), modifiedTime,
+			syncDLObject.getRepositoryId(), syncDLObject.getParentFolderId(),
+			syncDLObject.getTreePath(), syncDLObject.getName(),
+			syncDLObject.getExtension(), syncDLObject.getMimeType(),
+			syncDLObject.getDescription(), syncDLObject.getChangeLog(),
+			syncDLObject.getExtraSettings(), syncDLObject.getVersion(),
+			syncDLObject.getVersionId(), syncDLObject.getSize(),
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			syncDLObject.getChecksum(), syncDLObject.getEvent(),
 			syncDLObject.getLockExpirationDate(), syncDLObject.getLockUserId(),
 			syncDLObject.getLockUserName(), syncDLObject.getType(),
 			syncDLObject.getTypePK(), syncDLObject.getTypeUuid());
+<<<<<<< HEAD
+=======
+
+		if (event.equals(SyncConstants.EVENT_RESTORE) &&
+			type.equals(SyncConstants.TYPE_FOLDER)) {
+
+			List<Object> foldersAndFileEntriesAndFileShortcuts =
+				DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
+					syncDLObject.getRepositoryId(), syncDLObject.getTypePK(),
+					WorkflowConstants.STATUS_ANY, false, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS);
+
+			for (Object folderAndFileEntryAndFileShortcut :
+					foldersAndFileEntriesAndFileShortcuts) {
+
+				if (folderAndFileEntryAndFileShortcut instanceof FileEntry) {
+					FileEntry fileEntry =
+						(FileEntry)folderAndFileEntryAndFileShortcut;
+
+					addSyncDLObject(
+						modifiedTime, SyncConstants.EVENT_RESTORE,
+						SyncConstants.TYPE_FILE, fileEntry.getFileEntryId());
+				}
+				else if (folderAndFileEntryAndFileShortcut instanceof Folder) {
+					Folder folder = (Folder)folderAndFileEntryAndFileShortcut;
+
+					if (!SyncUtil.isSupportedFolder(folder)) {
+						continue;
+					}
+
+					addSyncDLObject(
+						modifiedTime, SyncConstants.EVENT_RESTORE,
+						SyncConstants.TYPE_FOLDER, folder.getFolderId());
+				}
+			}
+		}
+	}
+
+	protected void deleteDLSyncEvent(
+			long modifiedTime, long syncEventId, long typePK)
+		throws Exception {
+
+		if (syncEventId != 0) {
+			DLSyncEventLocalServiceUtil.deleteDLSyncEvent(syncEventId);
+
+			return;
+		}
+
+		DynamicQuery dynamicQuery = DLSyncEventLocalServiceUtil.dynamicQuery();
+
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq("modifiedTime", modifiedTime));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("typePK", typePK));
+
+		List<DLSyncEvent> dlSyncEvents =
+			DLSyncEventLocalServiceUtil.dynamicQuery(dynamicQuery);
+
+		if (dlSyncEvents.isEmpty()) {
+			return;
+		}
+
+		DLSyncEvent dlSyncEvent = dlSyncEvents.get(0);
+
+		DLSyncEventLocalServiceUtil.deleteDLSyncEvent(dlSyncEvent);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		String event = message.getString("event");
 		long modifiedTime = message.getLong("modifiedTime");
+<<<<<<< HEAD
+=======
+		long syncEventId = message.getLong("syncEventId");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		String type = message.getString("type");
 		long typePK = message.getLong("typePK");
 
 		addSyncDLObject(modifiedTime, event, type, typePK);
+<<<<<<< HEAD
+=======
+
+		deleteDLSyncEvent(modifiedTime, syncEventId, typePK);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 }

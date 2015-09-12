@@ -8,6 +8,7 @@ Javac-Debug: ${javac.debug}
 Javac-Deprecation: ${javac.deprecation}
 Javac-Encoding: ${javac.encoding}
 
+<<<<<<< HEAD
 -baseline: *
 -baselinerepo: localrepo
 -donotcopy: (\.touch)
@@ -26,4 +27,8 @@ Javac-Encoding: ${javac.encoding}
 		type=R5
 -pluginpath: ${workspace}/osgi/lib/plugin/bnd-repository.jar
 -releaserepo: localrepo
+=======
+-donotcopy: (\.touch)
+-dsannotations: *
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 -sources: false

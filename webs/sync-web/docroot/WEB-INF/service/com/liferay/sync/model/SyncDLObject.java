@@ -14,7 +14,14 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.model.PersistedModel;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.model.TreeModel;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * The extended model interface for the SyncDLObject service. Represents a row in the &quot;SyncDLObject&quot; database table, with each column mapped to a property of this class.
@@ -25,12 +32,24 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.sync.model.impl.SyncDLObjectModelImpl
  * @generated
  */
+<<<<<<< HEAD
 public interface SyncDLObject extends SyncDLObjectModel, PersistedModel {
+=======
+@ProviderType
+public interface SyncDLObject extends SyncDLObjectModel, PersistedModel,
+	TreeModel {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.sync.model.impl.SyncDLObjectImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+<<<<<<< HEAD
+=======
+	@Override
+	public java.lang.String buildTreePath();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setCreateDate(java.util.Date createDate);
 
 	public void setModifiedDate(java.util.Date modifiedDate);

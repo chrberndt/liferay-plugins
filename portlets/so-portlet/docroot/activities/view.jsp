@@ -58,7 +58,8 @@ portletURL.setParameter("tabs1", tabs1);
 	);
 
 	var loading = false;
-	var start = 0;
+
+	<portlet:namespace />start = 0;
 
 	var loadNewContent = function() {
 		loadingBar.removeClass('loaded');
@@ -82,7 +83,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				var uri = '<%= viewActivitySetsURL %>';
 
+<<<<<<< HEAD
 				uri = Liferay.Util.addParams('<portlet:namespace />start=' + start, uri) || uri;
+=======
+				uri = Liferay.Util.addParams('<portlet:namespace />start=' + <portlet:namespace />start, uri) || uri;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				A.io.request(
 					uri,
@@ -92,8 +97,6 @@ portletURL.setParameter("tabs1", tabs1);
 								var responseData = this.get('responseData');
 
 								socialActivities.append(responseData);
-
-								start = start + <%= _DELTA %>;
 
 								loadingBar.addClass('loaded');
 
@@ -181,9 +184,14 @@ portletURL.setParameter("tabs1", tabs1);
 								if (responseData) {
 									commentsList.empty();
 
+<<<<<<< HEAD
 									A.Array.each(
 										responseData.comments,
 										function(item, index, collection) {
+=======
+									responseData.comments.forEach(
+										function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 											Liferay.SO.Activities.addNewComment(commentsList, item);
 										}
 									);
@@ -192,7 +200,11 @@ portletURL.setParameter("tabs1", tabs1);
 								}
 							}
 						},
+<<<<<<< HEAD
 						dataType: 'json'
+=======
+						dataType: 'JSON'
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 				);
 			}
@@ -205,7 +217,7 @@ portletURL.setParameter("tabs1", tabs1);
 	socialActivities.delegate(
 		'click',
 		function(event) {
-			if (confirm('<%= UnicodeLanguageUtil.get(pageContext,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
+			if (confirm('<%= UnicodeLanguageUtil.get(request,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
 				var currentTarget = event.currentTarget;
 
 				var activityFooter = currentTarget.ancestor('.activity-footer');
@@ -247,17 +259,17 @@ portletURL.setParameter("tabs1", tabs1);
 									}
 
 									if (messagesCount > 1) {
-										commentText += ' <%= UnicodeLanguageUtil.get(pageContext, "comments") %>';
+										commentText += ' <%= UnicodeLanguageUtil.get(request, "comments") %>';
 									}
 									else {
-										commentText += ' <%= UnicodeLanguageUtil.get(pageContext, "comment") %>';
+										commentText += ' <%= UnicodeLanguageUtil.get(request, "comment") %>';
 									}
 
 									viewComments.html(commentText);
 								}
 							}
 						},
-						dataType: 'json',
+						dataType: 'JSON',
 						form: {
 							id: form
 						}
@@ -342,7 +354,7 @@ portletURL.setParameter("tabs1", tabs1);
 										}
 									}
 								},
-								dataType: 'json',
+								dataType: 'JSON',
 								form: {
 									id: editForm
 								}
@@ -379,7 +391,7 @@ portletURL.setParameter("tabs1", tabs1);
 						width: 400
 					},
 					id: '<portlet:namespace />Dialog',
-					title: '<%= UnicodeLanguageUtil.get(pageContext, "repost") %>',
+					title: '<%= UnicodeLanguageUtil.get(request, "repost") %>',
 					uri: uri
 				}
 			);
@@ -396,6 +408,16 @@ portletURL.setParameter("tabs1", tabs1);
 	);
 
 	Liferay.on(
+<<<<<<< HEAD
+=======
+		'microblogPosted',
+		function(event) {
+			Liferay.Portlet.refresh('#p_p_id<portlet:namespace />');
+		}
+	);
+
+	Liferay.on(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		'sessionExpired',
 		function(event) {
 			var reload = function() {

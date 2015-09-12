@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
+<!DOCTYPE project>
 
 <project name="modules-admin-portlet" basedir="." default="compile">
-	<import file="../../build-common-osgi-plugin.xml" />
+	<property name="osgi.ide.dependencies" value="bnd.jar" />
 
+<<<<<<< HEAD
 	<property name="osgi.ide.dependencies" value="bnd.jar,freemarker.jar" />
+=======
+	<import file="../../build-common-osgi-plugin.xml" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </project>

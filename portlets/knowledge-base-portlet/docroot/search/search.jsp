@@ -33,7 +33,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 </liferay-portlet:renderURL>
 
 <liferay-ui:search-container
-	emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-articles-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>", false) %>'
+	emptyResultsMessage='<%= LanguageUtil.format(request, "no-articles-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>", false) %>'
 	iteratorURL="<%= iteratorURL %>"
 	orderByCol="<%= orderByCol %>"
 	orderByType="<%= orderByType %>"
@@ -48,7 +48,11 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 	searchContext.setStart(searchContainer.getStart());
 	searchContext.setSorts(KnowledgeBaseUtil.getKBArticleSorts(orderByCol, orderByType));
 
+<<<<<<< HEAD
 	Indexer indexer = IndexerRegistryUtil.getIndexer(KBArticle.class);
+=======
+	Indexer<KBArticle> indexer = IndexerRegistryUtil.getIndexer(KBArticle.class);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	Hits hits = indexer.search(searchContext);
 
@@ -83,6 +87,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="mvcPath" value="/search/view_article.jsp" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="resourcePrimKey" value="<%= (String)tuple.getObject(0) %>" />
 		</liferay-portlet:renderURL>
 
@@ -131,19 +136,13 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 			>
 
 				<%
-				KBArticle kbArticle = null;
-
-				try {
-					kbArticle = KBArticleLocalServiceUtil.getLatestKBArticle(GetterUtil.getLong((String)tuple.getObject(0)), WorkflowConstants.STATUS_APPROVED);
-				}
-				catch (NoSuchArticleException nsae) {
-				}
+				KBArticle kbArticle = KBArticleLocalServiceUtil.fetchLatestKBArticle(GetterUtil.getLong((String)tuple.getObject(0)), WorkflowConstants.STATUS_APPROVED);
 
 				int viewCount = (kbArticle != null) ? kbArticle.getViewCount() : 0;
 
 				buffer.append(viewCount);
 				buffer.append(StringPool.SPACE);
-				buffer.append((viewCount == 1) ? LanguageUtil.get(pageContext, "view") : LanguageUtil.get(pageContext, "views"));
+				buffer.append((viewCount == 1) ? LanguageUtil.get(request, "view") : LanguageUtil.get(request, "views"));
 				%>
 
 			</liferay-ui:search-container-column-text>

@@ -14,6 +14,8 @@
 
 package com.liferay.socialcoding.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -38,6 +40,7 @@ import java.util.Date;
  * @see com.liferay.socialcoding.model.impl.JIRAIssueModelImpl
  * @generated
  */
+@ProviderType
 public interface JIRAIssueModel extends BaseModel<JIRAIssue> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -116,19 +119,18 @@ public interface JIRAIssueModel extends BaseModel<JIRAIssue> {
 	public void setProjectId(long projectId);
 
 	/**
-	 * Returns the key of this j i r a issue.
+	 * Returns the issue number of this j i r a issue.
 	 *
-	 * @return the key of this j i r a issue
+	 * @return the issue number of this j i r a issue
 	 */
-	@AutoEscape
-	public String getKey();
+	public long getIssueNumber();
 
 	/**
-	 * Sets the key of this j i r a issue.
+	 * Sets the issue number of this j i r a issue.
 	 *
-	 * @param key the key of this j i r a issue
+	 * @param issueNumber the issue number of this j i r a issue
 	 */
-	public void setKey(String key);
+	public void setIssueNumber(long issueNumber);
 
 	/**
 	 * Returns the summary of this j i r a issue.
@@ -257,19 +259,19 @@ public interface JIRAIssueModel extends BaseModel<JIRAIssue> {
 	public Object clone();
 
 	@Override
-	public int compareTo(JIRAIssue jiraIssue);
+	public int compareTo(com.liferay.socialcoding.model.JIRAIssue jiraIssue);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<JIRAIssue> toCacheModel();
+	public CacheModel<com.liferay.socialcoding.model.JIRAIssue> toCacheModel();
 
 	@Override
-	public JIRAIssue toEscapedModel();
+	public com.liferay.socialcoding.model.JIRAIssue toEscapedModel();
 
 	@Override
-	public JIRAIssue toUnescapedModel();
+	public com.liferay.socialcoding.model.JIRAIssue toUnescapedModel();
 
 	@Override
 	public String toString();

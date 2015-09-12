@@ -11,13 +11,21 @@
 	<classpathentry kind="lib" path="/portal-master/lib/development/mail.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/development/servlet-api.jar" />
 	<classpathentry kind="lib" path="/portal-master/lib/global/portlet.jar" />
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/portal-master/lib/portal/commons-logging.jar" />
+=======
+	<classpathentry kind="lib" path="/portal-master/lib/portal/bnd.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/commons-logging.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/jstl-api.jar" />
+	<classpathentry kind="lib" path="/portal-master/lib/portal/jstl-impl.jar" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<classpathentry kind="lib" path="/portal-master/lib/portal/log4j.jar" />
 	<classpathentry kind="lib" path="/portal-master/portal-service/portal-service.jar" />
 	<classpathentry kind="lib" path="/portal-master/util-bridges/util-bridges.jar" />
 	<classpathentry kind="lib" path="/portal-master/util-java/util-java.jar" />
 	<classpathentry kind="lib" path="/portal-master/util-taglib/util-taglib.jar" />
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/apns.jar" />
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/gcm-server.jar" />
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-annotations.jar" />
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-core.jar" />
@@ -25,5 +33,27 @@
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/json-simple.jar" />
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/portal-compat-shared.jar" />
 	<classpathentry kind="lib" path="docroot/WEB-INF/lib/slf4j-api.jar" />
+=======
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/commons-codec.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/commons-httpclient.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/commons-lang3.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/gcm-server.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/httpclient.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/httpcore.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-annotations.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-core-asl.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-core.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-databind.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jackson-mapper-asl.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/java-mpns.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jcl-over-slf4j.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jodd-core.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jodd-http.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/jodd-upload.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/json-simple.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/portal-compat-shared.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/slf4j-api.jar" />
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/twilio-java-sdk.jar" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<classpathentry kind="output" path="bin" />
 </classpath>

@@ -113,7 +113,17 @@ public class AMIBuilder extends BaseAMITool {
 			e.printStackTrace();
 
 			amiBuilder.destroy();
+<<<<<<< HEAD
 		}
+=======
+
+			System.exit(-1);
+
+			return;
+		}
+
+		System.exit(0);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public AMIBuilder(
@@ -229,6 +239,7 @@ public class AMIBuilder extends BaseAMITool {
 		}
 	}
 
+<<<<<<< HEAD
 	protected String getKeyFileName() {
 		StringBuilder sb = new StringBuilder(6);
 
@@ -261,6 +272,9 @@ public class AMIBuilder extends BaseAMITool {
 	}
 
 	protected Instance getRunningInstance(String instanceId) {
+=======
+	protected Instance getInstance(String instanceId, String state) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		DescribeInstancesRequest describeInstancesRequest =
 			new DescribeInstancesRequest();
 
@@ -272,7 +286,11 @@ public class AMIBuilder extends BaseAMITool {
 
 		List<String> values = new ArrayList<String>();
 
+<<<<<<< HEAD
 		values.add("running");
+=======
+		values.add(state);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		filter.setValues(values);
 
@@ -303,6 +321,40 @@ public class AMIBuilder extends BaseAMITool {
 		return instances.get(0);
 	}
 
+<<<<<<< HEAD
+=======
+	protected String getKeyFileName() {
+		StringBuilder sb = new StringBuilder(6);
+
+		sb.append(System.getProperty("user.home"));
+		sb.append(File.separator);
+		sb.append(".ssh");
+		sb.append(File.separator);
+		sb.append(properties.getProperty("key.name"));
+		sb.append(".pem");
+
+		return sb.toString();
+	}
+
+	protected Map<String, String> getProvisioners(Properties properties) {
+		Map<String, String> provisioners = new TreeMap<String, String>();
+
+		Set<String> names = properties.stringPropertyNames();
+
+		for (String name : names) {
+			if (!name.contains("provisioners")) {
+				continue;
+			}
+
+			String value = properties.getProperty(name);
+
+			provisioners.put(name, value);
+		}
+
+		return provisioners;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	protected boolean isImageCreated(String imageId) {
 		DescribeImagesRequest describeImagesRequest =
 			new DescribeImagesRequest();
@@ -516,6 +568,7 @@ public class AMIBuilder extends BaseAMITool {
 
 		boolean running = false;
 
+<<<<<<< HEAD
 		for (int i = 0; i < 6; i++) {
 			sleep(30);
 
@@ -544,6 +597,43 @@ public class AMIBuilder extends BaseAMITool {
 
 				break;
 			}
+=======
+		int i = 0;
+
+		do {
+			System.out.println("Waiting for running instance " + i + "...");
+
+			i = i + 1;
+
+			sleep(30);
+
+			instance = getInstance(_instanceId, "pending");
+		}
+		while (instance != null);
+
+		instance = getInstance(_instanceId, "running");
+
+		if (instance != null) {
+			_publicIpAddress = instance.getPublicIpAddress();
+
+			running = true;
+
+			sb = new StringBuilder(7);
+
+			sb.append("{instanceId=");
+			sb.append(_instanceId);
+			sb.append(", publicIpAddress=");
+			sb.append(_publicIpAddress);
+			sb.append(", stat=");
+
+			instanceState = instance.getState();
+
+			sb.append(instanceState.getName());
+
+			sb.append("}");
+
+			System.out.println("Started instance " + sb.toString());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		if (!running) {

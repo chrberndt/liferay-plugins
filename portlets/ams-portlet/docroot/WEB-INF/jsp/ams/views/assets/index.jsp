@@ -19,7 +19,6 @@
 <portlet:renderURL var="editAssetURL">
 	<portlet:param name="controller" value="assets" />
 	<portlet:param name="action" value="edit" />
-	<portlet:param name="format" value="html" />
 </portlet:renderURL>
 
 <aui:button-row>
@@ -29,12 +28,19 @@
 <portlet:renderURL var="viewAssetsURL">
 	<portlet:param name="controller" value="assets" />
 	<portlet:param name="action" value="index" />
+<<<<<<< HEAD
 	<portlet:param name="format" value="html" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </portlet:renderURL>
 
 <aui:form action="${viewAssetsURL}" method="get" name="fm">
 	<aui:fieldset>
+<<<<<<< HEAD
 		<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-assets" type="text" />
+=======
+		<aui:input inlineField="${true}" label="" name="keywords" size="30" title="search-assets" type="text" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		<aui:button type="submit" value="search" />
 	</aui:fieldset>
@@ -48,7 +54,11 @@
 
 	<liferay-ui:search-container-row
 		className="com.liferay.ams.model.Asset"
+<<<<<<< HEAD
 		escapedModel="<%= true %>"
+=======
+		escapedModel="${true}"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		keyProperty="assetId"
 		modelVar="asset"
 	>
@@ -56,7 +66,10 @@
 			<portlet:param name="controller" value="assets" />
 			<portlet:param name="action" value="view" />
 			<portlet:param name="id" value="${asset.assetId}" />
+<<<<<<< HEAD
 			<portlet:param name="format" value="html" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</portlet:renderURL>
 
 		<liferay-ui:search-container-column-text
@@ -75,7 +88,10 @@
 			<portlet:param name="controller" value="assets" />
 			<portlet:param name="action" value="delete" />
 			<portlet:param name="id" value="${asset.assetId}" />
+<<<<<<< HEAD
 			<portlet:param name="format" value="html" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</portlet:actionURL>
 
 		<c:if test='${alloyPermission:contains(themeDisplay, "assets", "delete")}'>

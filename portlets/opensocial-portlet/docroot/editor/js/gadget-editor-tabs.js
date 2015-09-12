@@ -21,10 +21,13 @@ AUI.add(
 		var STR_EMPTY = '';
 
 		var TPL_CLOSE_BUTTON = '<a class="gadget-editor-tab-close icon-remove" href="javascript:;"></a>';
-
-		var TPL_DIV = '<div></div>';
+<<<<<<< HEAD
+=======
 
 		var TPL_DIRTY_INDICATOR = '<span>*</span>';
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
+
+		var TPL_DIV = '<div></div>';
 
 		var TabViewEditor = A.Component.create(
 			{
@@ -115,7 +118,11 @@ AUI.add(
 						var tab = null;
 
 						instance.some(
+<<<<<<< HEAD
 							function(item, index, collection) {
+=======
+							function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								if (item.get(ID) === id) {
 									tab = item;
 
@@ -134,12 +141,21 @@ AUI.add(
 						var tab = instance.getTabById(id);
 
 						var index = instance.indexOf(tab);
+<<<<<<< HEAD
 
 						instance.remove(index);
 
 						var tabContentBox = tab.get(CONTENT_BOX);
 						var tabViewContentBox = instance.get(CONTENT_BOX);
 
+=======
+
+						instance.remove(index);
+
+						var tabContentBox = tab.get(CONTENT_BOX);
+						var tabViewContentBox = instance.get(CONTENT_BOX);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						if (tabViewContentBox.contains(tabContentBox)) {
 							tabViewContentBox.removeChild(tabContentBox);
 						}
@@ -182,30 +198,49 @@ AUI.add(
 					aceEditor: {
 						validator: '_validateAceEditor'
 					},
+<<<<<<< HEAD
 					dirtyIndicatorNode: {
 						validator: '_validateDirtyIndicatorNode'
 					},
 					fileName: {
 						validator: Lang.isString
 					},
+=======
+
+					dirtyIndicatorNode: {
+						validator: '_validateDirtyIndicatorNode'
+					},
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					entryId: {
 						setter: function(value) {
 							return String(value);
 						},
 						value: STR_EMPTY
 					},
+
+					fileName: {
+						validator: Lang.isString
+					},
+
 					isDirty: {
 						validator: Lang.isBoolean,
 						value: false
 					},
+
 					isNew: {
 						validator: Lang.isBoolean,
 						value: true
 					},
+
 					isRendered: {
 						validator: Lang.isBoolean,
 						value: false
 					},
+<<<<<<< HEAD
+=======
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					label: {
 						validator: Lang.isString
 					}
@@ -216,6 +251,7 @@ AUI.add(
 				NAME: 'tab-editor',
 
 				prototype: {
+<<<<<<< HEAD
 					bindUI: function() {
 						var instance = this;
 
@@ -225,6 +261,8 @@ AUI.add(
 						instance.on('labelChange', instance._onLabelChange);
 					},
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					initializer: function(config) {
 						var instance = this;
 
@@ -263,6 +301,18 @@ AUI.add(
 						var instance = this;
 
 						TabEditor.superclass.renderUI.apply(this, arguments);
+<<<<<<< HEAD
+=======
+					},
+
+					bindUI: function() {
+						var instance = this;
+
+						TabEditor.superclass.bindUI.apply(this, arguments);
+
+						instance.on('isDirtyChange', instance._onIsDirtyChange);
+						instance.on('labelChange', instance._onLabelChange);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					},
 
 					searchEditorText: function(searchText, caseInsensitive, replaceText, doReplace) {

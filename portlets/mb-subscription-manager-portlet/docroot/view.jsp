@@ -25,11 +25,15 @@ String keywords = ParamUtil.getString(request, "keywords");
 />
 
 <aui:form action="<%= portletURL %>" cssClass="form-search" method="post" name="fm1">
+<<<<<<< HEAD
 	<liferay-ui:input-search placeholder='<%= LanguageUtil.get(locale, "keywords") %>' title='<%= LanguageUtil.get(locale, "keywords") %>' />
+=======
+	<liferay-ui:input-search placeholder='<%= LanguageUtil.get(request, "keywords") %>' title='<%= LanguageUtil.get(request, "keywords") %>' />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </aui:form>
 
 <liferay-ui:search-container
-	emptyResultsMessage="no-categories-found"
+	emptyResultsMessage="no-categories-were-found"
 	iteratorURL="<%= portletURL %>"
 	total="<%= SubscriptionManagerUtil.getMBCategoriesCount(scopeGroupId, keywords) %>"
 >
@@ -67,6 +71,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		<liferay-ui:search-container-column-jsp
 			align="right"
+			cssClass="entry-action"
 			path="/category_action.jsp"
 		/>
 	</liferay-ui:search-container-row>
@@ -136,7 +141,11 @@ private String _getSubscribers(PageContext pageContext, MBCategory mbCategory) t
 	sb.append("<a href=\"");
 	sb.append(HtmlUtil.escape(portletURL.toString()));
 	sb.append("\">");
+<<<<<<< HEAD
 	sb.append(LanguageUtil.format(pageContext, "and-x-more", String.valueOf(count), false));
+=======
+	sb.append(LanguageUtil.format(request, "and-x-more", String.valueOf(count), false));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	sb.append("</a>");
 
 	return sb.toString();

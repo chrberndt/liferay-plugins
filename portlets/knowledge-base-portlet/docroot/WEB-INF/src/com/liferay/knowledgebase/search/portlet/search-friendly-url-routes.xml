@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
 
 <routes>
 	<route>
@@ -20,6 +20,10 @@
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 	</route>
 	<route>
+		<pattern>/{resourcePrimKey:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/search/view_article.jsp</implicit-parameter>
+	</route>
+	<route>
 		<pattern>/{resourcePrimKey:\d+}/{status:-?\d+}/history</pattern>
 		<implicit-parameter name="mvcPath">/search/history.jsp</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
@@ -27,9 +31,5 @@
 	<route>
 		<pattern>/{resourcePrimKey:\d+}/{status:-?\d+}/history/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/search/history.jsp</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/{resourcePrimKey:\d+}/{p_p_state}</pattern>
-		<implicit-parameter name="mvcPath">/search/view_article.jsp</implicit-parameter>
 	</route>
 </routes>

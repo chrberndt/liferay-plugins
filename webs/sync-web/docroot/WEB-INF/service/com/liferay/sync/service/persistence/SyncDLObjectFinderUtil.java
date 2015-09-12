@@ -14,11 +14,17 @@
 
 package com.liferay.sync.service.persistence;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
+<<<<<<< HEAD
  */
 public class SyncDLObjectFinderUtil {
 	public static java.util.List<com.liferay.sync.model.SyncDLObject> filterFindByC_M_R(
@@ -26,6 +32,15 @@ public class SyncDLObjectFinderUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .filterFindByC_M_R(companyId, modifiedTime, repositoryId);
+=======
+ * @generated
+ */
+@ProviderType
+public class SyncDLObjectFinderUtil {
+	public static java.util.List<java.lang.Long> filterFindByR_U_T(
+		long groupId, long userId, long[] typePKs) {
+		return getFinder().filterFindByR_U_T(groupId, userId, typePKs);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static SyncDLObjectFinder getFinder() {

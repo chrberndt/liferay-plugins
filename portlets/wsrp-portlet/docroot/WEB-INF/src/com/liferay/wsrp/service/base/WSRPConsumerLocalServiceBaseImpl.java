@@ -14,12 +14,19 @@
 
 package com.liferay.wsrp.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -31,6 +38,13 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.exportimport.lar.ExportImportHelperUtil;
+import com.liferay.portlet.exportimport.lar.ManifestSummary;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelType;
 
 import com.liferay.wsrp.model.WSRPConsumer;
 import com.liferay.wsrp.service.WSRPConsumerLocalService;
@@ -56,6 +70,7 @@ import javax.sql.DataSource;
  * @see com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class WSRPConsumerLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements WSRPConsumerLocalService,
 		IdentifiableBean {
@@ -70,12 +85,10 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 *
 	 * @param wsrpConsumer the w s r p consumer
 	 * @return the w s r p consumer that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public WSRPConsumer addWSRPConsumer(WSRPConsumer wsrpConsumer)
-		throws SystemException {
+	public WSRPConsumer addWSRPConsumer(WSRPConsumer wsrpConsumer) {
 		wsrpConsumer.setNew(true);
 
 		return wsrpConsumerPersistence.update(wsrpConsumer);
@@ -98,12 +111,11 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param wsrpConsumerId the primary key of the w s r p consumer
 	 * @return the w s r p consumer that was removed
 	 * @throws PortalException if a w s r p consumer with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public WSRPConsumer deleteWSRPConsumer(long wsrpConsumerId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return wsrpConsumerPersistence.remove(wsrpConsumerId);
 	}
 
@@ -113,12 +125,11 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param wsrpConsumer the w s r p consumer
 	 * @return the w s r p consumer that was removed
 	 * @throws PortalException
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public WSRPConsumer deleteWSRPConsumer(WSRPConsumer wsrpConsumer)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return wsrpConsumerPersistence.remove(wsrpConsumer);
 	}
 
@@ -135,12 +146,9 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return wsrpConsumerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -155,12 +163,10 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return wsrpConsumerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
@@ -177,47 +183,41 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return wsrpConsumerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return wsrpConsumerPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return wsrpConsumerPersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
-	public WSRPConsumer fetchWSRPConsumer(long wsrpConsumerId)
-		throws SystemException {
+	public WSRPConsumer fetchWSRPConsumer(long wsrpConsumerId) {
 		return wsrpConsumerPersistence.fetchByPrimaryKey(wsrpConsumerId);
 	}
 
@@ -225,13 +225,12 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * Returns the w s r p consumer with the matching UUID and company.
 	 *
 	 * @param uuid the w s r p consumer's UUID
-	 * @param  companyId the primary key of the company
+	 * @param companyId the primary key of the company
 	 * @return the matching w s r p consumer, or <code>null</code> if a matching w s r p consumer could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public WSRPConsumer fetchWSRPConsumerByUuidAndCompanyId(String uuid,
-		long companyId) throws SystemException {
+		long companyId) {
 		return wsrpConsumerPersistence.fetchByUuid_C_First(uuid, companyId, null);
 	}
 
@@ -241,17 +240,100 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param wsrpConsumerId the primary key of the w s r p consumer
 	 * @return the w s r p consumer
 	 * @throws PortalException if a w s r p consumer with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public WSRPConsumer getWSRPConsumer(long wsrpConsumerId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return wsrpConsumerPersistence.findByPrimaryKey(wsrpConsumerId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(WSRPConsumer.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("wsrpConsumerId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(WSRPConsumer.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("wsrpConsumerId");
+	}
+
+	@Override
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		final PortletDataContext portletDataContext) {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+				@Override
+				public long performCount() throws PortalException {
+					ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+
+					StagedModelType stagedModelType = getStagedModelType();
+
+					long modelAdditionCount = super.performCount();
+
+					manifestSummary.addModelAdditionCount(stagedModelType.toString(),
+						modelAdditionCount);
+
+					long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext,
+							stagedModelType);
+
+					manifestSummary.addModelDeletionCount(stagedModelType.toString(),
+						modelDeletionCount);
+
+					return modelAdditionCount;
+				}
+			};
+
+		initActionableDynamicQuery(exportActionableDynamicQuery);
+
+		exportActionableDynamicQuery.setAddCriteriaMethod(new ActionableDynamicQuery.AddCriteriaMethod() {
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					portletDataContext.addDateRangeCriteria(dynamicQuery,
+						"modifiedDate");
+				}
+			});
+
+		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+
+		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod() {
+				@Override
+				public void performAction(Object object)
+					throws PortalException {
+					WSRPConsumer stagedModel = (WSRPConsumer)object;
+
+					StagedModelDataHandlerUtil.exportStagedModel(portletDataContext,
+						stagedModel);
+				}
+			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(WSRPConsumer.class.getName())));
+
+		return exportActionableDynamicQuery;
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return wsrpConsumerLocalService.deleteWSRPConsumer((WSRPConsumer)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return wsrpConsumerPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -259,14 +341,13 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * Returns the w s r p consumer with the matching UUID and company.
 	 *
 	 * @param uuid the w s r p consumer's UUID
-	 * @param  companyId the primary key of the company
+	 * @param companyId the primary key of the company
 	 * @return the matching w s r p consumer
 	 * @throws PortalException if a matching w s r p consumer could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public WSRPConsumer getWSRPConsumerByUuidAndCompanyId(String uuid,
-		long companyId) throws PortalException, SystemException {
+		long companyId) throws PortalException {
 		return wsrpConsumerPersistence.findByUuid_C_First(uuid, companyId, null);
 	}
 
@@ -280,11 +361,9 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param start the lower bound of the range of w s r p consumers
 	 * @param end the upper bound of the range of w s r p consumers (not inclusive)
 	 * @return the range of w s r p consumers
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<WSRPConsumer> getWSRPConsumers(int start, int end)
-		throws SystemException {
+	public List<WSRPConsumer> getWSRPConsumers(int start, int end) {
 		return wsrpConsumerPersistence.findAll(start, end);
 	}
 
@@ -292,10 +371,9 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * Returns the number of w s r p consumers.
 	 *
 	 * @return the number of w s r p consumers
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getWSRPConsumersCount() throws SystemException {
+	public int getWSRPConsumersCount() {
 		return wsrpConsumerPersistence.countAll();
 	}
 
@@ -304,12 +382,10 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 *
 	 * @param wsrpConsumer the w s r p consumer
 	 * @return the w s r p consumer that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public WSRPConsumer updateWSRPConsumer(WSRPConsumer wsrpConsumer)
-		throws SystemException {
+	public WSRPConsumer updateWSRPConsumer(WSRPConsumer wsrpConsumer) {
 		return wsrpConsumerPersistence.update(wsrpConsumer);
 	}
 
@@ -318,7 +394,7 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 *
 	 * @return the w s r p consumer local service
 	 */
-	public com.liferay.wsrp.service.WSRPConsumerLocalService getWSRPConsumerLocalService() {
+	public WSRPConsumerLocalService getWSRPConsumerLocalService() {
 		return wsrpConsumerLocalService;
 	}
 
@@ -328,7 +404,7 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	 * @param wsrpConsumerLocalService the w s r p consumer local service
 	 */
 	public void setWSRPConsumerLocalService(
-		com.liferay.wsrp.service.WSRPConsumerLocalService wsrpConsumerLocalService) {
+		WSRPConsumerLocalService wsrpConsumerLocalService) {
 		this.wsrpConsumerLocalService = wsrpConsumerLocalService;
 	}
 
@@ -642,13 +718,18 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = wsrpConsumerPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -661,7 +742,7 @@ public abstract class WSRPConsumerLocalServiceBaseImpl
 	}
 
 	@BeanReference(type = com.liferay.wsrp.service.WSRPConsumerLocalService.class)
-	protected com.liferay.wsrp.service.WSRPConsumerLocalService wsrpConsumerLocalService;
+	protected WSRPConsumerLocalService wsrpConsumerLocalService;
 	@BeanReference(type = WSRPConsumerPersistence.class)
 	protected WSRPConsumerPersistence wsrpConsumerPersistence;
 	@BeanReference(type = com.liferay.wsrp.service.WSRPConsumerPortletLocalService.class)

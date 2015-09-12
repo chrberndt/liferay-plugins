@@ -25,6 +25,14 @@ public class SyncDLObjectImpl extends SyncDLObjectBaseImpl {
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public String buildTreePath() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setCreateDate(Date createDate) {
 		setCreateTime(createDate.getTime());
 	}

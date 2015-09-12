@@ -2,5 +2,9 @@
 <!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
 
 <hook>
+<<<<<<< HEAD
+=======
+	<portal-properties>portal.properties</portal-properties>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<language-properties>content/Language*.properties</language-properties>
 </hook>

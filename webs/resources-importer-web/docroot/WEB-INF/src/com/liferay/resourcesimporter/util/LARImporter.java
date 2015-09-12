@@ -14,10 +14,11 @@
 
 package com.liferay.resourcesimporter.util;
 
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataHandlerKeys;
+import com.liferay.portlet.exportimport.lar.UserIdStrategy;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -72,11 +73,8 @@ public class LARImporter extends BaseImporter {
 	}
 
 	protected Map<String, String[]> getParameterMap() {
-		Map<String, String[]> parameters = new HashMap<String, String[]>();
+		Map<String, String[]> parameters = new HashMap<>();
 
-		parameters.put(
-			PortletDataHandlerKeys.CATEGORIES,
-			new String[] {Boolean.TRUE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.TRUE.toString()});
@@ -91,7 +89,10 @@ public class LARImporter extends BaseImporter {
 			new String[] {Boolean.TRUE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
-			new String[] {Boolean.TRUE.toString()});
+			new String[] {
+				PortletDataHandlerKeys.
+					LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_UUID
+			});
 		parameters.put(
 			PortletDataHandlerKeys.LOGO,
 			new String[] {Boolean.TRUE.toString()});
@@ -121,6 +122,7 @@ public class LARImporter extends BaseImporter {
 			new String[] {Boolean.TRUE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
+<<<<<<< HEAD
 			new String[] {Boolean.TRUE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.PUBLIC_LAYOUT_PERMISSIONS,
@@ -128,12 +130,15 @@ public class LARImporter extends BaseImporter {
 		parameters.put(
 			PortletDataHandlerKeys.PUBLISH_TO_REMOTE,
 			new String[] {Boolean.TRUE.toString()});
+=======
+			new String[] {PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE});
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		parameters.put(
 			PortletDataHandlerKeys.THEME_REFERENCE,
 			new String[] {Boolean.TRUE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			new String[] {Boolean.TRUE.toString()});
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
 
 		return parameters;
 	}

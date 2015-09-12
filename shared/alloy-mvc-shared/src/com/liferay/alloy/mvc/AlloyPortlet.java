@@ -14,6 +14,10 @@
 
 package com.liferay.alloy.mvc;
 
+<<<<<<< HEAD
+=======
+import com.liferay.alloy.mvc.jsonwebservice.AlloyControllerInvokerManager;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -35,9 +39,14 @@ import com.liferay.portal.model.Portlet;
 import java.io.IOException;
 
 import java.util.HashMap;
+<<<<<<< HEAD
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+=======
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -60,9 +69,14 @@ public class AlloyPortlet extends GenericPortlet {
 
 	@Override
 	public void destroy() {
+<<<<<<< HEAD
 		for (AlloyController alloyController : _alloyControllers) {
 			BaseAlloyControllerImpl baseAlloyControllerImpl =
 				(BaseAlloyControllerImpl)alloyController;
+=======
+		for (BaseAlloyControllerImpl baseAlloyControllerImpl :
+				_alloyControllers.values()) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			Indexer indexer = baseAlloyControllerImpl.indexer;
 
@@ -96,6 +110,11 @@ public class AlloyPortlet extends GenericPortlet {
 				}
 			}
 		}
+<<<<<<< HEAD
+=======
+
+		_alloyControllerInvokerManager.unregisterControllers();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -113,6 +132,12 @@ public class AlloyPortlet extends GenericPortlet {
 		Router router = friendlyURLMapper.getRouter();
 
 		router.urlToParameters(HttpMethods.GET, _defaultRouteParameters);
+<<<<<<< HEAD
+=======
+
+		_alloyControllerInvokerManager = new AlloyControllerInvokerManager(
+			liferayPortletConfig);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -145,9 +170,28 @@ public class AlloyPortlet extends GenericPortlet {
 		include(path, resourceRequest, resourceResponse);
 	}
 
+<<<<<<< HEAD
 	protected Map<String, String> getDefaultRouteParameters() {
 		/*Map<String, String> defaultRouteParameters =
 			new HashMap<String, String[]>();
+=======
+	protected String getControllerPath(PortletRequest portletRequest) {
+		String controllerPath = ParamUtil.getString(
+			portletRequest, "controller");
+
+		if (Validator.isNull(controllerPath)) {
+			Map<String, String> defaultRouteParameters =
+				getDefaultRouteParameters();
+
+			controllerPath = defaultRouteParameters.get("controller");
+		}
+
+		return controllerPath;
+	}
+
+	protected Map<String, String> getDefaultRouteParameters() {
+		/*Map<String, String> defaultRouteParameters = new HashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		defaultRouteParameters.put("controller", new String[] {"assets"});
 		defaultRouteParameters.put("action", new String[] {"index"});
@@ -164,6 +208,7 @@ public class AlloyPortlet extends GenericPortlet {
 
 		Portlet portlet = liferayPortletConfig.getPortlet();
 
+<<<<<<< HEAD
 		String controllerPath = ParamUtil.getString(
 			portletRequest, "controller");
 
@@ -173,6 +218,9 @@ public class AlloyPortlet extends GenericPortlet {
 
 			controllerPath = defaultRouteParameters.get("controller");
 		}
+=======
+		String controllerPath = getControllerPath(portletRequest);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		StringBundler sb = new StringBundler(5);
 
@@ -204,16 +252,54 @@ public class AlloyPortlet extends GenericPortlet {
 	}
 
 	protected void registerAlloyController(AlloyController alloyController) {
+<<<<<<< HEAD
 		if (!_alloyControllers.contains(alloyController)) {
 			_alloyControllers.add(alloyController);
+=======
+		BaseAlloyControllerImpl newBaseAlloyControllerImpl =
+			(BaseAlloyControllerImpl)alloyController;
+
+		String controller = newBaseAlloyControllerImpl.controllerPath;
+
+		BaseAlloyControllerImpl oldBaseAlloyControllerImpl =
+			_alloyControllers.get(controller);
+
+		if ((oldBaseAlloyControllerImpl == null) ||
+			(newBaseAlloyControllerImpl.getClass() !=
+				oldBaseAlloyControllerImpl.getClass())) {
+
+			synchronized (controller.intern()) {
+				oldBaseAlloyControllerImpl = _alloyControllers.get(controller);
+
+				if ((oldBaseAlloyControllerImpl == null) ||
+					(newBaseAlloyControllerImpl.getClass() !=
+						oldBaseAlloyControllerImpl.getClass())) {
+
+					_alloyControllers.put(
+						controller, newBaseAlloyControllerImpl);
+
+					_alloyControllerInvokerManager.registerController(
+						newBaseAlloyControllerImpl.getThemeDisplay(), this,
+						newBaseAlloyControllerImpl.portlet, controller,
+						newBaseAlloyControllerImpl.getClass());
+				}
+			}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AlloyPortlet.class);
 
+<<<<<<< HEAD
 	private Set<AlloyController> _alloyControllers =
 		new HashSet<AlloyController>();
 	private Map<String, String> _defaultRouteParameters =
 		new HashMap<String, String>();
+=======
+	private AlloyControllerInvokerManager _alloyControllerInvokerManager;
+	private Map<String, BaseAlloyControllerImpl> _alloyControllers =
+		new ConcurrentHashMap<>();
+	private Map<String, String> _defaultRouteParameters = new HashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

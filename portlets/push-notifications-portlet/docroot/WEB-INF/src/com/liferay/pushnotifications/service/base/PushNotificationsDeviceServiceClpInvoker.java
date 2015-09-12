@@ -14,14 +14,26 @@
 
 package com.liferay.pushnotifications.service.base;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.pushnotifications.service.PushNotificationsDeviceServiceUtil;
 
 import java.util.Arrays;
 
 /**
+<<<<<<< HEAD
  * @author Silvio Santos
  * @generated
  */
+=======
+ * @author Bruno Farache
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class PushNotificationsDeviceServiceClpInvoker {
 	public PushNotificationsDeviceServiceClpInvoker() {
 		_methodName24 = "getBeanIdentifier";
@@ -41,6 +53,19 @@ public class PushNotificationsDeviceServiceClpInvoker {
 		_methodName31 = "deletePushNotificationsDevice";
 
 		_methodParameterTypes31 = new String[] { "java.lang.String" };
+<<<<<<< HEAD
+=======
+
+		_methodName32 = "sendPushNotification";
+
+		_methodParameterTypes32 = new String[] { "long[][]", "java.lang.String" };
+
+		_methodName33 = "sendPushNotification";
+
+		_methodParameterTypes33 = new String[] {
+				"java.lang.String", "java.util.List", "java.lang.String"
+			};
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -68,6 +93,26 @@ public class PushNotificationsDeviceServiceClpInvoker {
 			return PushNotificationsDeviceServiceUtil.deletePushNotificationsDevice((java.lang.String)arguments[0]);
 		}
 
+<<<<<<< HEAD
+=======
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			PushNotificationsDeviceServiceUtil.sendPushNotification((long[])arguments[0],
+				(java.lang.String)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+			PushNotificationsDeviceServiceUtil.sendPushNotification((java.lang.String)arguments[0],
+				(java.util.List<java.lang.String>)arguments[1],
+				(java.lang.String)arguments[2]);
+
+			return null;
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		throw new UnsupportedOperationException();
 	}
 
@@ -79,4 +124,11 @@ public class PushNotificationsDeviceServiceClpInvoker {
 	private String[] _methodParameterTypes30;
 	private String _methodName31;
 	private String[] _methodParameterTypes31;
+<<<<<<< HEAD
+=======
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

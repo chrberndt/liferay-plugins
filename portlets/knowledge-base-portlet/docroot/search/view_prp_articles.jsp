@@ -58,6 +58,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="mvcPath" value="/search/view_article.jsp" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="resourcePrimKey" value="<%= String.valueOf(assetEntry.getClassPK()) %>" />
 		</liferay-portlet:renderURL>
 
@@ -107,19 +108,13 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 			>
 
 				<%
-				KBArticle kbArticle = null;
-
-				try {
-					kbArticle = KBArticleLocalServiceUtil.getLatestKBArticle(assetEntry.getClassPK(), WorkflowConstants.STATUS_APPROVED);
-				}
-				catch (NoSuchArticleException nsae) {
-				}
+				KBArticle kbArticle = KBArticleLocalServiceUtil.fetchLatestKBArticle(assetEntry.getClassPK(), WorkflowConstants.STATUS_APPROVED);
 
 				int viewCount = (kbArticle != null) ? kbArticle.getViewCount() : 0;
 
 				buffer.append(viewCount);
 				buffer.append(StringPool.SPACE);
-				buffer.append((viewCount == 1) ? LanguageUtil.get(pageContext, "view") : LanguageUtil.get(pageContext, "views"));
+				buffer.append((viewCount == 1) ? LanguageUtil.get(request, "view") : LanguageUtil.get(request, "views"));
 				%>
 
 			</liferay-ui:search-container-column-text>
@@ -145,20 +140,20 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 						<c:when test="<%= Validator.isNotNull(assetTagName) %>">
 							<c:choose>
 								<c:when test="<%= total > 0 %>">
-									<%= LanguageUtil.format(pageContext, "articles-with-x-x-and-tag-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale), assetTagName}, false) %>
+									<%= LanguageUtil.format(request, "articles-with-x-x-and-tag-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale), assetTagName}, false) %>
 								</c:when>
 								<c:otherwise>
-									<%= LanguageUtil.format(pageContext, "there-are-no-articles-with-x-x-and-tag-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale), assetTagName}, false) %>
+									<%= LanguageUtil.format(request, "there-are-no-articles-with-x-x-and-tag-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale), assetTagName}, false) %>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
 								<c:when test="<%= total > 0 %>">
-									<%= LanguageUtil.format(pageContext, "articles-with-x-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale)}, false) %>
+									<%= LanguageUtil.format(request, "articles-with-x-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale)}, false) %>
 								</c:when>
 								<c:otherwise>
-									<%= LanguageUtil.format(pageContext, "there-are-no-articles-with-x-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale)}, false) %>
+									<%= LanguageUtil.format(request, "there-are-no-articles-with-x-x", new String[] {assetVocabulary.getTitle(locale), assetCategory.getTitle(locale)}, false) %>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -167,10 +162,10 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 				<c:otherwise>
 					<c:choose>
 						<c:when test="<%= total > 0 %>">
-							<%= LanguageUtil.format(pageContext, "articles-with-tag-x", assetTagName, false) %>
+							<%= LanguageUtil.format(request, "articles-with-tag-x", assetTagName, false) %>
 						</c:when>
 						<c:otherwise>
-							<%= LanguageUtil.format(pageContext, "there-are-no-articles-with-tag-x", assetTagName, false) %>
+							<%= LanguageUtil.format(request, "there-are-no-articles-with-tag-x", assetTagName, false) %>
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>

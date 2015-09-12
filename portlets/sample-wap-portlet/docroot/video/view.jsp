@@ -17,6 +17,11 @@
 <%@ include file="/init.jsp" %>
 
 <a href="<%= PortalUtil.getPathContext(request) %>/video/hong_kong.rm">
+<<<<<<< HEAD
 <img alt="" src="<%= PortalUtil.getPathContext(request) %>/video/hong_kong.gif" /><br />
 Download
+=======
+	<img alt="" src="<%= PortalUtil.getPathContext(request) %>/video/hong_kong.gif" /><br />
+	Download
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </a>

@@ -14,11 +14,12 @@
 
 package com.liferay.sampleservicebuilder.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.StagedGroupedModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +41,8 @@ import java.util.Date;
  * @see com.liferay.sampleservicebuilder.model.impl.FooModelImpl
  * @generated
  */
-public interface FooModel extends BaseModel<Foo>, StagedGroupedModel {
+@ProviderType
+public interface FooModel extends BaseModel<Foo>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,7 +69,6 @@ public interface FooModel extends BaseModel<Foo>, StagedGroupedModel {
 	 * @return the uuid of this foo
 	 */
 	@AutoEscape
-	@Override
 	public String getUuid();
 
 	/**
@@ -75,7 +76,6 @@ public interface FooModel extends BaseModel<Foo>, StagedGroupedModel {
 	 *
 	 * @param uuid the uuid of this foo
 	 */
-	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -144,10 +144,9 @@ public interface FooModel extends BaseModel<Foo>, StagedGroupedModel {
 	 * Returns the user uuid of this foo.
 	 *
 	 * @return the user uuid of this foo
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this foo.
@@ -322,19 +321,19 @@ public interface FooModel extends BaseModel<Foo>, StagedGroupedModel {
 	public Object clone();
 
 	@Override
-	public int compareTo(Foo foo);
+	public int compareTo(com.liferay.sampleservicebuilder.model.Foo foo);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Foo> toCacheModel();
+	public CacheModel<com.liferay.sampleservicebuilder.model.Foo> toCacheModel();
 
 	@Override
-	public Foo toEscapedModel();
+	public com.liferay.sampleservicebuilder.model.Foo toEscapedModel();
 
 	@Override
-	public Foo toUnescapedModel();
+	public com.liferay.sampleservicebuilder.model.Foo toUnescapedModel();
 
 	@Override
 	public String toString();

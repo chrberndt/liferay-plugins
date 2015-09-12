@@ -14,8 +14,15 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.util.GetterUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -35,6 +42,10 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDiff>
 	implements SyncDLFileVersionDiff {
 	public SyncDLFileVersionDiffClp() {
@@ -82,6 +93,12 @@ public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDif
 		attributes.put("size", getSize());
 		attributes.put("expirationDate", getExpirationDate());
 
+<<<<<<< HEAD
+=======
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return attributes;
 	}
 
@@ -129,6 +146,12 @@ public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDif
 		if (expirationDate != null) {
 			setExpirationDate(expirationDate);
 		}
+<<<<<<< HEAD
+=======
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -349,7 +372,11 @@ public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDif
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void persist() throws SystemException {
+=======
+	public void persist() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (this.isNew()) {
 			SyncDLFileVersionDiffLocalServiceUtil.addSyncDLFileVersionDiff(this);
 		}
@@ -417,12 +444,32 @@ public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDif
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 
@@ -495,4 +542,10 @@ public class SyncDLFileVersionDiffClp extends BaseModelImpl<SyncDLFileVersionDif
 	private long _size;
 	private Date _expirationDate;
 	private BaseModel<?> _syncDLFileVersionDiffRemoteModel;
+<<<<<<< HEAD
+=======
+	private Class<?> _clpSerializerClass = com.liferay.sync.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

@@ -14,17 +14,26 @@
 
 package com.liferay.pushnotifications.messaging;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+=======
+import com.liferay.portal.kernel.json.JSONArray;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+<<<<<<< HEAD
 import com.liferay.pushnotifications.sender.PushNotificationsSender;
 import com.liferay.pushnotifications.service.PushNotificationsDeviceLocalServiceUtil;
 
 import java.util.List;
 import java.util.Map;
+=======
+import com.liferay.pushnotifications.service.PushNotificationsDeviceLocalServiceUtil;
+import com.liferay.pushnotifications.util.PushNotificationsConstants;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Silvio Santos
@@ -32,6 +41,7 @@ import java.util.Map;
  */
 public class PushNotificationsMessageListener implements MessageListener {
 
+<<<<<<< HEAD
 	public Map<String, PushNotificationsSender> getPushNotificationsSenders() {
 		return _pushNotificationsSenders;
 	}
@@ -66,12 +76,33 @@ public class PushNotificationsMessageListener implements MessageListener {
 
 				pushNotificationsSender.send(tokens, jsonObject);
 			}
+=======
+	@Override
+	public void receive(Message message) {
+		JSONObject payloadJSONObject = (JSONObject)message.getPayload();
+
+		JSONArray toUserIdsJSONArray = payloadJSONObject.getJSONArray(
+			PushNotificationsConstants.KEY_TO_USER_IDS);
+
+		long[] toUserIds = new long[toUserIdsJSONArray.length()];
+
+		for (int i = 0; i < toUserIdsJSONArray.length(); i++) {
+			toUserIds[i] = toUserIdsJSONArray.getLong(i);
+		}
+
+		payloadJSONObject.remove(PushNotificationsConstants.KEY_TO_USER_IDS);
+
+		try {
+			PushNotificationsDeviceLocalServiceUtil.sendPushNotification(
+				toUserIds, payloadJSONObject);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 		catch (Exception e) {
 			_log.error("Unable to send notification", e);
 		}
 	}
 
+<<<<<<< HEAD
 	public void setPushNotificationsSenders(
 		Map<String, PushNotificationsSender> pushNotificationSenders) {
 
@@ -83,4 +114,9 @@ public class PushNotificationsMessageListener implements MessageListener {
 
 	private Map<String, PushNotificationsSender> _pushNotificationsSenders;
 
+=======
+	private static Log _log = LogFactoryUtil.getLog(
+		PushNotificationsMessageListener.class);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <projectDescription>
+<<<<<<< HEAD
 	<name>sync-web-6.2.x</name>
+=======
+	<name>sync-web-master</name>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<comment></comment>
 	<projects></projects>
 	<buildSpec>

@@ -46,14 +46,22 @@ MailManager mailManager = MailManager.getInstance(request);
 	String folderName = folder.getDisplayName();
 
 	if (Validator.isNotNull(keywords)) {
+<<<<<<< HEAD
 		folderName = LanguageUtil.get(pageContext, "search-results");
+=======
+		folderName = LanguageUtil.get(request, "search-results");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 	%>
 
 	<div class="row-fluid">
 		<aui:nav-bar>
 			<aui:nav>
+<<<<<<< HEAD
 				<aui:nav-item cssClass="messages-link" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>" data-pageNumber="<%= pageNumber %>" href="javascript:;" iconClass="icon-arrow-left" label='<%= LanguageUtil.format(pageContext, "back-to-x", folderName, false) %>' />
+=======
+				<aui:nav-item cssClass="messages-link" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>" data-pageNumber="<%= pageNumber %>" href="javascript:;" iconClass="icon-arrow-left" label='<%= LanguageUtil.format(request, "back-to-x", folderName, false) %>' />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				<aui:nav-item cssClass="compose-message" data-messageType="reply" data-replyMessageId="<%= message.getMessageId() %>" iconClass="icon-reply" label="reply" />
 

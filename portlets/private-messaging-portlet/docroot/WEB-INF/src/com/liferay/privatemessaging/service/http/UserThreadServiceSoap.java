@@ -14,6 +14,11 @@
 
 package com.liferay.privatemessaging.service.http;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -23,7 +28,11 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
+<<<<<<< HEAD
  * {@link com.liferay.privatemessaging.service.UserThreadServiceUtil} service utility. The
+=======
+ * {@link UserThreadServiceUtil} service utility. The
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -58,9 +67,16 @@ import java.rmi.RemoteException;
  * @author Brian Wing Shun Chan
  * @see UserThreadServiceHttp
  * @see com.liferay.privatemessaging.model.UserThreadSoap
+<<<<<<< HEAD
  * @see com.liferay.privatemessaging.service.UserThreadServiceUtil
  * @generated
  */
+=======
+ * @see UserThreadServiceUtil
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class UserThreadServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessage getLastThreadMessage(
 		long mbThreadId) throws RemoteException {

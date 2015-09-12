@@ -18,15 +18,17 @@
 package com.liferay.so.hook.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.notifications.UserNotificationManagerUtil;
 import com.liferay.portal.kernel.process.ProcessCallable;
 import com.liferay.portal.kernel.process.ProcessException;
@@ -83,7 +85,11 @@ public class SOAnnouncementsEntryLocalServiceImpl
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, int priority, boolean alert)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		AnnouncementsEntry announcementEntry = super.addEntry(
 			userId, classNameId, classPK, title, content, url, type,
@@ -104,15 +110,13 @@ public class SOAnnouncementsEntryLocalServiceImpl
 	}
 
 	@Override
-	public void checkEntries() throws PortalException, SystemException {
+	public void checkEntries() throws PortalException {
 		super.checkEntries();
 
 		sendNotificationEvent();
 	}
 
-	protected void sendNotificationEvent()
-		throws PortalException, SystemException {
-
+	protected void sendNotificationEvent() throws PortalException {
 		Date now = new Date();
 
 		if (_previousCheckDate == null) {
@@ -140,7 +144,7 @@ public class SOAnnouncementsEntryLocalServiceImpl
 	}
 
 	protected void sendNotificationEvent(AnnouncementsEntry announcementEntry)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		JSONObject notificationEventJSONObject =
 			JSONFactoryUtil.createJSONObject();
@@ -193,13 +197,21 @@ public class SOAnnouncementsEntryLocalServiceImpl
 		protected void sendUserNotifications(
 				AnnouncementsEntry announcementEntry,
 				JSONObject notificationEventJSONObject)
+<<<<<<< HEAD
 			throws PortalException, SystemException {
+=======
+			throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			int count = 0;
 			long teamId = 0;
 
+<<<<<<< HEAD
 			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
+=======
+			LinkedHashMap<String, Object> params = new LinkedHashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			if (announcementEntry.getClassNameId() == 0) {
 				count = UserLocalServiceUtil.getUsersCount();
@@ -227,7 +239,11 @@ public class SOAnnouncementsEntryLocalServiceImpl
 
 					params.put(
 						"usersOrgsTree",
+<<<<<<< HEAD
 						ListUtil.fromArray(new Organization[]{organization}));
+=======
+						ListUtil.fromArray(new Organization[] {organization}));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				}
 				else if (className.equals(Role.class.getName())) {
 					Role role = RoleLocalServiceUtil.fetchRole(classPK);
@@ -290,6 +306,7 @@ public class SOAnnouncementsEntryLocalServiceImpl
 							0,
 							UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
 
+<<<<<<< HEAD
 						NotificationEvent notificationEvent =
 							NotificationEventFactoryUtil.
 								createNotificationEvent(
@@ -302,6 +319,13 @@ public class SOAnnouncementsEntryLocalServiceImpl
 						UserNotificationEventLocalServiceUtil.
 							addUserNotificationEvent(
 								user.getUserId(), notificationEvent);
+=======
+						UserNotificationEventLocalServiceUtil.
+							sendUserNotificationEvents(
+								user.getUserId(), PortletKeys.SO_ANNOUNCEMENTS,
+								UserNotificationDeliveryConstants.TYPE_WEBSITE,
+								notificationEventJSONObject);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 				}
 			}

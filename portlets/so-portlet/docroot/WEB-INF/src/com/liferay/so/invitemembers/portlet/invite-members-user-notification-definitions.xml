@@ -9,7 +9,11 @@
 			<name>website</name>
 			<type>${com.liferay.portal.model.UserNotificationDeliveryConstants.TYPE_WEBSITE}</type>
 			<default>true</default>
+<<<<<<< HEAD
 			<modifiable>true</modifiable>
+=======
+			<modifiable>false</modifiable>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</delivery-type>
 	</definition>
 </user-notification-definitions>

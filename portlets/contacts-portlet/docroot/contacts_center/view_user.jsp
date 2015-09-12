@@ -68,7 +68,11 @@ request.setAttribute("view_user.jsp-user", user2);
 						</c:if>
 
 						<c:if test="<%= follower %>">
+<<<<<<< HEAD
 							<span class="lfr-asset-icon lfr-asset-follower last">
+=======
+							<span class="last lfr-asset-follower lfr-asset-icon">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								<i class="icon-user"></i>
 
 								<liferay-ui:message key="follower" />
@@ -132,12 +136,16 @@ request.setAttribute("view_user.jsp-user", user2);
 				</aui:layout>
 			</aui:layout>
 
+<<<<<<< HEAD
 			<div class="lfr-detail-info field-group" data-sectionId="details" data-title="<%= LanguageUtil.get(pageContext, "details") %>">
+=======
+			<div class="field-group lfr-detail-info" data-sectionId="details" data-title="<%= LanguageUtil.get(request, "details") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				<i class="icon-edit"></i>
 
 				<c:if test="<%= showIcon %>">
 					<div class="lfr-contact-thumb">
-						<a href="<%= user2.getDisplayURL(themeDisplay) %>"><img alt="<%= user2.getFullName() %>" src="<%= user2.getPortraitURL(themeDisplay) %>" /></a>
+						<a href="<%= user2.getDisplayURL(themeDisplay) %>"><img alt="<%= HtmlUtil.escapeAttribute(user2.getFullName()) %>" src="<%= user2.getPortraitURL(themeDisplay) %>" /></a>
 					</div>
 				</c:if>
 
@@ -216,10 +224,10 @@ request.setAttribute("view_user.jsp-user", user2);
 								Group group = themeDisplay.getScopeGroup();
 
 								if (group.isUser()) {
-									groupParams.put("usersGroups", new Long(group.getClassPK()));
+									groupParams.put("usersGroups", Long.valueOf(group.getClassPK()));
 								}
 								else {
-									groupParams.put("usersGroups", new Long(themeDisplay.getUserId()));
+									groupParams.put("usersGroups", Long.valueOf(themeDisplay.getUserId()));
 								}
 
 								groupParams.put("active", Boolean.TRUE);
@@ -248,6 +256,7 @@ request.setAttribute("view_user.jsp-user", user2);
 											for (Group curGroup : results) {
 											%>
 
+<<<<<<< HEAD
 												<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="siteURL" windowState="<%= LiferayWindowState.NORMAL.toString() %>">
 													<portlet:param name="struts_action" value="/my_sites/view" />
 													<portlet:param name="groupId" value="<%= String.valueOf(curGroup.getGroupId()) %>" />
@@ -255,6 +264,9 @@ request.setAttribute("view_user.jsp-user", user2);
 												</liferay-portlet:actionURL>
 
 												<li class="user-information-sites <%= SocialOfficeServiceUtil.isSocialOfficeGroup(curGroup.getGroupId()) ? "social-office-enabled" : "social-office-disabled" %>"><a href="<%= siteURL %>"><%= HtmlUtil.escape(curGroup.getDescriptiveName(locale)) %></a></li>
+=======
+												<li class="user-information-sites <%= SocialOfficeServiceUtil.isSocialOfficeGroup(curGroup.getGroupId()) ? "social-office-enabled" : "social-office-disabled" %>"><a href="<%= curGroup.getDisplayURL(themeDisplay, !curGroup.hasPublicLayouts()) %>"><%= HtmlUtil.escape(curGroup.getDescriptiveName(locale)) %></a></li>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 											<%
 											}
@@ -281,7 +293,11 @@ request.setAttribute("view_user.jsp-user", user2);
 
 								<c:choose>
 									<c:when test="<%= !assetTags.isEmpty() %>">
+<<<<<<< HEAD
 										<div class="field-group" data-sectionId="categorization" data-title="<%= LanguageUtil.get(pageContext, "tags") %>">
+=======
+										<div class="field-group" data-sectionId="categorization" data-title="<%= LanguageUtil.get(request, "tags") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 											<i class="icon-edit"></i>
 
 											<ul class="user-tags">

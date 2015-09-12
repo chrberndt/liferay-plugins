@@ -45,13 +45,21 @@ MicroblogsEntry microblogsEntry = MicroblogsEntryLocalServiceUtil.fetchMicroblog
 
 				<div class="user-portrait">
 					<span class="avatar">
+<<<<<<< HEAD
 						<a href="<%= receiverUser.getDisplayURL(themeDisplay) %>"><img alt="<%= HtmlUtil.escape(receiverUser.getFullName()) %>" src="<%= receiverUser.getPortraitURL(themeDisplay) %>" /></a>
+=======
+						<a href="<%= receiverUser.getDisplayURL(themeDisplay) %>"><img alt="<%= HtmlUtil.escapeAttribute(receiverUser.getFullName()) %>" src="<%= receiverUser.getPortraitURL(themeDisplay) %>" /></a>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					</span>
 				</div>
 
 				<div class="activity-header">
 					<div class="activity-time">
+<<<<<<< HEAD
 						<%= Time.getRelativeTimeDescription(microblogsEntry.getModifiedDate(), themeDisplay.getLocale(), themeDisplay.getTimeZone()) %>
+=======
+						<%= Time.getRelativeTimeDescription(microblogsEntry.getModifiedDate(), themeDisplay.getLocale(), themeDisplay.getTimeZone(), FastDateFormatFactoryUtil.getDate(DateFormat.FULL, themeDisplay.getLocale(), themeDisplay.getTimeZone())) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					</div>
 
 					<div class="activity-user-name">

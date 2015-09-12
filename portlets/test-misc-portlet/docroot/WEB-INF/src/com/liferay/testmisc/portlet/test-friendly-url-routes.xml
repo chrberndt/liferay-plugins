@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+=======
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <routes>
 	<route>
@@ -7,6 +11,7 @@
 		<implicit-parameter name="mvcPath">/view.jsp</implicit-parameter>
 	</route>
 	<route>
+<<<<<<< HEAD
 		<pattern>/logo.png</pattern>
 		<ignored-parameter name="p_p_cacheability" />
 		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
@@ -16,5 +21,16 @@
 		<pattern>{mvcPath}</pattern>
 		<ignored-parameter name="p_p_cacheability" />
 		<ignored-parameter name="p_p_resource_id" />
+=======
+		<pattern>{mvcPath}</pattern>
+		<ignored-parameter name="p_p_cacheability" />
+		<ignored-parameter name="p_p_resource_id" />
+	</route>
+	<route>
+		<pattern>/logo.png</pattern>
+		<ignored-parameter name="p_p_cacheability" />
+		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
+		<implicit-parameter name="p_p_resource_id">logo.png</implicit-parameter>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</route>
 </routes>

@@ -5,6 +5,7 @@
 	<import file="../build-common-plugins.xml" />
 
 	<target name="create">
+<<<<<<< HEAD
 		<if>
 			<or>
 				<not>
@@ -40,5 +41,15 @@
 			<replacefilter token="@web.display.name@" value="${web.display.name}" />
 			<replacefilter token="@web.name@" value="${web.name}" />
 		</replace>
+=======
+		<property name="web.display.name" value="" />
+		<property name="web.name" value="" />
+
+		<gradle-execute task="createWeb">
+			<arg value="--build-file=../sdk.gradle" />
+			<arg value="-PwebDisplayName=${web.display.name}" />
+			<arg value="-PwebName=${web.name}" />
+		</gradle-execute>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</target>
 </project>

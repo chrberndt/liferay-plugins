@@ -14,6 +14,7 @@
 
 package com.liferay.words.service.impl;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.util.SerializableUtil;
@@ -22,6 +23,12 @@ import com.liferay.words.service.base.WordsServiceBaseImpl;
 
 import java.lang.reflect.Method;
 
+=======
+import com.liferay.portal.kernel.jazzy.InvalidWord;
+import com.liferay.portal.kernel.words.WordsUtil;
+import com.liferay.words.service.base.WordsServiceBaseImpl;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,9 +41,15 @@ public class WordsServiceImpl extends WordsServiceBaseImpl {
 
 	@Override
 	public List<String> checkSpelling(String text) throws Exception {
+<<<<<<< HEAD
 		List<String> invalidWords = new ArrayList<String>();
 
 		for (InvalidWord invalidWord : getInvalidWords(text)) {
+=======
+		List<String> invalidWords = new ArrayList<>();
+
+		for (InvalidWord invalidWord : WordsUtil.checkSpelling(text)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			invalidWords.add(invalidWord.getInvalidWord());
 		}
 
@@ -45,7 +58,11 @@ public class WordsServiceImpl extends WordsServiceBaseImpl {
 
 	@Override
 	public List<String> getSuggestions(String word) throws Exception {
+<<<<<<< HEAD
 		List<InvalidWord> invalidWords = getInvalidWords(word);
+=======
+		List<InvalidWord> invalidWords = WordsUtil.checkSpelling(word);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (invalidWords.isEmpty()) {
 			return Collections.emptyList();
@@ -56,6 +73,7 @@ public class WordsServiceImpl extends WordsServiceBaseImpl {
 		return invalidWord.getSuggestions();
 	}
 
+<<<<<<< HEAD
 	protected List<InvalidWord> getInvalidWords(String text) throws Exception {
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
@@ -69,4 +87,6 @@ public class WordsServiceImpl extends WordsServiceBaseImpl {
 			method.invoke(null, text));
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

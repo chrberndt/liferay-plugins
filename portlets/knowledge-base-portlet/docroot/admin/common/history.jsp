@@ -17,15 +17,17 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
-int status = (Integer)request.getAttribute(WebKeys.KNOWLEDGE_BASE_STATUS);
-
 KBArticle kbArticle = (KBArticle)request.getAttribute(WebKeys.KNOWLEDGE_BASE_KB_ARTICLE);
+
+int status = (Integer)request.getAttribute(WebKeys.KNOWLEDGE_BASE_STATUS);
 
 int sourceVersion = ParamUtil.getInteger(request, "sourceVersion", kbArticle.getVersion() - 1);
 int targetVersion = ParamUtil.getInteger(request, "targetVersion", kbArticle.getVersion());
 
 String orderByCol = ParamUtil.getString(request, "orderByCol", "version");
 String orderByType = ParamUtil.getString(request, "orderByType", "desc");
+
+KBArticleURLHelper kbArticleURLHelper = new KBArticleURLHelper(renderRequest, renderResponse, templatePath);
 %>
 
 <liferay-portlet:renderURL varImpl="compareVersionsURL">
@@ -126,7 +128,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 						href="<%= rowURL %>"
 						name="status"
 						orderable="<%= true %>"
-						value='<%= curKBArticle.getStatus() + " (" + LanguageUtil.get(pageContext, WorkflowConstants.getStatusLabel(curKBArticle.getStatus())) + ")" %>'
+						value='<%= curKBArticle.getStatus() + " (" + LanguageUtil.get(request, WorkflowConstants.getStatusLabel(curKBArticle.getStatus())) + ")" %>'
 					/>
 				</c:if>
 
@@ -147,12 +149,8 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 							<portlet:param name="mvcPath" value='<%= templatePath + "history.jsp" %>' />
 							<portlet:param name="redirect" value="<%= redirect %>" />
 							<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
-							<portlet:param name="status" value="<%= String.valueOf(status) %>" />
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
-							<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(kbArticle.getParentResourcePrimKey()) %>" />
-							<portlet:param name="title" value="<%= curKBArticle.getTitle() %>" />
-							<portlet:param name="content" value="<%= curKBArticle.getContent() %>" />
-							<portlet:param name="description" value="<%= curKBArticle.getDescription() %>" />
+							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
+							<portlet:param name="version" value="<%= String.valueOf(curKBArticle.getVersion()) %>" />
 							<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 						</liferay-portlet:actionURL>
 
@@ -161,7 +159,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 						%>
 
 						<liferay-ui:icon
-							image="undo"
+							iconCssClass="icon-undo"
 							label="<%= true %>"
 							message="revert"
 							url="<%= revertURL.toString() %>"
@@ -172,27 +170,31 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 
 			<div class="float-container kb-entity-header">
 				<div class="kb-title">
+<<<<<<< HEAD
 					<%= HtmlUtil.escape(AdminUtil.getKBArticleDiff(kbArticle.getResourcePrimKey(), sourceVersion, targetVersion, "title")) %>
+=======
+					<liferay-ui:diff-html diffHtmlResults='<%= AdminUtil.getKBArticleDiff(kbArticle.getResourcePrimKey(), sourceVersion, targetVersion, "title") %>' />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</div>
 
 				<div class="kb-tools">
-					<liferay-portlet:renderURL var="viewKBArticleURL">
-						<portlet:param name="mvcPath" value='<%= templatePath + "view_article.jsp" %>' />
-						<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
-					</liferay-portlet:renderURL>
+
+					<%
+					PortletURL viewKBArticleURL = kbArticleURLHelper.createViewURL(kbArticle);
+					%>
 
 					<liferay-ui:icon
-						image="../common/page"
+						iconCssClass="icon-file-alt"
 						label="<%= true %>"
 						message="latest-version"
 						method="get"
-						url="<%= viewKBArticleURL %>"
+						url="<%= viewKBArticleURL.toString() %>"
 					/>
 				</div>
 			</div>
 
 			<div class="kb-entity-body">
-				<%= AdminUtil.getKBArticleDiff(kbArticle.getResourcePrimKey(), sourceVersion, targetVersion, "content") %>
+				<liferay-ui:diff-html diffHtmlResults='<%= AdminUtil.getKBArticleDiff(kbArticle.getResourcePrimKey(), sourceVersion, targetVersion, "content") %>' />
 			</div>
 
 			<aui:button-row cssClass="kb-bulk-action-button-holder">
@@ -212,12 +214,13 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 			var A = AUI();
 
 			var rowIds = A.all('input[name=<portlet:namespace />rowIds]:checked');
+
 			var sourceVersion = A.one('input[name="<portlet:namespace />sourceVersion"]');
 			var targetVersion = A.one('input[name="<portlet:namespace />targetVersion"]');
 
 			var rowIdsSize = rowIds.size();
 
-			if (rowIdsSize == 1) {
+			if (rowIdsSize === 1) {
 				if (sourceVersion) {
 					sourceVersion.val(rowIds.item(0).val());
 				}
@@ -248,7 +251,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 			rowIds.each(
 				function(item, index, collection) {
 					if (index >= 2) {
-						item.set('checked', false);
+						item.attr('checked', false);
 					}
 				}
 			);
@@ -271,7 +274,7 @@ String orderByType = ParamUtil.getString(request, "orderByType", "desc");
 					index = 1;
 				}
 
-				rowsChecked.item(index).set('checked', false);
+				rowsChecked.item(index).attr('checked', false);
 			}
 		},
 		['aui-base', 'selector-css3']

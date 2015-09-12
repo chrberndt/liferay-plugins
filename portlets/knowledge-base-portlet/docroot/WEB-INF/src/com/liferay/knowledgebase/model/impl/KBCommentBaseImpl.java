@@ -14,10 +14,10 @@
 
 package com.liferay.knowledgebase.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.knowledgebase.model.KBComment;
 import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the KBComment service. Represents a row in the &quot;KBComment&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see KBCommentImpl
- * @see com.liferay.knowledgebase.model.KBComment
+ * @see KBComment
  * @generated
  */
+@ProviderType
 public abstract class KBCommentBaseImpl extends KBCommentModelImpl
 	implements KBComment {
 	/*
@@ -39,7 +40,7 @@ public abstract class KBCommentBaseImpl extends KBCommentModelImpl
 	 * Never modify or reference this class directly. All methods that expect a k b comment model instance should use the {@link KBComment} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			KBCommentLocalServiceUtil.addKBComment(this);
 		}

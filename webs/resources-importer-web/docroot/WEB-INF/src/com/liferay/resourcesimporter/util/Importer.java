@@ -26,13 +26,22 @@ public interface Importer {
 
 	public long getGroupId();
 
+	public String getTargetClassName();
+
 	public long getTargetClassPK();
 
 	public void importResources() throws Exception;
 
 	public boolean isCompanyGroup() throws Exception;
 
+<<<<<<< HEAD
+=======
+	public boolean isDeveloperModeEnabled();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public boolean isExisting();
+
+	public void setAppendVersion(boolean appendVersion);
 
 	public void setCompanyId(long companyId);
 
@@ -50,6 +59,11 @@ public interface Importer {
 
 	public void setTargetValue(String targetValue);
 
+<<<<<<< HEAD
+=======
+	public void setUpdateModeEnabled(boolean updateModeEnabled);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setVersion(String version);
 
 }

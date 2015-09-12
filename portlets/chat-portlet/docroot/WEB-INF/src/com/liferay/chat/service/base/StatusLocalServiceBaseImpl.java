@@ -14,6 +14,8 @@
 
 package com.liferay.chat.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.chat.model.Status;
 import com.liferay.chat.service.StatusLocalService;
 import com.liferay.chat.service.persistence.EntryFinder;
@@ -23,8 +25,12 @@ import com.liferay.chat.service.persistence.StatusPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -38,6 +44,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
@@ -57,6 +64,7 @@ import javax.sql.DataSource;
  * @see com.liferay.chat.service.StatusLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements StatusLocalService, IdentifiableBean {
 	/*
@@ -70,11 +78,10 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param status the status
 	 * @return the status that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Status addStatus(Status status) throws SystemException {
+	public Status addStatus(Status status) {
 		status.setNew(true);
 
 		return statusPersistence.update(status);
@@ -97,12 +104,10 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param statusId the primary key of the status
 	 * @return the status that was removed
 	 * @throws PortalException if a status with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Status deleteStatus(long statusId)
-		throws PortalException, SystemException {
+	public Status deleteStatus(long statusId) throws PortalException {
 		return statusPersistence.remove(statusId);
 	}
 
@@ -111,11 +116,10 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param status the status
 	 * @return the status that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Status deleteStatus(Status status) throws SystemException {
+	public Status deleteStatus(Status status) {
 		return statusPersistence.remove(status);
 	}
 
@@ -132,12 +136,9 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return statusPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -152,12 +153,10 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return statusPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -173,45 +172,40 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return statusPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return statusPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return statusPersistence.countWithDynamicQuery(dynamicQuery, projection);
 	}
 
 	@Override
-	public Status fetchStatus(long statusId) throws SystemException {
+	public Status fetchStatus(long statusId) {
 		return statusPersistence.fetchByPrimaryKey(statusId);
 	}
 
@@ -221,17 +215,46 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param statusId the primary key of the status
 	 * @return the status
 	 * @throws PortalException if a status with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Status getStatus(long statusId)
-		throws PortalException, SystemException {
+	public Status getStatus(long statusId) throws PortalException {
 		return statusPersistence.findByPrimaryKey(statusId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.chat.service.StatusLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Status.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("statusId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.chat.service.StatusLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Status.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("statusId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return statusLocalService.deleteStatus((Status)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return statusPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -245,11 +268,9 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of statuses
 	 * @param end the upper bound of the range of statuses (not inclusive)
 	 * @return the range of statuses
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Status> getStatuses(int start, int end)
-		throws SystemException {
+	public List<Status> getStatuses(int start, int end) {
 		return statusPersistence.findAll(start, end);
 	}
 
@@ -257,10 +278,9 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * Returns the number of statuses.
 	 *
 	 * @return the number of statuses
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getStatusesCount() throws SystemException {
+	public int getStatusesCount() {
 		return statusPersistence.countAll();
 	}
 
@@ -269,11 +289,10 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param status the status
 	 * @return the status that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Status updateStatus(Status status) throws SystemException {
+	public Status updateStatus(Status status) {
 		return statusPersistence.update(status);
 	}
 
@@ -337,7 +356,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the status local service
 	 */
-	public com.liferay.chat.service.StatusLocalService getStatusLocalService() {
+	public StatusLocalService getStatusLocalService() {
 		return statusLocalService;
 	}
 
@@ -346,8 +365,7 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param statusLocalService the status local service
 	 */
-	public void setStatusLocalService(
-		com.liferay.chat.service.StatusLocalService statusLocalService) {
+	public void setStatusLocalService(StatusLocalService statusLocalService) {
 		this.statusLocalService = statusLocalService;
 	}
 
@@ -602,13 +620,18 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = statusPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -626,8 +649,8 @@ public abstract class StatusLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected EntryPersistence entryPersistence;
 	@BeanReference(type = EntryFinder.class)
 	protected EntryFinder entryFinder;
-	@BeanReference(type = com.liferay.chat.service.StatusLocalService.class)
-	protected com.liferay.chat.service.StatusLocalService statusLocalService;
+	@BeanReference(type = StatusLocalService.class)
+	protected StatusLocalService statusLocalService;
 	@BeanReference(type = StatusPersistence.class)
 	protected StatusPersistence statusPersistence;
 	@BeanReference(type = StatusFinder.class)

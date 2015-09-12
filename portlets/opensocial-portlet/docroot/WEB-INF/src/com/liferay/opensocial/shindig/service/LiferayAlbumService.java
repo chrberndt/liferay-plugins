@@ -224,7 +224,7 @@ public class LiferayAlbumService implements AlbumService {
 			SecurityToken securityToken)
 		throws Exception {
 
-		List<Album> albums = new ArrayList<Album>();
+		List<Album> albums = new ArrayList<>();
 
 		for (UserId userId : userIds) {
 			String userIdString = userId.getUserId(securityToken);
@@ -237,7 +237,11 @@ public class LiferayAlbumService implements AlbumService {
 				continue;
 			}
 
+<<<<<<< HEAD
 			List<Folder> folders = new ArrayList<Folder>();
+=======
+			List<Folder> folders = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			GroupId.Type groupIdType = groupId.getType();
 
@@ -285,7 +289,7 @@ public class LiferayAlbumService implements AlbumService {
 			SecurityToken securityToken)
 		throws Exception {
 
-		List<Album> albums = new ArrayList<Album>();
+		List<Album> albums = new ArrayList<>();
 
 		for (String albumId : albumIds) {
 			Folder folder = DLAppServiceUtil.getFolder(

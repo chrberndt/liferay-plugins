@@ -39,7 +39,11 @@ public class AlloySearchResult {
 			return baseModels;
 		}
 
+<<<<<<< HEAD
 		List<BaseModel<?>> baseModels = new ArrayList<BaseModel<?>>();
+=======
+		List<BaseModel<?>> baseModels = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		Document[] documents = hits.getDocs();
 

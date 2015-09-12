@@ -17,6 +17,7 @@ package com.liferay.knowledgebase.admin.lar;
 import com.liferay.knowledgebase.admin.util.AdminUtil;
 import com.liferay.knowledgebase.model.KBArticle;
 import com.liferay.knowledgebase.model.KBArticleConstants;
+<<<<<<< HEAD
 import com.liferay.knowledgebase.service.KBArticleLocalServiceUtil;
 import com.liferay.knowledgebase.service.persistence.KBArticleUtil;
 import com.liferay.knowledgebase.util.KnowledgeBaseUtil;
@@ -32,12 +33,38 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+=======
+import com.liferay.knowledgebase.model.KBFolder;
+import com.liferay.knowledgebase.model.KBFolderConstants;
+import com.liferay.knowledgebase.service.KBArticleLocalServiceUtil;
+import com.liferay.knowledgebase.service.KBFolderLocalServiceUtil;
+import com.liferay.knowledgebase.service.persistence.KBArticleUtil;
+import com.liferay.knowledgebase.util.KnowledgeBaseUtil;
+import com.liferay.knowledgebase.util.PortletKeys;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.service.ServiceContext;
+<<<<<<< HEAD
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+=======
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.exportimport.lar.BaseStagedModelDataHandler;
+import com.liferay.portlet.exportimport.lar.ExportImportPathUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelModifiedDateComparator;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.InputStream;
 
@@ -53,6 +80,7 @@ public class KBArticleStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {KBArticle.class.getName()};
 
 	@Override
+<<<<<<< HEAD
 	public void deleteStagedModel(
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
@@ -63,10 +91,45 @@ public class KBArticleStagedModelDataHandler
 
 		if (kbArticle != null) {
 			KBArticleLocalServiceUtil.deleteKBArticle(kbArticle);
+=======
+	public void deleteStagedModel(KBArticle kbArticle) throws PortalException {
+		KBArticleLocalServiceUtil.deleteKBArticle(kbArticle);
+	}
+
+	@Override
+	public void deleteStagedModel(
+			String uuid, long groupId, String className, String extraData)
+		throws PortalException {
+
+		KBArticle kbArticle = fetchStagedModelByUuidAndGroupId(uuid, groupId);
+
+		if (kbArticle != null) {
+			deleteStagedModel(kbArticle);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public KBArticle fetchStagedModelByUuidAndGroupId(
+		String uuid, long groupId) {
+
+		return KBArticleLocalServiceUtil.fetchKBArticleByUuidAndGroupId(
+			uuid, groupId);
+	}
+
+	@Override
+	public List<KBArticle> fetchStagedModelsByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return KBArticleLocalServiceUtil.getKBArticlesByUuidAndCompanyId(
+			uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new StagedModelModifiedDateComparator<KBArticle>());
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -90,6 +153,7 @@ public class KBArticleStagedModelDataHandler
 		throws Exception {
 
 		if (kbArticle.getParentResourcePrimKey() !=
+<<<<<<< HEAD
 				KBArticleConstants.DEFAULT_PARENT_RESOURCE_PRIM_KEY) {
 
 			KBArticle parentKBArticle =
@@ -100,6 +164,33 @@ public class KBArticleStagedModelDataHandler
 			StagedModelDataHandlerUtil.exportReferenceStagedModel(
 				portletDataContext, kbArticle, parentKBArticle,
 				PortletDataContext.REFERENCE_TYPE_PARENT);
+=======
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			long kbArticleClassNameId = PortalUtil.getClassNameId(
+				KBArticleConstants.getClassName());
+
+			if (kbArticle.getParentResourceClassNameId() ==
+					kbArticleClassNameId) {
+
+				KBArticle parentKBArticle =
+					KBArticleLocalServiceUtil.getLatestKBArticle(
+						kbArticle.getParentResourcePrimKey(),
+						WorkflowConstants.STATUS_APPROVED);
+
+				StagedModelDataHandlerUtil.exportReferenceStagedModel(
+					portletDataContext, kbArticle, parentKBArticle,
+					PortletDataContext.REFERENCE_TYPE_PARENT);
+			}
+			else {
+				KBFolder parentKBFolder = KBFolderLocalServiceUtil.getKBFolder(
+					kbArticle.getParentResourcePrimKey());
+
+				StagedModelDataHandlerUtil.exportReferenceStagedModel(
+					portletDataContext, kbArticle, parentKBFolder,
+					PortletDataContext.REFERENCE_TYPE_PARENT);
+			}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		Element kbArticleElement = portletDataContext.getExportDataElement(
@@ -121,10 +212,25 @@ public class KBArticleStagedModelDataHandler
 		long userId = portletDataContext.getUserId(kbArticle.getUserUuid());
 
 		if (kbArticle.getParentResourcePrimKey() !=
+<<<<<<< HEAD
 				KBArticleConstants.DEFAULT_PARENT_RESOURCE_PRIM_KEY) {
 
 			StagedModelDataHandlerUtil.importReferenceStagedModels(
 				portletDataContext, kbArticle, KBArticle.class);
+=======
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			if (kbArticle.getClassNameId() ==
+					kbArticle.getParentResourceClassNameId()) {
+
+				StagedModelDataHandlerUtil.importReferenceStagedModels(
+					portletDataContext, kbArticle, KBArticle.class);
+			}
+			else {
+				StagedModelDataHandlerUtil.importReferenceStagedModels(
+					portletDataContext, kbArticle, KBFolder.class);
+			}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		Map<Long, Long> kbArticleResourcePrimKeys =
@@ -132,11 +238,31 @@ public class KBArticleStagedModelDataHandler
 				KBArticle.class);
 
 		long parentResourcePrimKey = MapUtil.getLong(
+<<<<<<< HEAD
 			kbArticleResourcePrimKeys, kbArticle.getParentResourcePrimKey(), 0);
+=======
+			kbArticleResourcePrimKeys, kbArticle.getParentResourcePrimKey(),
+			KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		long resourcePrimaryKey = MapUtil.getLong(
 			kbArticleResourcePrimKeys, kbArticle.getResourcePrimKey(), 0);
 
+<<<<<<< HEAD
+=======
+		if (parentResourcePrimKey ==
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			Map<Long, Long> kbFolderResourcePrimKeys =
+				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+					KBFolder.class);
+
+			parentResourcePrimKey = MapUtil.getLong(
+				kbFolderResourcePrimKeys, kbArticle.getParentResourcePrimKey(),
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		String[] sections = AdminUtil.unescapeSections(kbArticle.getSections());
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
@@ -149,7 +275,11 @@ public class KBArticleStagedModelDataHandler
 				resourcePrimaryKey, kbArticle.getVersion());
 
 			if (existingKBArticle == null) {
+<<<<<<< HEAD
 				existingKBArticle = KBArticleUtil.fetchByUUID_G(
+=======
+				existingKBArticle = fetchStagedModelByUuidAndGroupId(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					kbArticle.getUuid(), portletDataContext.getScopeGroupId());
 			}
 
@@ -162,10 +292,18 @@ public class KBArticleStagedModelDataHandler
 
 				if (existingKBArticle == null) {
 					importedKBArticle = KBArticleLocalServiceUtil.addKBArticle(
+<<<<<<< HEAD
 						userId, parentResourcePrimKey, kbArticle.getTitle(),
 						kbArticle.getUrlTitle(), kbArticle.getContent(),
 						kbArticle.getDescription(), sections, StringPool.BLANK,
 						serviceContext);
+=======
+						userId, kbArticle.getParentResourceClassNameId(),
+						parentResourcePrimKey, kbArticle.getTitle(),
+						kbArticle.getUrlTitle(), kbArticle.getContent(),
+						kbArticle.getDescription(), kbArticle.getSourceURL(),
+						sections, null, serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 					KBArticleLocalServiceUtil.updatePriority(
 						importedKBArticle.getResourcePrimKey(),
@@ -175,11 +313,20 @@ public class KBArticleStagedModelDataHandler
 					KBArticleLocalServiceUtil.updateKBArticle(
 						userId, existingKBArticle.getResourcePrimKey(),
 						kbArticle.getTitle(), kbArticle.getContent(),
+<<<<<<< HEAD
 						kbArticle.getDescription(), sections, StringPool.BLANK,
 						serviceContext);
 
 					KBArticleLocalServiceUtil.moveKBArticle(
 						userId, existingKBArticle.getResourcePrimKey(),
+=======
+						kbArticle.getDescription(), kbArticle.getSourceURL(),
+						sections, null, null, serviceContext);
+
+					KBArticleLocalServiceUtil.moveKBArticle(
+						userId, existingKBArticle.getResourcePrimKey(),
+						existingKBArticle.getParentResourceClassNameId(),
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						parentResourcePrimKey, kbArticle.getPriority());
 
 					importedKBArticle =
@@ -194,10 +341,18 @@ public class KBArticleStagedModelDataHandler
 		}
 		else {
 			importedKBArticle = KBArticleLocalServiceUtil.addKBArticle(
+<<<<<<< HEAD
 				userId, parentResourcePrimKey, kbArticle.getTitle(),
 				kbArticle.getUrlTitle(), kbArticle.getContent(),
 				kbArticle.getDescription(), sections, StringPool.BLANK,
 				serviceContext);
+=======
+				userId, kbArticle.getParentResourceClassNameId(),
+				parentResourcePrimKey, kbArticle.getTitle(),
+				kbArticle.getUrlTitle(), kbArticle.getContent(),
+				kbArticle.getDescription(), kbArticle.getSourceURL(), sections,
+				null, serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			KBArticleLocalServiceUtil.updatePriority(
 				importedKBArticle.getResourcePrimKey(),

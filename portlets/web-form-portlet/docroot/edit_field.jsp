@@ -20,12 +20,19 @@
 int index = ParamUtil.getInteger(renderRequest, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 int formFieldsIndex = GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-formFieldsIndex"));
 boolean fieldsEditingDisabled = GetterUtil.getBoolean((String)request.getAttribute("configuration.jsp-fieldsEditingDisabled"));
-String fieldLabelXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldLabel" + formFieldsIndex);
+String fieldLabelXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldLabel" + formFieldsIndex), StringPool.BLANK);
 String fieldLabel = LocalizationUtil.getLocalization(fieldLabelXml, themeDisplay.getLanguageId());
 String fieldType = PrefsParamUtil.getString(portletPreferences, renderRequest, "fieldType" + formFieldsIndex);
 boolean fieldOptional = PrefsParamUtil.getBoolean(portletPreferences, renderRequest, "fieldOptional" + formFieldsIndex);
-String fieldOptionsXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldOptions" + formFieldsIndex);
+
+String fieldOptionsXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldOptions" + formFieldsIndex), StringPool.BLANK);
+
 String fieldOptions = LocalizationUtil.getLocalization(fieldOptionsXml, themeDisplay.getLanguageId());
+
+String fieldParagraphXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "fieldParagraph" + formFieldsIndex), StringPool.BLANK);
+
+String fieldParagraph = LocalizationUtil.getLocalization(fieldParagraphXml, themeDisplay.getLanguageId());
+
 String fieldValidationScript = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationScript" + formFieldsIndex);
 String fieldValidationErrorMessage = PrefsParamUtil.getString(portletPreferences, request, "fieldValidationErrorMessage" + formFieldsIndex);
 
@@ -70,13 +77,13 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 
 	<c:choose>
 		<c:when test="<%= !fieldsEditingDisabled %>">
-			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>'>
-				<aui:option selected='<%= fieldType.equals("text") %>' value="text"><liferay-ui:message key="text" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("textarea") %>' value="textarea"><liferay-ui:message key="text-box" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("options") %>' value="options"><liferay-ui:message key="options" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("radio") %>' value="radio"><liferay-ui:message key="radio-buttons" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("paragraph") %>' value="paragraph"><liferay-ui:message key="paragraph" /></aui:option>
-				<aui:option selected='<%= fieldType.equals("checkbox") %>' value="checkbox"><liferay-ui:message key="check-box" /></aui:option>
+			<aui:select ignoreRequestValue="<%= ignoreRequestValue %>" label="type" name='<%= "fieldType" + index %>' value="<%= fieldType %>">
+				<aui:option label="text" />
+				<aui:option label="text-box" value="textarea" />
+				<aui:option label="options" />
+				<aui:option label="radio-buttons" value="radio" />
+				<aui:option label="paragraph" />
+				<aui:option label="check-box" value="checkbox" />
 			</aui:select>
 		</c:when>
 		<c:otherwise>
@@ -119,7 +126,23 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 		</c:when>
 	</c:choose>
 
-	<c:if test="<%= true %>">
+	<c:choose>
+		<c:when test="<%= !fieldsEditingDisabled %>">
+			<aui:field-wrapper cssClass='<%= "paragraph" + (Validator.isNull(fieldType) || !fieldType.equals("paragraph") ? " hide" : StringPool.BLANK) %>' label="paragraph">
+				<liferay-ui:input-localized cssClass="lfr-editor-textarea" ignoreRequestValue="<%= ignoreRequestValue %>" name='<%= "fieldParagraph" + index %>' type="textarea" xml="<%= fieldParagraphXml %>" />
+			</aui:field-wrapper>
+		</c:when>
+		<c:when test="<%= Validator.isNotNull(fieldParagraph) %>">
+				<dt>
+					<liferay-ui:message key="paragraph" />
+				</dt>
+				<dd>
+					<%= fieldParagraph %>
+				</dd>
+		</c:when>
+	</c:choose>
+
+	<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
 		<c:choose>
 			<c:when test="<%= !fieldsEditingDisabled %>">
 				<div class="validation">
@@ -131,7 +154,7 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 						<aui:column columnWidth="50">
 							<aui:input cols="80" cssClass="validation-script" ignoreRequestValue="<%= ignoreRequestValue %>" label="validation-script" name='<%= "fieldValidationScript" + index %>' style="width: 95%" type="textarea" value="<%= fieldValidationScript %>" wrap="off" />
 
-							<aui:input cols="80" cssClass="lfr-input-text-container" ignoreRequestValue="<%= ignoreRequestValue %>" label="validation-error-message" name='<%= "fieldValidationErrorMessage" + index %>' size="80" value="<%= fieldValidationErrorMessage %>" />
+							<aui:input cols="80" ignoreRequestValue="<%= ignoreRequestValue %>" label="validation-error-message" name='<%= "fieldValidationErrorMessage" + index %>' size="80" value="<%= fieldValidationErrorMessage %>" wrapperCssClass="lfr-input-text-container" />
 						</aui:column>
 						<aui:column columnWidth="50">
 							<div class="syntax-help">
@@ -142,26 +165,26 @@ boolean ignoreRequestValue = (index != formFieldsIndex);
 				</div>
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(fieldValidationScript) %>">
-					<dt class="optional">
-						<liferay-ui:message key="validation" />
-					</dt>
-					<dd>
-						<pre><%= fieldValidationScript %></pre>
-					</dd>
-					<dt class="optional">
-						<liferay-ui:message key="validation-error-message" />
-					</dt>
-					<dd>
-						<%= fieldValidationErrorMessage %>
-					</dd>
+				<dt class="optional">
+					<liferay-ui:message key="validation" />
+				</dt>
+				<dd>
+					<pre><%= fieldValidationScript %></pre>
+				</dd>
+				<dt class="optional">
+					<liferay-ui:message key="validation-error-message" />
+				</dt>
+				<dd>
+					<%= fieldValidationErrorMessage %>
+				</dd>
 			</c:when>
 			<c:otherwise>
-					<dt class="optional">
-						<liferay-ui:message key="validation" />
-					</dt>
-					<dd>
-						<liferay-ui:message key="this-field-does-not-have-any-specific-validation" />
-					</dd>
+				<dt class="optional">
+					<liferay-ui:message key="validation" />
+				</dt>
+				<dd>
+					<liferay-ui:message key="this-field-does-not-have-any-specific-validation" />
+				</dd>
 			</c:otherwise>
 		</c:choose>
 	</c:if>

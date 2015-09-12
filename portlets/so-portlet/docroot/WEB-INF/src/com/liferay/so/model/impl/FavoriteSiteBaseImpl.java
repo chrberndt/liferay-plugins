@@ -14,7 +14,7 @@
 
 package com.liferay.so.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.so.model.FavoriteSite;
 import com.liferay.so.service.FavoriteSiteLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.so.service.FavoriteSiteLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see FavoriteSiteImpl
- * @see com.liferay.so.model.FavoriteSite
+ * @see FavoriteSite
  * @generated
  */
+@ProviderType
 public abstract class FavoriteSiteBaseImpl extends FavoriteSiteModelImpl
 	implements FavoriteSite {
 	/*
@@ -39,7 +40,7 @@ public abstract class FavoriteSiteBaseImpl extends FavoriteSiteModelImpl
 	 * Never modify or reference this class directly. All methods that expect a favorite site model instance should use the {@link FavoriteSite} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			FavoriteSiteLocalServiceUtil.addFavoriteSite(this);
 		}

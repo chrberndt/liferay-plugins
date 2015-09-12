@@ -4,7 +4,10 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.pushnotifications.model.PushNotificationsDevice" />
 	<class name="com.liferay.pushnotifications.model.impl.PushNotificationsDeviceImpl" table="PushNotificationsDevice">
+<<<<<<< HEAD
 		<cache usage="read-write" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<id name="pushNotificationsDeviceId" type="long">
 			<generator class="assigned" />
 		</id>

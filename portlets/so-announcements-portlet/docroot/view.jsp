@@ -76,14 +76,18 @@ if (group.isUser() && !showManageEntries) {
 		function(event) {
 			event.preventDefault();
 
-			if (confirm('<%= UnicodeLanguageUtil.get(pageContext,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
+			if (confirm('<%= UnicodeLanguageUtil.get(request,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
 				var entry = event.currentTarget.ancestor('.entry');
 
 				var entryId = entry.attr('data-entryId');
 
 				var uri = '<liferay-portlet:actionURL name="deleteEntry"></liferay-portlet:actionURL>';
 
+<<<<<<< HEAD
 				uri = Liferay.Util.addParams('<portlet:namespace />entryId=' + entryId, uri)
+=======
+				uri = Liferay.Util.addParams('<portlet:namespace />entryId=' + entryId, uri);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				A.io.request(
 					uri,
@@ -96,7 +100,11 @@ if (group.isUser() && !showManageEntries) {
 									var message = A.one('#<portlet:namespace />errorMessage');
 
 									if (message) {
+<<<<<<< HEAD
 										message.html('<span class="alert alert-error">' + responseData.message + '</span>');
+=======
+										message.html('<span class="alert alert-danger">' + responseData.message + '</span>');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									}
 								}
 								else {
@@ -113,7 +121,11 @@ if (group.isUser() && !showManageEntries) {
 
 							}
 						},
+<<<<<<< HEAD
 						dataType: 'json'
+=======
+						dataType: 'JSON'
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 				);
 			}
@@ -129,11 +141,19 @@ if (group.isUser() && !showManageEntries) {
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
+<<<<<<< HEAD
 		<portlet:namespace />openWindow('<%= addEntryURL %>', '<%= UnicodeLanguageUtil.get(pageContext, "add-entry") %>', true, 800);
 	}
 
 	function <portlet:namespace />editEntry(uri) {
 		<portlet:namespace />openWindow(uri, '<%= UnicodeLanguageUtil.get(pageContext, "edit-entry") %>', true, 800);
+=======
+		<portlet:namespace />openWindow('<%= addEntryURL %>', '<%= UnicodeLanguageUtil.get(request, "add-entry") %>', true, 800);
+	}
+
+	function <portlet:namespace />editEntry(uri) {
+		<portlet:namespace />openWindow(uri, '<%= UnicodeLanguageUtil.get(request, "edit-entry") %>', true, 800);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	function <portlet:namespace />handleEntry(entryId) {
@@ -163,7 +183,11 @@ if (group.isUser() && !showManageEntries) {
 	function <portlet:namespace />manageEntries() {
 		<portlet:renderURL var="manageEntriesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="mvcPath" value="/manage_entries.jsp" /></portlet:renderURL>
 
+<<<<<<< HEAD
 		<portlet:namespace />openWindow('<%= manageEntriesURL %>', '<%= UnicodeLanguageUtil.get(pageContext, "manage-entries") %>', true, 800);
+=======
+		<portlet:namespace />openWindow('<%= manageEntriesURL %>', '<%= UnicodeLanguageUtil.get(request, "manage-entries") %>', true, 800);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	function <portlet:namespace />markEntry(entryId) {

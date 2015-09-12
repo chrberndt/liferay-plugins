@@ -19,7 +19,10 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -36,6 +39,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -48,14 +52,14 @@ import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivitySetLocalServiceUtil;
 import com.liferay.portlet.trash.util.TrashUtil;
 import com.liferay.so.activities.util.PortletPropsValues;
+import com.liferay.wiki.model.WikiPageResource;
 
+import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * @author Brian Wing Shun Chan
@@ -85,6 +89,7 @@ public abstract class SOSocialActivityInterpreter
 
 		List<SocialActivity> viewableActivities = getViewableActivities(
 			activitySet, serviceContext);
+<<<<<<< HEAD
 
 		if (viewableActivities.isEmpty()) {
 			return null;
@@ -93,6 +98,16 @@ public abstract class SOSocialActivityInterpreter
 		if (viewableActivities.size() == 1) {
 			SocialActivity activity = viewableActivities.get(0);
 
+=======
+
+		if (viewableActivities.isEmpty()) {
+			return null;
+		}
+
+		if (viewableActivities.size() == 1) {
+			SocialActivity activity = viewableActivities.get(0);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return doInterpret(activity, serviceContext);
 		}
 
@@ -109,9 +124,7 @@ public abstract class SOSocialActivityInterpreter
 		return new SocialActivityFeedEntry(link, title, body);
 	}
 
-	protected List<Long> getActivitySetUserIds(long activitySetId)
-		throws SystemException {
-
+	protected List<Long> getActivitySetUserIds(long activitySetId) {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			SocialActivity.class);
 
@@ -132,6 +145,14 @@ public abstract class SOSocialActivityInterpreter
 				className);
 
 		return assetRendererFactory.getAssetRenderer(classPK);
+	}
+
+	protected String getAttachmentTitle(
+			SocialActivity activity, WikiPageResource pageResource,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		return null;
 	}
 
 	protected String getBody(
@@ -159,6 +180,8 @@ public abstract class SOSocialActivityInterpreter
 			sb.append(subfeedEntry.getTitle());
 			sb.append("</span><span class=\"activity-subentry-body\">");
 			sb.append(subfeedEntry.getBody());
+			sb.append("</span><span class=\"activity-subentry-link\">");
+			sb.append(subfeedEntry.getLink());
 			sb.append("</span></div>");
 		}
 
@@ -185,11 +208,14 @@ public abstract class SOSocialActivityInterpreter
 		}
 
 		return activity.getCreateDate();
+<<<<<<< HEAD
 	}
 
 	protected Format getFormatDateTime(Locale locale, TimeZone timezone) {
 		return FastDateFormatFactoryUtil.getSimpleDateFormat(
 			"EEEE, MMMMM dd, yyyy 'at' h:mm a", locale, timezone);
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	protected String getLink(
@@ -205,9 +231,11 @@ public abstract class SOSocialActivityInterpreter
 
 		AssetRenderer assetRenderer = getAssetRenderer(className, classPK);
 
-		return assetRenderer.getURLViewInContext(
+		String url = assetRenderer.getURLViewInContext(
 			serviceContext.getLiferayPortletRequest(),
 			serviceContext.getLiferayPortletResponse(), null);
+
+		return addNoSuchEntryRedirect(url, className, classPK, serviceContext);
 	}
 
 	protected String getPageTitle(
@@ -240,6 +268,11 @@ public abstract class SOSocialActivityInterpreter
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
+<<<<<<< HEAD
+=======
+		String link = getLink(activity, serviceContext);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		String className = activity.getClassName();
 
 		String title = getPageTitle(
@@ -248,7 +281,11 @@ public abstract class SOSocialActivityInterpreter
 		AssetRenderer assetRenderer = getAssetRenderer(
 			className, activity.getClassPK());
 
+<<<<<<< HEAD
 		String body = assetRenderer.getSummary(serviceContext.getLocale());
+=======
+		String body = assetRenderer.getSummary();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (className.equals(MBMessage.class.getName())) {
 			MBMessage mbMessage = MBMessageLocalServiceUtil.getMBMessage(
@@ -262,7 +299,7 @@ public abstract class SOSocialActivityInterpreter
 
 		body = StringUtil.shorten(HtmlUtil.escape(body), 200);
 
-		return new SocialActivityFeedEntry(title, body);
+		return new SocialActivityFeedEntry(link, title, body);
 	}
 
 	protected String getTitle(
@@ -312,8 +349,14 @@ public abstract class SOSocialActivityInterpreter
 
 		sb.append("</div><div class=\"activity-time\" title=\"");
 
+<<<<<<< HEAD
 		Format dateFormatDate = getFormatDateTime(
 			serviceContext.getLocale(), serviceContext.getTimeZone());
+=======
+		Format dateFormatDate = FastDateFormatFactoryUtil.getDateTime(
+			DateFormat.FULL, DateFormat.SHORT, serviceContext.getLocale(),
+			serviceContext.getTimeZone());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		Date activityDate = new Date(displayDate);
 
@@ -321,9 +364,19 @@ public abstract class SOSocialActivityInterpreter
 
 		sb.append("\">");
 
+<<<<<<< HEAD
 		String relativeTimeDescription = Time.getRelativeTimeDescription(
 			displayDate, serviceContext.getLocale(),
 			serviceContext.getTimeZone());
+=======
+		Format dateFormat = FastDateFormatFactoryUtil.getDate(
+			DateFormat.FULL, serviceContext.getLocale(),
+			serviceContext.getTimeZone());
+
+		String relativeTimeDescription = Time.getRelativeTimeDescription(
+			displayDate, serviceContext.getLocale(),
+			serviceContext.getTimeZone(), dateFormat);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append(relativeTimeDescription);
 
@@ -421,8 +474,12 @@ public abstract class SOSocialActivityInterpreter
 			SocialActivitySet activitySet, ServiceContext serviceContext)
 		throws Exception {
 
+<<<<<<< HEAD
 		List<SocialActivity> viewableActivities =
 			new ArrayList<SocialActivity>();
+=======
+		List<SocialActivity> viewableActivities = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		List<SocialActivity> activities =
 			SocialActivityLocalServiceUtil.getActivitySetActivities(
@@ -447,7 +504,11 @@ public abstract class SOSocialActivityInterpreter
 				continue;
 			}
 
+<<<<<<< HEAD
 			if (!isAfterDisplayDate(activity)) {
+=======
+			if (!isVisible(activity)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				continue;
 			}
 
@@ -463,9 +524,47 @@ public abstract class SOSocialActivityInterpreter
 			String actionId, ServiceContext serviceContext)
 		throws Exception {
 
-		return permissionChecker.hasPermission(
-			activity.getGroupId(), activity.getClassName(),
-			activity.getClassPK(), ActionKeys.VIEW);
+		AssetEntry assetEntry = activity.getAssetEntry();
+
+		AssetRenderer assetRenderer = assetEntry.getAssetRenderer();
+
+		return assetRenderer.hasViewPermission(permissionChecker);
+	}
+
+	protected boolean hasPermissions(
+			SocialActivity activity, ServiceContext serviceContext)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		return hasPermissions(
+			permissionChecker, activity, ActionKeys.VIEW, serviceContext);
+	}
+
+	protected boolean hasPermissions(
+			SocialActivitySet activitySet, ServiceContext serviceContext)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		List<SocialActivity> activities =
+			SocialActivityLocalServiceUtil.getActivitySetActivities(
+				activitySet.getActivitySetId(), 0, 1);
+
+		if (!activities.isEmpty()) {
+			SocialActivity activity = activities.get(0);
+
+			return hasPermissions(
+				permissionChecker, activity, ActionKeys.VIEW, serviceContext);
+		}
+
+		return false;
 	}
 
 	protected boolean hasPermissions(
@@ -531,6 +630,10 @@ public abstract class SOSocialActivityInterpreter
 		}
 
 		return false;
+	}
+
+	protected boolean isVisible(SocialActivity activity) throws Exception {
+		return true;
 	}
 
 	protected String wrapLink(String link, String iconPath, String text) {

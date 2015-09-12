@@ -14,8 +14,9 @@
 
 package com.liferay.ams.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.ams.model.impl.CheckoutModelImpl
  * @generated
  */
+@ProviderType
 public interface CheckoutModel extends AuditedModel, BaseModel<Checkout> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -111,10 +113,9 @@ public interface CheckoutModel extends AuditedModel, BaseModel<Checkout> {
 	 * Returns the user uuid of this checkout.
 	 *
 	 * @return the user uuid of this checkout
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this checkout.
@@ -266,19 +267,19 @@ public interface CheckoutModel extends AuditedModel, BaseModel<Checkout> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Checkout checkout);
+	public int compareTo(com.liferay.ams.model.Checkout checkout);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Checkout> toCacheModel();
+	public CacheModel<com.liferay.ams.model.Checkout> toCacheModel();
 
 	@Override
-	public Checkout toEscapedModel();
+	public com.liferay.ams.model.Checkout toEscapedModel();
 
 	@Override
-	public Checkout toUnescapedModel();
+	public com.liferay.ams.model.Checkout toUnescapedModel();
 
 	@Override
 	public String toString();

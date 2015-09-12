@@ -19,7 +19,10 @@ package com.liferay.privatemessaging.service.impl;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -38,7 +41,11 @@ import java.util.List;
 public class UserThreadServiceImpl extends UserThreadServiceBaseImpl {
 
 	public MBMessage getLastThreadMessage(long mbThreadId)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		List<MBMessage> mbMessages = getThreadMessages(
 			mbThreadId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, false);
@@ -50,7 +57,11 @@ public class UserThreadServiceImpl extends UserThreadServiceBaseImpl {
 
 	public List<MBMessage> getThreadMessages(
 			long mbThreadId, int start, int end, boolean ascending)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		UserThread userThread = userThreadLocalService.getUserThread(
 			getUserId(), mbThreadId);
@@ -63,7 +74,11 @@ public class UserThreadServiceImpl extends UserThreadServiceBaseImpl {
 				mbThreadId, WorkflowConstants.STATUS_ANY,
 				new MessageCreateDateComparator(ascending));
 
+<<<<<<< HEAD
 		List<MBMessage> filteredMBMessages = new ArrayList<MBMessage>();
+=======
+		List<MBMessage> filteredMBMessages = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		for (MBMessage mbMessage : mbMessages) {
 			int compareTo = DateUtil.compareTo(
@@ -87,9 +102,13 @@ public class UserThreadServiceImpl extends UserThreadServiceBaseImpl {
 		return filteredMBMessages.subList(start, end);
 	}
 
+<<<<<<< HEAD
 	public int getThreadMessagesCount(long mbThreadId)
 		throws PortalException, SystemException {
 
+=======
+	public int getThreadMessagesCount(long mbThreadId) throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		List<MBMessage> mbMessages = getThreadMessages(
 			mbThreadId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, true);
 
@@ -97,7 +116,11 @@ public class UserThreadServiceImpl extends UserThreadServiceBaseImpl {
 	}
 
 	public List<UserThread> getUserUserThreads(boolean deleted)
+<<<<<<< HEAD
 		throws PrincipalException, SystemException {
+=======
+		throws PrincipalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return userThreadLocalService.getUserUserThreads(getUserId(), deleted);
 	}

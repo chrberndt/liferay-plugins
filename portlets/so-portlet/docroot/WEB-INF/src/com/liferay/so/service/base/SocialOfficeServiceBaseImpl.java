@@ -16,6 +16,8 @@ package com.liferay.so.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -24,6 +26,7 @@ import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.so.service.SocialOfficeService;
 import com.liferay.so.service.persistence.FavoriteSiteFinder;
@@ -190,7 +193,7 @@ public abstract class SocialOfficeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the social office remote service
 	 */
-	public com.liferay.so.service.SocialOfficeService getSocialOfficeService() {
+	public SocialOfficeService getSocialOfficeService() {
 		return socialOfficeService;
 	}
 
@@ -199,8 +202,7 @@ public abstract class SocialOfficeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param socialOfficeService the social office remote service
 	 */
-	public void setSocialOfficeService(
-		com.liferay.so.service.SocialOfficeService socialOfficeService) {
+	public void setSocialOfficeService(SocialOfficeService socialOfficeService) {
 		this.socialOfficeService = socialOfficeService;
 	}
 
@@ -462,13 +464,18 @@ public abstract class SocialOfficeServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = InfrastructureUtil.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -494,8 +501,8 @@ public abstract class SocialOfficeServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.so.service.ProjectsEntryLocalService projectsEntryLocalService;
 	@BeanReference(type = ProjectsEntryPersistence.class)
 	protected ProjectsEntryPersistence projectsEntryPersistence;
-	@BeanReference(type = com.liferay.so.service.SocialOfficeService.class)
-	protected com.liferay.so.service.SocialOfficeService socialOfficeService;
+	@BeanReference(type = SocialOfficeService.class)
+	protected SocialOfficeService socialOfficeService;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ClassNameLocalService.class)

@@ -17,7 +17,6 @@ package com.liferay.mail.mailbox;
 import com.liferay.mail.model.Account;
 import com.liferay.mail.service.AccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -33,7 +32,7 @@ public class MailboxFactoryUtil {
 
 	public static Mailbox getMailbox(
 			long userId, long accountId, String password)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 		Account account = AccountLocalServiceUtil.getAccount(accountId);
@@ -50,7 +49,7 @@ public class MailboxFactoryUtil {
 	}
 
 	public static Mailbox getMailbox(long userId, String protocol)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
@@ -66,7 +65,7 @@ public class MailboxFactoryUtil {
 	public static List<MailboxFactory> getMailboxFactories() {
 		Set<String> protocols = _mailboxFactories.keySet();
 
-		List<MailboxFactory> mailboxFactories = new ArrayList<MailboxFactory>();
+		List<MailboxFactory> mailboxFactories = new ArrayList<>();
 
 		for (String protocol : protocols) {
 			mailboxFactories.add(_mailboxFactories.get(protocol));

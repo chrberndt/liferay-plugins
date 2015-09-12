@@ -63,7 +63,7 @@ public class MongoExpandoValueLocalServiceImpl
 	public ExpandoValue addValue(
 			long classNameId, long tableId, long columnId, long classPK,
 			String data)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
 			tableId);
@@ -126,7 +126,7 @@ public class MongoExpandoValueLocalServiceImpl
 	public void addValues(
 			long classNameId, long tableId, List<ExpandoColumn> expandoColumns,
 			long classPK, Map<String, String> data)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
 			tableId);
@@ -181,7 +181,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public void deleteColumnValues(long columnId) throws SystemException {
+	public void deleteColumnValues(long columnId) {
 		try {
 			ExpandoColumn expandoColumn = ExpandoColumnUtil.fetchByPrimaryKey(
 				columnId);
@@ -213,7 +213,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public void deleteTableValues(long tableId) throws SystemException {
+	public void deleteTableValues(long tableId) {
 		try {
 			ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
 				tableId);
@@ -246,9 +246,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public void deleteValue(long columnId, long rowId)
-		throws PortalException, SystemException {
-
+	public void deleteValue(long columnId, long rowId) throws PortalException {
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(
 			columnId);
 
@@ -264,7 +262,7 @@ public class MongoExpandoValueLocalServiceImpl
 	public void deleteValue(
 			long companyId, long classNameId, String tableName,
 			String columnName, long classPK)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
 			companyId, classNameId, tableName);
@@ -290,9 +288,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public void deleteValues(long classNameId, long classPK)
-		throws SystemException {
-
+	public void deleteValues(long classNameId, long classPK) {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
 		List<ExpandoTable> expandoTables =
@@ -314,8 +310,8 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public List<ExpandoValue> getColumnValues(long columnId, int start, int end)
-		throws SystemException {
+	public List<ExpandoValue> getColumnValues(
+		long columnId, int start, int end) {
 
 		try {
 			ExpandoColumn expandoColumn =
@@ -336,9 +332,8 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public List<ExpandoValue> getColumnValues(
-			long companyId, long classNameId, String tableName,
-			String columnName, String data, int start, int end)
-		throws SystemException {
+		long companyId, long classNameId, String tableName, String columnName,
+		String data, int start, int end) {
 
 		try {
 			ExpandoColumn expandoColumn =
@@ -371,7 +366,7 @@ public class MongoExpandoValueLocalServiceImpl
 				dbCursor = dbCursor.skip(start).limit(end - start);
 			}
 
-			List<ExpandoValue> expandoValues = new ArrayList<ExpandoValue>();
+			List<ExpandoValue> expandoValues = new ArrayList<>();
 
 			for (DBObject dbObject : dbCursor.toArray()) {
 				BasicDBObject expandoValueDBObject = (BasicDBObject)dbObject;
@@ -390,7 +385,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public int getColumnValuesCount(long columnId) throws SystemException {
+	public int getColumnValuesCount(long columnId) {
 		try {
 			ExpandoColumn expandoColumn =
 				ExpandoColumnLocalServiceUtil.getColumn(columnId);
@@ -409,9 +404,8 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public int getColumnValuesCount(
-			long companyId, long classNameId, String tableName,
-			String columnName, String data)
-		throws SystemException {
+		long companyId, long classNameId, String tableName, String columnName,
+		String data) {
 
 		try {
 			ExpandoColumn expandoColumn =
@@ -459,9 +453,8 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public List<ExpandoValue> getRowValues(
-			long companyId, long classNameId, String tableName, long classPK,
-			int start, int end)
-		throws SystemException {
+		long companyId, long classNameId, String tableName, long classPK,
+		int start, int end) {
 
 		try {
 			ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
@@ -492,7 +485,7 @@ public class MongoExpandoValueLocalServiceImpl
 				expandoColumns = expandoColumns.subList(start, end);
 			}
 
-			List<ExpandoValue> expandoValues = new ArrayList<ExpandoValue>();
+			List<ExpandoValue> expandoValues = new ArrayList<>();
 
 			for (ExpandoColumn expandoColumn : expandoColumns) {
 				ExpandoValue expandoValue = toExpandoValue(
@@ -515,8 +508,7 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public int getRowValuesCount(
-			long companyId, long classNameId, String tableName, long classPK)
-		throws SystemException {
+		long companyId, long classNameId, String tableName, long classPK) {
 
 		try {
 			ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
@@ -537,7 +529,7 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public ExpandoValue getValue(long columnId, long rowId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(
 			columnId);
@@ -551,9 +543,7 @@ public class MongoExpandoValueLocalServiceImpl
 	}
 
 	@Override
-	public ExpandoValue getValue(long tableId, long columnId, long classPK)
-		throws SystemException {
-
+	public ExpandoValue getValue(long tableId, long columnId, long classPK) {
 		try {
 			ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
 				tableId);
@@ -572,9 +562,8 @@ public class MongoExpandoValueLocalServiceImpl
 
 	@Override
 	public ExpandoValue getValue(
-			long companyId, long classNameId, String tableName,
-			String columnName, long classPK)
-		throws SystemException {
+		long companyId, long classNameId, String tableName, String columnName,
+		long classPK) {
 
 		try {
 			ExpandoTable expandoTable = ExpandoTableLocalServiceUtil.getTable(
@@ -616,7 +605,7 @@ public class MongoExpandoValueLocalServiceImpl
 
 	protected Object getData(
 			ExpandoColumn expandoColumn, ExpandoValue expandoValue)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		int type = expandoColumn.getType();
 
@@ -672,7 +661,7 @@ public class MongoExpandoValueLocalServiceImpl
 
 	protected ExpandoValue toExpandoValue(
 			BasicDBObject expandoValueDBObject, ExpandoColumn expandoColumn)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ExpandoValue expandoValue = ExpandoValueUtil.create(0);
 
@@ -774,7 +763,7 @@ public class MongoExpandoValueLocalServiceImpl
 	protected void updateExpandoValueDBObject(
 			DBObject expandoValueDBObject, List<ExpandoColumn> expandoColumns,
 			Map<String, String> data, ExpandoValue expandoValue)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		for (ExpandoColumn expandoColumn : expandoColumns) {
 			String dataString = data.get(expandoColumn.getName());

@@ -14,6 +14,11 @@
 
 package com.liferay.pushnotifications.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
@@ -26,18 +31,40 @@ import com.liferay.portal.service.InvokableService;
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
+<<<<<<< HEAD
  * @author Silvio Santos
+=======
+ * @author Bruno Farache
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @see PushNotificationsDeviceService
  * @see com.liferay.pushnotifications.service.base.PushNotificationsDeviceServiceBaseImpl
  * @see com.liferay.pushnotifications.service.impl.PushNotificationsDeviceServiceImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class PushNotificationsDeviceServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.pushnotifications.service.impl.PushNotificationsDeviceServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+<<<<<<< HEAD
+=======
+	public static com.liferay.pushnotifications.model.PushNotificationsDevice addPushNotificationsDevice(
+		java.lang.String token, java.lang.String platform)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().addPushNotificationsDevice(token, platform);
+	}
+
+	public static com.liferay.pushnotifications.model.PushNotificationsDevice deletePushNotificationsDevice(
+		java.lang.String token)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePushNotificationsDevice(token);
+	}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	/**
 	* Returns the Spring bean ID for this bean.
@@ -48,6 +75,7 @@ public class PushNotificationsDeviceServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -57,12 +85,15 @@ public class PushNotificationsDeviceServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+<<<<<<< HEAD
 	public static com.liferay.pushnotifications.model.PushNotificationsDevice addPushNotificationsDevice(
 		java.lang.String token, java.lang.String platform)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -75,6 +106,27 @@ public class PushNotificationsDeviceServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deletePushNotificationsDevice(token);
+=======
+	public static void sendPushNotification(java.lang.String platform,
+		java.util.List<java.lang.String> tokens, java.lang.String payload)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().sendPushNotification(platform, tokens, payload);
+	}
+
+	public static void sendPushNotification(long[] toUserIds,
+		java.lang.String payload)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService().sendPushNotification(toUserIds, payload);
+	}
+
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static void clearService() {
@@ -103,6 +155,10 @@ public class PushNotificationsDeviceServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setService(PushNotificationsDeviceService service) {
 	}
 

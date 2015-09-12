@@ -15,14 +15,24 @@
 package com.liferay.repository.external.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+=======
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.repository.model.RepositoryModelOperation;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
+<<<<<<< HEAD
+=======
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.repository.external.ExtRepositoryAdapter;
 import com.liferay.repository.external.ExtRepositoryFileVersion;
 
@@ -52,13 +62,27 @@ public class ExtRepositoryFileVersionAdapter
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public void execute(RepositoryModelOperation repositoryModelOperation)
+		throws PortalException {
+
+		repositoryModelOperation.execute(this);
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String getChangeLog() {
 		return _extRepositoryFileVersion.getChangeLog();
 	}
 
 	@Override
 	public InputStream getContentStream(boolean incrementCounter)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		ExtRepositoryAdapter extRepositoryAdapter = getRepository();
 
@@ -82,7 +106,11 @@ public class ExtRepositoryFileVersionAdapter
 
 	@Override
 	@SuppressWarnings("unused")
+<<<<<<< HEAD
 	public FileEntry getFileEntry() throws PortalException, SystemException {
+=======
+	public FileEntry getFileEntry() throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _extRepositoryFileEntryAdapter;
 	}
 
@@ -92,6 +120,14 @@ public class ExtRepositoryFileVersionAdapter
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public String getFileName() {
+		return DLUtil.getSanitizedFileName(getTitle(), getExtension());
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long getFileVersionId() {
 		return getPrimaryKey();
 	}
@@ -143,8 +179,12 @@ public class ExtRepositoryFileVersionAdapter
 	}
 
 	@Override
+<<<<<<< HEAD
 	@SuppressWarnings("unused")
 	public String getStatusByUserUuid() throws SystemException {
+=======
+	public String getStatusByUserUuid() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getUserUuid();
 	}
 
@@ -165,7 +205,11 @@ public class ExtRepositoryFileVersionAdapter
 
 	@Override
 	public boolean isApproved() {
+<<<<<<< HEAD
 		return true;
+=======
+		return false;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override

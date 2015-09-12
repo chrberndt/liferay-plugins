@@ -15,6 +15,7 @@
 package com.liferay.samplelar.lar;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -24,6 +25,18 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.samplelar.model.SampleLARBooking;
 import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
 import com.liferay.samplelar.service.persistence.SampleLARBookingExportActionableDynamicQuery;
+=======
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portlet.exportimport.lar.BasePortletDataHandler;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.PortletDataHandlerBoolean;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+import com.liferay.portlet.exportimport.xstream.XStreamAliasRegistryUtil;
+import com.liferay.samplelar.model.SampleLARBooking;
+import com.liferay.samplelar.model.impl.SampleLARBookingImpl;
+import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.util.List;
 
@@ -44,6 +57,12 @@ public class SampleLARPortletDataHandler extends BasePortletDataHandler {
 				NAMESPACE, "bookings", true, false, null,
 				SampleLARBooking.class.getName()));
 		setImportControls(getExportControls());
+<<<<<<< HEAD
+=======
+
+		XStreamAliasRegistryUtil.register(
+			SampleLARBookingImpl.class, "SampleLARBooking");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -80,7 +99,11 @@ public class SampleLARPortletDataHandler extends BasePortletDataHandler {
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		ActionableDynamicQuery sampleLARBookingActionableDynamicQuery =
+<<<<<<< HEAD
 			new SampleLARBookingExportActionableDynamicQuery(
+=======
+			SampleLARBookingLocalServiceUtil.getExportActionableDynamicQuery(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				portletDataContext);
 
 		sampleLARBookingActionableDynamicQuery.performActions();
@@ -120,7 +143,11 @@ public class SampleLARPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		ActionableDynamicQuery sampleLARBookingActionableDynamicQuery =
+<<<<<<< HEAD
 			new SampleLARBookingExportActionableDynamicQuery(
+=======
+			SampleLARBookingLocalServiceUtil.getExportActionableDynamicQuery(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				portletDataContext);
 
 		sampleLARBookingActionableDynamicQuery.performCount();

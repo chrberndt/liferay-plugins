@@ -22,7 +22,11 @@ Map<String, Bible> bibles = RBVUtil.getBibles();
 
 <portlet:actionURL var="updateURL" />
 
+<<<<<<< HEAD
 <aui:form action="<%= updateURL %>" method="post" name="fm" onSubmit="submitForm(document.<portlet:namespace />fm);">
+=======
+<aui:form action="<%= updateURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveForm();" %>'>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 	<aui:select inlineLabel="true" name="language">
@@ -44,4 +48,14 @@ Map<String, Bible> bibles = RBVUtil.getBibles();
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 	</aui:button-row>
+<<<<<<< HEAD
 </aui:form>
+=======
+</aui:form>
+
+<aui:script>
+	function <portlet:namespace />saveForm() {
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

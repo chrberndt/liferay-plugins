@@ -26,7 +26,11 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 <portlet:actionURL var="portletURL" />
 
+<<<<<<< HEAD
 <aui:form action="<%= portletURL %>" method="post" name="fm" onSubmit="submitForm(document.<portlet:namespace />fm);">
+=======
+<aui:form action="<%= portletURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveForm();" %>'>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
 	<liferay-ui:error exception="<%= ValidatorException.class %>">
@@ -45,6 +49,7 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 		%>
 
 			<strong><%= symbol %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
+<<<<<<< HEAD
 
 		<%
 		}
@@ -54,10 +59,30 @@ symbolsString = StringUtil.merge(symbols, StringPool.SPACE);
 
 	<aui:input label="add-all-ticker-symbols-separated-by-spaces" name="symbols" type="textarea" value="<%= symbolsString %>" />
 
+=======
+
+		<%
+		}
+		%>
+
+	</liferay-ui:error>
+
+	<aui:input label="add-all-ticker-symbols-separated-by-spaces" name="symbols" type="textarea" value="<%= symbolsString %>" />
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+<<<<<<< HEAD
+=======
+
+<aui:script>
+	function <portlet:namespace />saveForm() {
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<aui:script>

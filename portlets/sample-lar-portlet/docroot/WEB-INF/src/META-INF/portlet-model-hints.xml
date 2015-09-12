@@ -11,5 +11,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="bookingNumber" type="String" />
+<<<<<<< HEAD
+=======
+		<field name="lastPublishDate" type="Date" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</model>
 </model-hints>

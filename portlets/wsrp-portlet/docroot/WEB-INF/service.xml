@@ -25,6 +25,10 @@
 		<column name="forwardCookies" type="String" />
 		<column name="forwardHeaders" type="String" />
 		<column name="markupCharacterSets" type="String" />
+<<<<<<< HEAD
+=======
+		<column name="lastPublishDate" type="Date" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		<!-- Order -->
 
@@ -55,6 +59,10 @@
 		<column name="wsrpConsumerId" type="long" />
 		<column name="name" type="String" />
 		<column name="portletHandle" type="String" />
+<<<<<<< HEAD
+=======
+		<column name="lastPublishDate" type="Date" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		<!-- Order -->
 
@@ -93,6 +101,10 @@
 		<column name="name" type="String" />
 		<column name="version" type="String" />
 		<column name="portletIds" type="String" />
+<<<<<<< HEAD
+=======
+		<column name="lastPublishDate" type="Date" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		<!-- Order -->
 

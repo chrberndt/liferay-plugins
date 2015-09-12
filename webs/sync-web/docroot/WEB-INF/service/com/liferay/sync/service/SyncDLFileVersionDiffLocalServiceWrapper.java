@@ -14,6 +14,11 @@
 
 package com.liferay.sync.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
@@ -23,6 +28,10 @@ import com.liferay.portal.service.ServiceWrapper;
  * @see SyncDLFileVersionDiffLocalService
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLFileVersionDiffLocalServiceWrapper
 	implements SyncDLFileVersionDiffLocalService,
 		ServiceWrapper<SyncDLFileVersionDiffLocalService> {
@@ -31,17 +40,36 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		_syncDLFileVersionDiffLocalService = syncDLFileVersionDiffLocalService;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff addSyncDLFileVersionDiff(
+		long fileEntryId, long sourceFileVersionId, long targetFileVersionId,
+		java.io.File file)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.addSyncDLFileVersionDiff(fileEntryId,
+			sourceFileVersionId, targetFileVersionId, file);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Adds the sync d l file version diff to the database. Also notifies the appropriate model listeners.
 	*
 	* @param syncDLFileVersionDiff the sync d l file version diff
 	* @return the sync d l file version diff that was added
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.liferay.sync.model.SyncDLFileVersionDiff addSyncDLFileVersionDiff(
 		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff addSyncDLFileVersionDiff(
+		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.addSyncDLFileVersionDiff(syncDLFileVersionDiff);
 	}
 
@@ -57,6 +85,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		return _syncDLFileVersionDiffLocalService.createSyncDLFileVersionDiff(syncDLFileVersionDiffId);
 	}
 
+<<<<<<< HEAD
 	/**
 	* Deletes the sync d l file version diff with the primary key from the database. Also notifies the appropriate model listeners.
 	*
@@ -71,6 +100,22 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiff(syncDLFileVersionDiffId);
+=======
+	@Override
+	public void deleteExpiredSyncDLFileVersionDiffs()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_syncDLFileVersionDiffLocalService.deleteExpiredSyncDLFileVersionDiffs();
+	}
+
+	/**
+	* @throws PortalException
+	*/
+	@Override
+	public com.liferay.portal.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.deletePersistedModel(persistedModel);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -78,15 +123,46 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	*
 	* @param syncDLFileVersionDiff the sync d l file version diff
 	* @return the sync d l file version diff that was removed
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
+=======
+	* @throws PortalException
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	*/
 	@Override
 	public com.liferay.sync.model.SyncDLFileVersionDiff deleteSyncDLFileVersionDiff(
 		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiff(syncDLFileVersionDiff);
 	}
 
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiff(syncDLFileVersionDiff);
+	}
+
+	/**
+	* Deletes the sync d l file version diff with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param syncDLFileVersionDiffId the primary key of the sync d l file version diff
+	* @return the sync d l file version diff that was removed
+	* @throws PortalException if a sync d l file version diff with the primary key could not be found
+	*/
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff deleteSyncDLFileVersionDiff(
+		long syncDLFileVersionDiffId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiff(syncDLFileVersionDiffId);
+	}
+
+	@Override
+	public void deleteSyncDLFileVersionDiffs(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiffs(fileEntryId);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _syncDLFileVersionDiffLocalService.dynamicQuery();
@@ -97,6 +173,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	*
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
@@ -104,6 +181,12 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	@Override
+	public <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.dynamicQuery(dynamicQuery);
 	}
 
@@ -118,6 +201,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	* @param start the lower bound of the range of model instances
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
@@ -125,6 +209,13 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	@Override
+	public <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
@@ -141,6 +232,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
@@ -150,11 +242,20 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	@Override
+	public <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.dynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the number of rows that match the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -165,44 +266,106 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the number of rows matching the dynamic query
+	*/
+	@Override
+	public long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the number of rows that match the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
 	* @param projection the projection to apply to the query
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
+=======
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @param projection the projection to apply to the query
+	* @return the number of rows matching the dynamic query
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	*/
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+<<<<<<< HEAD
 		com.liferay.portal.kernel.dao.orm.Projection projection)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.dynamicQueryCount(dynamicQuery,
 			projection);
 	}
 
 	@Override
 	public com.liferay.sync.model.SyncDLFileVersionDiff fetchSyncDLFileVersionDiff(
+<<<<<<< HEAD
 		long syncDLFileVersionDiffId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _syncDLFileVersionDiffLocalService.fetchSyncDLFileVersionDiff(syncDLFileVersionDiffId);
 	}
 
+=======
+		long fileEntryId, long sourceFileVersionId, long targetFileVersionId) {
+		return _syncDLFileVersionDiffLocalService.fetchSyncDLFileVersionDiff(fileEntryId,
+			sourceFileVersionId, targetFileVersionId);
+	}
+
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff fetchSyncDLFileVersionDiff(
+		long syncDLFileVersionDiffId) {
+		return _syncDLFileVersionDiffLocalService.fetchSyncDLFileVersionDiff(syncDLFileVersionDiffId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return _syncDLFileVersionDiffLocalService.getActionableDynamicQuery();
+	}
+
+	/**
+	* Returns the Spring bean ID for this bean.
+	*
+	* @return the Spring bean ID for this bean
+	*/
+	@Override
+	public java.lang.String getBeanIdentifier() {
+		return _syncDLFileVersionDiffLocalService.getBeanIdentifier();
+	}
+
+	@Override
+	public com.liferay.portal.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Returns the sync d l file version diff with the primary key.
 	*
 	* @param syncDLFileVersionDiffId the primary key of the sync d l file version diff
 	* @return the sync d l file version diff
 	* @throws PortalException if a sync d l file version diff with the primary key could not be found
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	*/
 	@Override
 	public com.liferay.sync.model.SyncDLFileVersionDiff getSyncDLFileVersionDiff(
 		long syncDLFileVersionDiffId)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _syncDLFileVersionDiffLocalService.getSyncDLFileVersionDiff(syncDLFileVersionDiffId);
@@ -216,6 +379,12 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		return _syncDLFileVersionDiffLocalService.getPersistedModel(primaryKeyObj);
 	}
 
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _syncDLFileVersionDiffLocalService.getSyncDLFileVersionDiff(syncDLFileVersionDiffId);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Returns a range of all the sync d l file version diffs.
 	*
@@ -226,12 +395,19 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	* @param start the lower bound of the range of sync d l file version diffs
 	* @param end the upper bound of the range of sync d l file version diffs (not inclusive)
 	* @return the range of sync d l file version diffs
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public java.util.List<com.liferay.sync.model.SyncDLFileVersionDiff> getSyncDLFileVersionDiffs(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	@Override
+	public java.util.List<com.liferay.sync.model.SyncDLFileVersionDiff> getSyncDLFileVersionDiffs(
+		int start, int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return _syncDLFileVersionDiffLocalService.getSyncDLFileVersionDiffs(start,
 			end);
 	}
@@ -240,6 +416,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	* Returns the number of sync d l file version diffs.
 	*
 	* @return the number of sync d l file version diffs
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@Override
@@ -270,6 +447,26 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _syncDLFileVersionDiffLocalService.getBeanIdentifier();
+=======
+	*/
+	@Override
+	public int getSyncDLFileVersionDiffsCount() {
+		return _syncDLFileVersionDiffLocalService.getSyncDLFileVersionDiffsCount();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _syncDLFileVersionDiffLocalService.invokeMethod(name,
+			parameterTypes, arguments);
+	}
+
+	@Override
+	public void refreshExpirationDate(long syncDLFileVersionDiffId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_syncDLFileVersionDiffLocalService.refreshExpirationDate(syncDLFileVersionDiffId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -282,6 +479,7 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		_syncDLFileVersionDiffLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
@@ -320,11 +518,27 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_syncDLFileVersionDiffLocalService.refreshExpirationDate(syncDLFileVersionDiffId);
+=======
+	/**
+	* Updates the sync d l file version diff in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param syncDLFileVersionDiff the sync d l file version diff
+	* @return the sync d l file version diff that was updated
+	*/
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff updateSyncDLFileVersionDiff(
+		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff) {
+		return _syncDLFileVersionDiffLocalService.updateSyncDLFileVersionDiff(syncDLFileVersionDiff);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public SyncDLFileVersionDiffLocalService getWrappedSyncDLFileVersionDiffLocalService() {
 		return _syncDLFileVersionDiffLocalService;
 	}
@@ -332,6 +546,10 @@ public class SyncDLFileVersionDiffLocalServiceWrapper
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setWrappedSyncDLFileVersionDiffLocalService(
 		SyncDLFileVersionDiffLocalService syncDLFileVersionDiffLocalService) {
 		_syncDLFileVersionDiffLocalService = syncDLFileVersionDiffLocalService;

@@ -16,8 +16,12 @@
 
 <%@ include file="/section/init.jsp" %>
 
+<%
+KBArticleURLHelper kbArticleURLHelper = new KBArticleURLHelper(renderRequest, renderResponse, templatePath);
+%>
+
 <c:choose>
-	<c:when test="<%= Validator.isNotNull(PortletPropsValues.ADMIN_KB_ARTICLE_SECTIONS) %>">
+	<c:when test="<%= ArrayUtil.isNotEmpty(PortletPropsValues.ADMIN_KB_ARTICLE_SECTIONS) %>">
 		<liferay-portlet:renderURL varImpl="iteratorURL">
 			<portlet:param name="mvcPath" value="/section/view.jsp" />
 		</liferay-portlet:renderURL>
@@ -36,7 +40,7 @@
 				List<String> titles = new ArrayList<String>();
 
 				for (String kbArticlesSection : kbArticlesSections) {
-					titles.add(LanguageUtil.get(pageContext, kbArticlesSection));
+					titles.add(LanguageUtil.get(request, kbArticlesSection));
 				}
 
 				Collections.sort(titles);
@@ -59,17 +63,17 @@
 				%>
 
 					<div class="<%= (i == 0) ? "kb-article-title kb-article-title-first" : "kb-article-title" %>">
-						<portlet:renderURL var="viewKBArticleURL" windowState="<%= kbArticleWindowState %>">
-							<portlet:param name="mvcPath" value="/section/view_article.jsp" />
-							<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
-						</portlet:renderURL>
+
+						<%
+						PortletURL viewKBArticleURL = kbArticleURLHelper.createViewWithRedirectURL(kbArticle, currentURL);
+						%>
 
 						<liferay-ui:icon
-							image="../trees/page"
+							iconCssClass="icon-file-alt"
 							label="<%= true %>"
 							message="<%= kbArticle.getTitle() %>"
 							method="get"
-							url="<%= viewKBArticleURL %>"
+							url="<%= viewKBArticleURL.toString() %>"
 						/>
 					</div>
 
@@ -106,7 +110,7 @@
 		%>
 
 		<div class="alert alert-info">
-			<%= LanguageUtil.format(pageContext, "please-input-a-list-of-comma-delimited-words-for-portlet-property-x-to-enable-this-portlet", "admin.kb.article.sections", false) %>
+			<%= LanguageUtil.format(request, "please-input-a-list-of-comma-delimited-words-for-portlet-property-x-to-enable-this-portlet", "admin.kb.article.sections", false) %>
 		</div>
 	</c:otherwise>
 </c:choose>

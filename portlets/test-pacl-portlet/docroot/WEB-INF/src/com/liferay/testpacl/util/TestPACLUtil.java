@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -39,7 +38,7 @@ public class TestPACLUtil {
 	public static final String TEST_FIELD = "TEST_FIELD";
 
 	public static Map<String, Boolean> testCurrentThread(long userId) {
-		Map<String, Boolean> results = new HashMap<String, Boolean>();
+		Map<String, Boolean> results = new HashMap<>();
 
 		try {
 			PortalServiceUtil.getBuildNumber();
@@ -82,7 +81,7 @@ public class TestPACLUtil {
 	public static Map<String, Boolean> testNewThread(final long userId)
 		throws Exception {
 
-		final Map<String, Boolean> results = new HashMap<String, Boolean>();
+		final Map<String, Boolean> results = new HashMap<>();
 
 		Thread thread = new Thread() {
 
@@ -131,17 +130,7 @@ public class TestPACLUtil {
 
 			fileName = StringUtil.replace(fileName, "../webapps", installedDir);
 
-			if (ServerDetector.isGeronimo()) {
-				String geronimoHome = System.getProperty(
-					"org.apache.geronimo.home.dir");
-				String version = ReleaseInfo.getVersion();
-
-				fileName = StringUtil.replace(
-					fileName, installedDir + "/chat-portlet/",
-					geronimoHome + "/repository/liferay/chat-portlet/" +
-						version + ".1/chat-portlet-" + version + ".1.car/");
-			}
-			else if (ServerDetector.isGlassfish()) {
+			if (ServerDetector.isGlassfish()) {
 				fileName = StringUtil.replace(
 					fileName, "autodeploy", "applications");
 			}

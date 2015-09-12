@@ -198,7 +198,11 @@ else if (SocialRelationLocalServiceUtil.hasRelation(themeDisplay.getUserId(), us
 						width: 600
 					},
 					id: '<%= PortalUtil.getPortletNamespace(PortletKeys.PRIVATE_MESSAGING) %>Dialog',
+<<<<<<< HEAD
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "new-message") %>',
+=======
+					title: '<%= UnicodeLanguageUtil.get(request, "new-message") %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					uri: uri
 				}
 			);

@@ -19,7 +19,10 @@ package com.liferay.contacts.util;
 
 import com.liferay.contacts.model.Entry;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -103,7 +106,11 @@ public class ContactsUtil {
 	}
 
 	public static JSONObject getUserJSONObject(long userId, User user)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -196,7 +203,11 @@ public class ContactsUtil {
 
 			ListType listType = address.getType();
 
+<<<<<<< HEAD
 			sb.append(StringUtil.toUpperCase(listType.getName()));
+=======
+			sb.append(StringUtil.toUpperCase(_getVCardListTypeName(listType)));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			sb.append(StringPool.COLON);
 			sb.append(StringPool.SEMICOLON);
@@ -354,7 +365,7 @@ public class ContactsUtil {
 		sb.append(user.getMiddleName());
 		sb.append(StringPool.SEMICOLON);
 
-		int prefixId = contact.getPrefixId();
+		long prefixId = contact.getPrefixId();
 
 		if (prefixId > 0) {
 			ListType listType = ListTypeServiceUtil.getListType(prefixId);
@@ -364,7 +375,7 @@ public class ContactsUtil {
 
 		sb.append(StringPool.SEMICOLON);
 
-		int suffixId = contact.getSuffixId();
+		long suffixId = contact.getSuffixId();
 
 		if (suffixId > 0) {
 			ListType listType = ListTypeServiceUtil.getListType(suffixId);
@@ -391,7 +402,11 @@ public class ContactsUtil {
 
 			ListType listType = phone.getType();
 
+<<<<<<< HEAD
 			sb.append(StringUtil.toUpperCase(listType.getName()));
+=======
+			sb.append(StringUtil.toUpperCase(_getVCardListTypeName(listType)));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			sb.append(StringPool.COLON);
 			sb.append(phone.getNumber());
@@ -401,6 +416,19 @@ public class ContactsUtil {
 		}
 
 		return sb.toString();
+	}
+
+	private static String _getVCardListTypeName(ListType listType) {
+		String listTypeName = listType.getName();
+
+		if (StringUtil.equalsIgnoreCase(listTypeName, "business")) {
+			listTypeName = "work";
+		}
+		else if (StringUtil.equalsIgnoreCase(listTypeName, "personal")) {
+			listTypeName = "home";
+		}
+
+		return listTypeName;
 	}
 
 	private static String _getWebsites(User user) throws Exception {
@@ -414,7 +442,11 @@ public class ContactsUtil {
 
 			ListType listType = website.getType();
 
+<<<<<<< HEAD
 			sb.append(StringUtil.toUpperCase(listType.getName()));
+=======
+			sb.append(StringUtil.toUpperCase(_getVCardListTypeName(listType)));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			sb.append(StringPool.COLON);
 

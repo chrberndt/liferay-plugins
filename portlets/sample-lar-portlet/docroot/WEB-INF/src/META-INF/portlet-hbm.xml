@@ -4,7 +4,10 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.samplelar.model.SampleLARBooking" />
 	<class name="com.liferay.samplelar.model.impl.SampleLARBookingImpl" table="SampleLARBooking">
+<<<<<<< HEAD
 		<cache usage="read-write" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<id name="sampleLARBookingId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -16,5 +19,9 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="bookingNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+<<<<<<< HEAD
+=======
+		<property name="lastPublishDate" type="org.hibernate.type.TimestampType" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</class>
 </hibernate-mapping>

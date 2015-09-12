@@ -64,7 +64,11 @@ MailManager mailManager = MailManager.getInstance(request);
 			</aui:nav-item>
 
 			<aui:nav-bar-search cssClass="form-search pull-right search-messages">
+<<<<<<< HEAD
 				<liferay-ui:input-search id="keywords" placeholder='<%= LanguageUtil.get(locale, "keywords") %>' title='<%= LanguageUtil.get(locale, "search-messages") %>' />
+=======
+				<liferay-ui:input-search id="keywords" placeholder='<%= LanguageUtil.get(request, "keywords") %>' title='<%= LanguageUtil.get(request, "search-messages") %>' />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</aui:nav-bar-search>
 		</aui:nav>
 	</aui:nav-bar>
@@ -84,7 +88,11 @@ MailManager mailManager = MailManager.getInstance(request);
 		</c:when>
 		<c:otherwise>
 			<div class="table-container">
+<<<<<<< HEAD
 				<table class="table table-condensed table-bordered table-hover">
+=======
+				<table class="table table-bordered table-condensed table-hover">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<thead>
 						<tr>
 							<th class="check"></th>
@@ -186,30 +194,53 @@ MailManager mailManager = MailManager.getInstance(request);
 						%>
 
 							<tr class="<%= rowCssClass %>">
+<<<<<<< HEAD
 								<td>
 									<aui:input id='<%= "message" + message.getMessageId() %>' label="" messageId="<%= message.getMessageId() %>" name="message" type="checkbox" value="<%= message.getMessageId() %>" />
 								</td>
 								<td>
+=======
+								<td class="check">
+									<aui:input id='<%= "message" + message.getMessageId() %>' label="" messageId="<%= message.getMessageId() %>" name="message" type="checkbox" value="<%= message.getMessageId() %>" />
+								</td>
+								<td class="address">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									<div class="<%= messageCssClass %>" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-messageId="<%= message.getMessageId() %>" data-messageNumber="<%= messageNumber %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>">
 										<%= HtmlUtil.escape(address) %>
 									</div>
 								</td>
+<<<<<<< HEAD
 								<td>
 									<div class="<%= messageCssClass + (Validator.isNull(message.getSubject()) ? " no-subject" : StringPool.BLANK) %>" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-messageId="<%= message.getMessageId() %>" data-messageNumber="<%= messageNumber %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>">
 										<%= Validator.isNull(message.getSubject()) ? LanguageUtil.get(pageContext, "no-subject") : HtmlUtil.escape(message.getSubject()) %>
+=======
+								<td class="subject">
+									<div class="<%= messageCssClass + (Validator.isNull(message.getSubject()) ? " no-subject" : StringPool.BLANK) %>" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-messageId="<%= message.getMessageId() %>" data-messageNumber="<%= messageNumber %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>">
+										<%= Validator.isNull(message.getSubject()) ? LanguageUtil.get(request, "no-subject") : HtmlUtil.escape(message.getSubject()) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									</div>
 								</td>
 								<td class="attachments">
 									<div class="<%= messageCssClass %>" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-messageId="<%= message.getMessageId() %>" data-messageNumber="<%= messageNumber %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>">
+<<<<<<< HEAD
 										<c:if test="<%= !AttachmentLocalServiceUtil.getAttachments(message.getMessageId()).isEmpty() %>">
 											<liferay-ui:icon
 												image="../mail/clip"
+=======
+										<c:if test="<%= message.hasAttachments() %>">
+											<liferay-ui:icon
+												iconCssClass="icon-paper-clip"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 												message="attachments"
 											/>
 										</c:if>
 									</div>
 								</td>
+<<<<<<< HEAD
 								<td>
+=======
+								<td class="date">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									<div class="<%= messageCssClass %>" data-folderId="<%= folderId %>" data-keywords="<%= keywords %>" data-messageId="<%= message.getMessageId() %>" data-messageNumber="<%= messageNumber %>" data-orderByField="<%= orderByField %>" data-orderByType="<%= orderByType %>">
 										<%= HtmlUtil.escape(date) %>
 									</div>

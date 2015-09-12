@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+ResourceBundle portletConfigResourceBundle = portletConfig.getResourceBundle(locale);
 %>
 
 Test only in
@@ -236,7 +236,11 @@ Test only in
 					String resourceBundleActualValue = key;
 
 					try {
+<<<<<<< HEAD
 						resourceBundleActualValue = resourceBundle.getString(key);
+=======
+						resourceBundleActualValue = portletConfigResourceBundle.getString(key);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 					catch (Exception e) {
 					}
@@ -245,9 +249,13 @@ Test only in
 					<%= resourceBundleActualValue %>
 				</td>
 				<td>
+<<<<<<< HEAD
 					<liferay-util:buffer var="taglibActualValue">
 						<liferay-ui:message key="<%= key %>" />
 					</liferay-util:buffer>
+=======
+					<liferay-util:buffer var="taglibActualValue"><liferay-ui:message key="<%= key %>" /></liferay-util:buffer>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 					<%= taglibActualValue %>
 				</td>

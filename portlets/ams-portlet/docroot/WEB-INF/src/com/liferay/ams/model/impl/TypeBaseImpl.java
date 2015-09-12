@@ -14,10 +14,10 @@
 
 package com.liferay.ams.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.ams.model.Type;
 import com.liferay.ams.service.TypeLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the Type service. Represents a row in the &quot;AMS_Type&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see TypeImpl
- * @see com.liferay.ams.model.Type
+ * @see Type
  * @generated
  */
+@ProviderType
 public abstract class TypeBaseImpl extends TypeModelImpl implements Type {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -38,7 +39,7 @@ public abstract class TypeBaseImpl extends TypeModelImpl implements Type {
 	 * Never modify or reference this class directly. All methods that expect a type model instance should use the {@link Type} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			TypeLocalServiceUtil.addType(this);
 		}

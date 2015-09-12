@@ -58,7 +58,11 @@
 		}
 		%>
 
+<<<<<<< HEAD
 		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs, false) %>
+=======
+		<%= LanguageUtil.format(request, "you-are-signed-in-as-x", signedInAs, false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</c:when>
 	<c:otherwise>
 

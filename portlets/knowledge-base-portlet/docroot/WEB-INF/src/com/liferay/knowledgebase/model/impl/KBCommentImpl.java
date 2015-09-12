@@ -15,7 +15,11 @@
 package com.liferay.knowledgebase.model.impl;
 
 import com.liferay.knowledgebase.model.KBComment;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.lar.StagedModelType;
+=======
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Peter Shin

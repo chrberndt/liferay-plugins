@@ -103,6 +103,7 @@ public class EmailToMBMessageFilterSanitizerImpl implements Sanitizer {
 		}
 
 		StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
 
 		sb.append(s.substring(0, matcher.start()));
 
@@ -135,11 +136,45 @@ public class EmailToMBMessageFilterSanitizerImpl implements Sanitizer {
 
 		return sb.toString();
 	}
+=======
 
-	private static final Pattern _pattern = Pattern.compile(
-		PortletPropsValues.PLAIN_TEXT_EMAIL_REGEXP);
+		sb.append(s.substring(0, matcher.start()));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
+
+		int lastTextPos = 0;
+		int lastQuotedTextPos = 0;
+
+		String quotedText = s.substring(matcher.end(), s.length());
+
+		String[] quotedTextLines = quotedText.split("\r\n|\n|\r");
+
+		for (int i = 0; i < quotedTextLines.length; i++ ) {
+			if (Validator.isNull(quotedTextLines[i])) {
+				continue;
+			}
+
+			if (quotedTextLines[i].startsWith(StringPool.GREATER_THAN)) {
+				lastQuotedTextPos = i;
+
+				if ((lastTextPos > 0) && (lastTextPos < lastQuotedTextPos)) {
+					return s;
+				}
+			}
+			else {
+				lastTextPos = i;
+
+				sb.append(quotedTextLines[i]);
+				sb.append(StringPool.RETURN_NEW_LINE);
+			}
+		}
+
+		return sb.toString();
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		EmailToMBMessageFilterSanitizerImpl.class);
+
+	private static final Pattern _pattern = Pattern.compile(
+		PortletPropsValues.PLAIN_TEXT_EMAIL_REGEXP);
 
 }

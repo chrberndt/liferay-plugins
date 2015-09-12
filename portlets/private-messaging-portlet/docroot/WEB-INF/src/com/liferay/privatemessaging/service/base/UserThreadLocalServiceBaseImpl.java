@@ -14,10 +14,16 @@
 
 package com.liferay.privatemessaging.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -31,6 +37,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.service.UserThreadLocalService;
@@ -54,6 +61,7 @@ import javax.sql.DataSource;
  * @see com.liferay.privatemessaging.service.UserThreadLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class UserThreadLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements UserThreadLocalService,
 		IdentifiableBean {
@@ -68,12 +76,10 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 *
 	 * @param userThread the user thread
 	 * @return the user thread that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public UserThread addUserThread(UserThread userThread)
-		throws SystemException {
+	public UserThread addUserThread(UserThread userThread) {
 		userThread.setNew(true);
 
 		return userThreadPersistence.update(userThread);
@@ -96,12 +102,11 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param userThreadId the primary key of the user thread
 	 * @return the user thread that was removed
 	 * @throws PortalException if a user thread with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public UserThread deleteUserThread(long userThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return userThreadPersistence.remove(userThreadId);
 	}
 
@@ -110,12 +115,10 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 *
 	 * @param userThread the user thread
 	 * @return the user thread that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public UserThread deleteUserThread(UserThread userThread)
-		throws SystemException {
+	public UserThread deleteUserThread(UserThread userThread) {
 		return userThreadPersistence.remove(userThread);
 	}
 
@@ -132,12 +135,9 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return userThreadPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -152,12 +152,10 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return userThreadPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
@@ -174,47 +172,41 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return userThreadPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return userThreadPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return userThreadPersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
-	public UserThread fetchUserThread(long userThreadId)
-		throws SystemException {
+	public UserThread fetchUserThread(long userThreadId) {
 		return userThreadPersistence.fetchByPrimaryKey(userThreadId);
 	}
 
@@ -224,17 +216,47 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param userThreadId the primary key of the user thread
 	 * @return the user thread
 	 * @throws PortalException if a user thread with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public UserThread getUserThread(long userThreadId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return userThreadPersistence.findByPrimaryKey(userThreadId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.privatemessaging.service.UserThreadLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(UserThread.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("userThreadId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.privatemessaging.service.UserThreadLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(UserThread.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("userThreadId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return userThreadLocalService.deleteUserThread((UserThread)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return userThreadPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -248,11 +270,9 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param start the lower bound of the range of user threads
 	 * @param end the upper bound of the range of user threads (not inclusive)
 	 * @return the range of user threads
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<UserThread> getUserThreads(int start, int end)
-		throws SystemException {
+	public List<UserThread> getUserThreads(int start, int end) {
 		return userThreadPersistence.findAll(start, end);
 	}
 
@@ -260,10 +280,9 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * Returns the number of user threads.
 	 *
 	 * @return the number of user threads
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getUserThreadsCount() throws SystemException {
+	public int getUserThreadsCount() {
 		return userThreadPersistence.countAll();
 	}
 
@@ -272,12 +291,10 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 *
 	 * @param userThread the user thread
 	 * @return the user thread that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public UserThread updateUserThread(UserThread userThread)
-		throws SystemException {
+	public UserThread updateUserThread(UserThread userThread) {
 		return userThreadPersistence.update(userThread);
 	}
 
@@ -286,7 +303,7 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 *
 	 * @return the user thread local service
 	 */
-	public com.liferay.privatemessaging.service.UserThreadLocalService getUserThreadLocalService() {
+	public UserThreadLocalService getUserThreadLocalService() {
 		return userThreadLocalService;
 	}
 
@@ -296,7 +313,7 @@ public abstract class UserThreadLocalServiceBaseImpl
 	 * @param userThreadLocalService the user thread local service
 	 */
 	public void setUserThreadLocalService(
-		com.liferay.privatemessaging.service.UserThreadLocalService userThreadLocalService) {
+		UserThreadLocalService userThreadLocalService) {
 		this.userThreadLocalService = userThreadLocalService;
 	}
 
@@ -553,13 +570,18 @@ public abstract class UserThreadLocalServiceBaseImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = userThreadPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -571,8 +593,13 @@ public abstract class UserThreadLocalServiceBaseImpl
 		}
 	}
 
+<<<<<<< HEAD
 	@BeanReference(type = com.liferay.privatemessaging.service.UserThreadLocalService.class)
 	protected com.liferay.privatemessaging.service.UserThreadLocalService userThreadLocalService;
+=======
+	@BeanReference(type = UserThreadLocalService.class)
+	protected UserThreadLocalService userThreadLocalService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = com.liferay.privatemessaging.service.UserThreadService.class)
 	protected com.liferay.privatemessaging.service.UserThreadService userThreadService;
 	@BeanReference(type = UserThreadPersistence.class)

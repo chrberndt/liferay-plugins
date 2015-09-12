@@ -14,6 +14,11 @@
 
 package com.liferay.privatemessaging.service.base;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.privatemessaging.service.UserThreadServiceUtil;
 
 import java.util.Arrays;
@@ -22,6 +27,10 @@ import java.util.Arrays;
  * @author Brian Wing Shun Chan
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class UserThreadServiceClpInvoker {
 	public UserThreadServiceClpInvoker() {
 		_methodName24 = "getBeanIdentifier";

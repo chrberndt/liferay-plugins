@@ -16,6 +16,7 @@
 
 <%@ include file="/init.jsp" %>
 
+<<<<<<< HEAD
 <h3>hibernate-clustered</h3>
 
 <%
@@ -47,12 +48,14 @@ if (!GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HIBERNATE_CACHE_USE_QUERY_CAC
 	}
 %>
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 <h3>liferay-multi-vm-clustered</h3>
 
 <p>
 
-	<%= _testAttributeList("liferay-multi-vm-clustered", "com.liferay.portal.kernel.dao.orm.EntityCache.com.liferay.portal.model.impl.UserImpl", false, 10, 60) %>
-	<%= _testAttributeList("liferay-multi-vm-clustered", "com.liferay.testcacheconfiguration.MultiVMClusteredObject", false, 100000, 6000) %>
+	<%= _testAttributeList("MULTI_VM_PORTAL_CACHE_MANAGER", "com.liferay.portal.kernel.dao.orm.EntityCache.com.liferay.portal.model.impl.UserImpl", false, 10, 60) %>
+	<%= _testAttributeList("MULTI_VM_PORTAL_CACHE_MANAGER", "com.liferay.testcacheconfiguration.MultiVMClusteredObject", false, 100000, 6000) %>
 
 </p>
 
@@ -60,13 +63,15 @@ if (!GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HIBERNATE_CACHE_USE_QUERY_CAC
 
 <p>
 
-	<%= _testAttributeList("liferay-single-vm", "com.liferay.portal.util.WebCachePool", false, 1, 10) %>
+	<%= _testAttributeList("SINGLE_VM_PORTAL_CACHE_MANAGER", "com.liferay.portal.util.WebCachePool", false, 1, 10) %>
 
 </p>
 
 <%!
 private static String _testAttributeList(String cacheManagerName, String name, Object... values) throws Exception {
-	MBeanServer mBeanServer = (MBeanServer)PortalBeanLocatorUtil.locate("mBeanServer");
+	Registry registry = RegistryUtil.getRegistry();
+
+	MBeanServer mBeanServer = registry.getService(MBeanServer.class);
 
 	ObjectName objectName = new ObjectName("net.sf.ehcache:type=CacheConfiguration,CacheManager=" + cacheManagerName + ",name=" + name);
 

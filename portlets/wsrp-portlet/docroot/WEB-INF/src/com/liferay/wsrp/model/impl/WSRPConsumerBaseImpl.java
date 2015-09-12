@@ -14,7 +14,7 @@
 
 package com.liferay.wsrp.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.wsrp.model.WSRPConsumer;
 import com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see WSRPConsumerImpl
- * @see com.liferay.wsrp.model.WSRPConsumer
+ * @see WSRPConsumer
  * @generated
  */
+@ProviderType
 public abstract class WSRPConsumerBaseImpl extends WSRPConsumerModelImpl
 	implements WSRPConsumer {
 	/*
@@ -39,7 +40,7 @@ public abstract class WSRPConsumerBaseImpl extends WSRPConsumerModelImpl
 	 * Never modify or reference this class directly. All methods that expect a w s r p consumer model instance should use the {@link WSRPConsumer} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			WSRPConsumerLocalServiceUtil.addWSRPConsumer(this);
 		}

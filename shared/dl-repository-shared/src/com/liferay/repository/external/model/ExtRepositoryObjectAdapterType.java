@@ -18,6 +18,7 @@ package com.liferay.repository.external.model;
  * @author Iván Zaera
  * @author Sergio González
  */
+<<<<<<< HEAD
 public class ExtRepositoryObjectAdapterType<
 	T extends ExtRepositoryModelAdapter<?>> {
 
@@ -35,6 +36,22 @@ public class ExtRepositoryObjectAdapterType<
 		ExtRepositoryObjectAdapter<?>> OBJECT =
 			new ExtRepositoryObjectAdapterType<ExtRepositoryObjectAdapter<?>>(
 				"OBJECT");
+=======
+public class ExtRepositoryObjectAdapterType
+	<T extends ExtRepositoryModelAdapter<?>> {
+
+	public static final ExtRepositoryObjectAdapterType
+		<ExtRepositoryFileEntryAdapter> FILE =
+			new ExtRepositoryObjectAdapterType<>("FILE");
+
+	public static final ExtRepositoryObjectAdapterType
+		<ExtRepositoryFolderAdapter> FOLDER =
+			new ExtRepositoryObjectAdapterType<>("FOLDER");
+
+	public static final ExtRepositoryObjectAdapterType
+		<ExtRepositoryObjectAdapter<?>> OBJECT =
+			new ExtRepositoryObjectAdapterType<>("OBJECT");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public String toString() {

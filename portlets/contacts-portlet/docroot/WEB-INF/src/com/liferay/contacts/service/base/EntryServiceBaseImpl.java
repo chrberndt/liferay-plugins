@@ -21,12 +21,21 @@ import com.liferay.contacts.service.persistence.EntryPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.util.PortalUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import javax.sql.DataSource;
 
@@ -74,7 +83,11 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the entry remote service
 	 */
+<<<<<<< HEAD
 	public com.liferay.contacts.service.EntryService getEntryService() {
+=======
+	public EntryService getEntryService() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return entryService;
 	}
 
@@ -83,8 +96,12 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param entryService the entry remote service
 	 */
+<<<<<<< HEAD
 	public void setEntryService(
 		com.liferay.contacts.service.EntryService entryService) {
+=======
+	public void setEntryService(EntryService entryService) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		this.entryService = entryService;
 	}
 
@@ -334,6 +351,7 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query
@@ -342,6 +360,21 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 		try {
 			DataSource dataSource = entryPersistence.getDataSource();
 
+=======
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = entryPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
 
@@ -354,8 +387,13 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 
 	@BeanReference(type = com.liferay.contacts.service.EntryLocalService.class)
 	protected com.liferay.contacts.service.EntryLocalService entryLocalService;
+<<<<<<< HEAD
 	@BeanReference(type = com.liferay.contacts.service.EntryService.class)
 	protected com.liferay.contacts.service.EntryService entryService;
+=======
+	@BeanReference(type = EntryService.class)
+	protected EntryService entryService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = EntryPersistence.class)
 	protected EntryPersistence entryPersistence;
 	@BeanReference(type = EntryFinder.class)

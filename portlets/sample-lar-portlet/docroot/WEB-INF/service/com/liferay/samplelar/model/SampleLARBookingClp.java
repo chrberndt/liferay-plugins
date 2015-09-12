@@ -14,6 +14,7 @@
 
 package com.liferay.samplelar.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.StagedModelType;
@@ -23,6 +24,24 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.samplelar.service.ClpSerializer;
 import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
 
@@ -37,6 +56,10 @@ import java.util.Map;
 /**
  * @author Mate Thurzo
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 	implements SampleLARBooking {
 	public SampleLARBookingClp() {
@@ -85,6 +108,13 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("bookingNumber", getBookingNumber());
+<<<<<<< HEAD
+=======
+		attributes.put("lastPublishDate", getLastPublishDate());
+
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return attributes;
 	}
@@ -144,6 +174,18 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 		if (bookingNumber != null) {
 			setBookingNumber(bookingNumber);
 		}
+<<<<<<< HEAD
+=======
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
+		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -263,13 +305,28 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+=======
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
 	public void setUserUuid(String userUuid) {
+<<<<<<< HEAD
 		_userUuid = userUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -365,6 +422,32 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+
+		if (_sampleLARBookingRemoteModel != null) {
+			try {
+				Class<?> clazz = _sampleLARBookingRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLastPublishDate", Date.class);
+
+				method.invoke(_sampleLARBookingRemoteModel, lastPublishDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
 				SampleLARBooking.class.getName()));
@@ -421,7 +504,11 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void persist() throws SystemException {
+=======
+	public void persist() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (this.isNew()) {
 			SampleLARBookingLocalServiceUtil.addSampleLARBooking(this);
 		}
@@ -450,6 +537,10 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setBookingNumber(getBookingNumber());
+<<<<<<< HEAD
+=======
+		clone.setLastPublishDate(getLastPublishDate());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return clone;
 	}
@@ -489,14 +580,36 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
+=======
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(21);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -516,6 +629,11 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 		sb.append(getModifiedDate());
 		sb.append(", bookingNumber=");
 		sb.append(getBookingNumber());
+<<<<<<< HEAD
+=======
+		sb.append(", lastPublishDate=");
+		sb.append(getLastPublishDate());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append("}");
 
 		return sb.toString();
@@ -523,7 +641,11 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 
 	@Override
 	public String toXmlString() {
+<<<<<<< HEAD
 		StringBundler sb = new StringBundler(31);
+=======
+		StringBundler sb = new StringBundler(34);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.samplelar.model.SampleLARBooking");
@@ -565,6 +687,13 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 			"<column><column-name>bookingNumber</column-name><column-value><![CDATA[");
 		sb.append(getBookingNumber());
 		sb.append("]]></column-value></column>");
+<<<<<<< HEAD
+=======
+		sb.append(
+			"<column><column-name>lastPublishDate</column-name><column-value><![CDATA[");
+		sb.append(getLastPublishDate());
+		sb.append("]]></column-value></column>");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("</model>");
 
@@ -576,10 +705,21 @@ public class SampleLARBookingClp extends BaseModelImpl<SampleLARBooking>
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
+<<<<<<< HEAD
 	private String _userUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _bookingNumber;
+<<<<<<< HEAD
 	private BaseModel<?> _sampleLARBookingRemoteModel;
+=======
+	private Date _lastPublishDate;
+	private BaseModel<?> _sampleLARBookingRemoteModel;
+	private Class<?> _clpSerializerClass = com.liferay.samplelar.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

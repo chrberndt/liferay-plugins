@@ -14,11 +14,13 @@
 
 package com.liferay.akismet.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.akismet.service.AkismetDataLocalServiceUtil;
 import com.liferay.akismet.service.ClpSerializer;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -38,6 +40,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class AkismetDataClp extends BaseModelImpl<AkismetData>
 	implements AkismetData {
 	public AkismetDataClp() {
@@ -87,6 +90,9 @@ public class AkismetDataClp extends BaseModelImpl<AkismetData>
 		attributes.put("userAgent", getUserAgent());
 		attributes.put("userIP", getUserIP());
 		attributes.put("userURL", getUserURL());
+
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
 
 		return attributes;
 	}
@@ -152,6 +158,9 @@ public class AkismetDataClp extends BaseModelImpl<AkismetData>
 		if (userURL != null) {
 			setUserURL(userURL);
 		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -454,7 +463,7 @@ public class AkismetDataClp extends BaseModelImpl<AkismetData>
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			AkismetDataLocalServiceUtil.addAkismetData(this);
 		}
@@ -524,9 +533,23 @@ public class AkismetDataClp extends BaseModelImpl<AkismetData>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
 	}
 
 	@Override
@@ -623,4 +646,7 @@ public class AkismetDataClp extends BaseModelImpl<AkismetData>
 	private String _userIP;
 	private String _userURL;
 	private BaseModel<?> _akismetDataRemoteModel;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

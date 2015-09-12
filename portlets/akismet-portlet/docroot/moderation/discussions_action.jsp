@@ -28,7 +28,11 @@ MBDiscussion mbDiscussion = MBDiscussionLocalServiceUtil.getThreadDiscussion(mbM
 long blogsPlid = PortalUtil.getPlidFromPortletId(mbMessage.getGroupId(), PortletKeys.BLOGS);
 %>
 
+<<<<<<< HEAD
 <liferay-ui:icon-menu>
+=======
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	<%
 	String className = PortalUtil.getClassName(mbDiscussion.getClassNameId());
@@ -40,7 +44,11 @@ long blogsPlid = PortalUtil.getPlidFromPortletId(mbMessage.getGroupId(), Portlet
 			<portlet:param name="entryId" value="<%= String.valueOf(mbDiscussion.getClassPK()) %>" />
 		</liferay-portlet:renderURL>
 
+<<<<<<< HEAD
 		<liferay-ui:icon image="page" message="view-in-context" target="_blank" url="<%= String.valueOf(viewURL) %>" />
+=======
+		<liferay-ui:icon iconCssClass="icon-search" message="view-in-context" target="_blank" url="<%= String.valueOf(viewURL) %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</c:if>
 
 	<portlet:actionURL name="markNotSpamMBMessages" var="markAsHamURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
@@ -48,7 +56,7 @@ long blogsPlid = PortalUtil.getPlidFromPortletId(mbMessage.getGroupId(), Portlet
 		<portlet:param name="notSpamMBMessageIds" value="<%= String.valueOf(mbMessage.getMessageId()) %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon image="../mail/compose" message="not-spam" url="<%= markAsHamURL %>" />
+	<liferay-ui:icon iconCssClass="icon-envelope-alt" message="not-spam" url="<%= markAsHamURL %>" />
 
 	<portlet:actionURL name="deleteDiscussionMBMessages" var="deleteURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 		<portlet:param name="redirect" value="<%= portletURL.toString() %>" />

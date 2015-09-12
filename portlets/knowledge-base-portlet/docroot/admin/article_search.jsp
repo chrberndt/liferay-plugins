@@ -17,9 +17,7 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
-KBArticleSearch searchContainer = (KBArticleSearch)request.getAttribute("liferay-ui:search:searchContainer");
-
-KBArticleDisplayTerms displayTerms = (KBArticleDisplayTerms)searchContainer.getDisplayTerms();
+KBArticleDisplayTerms displayTerms = (KBArticleDisplayTerms)request.getAttribute("view.jsp-displayTerms");
 %>
 
 <liferay-ui:search-toggle
@@ -29,42 +27,42 @@ KBArticleDisplayTerms displayTerms = (KBArticleDisplayTerms)searchContainer.getD
 >
 	<aui:fieldset cssClass="kb-block-labels kb-search-toggle">
 		<div class="kb-field-wrapper">
-			<aui:input inlineField="<%= true %>" name="<%= displayTerms.TITLE %>" size="40" value="<%= displayTerms.getTitle() %>" />
+			<aui:input inlineField="<%= true %>" name="<%= KBArticleDisplayTerms.TITLE %>" size="40" value="<%= displayTerms.getTitle() %>" />
 
-			<aui:input inlineField="<%= true %>" name="<%= displayTerms.CONTENT %>" size="40" value="<%= displayTerms.getContent() %>" />
+			<aui:input inlineField="<%= true %>" name="<%= KBArticleDisplayTerms.CONTENT %>" size="40" value="<%= displayTerms.getContent() %>" />
 
-			<aui:select ignoreRequestValue="<%= true %>" inlineField="<%= true %>" name="<%= displayTerms.STATUS %>">
-				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_ANY) %>" selected="<%= displayTerms.getStatus() == WorkflowConstants.STATUS_ANY %>" value="<%= WorkflowConstants.STATUS_ANY %>" />
-				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_APPROVED) %>" selected="<%= displayTerms.getStatus() == WorkflowConstants.STATUS_APPROVED %>" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
-				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_DRAFT) %>" selected="<%= displayTerms.getStatus() == WorkflowConstants.STATUS_DRAFT %>" value="<%= WorkflowConstants.STATUS_DRAFT %>" />
-				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_PENDING) %>" selected="<%= displayTerms.getStatus() == WorkflowConstants.STATUS_PENDING %>" value="<%= WorkflowConstants.STATUS_PENDING %>" />
+			<aui:select ignoreRequestValue="<%= true %>" inlineField="<%= true %>" name="<%= KBArticleDisplayTerms.STATUS %>" value="<%= displayTerms.getStatus() %>">
+				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_ANY) %>" value="<%= WorkflowConstants.STATUS_ANY %>" />
+				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_APPROVED) %>" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
+				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_DRAFT) %>" value="<%= WorkflowConstants.STATUS_DRAFT %>" />
+				<aui:option label="<%= WorkflowConstants.getStatusLabel(WorkflowConstants.STATUS_PENDING) %>" value="<%= WorkflowConstants.STATUS_PENDING %>" />
 			</aui:select>
 		</div>
 
 		<aui:field-wrapper cssClass="float-container kb-field-wrapper" label="date">
-			<aui:select cssClass="kb-date-field" ignoreRequestValue="<%= true %>" inlineField="<%= true %>" label="" name="<%= displayTerms.ANYTIME %>">
+			<aui:select cssClass="kb-date-field" ignoreRequestValue="<%= true %>" inlineField="<%= true %>" label="" name="<%= KBArticleDisplayTerms.ANYTIME %>">
 				<aui:option label="anytime" selected="<%= displayTerms.isAnytime() %>" value="<%= true %>" />
 				<aui:option label="between" selected="<%= !displayTerms.isAnytime() %>" value="<%= false %>" />
 			</aui:select>
 
-			<span class='<%= displayTerms.isAnytime() ? "hide kb-date-field" : "kb-date-field" %>' id="<portlet:namespace />datesOptions">
+			<span class='kb-date-field <%= displayTerms.isAnytime() ? "hide" : "" %>' id="<portlet:namespace />datesOptions">
 				<liferay-ui:input-date
-					dayParam="<%= displayTerms.START_DATE_DAY %>"
+					dayParam="<%= KBArticleDisplayTerms.START_DATE_DAY %>"
 					dayValue="<%= displayTerms.getStartDateDay() %>"
 					firstDayOfWeek="<%= displayTerms.getFirstDayOfWeek() %>"
-					monthParam="<%= displayTerms.START_DATE_MONTH %>"
+					monthParam="<%= KBArticleDisplayTerms.START_DATE_MONTH %>"
 					monthValue="<%= displayTerms.getStartDateMonth() %>"
-					yearParam="<%= displayTerms.START_DATE_YEAR %>"
+					yearParam="<%= KBArticleDisplayTerms.START_DATE_YEAR %>"
 					yearValue="<%= displayTerms.getStartDateYear() %>"
 				/>
 
 				<liferay-ui:input-date
-					dayParam="<%= displayTerms.END_DATE_DAY %>"
+					dayParam="<%= KBArticleDisplayTerms.END_DATE_DAY %>"
 					dayValue="<%= displayTerms.getEndDateDay() %>"
 					firstDayOfWeek="<%= displayTerms.getFirstDayOfWeek() %>"
-					monthParam="<%= displayTerms.END_DATE_MONTH %>"
+					monthParam="<%= KBArticleDisplayTerms.END_DATE_MONTH %>"
 					monthValue="<%= displayTerms.getEndDateMonth() %>"
-					yearParam="<%= displayTerms.END_DATE_YEAR %>"
+					yearParam="<%= KBArticleDisplayTerms.END_DATE_YEAR %>"
 					yearValue="<%= displayTerms.getEndDateYear() %>"
 				/>
 			</span>
@@ -73,5 +71,9 @@ KBArticleDisplayTerms displayTerms = (KBArticleDisplayTerms)searchContainer.getD
 </liferay-ui:search-toggle>
 
 <aui:script>
+<<<<<<< HEAD
 	Liferay.Util.toggleSelectBox('<portlet:namespace /><%= displayTerms.ANYTIME %>', '<%= false %>', '<portlet:namespace />datesOptions');
+=======
+	Liferay.Util.toggleSelectBox('<portlet:namespace /><%= KBArticleDisplayTerms.ANYTIME %>', '<%= false %>', '<portlet:namespace />datesOptions');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </aui:script>

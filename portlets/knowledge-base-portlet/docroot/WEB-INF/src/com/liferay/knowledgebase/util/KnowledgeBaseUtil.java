@@ -15,6 +15,13 @@
 package com.liferay.knowledgebase.util;
 
 import com.liferay.knowledgebase.model.KBArticle;
+import com.liferay.knowledgebase.model.KBComment;
+import com.liferay.knowledgebase.model.KBCommentConstants;
+import com.liferay.knowledgebase.model.KBFolder;
+import com.liferay.knowledgebase.model.KBFolderConstants;
+import com.liferay.knowledgebase.model.KBTemplate;
+import com.liferay.knowledgebase.service.KBArticleServiceUtil;
+import com.liferay.knowledgebase.service.KBFolderServiceUtil;
 import com.liferay.knowledgebase.util.comparator.KBArticleCreateDateComparator;
 import com.liferay.knowledgebase.util.comparator.KBArticleModifiedDateComparator;
 import com.liferay.knowledgebase.util.comparator.KBArticlePriorityComparator;
@@ -23,11 +30,22 @@ import com.liferay.knowledgebase.util.comparator.KBArticleTitleComparator;
 import com.liferay.knowledgebase.util.comparator.KBArticleUserNameComparator;
 import com.liferay.knowledgebase.util.comparator.KBArticleVersionComparator;
 import com.liferay.knowledgebase.util.comparator.KBArticleViewCountComparator;
+import com.liferay.knowledgebase.util.comparator.KBCommentCreateDateComparator;
+import com.liferay.knowledgebase.util.comparator.KBCommentModifiedDateComparator;
 import com.liferay.knowledgebase.util.comparator.KBTemplateCreateDateComparator;
 import com.liferay.knowledgebase.util.comparator.KBTemplateModifiedDateComparator;
 import com.liferay.knowledgebase.util.comparator.KBTemplateTitleComparator;
 import com.liferay.knowledgebase.util.comparator.KBTemplateUserNameComparator;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+=======
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
@@ -35,6 +53,10 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.util.ListUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -43,24 +65,119 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.ModelHintsUtil;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.theme.ThemeDisplay;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.io.InputStream;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.Comparator;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
 import java.util.regex.Pattern;
+=======
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Peter Shin
  * @author Brian Wing Shun Chan
  */
 public class KnowledgeBaseUtil {
+
+	public static void addPortletBreadcrumbEntries(
+			long originalParentResourceClassNameId,
+			long originalParentResourcePrimKey, long parentResourceClassNameId,
+			long parentResourcePrimKey, String mvcPath,
+			HttpServletRequest request, RenderResponse renderResponse)
+		throws PortalException {
+
+		Map<String, Object> parameters = new HashMap<>();
+
+		parameters.put(
+			"originalParentResourceClassNameId",
+			originalParentResourceClassNameId);
+		parameters.put(
+			"originalParentResourcePrimKey", originalParentResourcePrimKey);
+		parameters.put("parentResourceClassNameId", parentResourceClassNameId);
+		parameters.put("parentResourcePrimKey", parentResourcePrimKey);
+		parameters.put("mvcPath", mvcPath);
+
+		addPortletBreadcrumbEntries(parameters, request, renderResponse);
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			long parentResourceClassNameId, long parentResourcePrimKey,
+			String mvcPath, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws PortalException {
+
+		Map<String, Object> parameters = new HashMap<>();
+
+		parameters.put("parentResourceClassNameId", parentResourceClassNameId);
+		parameters.put("parentResourcePrimKey", parentResourcePrimKey);
+		parameters.put("mvcPath", mvcPath);
+
+		addPortletBreadcrumbEntries(parameters, request, renderResponse);
+	}
+
+	public static List<KBFolder> getAlternateRootKBFolders(
+			long groupId, long kbFolderId)
+		throws PortalException {
+
+		List<KBFolder> kbFolders = KBFolderServiceUtil.getKBFolders(
+			groupId, kbFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		kbFolders = new ArrayList<>(kbFolders);
+
+		Iterator<KBFolder> itr = kbFolders.iterator();
+
+		while (itr.hasNext()) {
+			KBFolder kbFolder = itr.next();
+
+			if (kbFolder.isEmpty()) {
+				itr.remove();
+			}
+		}
+
+		return ListUtil.sort(
+			kbFolders,
+			new Comparator<KBFolder>() {
+
+				@Override
+				public int compare(KBFolder kbFolder1, KBFolder kbFolder2) {
+					String name1 = kbFolder1.getName();
+					String name2 = kbFolder2.getName();
+
+					return name1.compareTo(name2) * -1;
+				}
+
+			});
+	}
 
 	public static OrderByComparator getKBArticleOrderByComparator(
 		String orderByCol, String orderByType) {
@@ -194,7 +311,47 @@ public class KnowledgeBaseUtil {
 		return url;
 	}
 
-	public static OrderByComparator getKBTemplateOrderByComparator(
+	public static OrderByComparator<KBComment> getKBCommentOrderByComparator(
+		String orderByCol, String orderByType) {
+
+		if (Validator.isNull(orderByCol) || Validator.isNull(orderByType)) {
+			return null;
+		}
+
+		boolean ascending = false;
+
+		if (orderByType.equals("asc")) {
+			ascending = true;
+		}
+
+		if (orderByCol.equals("create-date")) {
+			return new KBCommentCreateDateComparator(ascending);
+		}
+		else if (orderByCol.equals("modified-date")) {
+			return new KBCommentModifiedDateComparator(ascending);
+		}
+
+		return null;
+	}
+
+	public static long getKBFolderId(
+			long parentResourceClassNameId, long parentResourcePrimKey)
+		throws PortalException {
+
+		long kbFolderClassNameId = PortalUtil.getClassNameId(
+			KBFolderConstants.getClassName());
+
+		if (parentResourceClassNameId == kbFolderClassNameId) {
+			return parentResourcePrimKey;
+		}
+
+		KBArticle kbArticle = KBArticleServiceUtil.getLatestKBArticle(
+			parentResourcePrimKey, WorkflowConstants.STATUS_ANY);
+
+		return kbArticle.getKbFolderId();
+	}
+
+	public static OrderByComparator<KBTemplate> getKBTemplateOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		if (Validator.isNull(orderByCol) || Validator.isNull(orderByType)) {
@@ -234,6 +391,21 @@ public class KnowledgeBaseUtil {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public static final int getNextStatus(int status) {
+		if (status == KBCommentConstants.STATUS_IN_PROGRESS) {
+			return KBCommentConstants.STATUS_COMPLETED;
+		}
+		else if (status == KBCommentConstants.STATUS_NEW) {
+			return KBCommentConstants.STATUS_IN_PROGRESS;
+		}
+		else {
+			return KBCommentConstants.STATUS_NONE;
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static Long[][] getParams(Long[] params) {
 		if (ArrayUtil.isEmpty(params)) {
 			return null;
@@ -249,6 +421,83 @@ public class KnowledgeBaseUtil {
 		};
 	}
 
+<<<<<<< HEAD
+=======
+	public static String getPreferredKBFolderURLTitle(
+			PortalPreferences portalPreferences, String contentRootPrefix)
+		throws JSONException {
+
+		String preferredKBFolderURLTitle = portalPreferences.getValue(
+			PortletKeys.KNOWLEDGE_BASE_DISPLAY, "preferredKBFolderURLTitle",
+			"{}");
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			preferredKBFolderURLTitle);
+
+		return jsonObject.getString(contentRootPrefix, StringPool.BLANK);
+	}
+
+	public static final int getPreviousStatus(int status) {
+		if (status == KBCommentConstants.STATUS_COMPLETED) {
+			return KBCommentConstants.STATUS_IN_PROGRESS;
+		}
+		else if (status == KBCommentConstants.STATUS_IN_PROGRESS) {
+			return KBCommentConstants.STATUS_NEW;
+		}
+		else {
+			return KBCommentConstants.STATUS_NONE;
+		}
+	}
+
+	public static long getRootResourcePrimKey(
+			PortletRequest portletRequest, long groupId,
+			long resourceClassNameId, long resourcePrimKey)
+		throws PortalException {
+
+		long kbFolderClassNameId = PortalUtil.getClassNameId(
+			KBFolderConstants.getClassName());
+
+		if (resourceClassNameId == kbFolderClassNameId) {
+			return getCurrentRootKBFolder(
+				portletRequest, groupId, resourcePrimKey);
+		}
+
+		return getKBFolderId(resourceClassNameId, resourcePrimKey);
+	}
+
+	public static final String getStatusLabel(int status) {
+		if (status == KBCommentConstants.STATUS_COMPLETED) {
+			return "resolved";
+		}
+		else if (status == KBCommentConstants.STATUS_IN_PROGRESS) {
+			return "in-progress";
+		}
+		else if (status == KBCommentConstants.STATUS_NEW) {
+			return "new";
+		}
+		else {
+			throw new IllegalArgumentException(
+				String.format("Invalid suggestion status %s", status));
+		}
+	}
+
+	public static final String getStatusTransitionLabel(int status) {
+		if (status == KBCommentConstants.STATUS_COMPLETED) {
+			return "resolve";
+		}
+		else if (status == KBCommentConstants.STATUS_IN_PROGRESS) {
+			return "move-to-in-progress";
+		}
+		else if (status == KBCommentConstants.STATUS_NEW) {
+			return "move-to-new";
+		}
+		else {
+			throw new IllegalArgumentException(
+				String.format("Invalid suggestion status %s", status));
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static String getUrlTitle(long id, String title) {
 		if (title == null) {
 			return String.valueOf(id);
@@ -263,45 +512,50 @@ public class KnowledgeBaseUtil {
 		}
 		else {
 			title = FriendlyURLNormalizerUtil.normalize(
+<<<<<<< HEAD
 				title, _friendlyURLPattern);
+=======
+				title, _normalizationFriendlyUrlPattern);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		return ModelHintsUtil.trimString(
 			KBArticle.class.getName(), "urlTitle", title);
 	}
 
+<<<<<<< HEAD
 	public static String[] parseKeywords(String values) {
 		List<String> keywords = new UniqueList<String>();
+=======
+	public static boolean isValidUrlTitle(String urlTitle) {
+		Matcher matcher = _validFriendlyUrlPattern.matcher(urlTitle);
 
-		StringBundler sb = new StringBundler();
+		return matcher.matches();
+	}
 
-		for (char c : values.toCharArray()) {
-			if (Character.isWhitespace(c)) {
-				if (sb.length() > 0) {
-					keywords.add(sb.toString());
+	public static void setPreferredKBFolderURLTitle(
+			PortalPreferences portalPreferences, String contentRootPrefix,
+			String value)
+		throws JSONException {
 
-					sb = new StringBundler();
-				}
-			}
-			else if (Character.isLetterOrDigit(c)) {
-				sb.append(c);
-			}
-			else {
-				return new String[] {values};
-			}
-		}
+		String preferredKBFolderURLTitle = portalPreferences.getValue(
+			PortletKeys.KNOWLEDGE_BASE_DISPLAY, "preferredKBFolderURLTitle",
+			"{}");
 
-		if (sb.length() > 0) {
-			keywords.add(sb.toString());
-		}
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			preferredKBFolderURLTitle);
 
-		return StringUtil.split(StringUtil.merge(keywords));
+		jsonObject.put(contentRootPrefix, value);
+
+		portalPreferences.setValue(
+			PortletKeys.KNOWLEDGE_BASE_DISPLAY, "preferredKBFolderURLTitle",
+			jsonObject.toString());
 	}
 
 	public static List<KBArticle> sort(
 		long[] resourcePrimKeys, List<KBArticle> kbArticles) {
 
-		Map<Long, KBArticle> map = new HashMap<Long, KBArticle>();
+		Map<Long, KBArticle> map = new HashMap<>();
 
 		for (KBArticle kbArticle : kbArticles) {
 			map.put(kbArticle.getResourcePrimKey(), kbArticle);
@@ -316,6 +570,149 @@ public class KnowledgeBaseUtil {
 		}
 
 		return kbArticles;
+	}
+
+	public static String[] splitKeywords(String keywords) {
+		Set<String> keywordsSet = new LinkedHashSet<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
+
+		StringBundler sb = new StringBundler();
+
+		for (char c : keywords.toCharArray()) {
+			if (Character.isWhitespace(c)) {
+				if (sb.length() > 0) {
+					keywordsSet.add(sb.toString());
+
+					sb = new StringBundler();
+				}
+			}
+			else if (Character.isLetterOrDigit(c)) {
+				sb.append(c);
+			}
+			else {
+				return new String[] {keywords};
+			}
+		}
+
+		if (sb.length() > 0) {
+			keywordsSet.add(sb.toString());
+		}
+
+		return StringUtil.split(StringUtil.merge(keywordsSet));
+	}
+
+	public static String trimLeadingSlash(String s) {
+		if (Validator.isNull(s)) {
+			return s;
+		}
+
+		int x = 0;
+
+		for (char c : s.toCharArray()) {
+			if ((c != CharPool.BACK_SLASH) && (c != CharPool.FORWARD_SLASH)) {
+				break;
+			}
+
+			x = x + 1;
+		}
+
+		return s.substring(x, s.length());
+	}
+
+	protected static void addPortletBreadcrumbEntries(
+			Map<String, Object> parameters, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws PortalException {
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+			Object value = entry.getValue();
+
+			portletURL.setParameter(entry.getKey(), value.toString());
+		}
+
+		long kbFolderClassNameId = PortalUtil.getClassNameId(
+			KBFolderConstants.getClassName());
+
+		long parentResourceClassNameId = (Long)parameters.get(
+			"parentResourceClassNameId");
+		long parentResourcePrimKey = (Long)parameters.get(
+			"parentResourcePrimKey");
+
+		String mvcPath = (String)parameters.get("mvcPath");
+
+		if (parentResourcePrimKey ==
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, themeDisplay.translate("home"), portletURL.toString());
+		}
+		else if (parentResourceClassNameId == kbFolderClassNameId) {
+			KBFolder kbFolder = KBFolderServiceUtil.getKBFolder(
+				parentResourcePrimKey);
+
+			addPortletBreadcrumbEntries(
+				kbFolder.getClassNameId(), kbFolder.getParentKBFolderId(),
+				mvcPath, request, renderResponse);
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, kbFolder.getName(), portletURL.toString());
+		}
+		else {
+			KBArticle kbArticle = KBArticleServiceUtil.getLatestKBArticle(
+				parentResourcePrimKey, WorkflowConstants.STATUS_ANY);
+
+			addPortletBreadcrumbEntries(
+				kbArticle.getParentResourceClassNameId(),
+				kbArticle.getParentResourcePrimKey(), mvcPath, request,
+				renderResponse);
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, kbArticle.getTitle(), portletURL.toString());
+		}
+	}
+
+	private static long getCurrentRootKBFolder(
+			PortletRequest portletRequest, long groupId, long kbFolderId)
+		throws PortalException {
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(portletRequest);
+
+		PortletPreferences portletPreferences = portletRequest.getPreferences();
+
+		String contentRootPrefix = GetterUtil.getString(
+			portletPreferences.getValue("contentRootPrefix", null));
+
+		String kbFolderURLTitle = getPreferredKBFolderURLTitle(
+			portalPreferences, contentRootPrefix);
+
+		long childKbFolderId = KBFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+		if (kbFolderURLTitle == null) {
+			List<KBFolder> kbFolders = getAlternateRootKBFolders(
+				groupId, kbFolderId);
+
+			if (!kbFolders.isEmpty()) {
+				KBFolder kbFolder = kbFolders.get(0);
+
+				childKbFolderId = kbFolder.getKbFolderId();
+			}
+		}
+		else {
+			KBFolder kbFolder = KBFolderServiceUtil.fetchKBFolderByUrlTitle(
+				groupId, kbFolderId, kbFolderURLTitle);
+
+			if (kbFolder != null) {
+				childKbFolderId = kbFolder.getKbFolderId();
+			}
+		}
+
+		return childKbFolderId;
 	}
 
 	public static String trimLeadingSlash(String s) {
@@ -339,6 +736,13 @@ public class KnowledgeBaseUtil {
 	private static final int _SQL_DATA_MAX_PARAMETERS = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.SQL_DATA_MAX_PARAMETERS));
 
+<<<<<<< HEAD
 	private static Pattern _friendlyURLPattern = Pattern.compile("[^a-z0-9_-]");
+=======
+	private static Pattern _normalizationFriendlyUrlPattern = Pattern.compile(
+		"[^a-z0-9_-]");
+	private static Pattern _validFriendlyUrlPattern = Pattern.compile(
+		"/[a-z0-9_-]+");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

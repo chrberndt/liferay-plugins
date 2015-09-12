@@ -14,14 +14,20 @@
 
 package com.liferay.jsonwebserviceclient;
 
+<<<<<<< HEAD
 import java.io.IOException;
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.security.KeyStore;
 
 import java.util.Map;
 
+<<<<<<< HEAD
 import javax.security.auth.login.CredentialException;
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /**
  * @author Ivica Cardic
  * @author Igor Beslic
@@ -29,6 +35,7 @@ import javax.security.auth.login.CredentialException;
 public interface JSONWebServiceClient {
 
 	public String doGet(String url, Map<String, String> parameters)
+<<<<<<< HEAD
 		throws CredentialException, IOException;
 
 	public String doPost(String url, Map<String, String> parameters)
@@ -36,10 +43,51 @@ public interface JSONWebServiceClient {
 
 	public void resetHttpClient();
 
+=======
+		throws JSONWebServiceTransportException;
+
+	public String doGet(
+			String url, Map<String, String> parameters,
+			Map<String, String> headers)
+		throws JSONWebServiceTransportException;
+
+	public String doPost(String url, Map<String, String> parameters)
+		throws JSONWebServiceTransportException;
+
+	public String doPost(
+			String url, Map<String, String> parameters,
+			Map<String, String> headers)
+		throws JSONWebServiceTransportException;
+
+	public String doPostAsJSON(String url, String json)
+		throws JSONWebServiceTransportException;
+
+	public String doPostAsJSON(
+			String url, String json, Map<String, String> headers)
+		throws JSONWebServiceTransportException;
+
+	public String getHostName();
+
+	public int getHostPort();
+
+	public String getProtocol();
+
+	public void resetHttpClient();
+
+	public void setHostName(String hostName);
+
+	public void setHostPort(int hostPort);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setKeyStore(KeyStore keyStore);
 
 	public void setLogin(String login);
 
 	public void setPassword(String password);
 
+<<<<<<< HEAD
+=======
+	public void setProtocol(String protocol);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

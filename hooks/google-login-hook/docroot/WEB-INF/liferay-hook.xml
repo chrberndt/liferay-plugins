@@ -4,9 +4,16 @@
 <hook>
 	<portal-properties>portal.properties</portal-properties>
 	<language-properties>content/Language*.properties</language-properties>
+<<<<<<< HEAD
 	<custom-jsp-dir>/custom_jsps</custom-jsp-dir>
 	<struts-action>
 		<struts-action-path>/portal/google_login</struts-action-path>
 		<struts-action-impl>com.liferay.googlelogin.hook.action.GoogleLoginAction</struts-action-impl>
+=======
+	<custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
+	<struts-action>
+		<struts-action-path>/portal/google_login</struts-action-path>
+		<struts-action-impl>com.liferay.google.login.hook.action.GoogleLoginAction</struts-action-impl>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</struts-action>
 </hook>

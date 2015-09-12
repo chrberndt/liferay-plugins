@@ -19,6 +19,7 @@ package com.liferay.so.configurations.portlet;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -26,15 +27,44 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+=======
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserActionableDynamicQuery;
 import com.liferay.portal.theme.ThemeDisplay;
+<<<<<<< HEAD
 import com.liferay.so.util.RoleConstants;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+=======
+import com.liferay.so.configurations.util.PortletKeys;
+import com.liferay.so.util.RoleConstants;
+
+import java.util.Map;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletPreferences;
+import javax.portlet.ValidatorException;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Jonathan Lee
@@ -56,9 +86,13 @@ public class ConfigurationsPortlet extends MVCPortlet {
 			new UserActionableDynamicQuery() {
 
 			@Override
+<<<<<<< HEAD
 			protected void performAction(Object object)
 				throws PortalException, SystemException {
 
+=======
+			protected void performAction(Object object) throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				User user = (User)object;
 
 				if (!user.isDefaultUser()) {
@@ -74,6 +108,43 @@ public class ConfigurationsPortlet extends MVCPortlet {
 		actionableDynamicQuery.performActions();
 	}
 
+<<<<<<< HEAD
+=======
+	public void updateGeneralConfigurations(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		boolean addSitePermission = ParamUtil.get(
+			actionRequest, "addSitePermission", true);
+
+		updateRolePermissions(themeDisplay.getCompanyId(), addSitePermission);
+
+		UnicodeProperties properties = PropertiesParamUtil.getProperties(
+			actionRequest, "preferences--");
+
+		PortletPreferences portletPreferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				themeDisplay.getCompanyId(), themeDisplay.getCompanyId(),
+				PortletKeys.PREFS_OWNER_TYPE_COMPANY,
+				LayoutConstants.DEFAULT_PLID, PortletKeys.SO_CONFIGURATIONS);
+
+		for (Map.Entry<String, String> entry : properties.entrySet()) {
+			portletPreferences.setValue(entry.getKey(), entry.getValue());
+		}
+
+		try {
+			portletPreferences.store();
+		}
+		catch (ValidatorException ve) {
+			SessionErrors.add(
+				actionRequest, ValidatorException.class.getName(), ve);
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void updateGroupsRole(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -112,4 +183,28 @@ public class ConfigurationsPortlet extends MVCPortlet {
 		UserLocalServiceUtil.unsetRoleUsers(role.getRoleId(), removeUserIds);
 	}
 
+<<<<<<< HEAD
+=======
+	protected void updateRolePermissions(
+			long companyId, boolean addSitePermission)
+		throws Exception {
+
+		Role role = RoleLocalServiceUtil.getRole(
+			companyId, RoleConstants.SOCIAL_OFFICE_USER);
+
+		if (addSitePermission) {
+			ResourcePermissionLocalServiceUtil.addResourcePermission(
+				companyId, PortletKeys.PORTAL, ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(companyId), role.getRoleId(),
+				ActionKeys.ADD_COMMUNITY);
+		}
+		else {
+			ResourcePermissionLocalServiceUtil.removeResourcePermission(
+				companyId, PortletKeys.PORTAL, ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(companyId), role.getRoleId(),
+				ActionKeys.ADD_COMMUNITY);
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

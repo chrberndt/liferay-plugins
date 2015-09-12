@@ -53,21 +53,36 @@ else {
 
 	if (messageType.equals("reply")) {
 		to = replyMessage.getSender();
+<<<<<<< HEAD
 		subject = LanguageUtil.format(pageContext, "re-x", replyMessage.getSubject(), false);
+=======
+		subject = LanguageUtil.format(request, "re-x", replyMessage.getSubject(), false);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 	else if (messageType.equals("reply-all")) {
 		to = replyMessage.getSender() + ", " + replyMessage.getTo();
 		cc = replyMessage.getCc();
+<<<<<<< HEAD
 		subject = LanguageUtil.format(pageContext, "re-x", replyMessage.getSubject(), false);
 	}
 	else if (messageType.equals("forward")) {
 		subject = LanguageUtil.format(pageContext, "fwd-x", replyMessage.getSubject(), false);
+=======
+		subject = LanguageUtil.format(request, "re-x", replyMessage.getSubject(), false);
+	}
+	else if (messageType.equals("forward")) {
+		subject = LanguageUtil.format(request, "fwd-x", replyMessage.getSubject(), false);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	StringBundler sb = new StringBundler(4);
 
 	sb.append("<br /><br />");
+<<<<<<< HEAD
 	sb.append(LanguageUtil.format(pageContext, "on-x-x-wrote", new Object[] {dateFormatDateTime.format(replyMessage.getSentDate()), replyMessage.getSender()}, false));
+=======
+	sb.append(LanguageUtil.format(request, "on-x-x-wrote", new Object[] {dateFormatDateTime.format(replyMessage.getSentDate()), replyMessage.getSender()}, false));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	sb.append("<br />");
 	sb.append(replyMessage.getBody());
 
@@ -105,7 +120,11 @@ else {
 
 		<div class="body-editor">
 			<aui:field-wrapper label="body">
+<<<<<<< HEAD
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email" width="100%" />
+=======
+				<liferay-ui:input-editor contents="<%= body %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email" width="100%" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				<aui:input name="body" type="hidden" />
 			</aui:field-wrapper>
@@ -121,12 +140,15 @@ else {
 	</aui:button-row>
 </form>
 
+<<<<<<< HEAD
 <aui:script>
 	function <portlet:namespace />initEditor() {
 		return '<%= UnicodeFormatter.toString(body) %>';
 	}
 </aui:script>
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 <aui:script use="aui-base,aui-io-deprecated,aui-io-upload">
 	var form = A.one('#<portlet:namespace />fm');
 
@@ -143,7 +165,7 @@ else {
 			A.io.request(
 				themeDisplay.getLayoutURL() + '/-/mail/send_message',
 				{
-					dataType: 'json',
+					dataType: 'JSON',
 					form: {
 						id: form.getDOMNode(),
 						upload: true
@@ -152,7 +174,7 @@ else {
 					on: {
 						complete: function(event, id, obj) {
 							try {
-								var responseData = A.JSON.parse(obj.responseText);
+								var responseData = JSON.parse(obj.responseText);
 
 								Liferay.Mail.setStatus(responseData.status, responseData.message);
 
@@ -180,7 +202,7 @@ else {
 			A.io.request(
 				themeDisplay.getLayoutURL() + '/-/mail/save_draft',
 				{
-					dataType: 'json',
+					dataType: 'JSON',
 					form: {
 						id: form.getDOMNode()
 					},

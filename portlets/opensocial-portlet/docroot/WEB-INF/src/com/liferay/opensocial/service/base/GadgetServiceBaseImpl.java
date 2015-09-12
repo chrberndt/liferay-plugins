@@ -22,12 +22,15 @@ import com.liferay.opensocial.service.persistence.OAuthTokenPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.sql.DataSource;
 
@@ -75,7 +78,7 @@ public abstract class GadgetServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the gadget remote service
 	 */
-	public com.liferay.opensocial.service.GadgetService getGadgetService() {
+	public GadgetService getGadgetService() {
 		return gadgetService;
 	}
 
@@ -84,8 +87,7 @@ public abstract class GadgetServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param gadgetService the gadget remote service
 	 */
-	public void setGadgetService(
-		com.liferay.opensocial.service.GadgetService gadgetService) {
+	public void setGadgetService(GadgetService gadgetService) {
 		this.gadgetService = gadgetService;
 	}
 
@@ -393,13 +395,18 @@ public abstract class GadgetServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = gadgetPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -414,7 +421,7 @@ public abstract class GadgetServiceBaseImpl extends BaseServiceImpl
 	@BeanReference(type = com.liferay.opensocial.service.GadgetLocalService.class)
 	protected com.liferay.opensocial.service.GadgetLocalService gadgetLocalService;
 	@BeanReference(type = com.liferay.opensocial.service.GadgetService.class)
-	protected com.liferay.opensocial.service.GadgetService gadgetService;
+	protected GadgetService gadgetService;
 	@BeanReference(type = GadgetPersistence.class)
 	protected GadgetPersistence gadgetPersistence;
 	@BeanReference(type = com.liferay.opensocial.service.OAuthConsumerLocalService.class)

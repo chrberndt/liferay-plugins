@@ -15,8 +15,15 @@
 --%>
 
 <%@ page import="com.liferay.alloy.mvc.AlloyController" %><%@
+<<<<<<< HEAD
 page import="com.liferay.alloy.mvc.AlloySearchResult" %><%@
 page import="com.liferay.alloy.mvc.BaseAlloyIndexer" %><%@
+=======
+page import="com.liferay.alloy.mvc.AlloyException" %><%@
+page import="com.liferay.alloy.mvc.AlloySearchResult" %><%@
+page import="com.liferay.alloy.mvc.BaseAlloyIndexer" %><%@
+page import="com.liferay.alloy.mvc.jsonwebservice.JSONWebServiceMethod" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.ams.model.Asset" %><%@
 page import="com.liferay.ams.model.Definition" %><%@
 page import="com.liferay.ams.model.Type" %><%@
@@ -29,10 +36,23 @@ page import="com.liferay.portal.kernel.search.Field" %><%@
 page import="com.liferay.portal.kernel.search.Indexer" %><%@
 page import="com.liferay.portal.kernel.search.SearchContext" %><%@
 page import="com.liferay.portal.kernel.search.Summary" %><%@
+<<<<<<< HEAD
 page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%@ page import="java.util.Locale" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
+=======
+page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
+page import="com.liferay.portal.model.BaseModel" %>
+
+<%@ page import="java.util.Locale" %><%@
+page import="java.util.regex.Matcher" %><%@
+page import="java.util.regex.Pattern" %>
+
+<%@ page import="javax.portlet.PortletRequest" %><%@
+page import="javax.portlet.PortletResponse" %><%@
+page import="javax.portlet.PortletURL" %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <%@ include file="/WEB-INF/jsp/util/portlet_keys.jspf" %>

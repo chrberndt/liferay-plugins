@@ -14,10 +14,16 @@
 
 package com.liferay.socialcoding.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -31,6 +37,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.socialcoding.model.JIRAAction;
 import com.liferay.socialcoding.service.JIRAActionLocalService;
@@ -41,6 +48,7 @@ import com.liferay.socialcoding.service.persistence.JIRAChangeGroupPersistence;
 import com.liferay.socialcoding.service.persistence.JIRAChangeItemPersistence;
 import com.liferay.socialcoding.service.persistence.JIRAIssueFinder;
 import com.liferay.socialcoding.service.persistence.JIRAIssuePersistence;
+import com.liferay.socialcoding.service.persistence.JIRAProjectPersistence;
 import com.liferay.socialcoding.service.persistence.SVNRepositoryPersistence;
 import com.liferay.socialcoding.service.persistence.SVNRevisionPersistence;
 
@@ -62,6 +70,7 @@ import javax.sql.DataSource;
  * @see com.liferay.socialcoding.service.JIRAActionLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class JIRAActionLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements JIRAActionLocalService,
 		IdentifiableBean {
@@ -76,12 +85,10 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 *
 	 * @param jiraAction the j i r a action
 	 * @return the j i r a action that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public JIRAAction addJIRAAction(JIRAAction jiraAction)
-		throws SystemException {
+	public JIRAAction addJIRAAction(JIRAAction jiraAction) {
 		jiraAction.setNew(true);
 
 		return jiraActionPersistence.update(jiraAction);
@@ -104,12 +111,11 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param jiraActionId the primary key of the j i r a action
 	 * @return the j i r a action that was removed
 	 * @throws PortalException if a j i r a action with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public JIRAAction deleteJIRAAction(long jiraActionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return jiraActionPersistence.remove(jiraActionId);
 	}
 
@@ -118,12 +124,10 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 *
 	 * @param jiraAction the j i r a action
 	 * @return the j i r a action that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public JIRAAction deleteJIRAAction(JIRAAction jiraAction)
-		throws SystemException {
+	public JIRAAction deleteJIRAAction(JIRAAction jiraAction) {
 		return jiraActionPersistence.remove(jiraAction);
 	}
 
@@ -140,12 +144,9 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return jiraActionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -160,12 +161,10 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return jiraActionPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
@@ -182,47 +181,41 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return jiraActionPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return jiraActionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return jiraActionPersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
-	public JIRAAction fetchJIRAAction(long jiraActionId)
-		throws SystemException {
+	public JIRAAction fetchJIRAAction(long jiraActionId) {
 		return jiraActionPersistence.fetchByPrimaryKey(jiraActionId);
 	}
 
@@ -232,17 +225,47 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param jiraActionId the primary key of the j i r a action
 	 * @return the j i r a action
 	 * @throws PortalException if a j i r a action with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public JIRAAction getJIRAAction(long jiraActionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return jiraActionPersistence.findByPrimaryKey(jiraActionId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAActionLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(JIRAAction.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraActionId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAActionLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(JIRAAction.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraActionId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return jiraActionLocalService.deleteJIRAAction((JIRAAction)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return jiraActionPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -256,11 +279,9 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param start the lower bound of the range of j i r a actions
 	 * @param end the upper bound of the range of j i r a actions (not inclusive)
 	 * @return the range of j i r a actions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<JIRAAction> getJIRAActions(int start, int end)
-		throws SystemException {
+	public List<JIRAAction> getJIRAActions(int start, int end) {
 		return jiraActionPersistence.findAll(start, end);
 	}
 
@@ -268,10 +289,9 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * Returns the number of j i r a actions.
 	 *
 	 * @return the number of j i r a actions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getJIRAActionsCount() throws SystemException {
+	public int getJIRAActionsCount() {
 		return jiraActionPersistence.countAll();
 	}
 
@@ -280,12 +300,10 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 *
 	 * @param jiraAction the j i r a action
 	 * @return the j i r a action that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public JIRAAction updateJIRAAction(JIRAAction jiraAction)
-		throws SystemException {
+	public JIRAAction updateJIRAAction(JIRAAction jiraAction) {
 		return jiraActionPersistence.update(jiraAction);
 	}
 
@@ -294,7 +312,7 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 *
 	 * @return the j i r a action local service
 	 */
-	public com.liferay.socialcoding.service.JIRAActionLocalService getJIRAActionLocalService() {
+	public JIRAActionLocalService getJIRAActionLocalService() {
 		return jiraActionLocalService;
 	}
 
@@ -304,7 +322,7 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 * @param jiraActionLocalService the j i r a action local service
 	 */
 	public void setJIRAActionLocalService(
-		com.liferay.socialcoding.service.JIRAActionLocalService jiraActionLocalService) {
+		JIRAActionLocalService jiraActionLocalService) {
 		this.jiraActionLocalService = jiraActionLocalService;
 	}
 
@@ -494,6 +512,44 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	 */
 	public void setJIRAIssueFinder(JIRAIssueFinder jiraIssueFinder) {
 		this.jiraIssueFinder = jiraIssueFinder;
+	}
+
+	/**
+	 * Returns the j i r a project local service.
+	 *
+	 * @return the j i r a project local service
+	 */
+	public com.liferay.socialcoding.service.JIRAProjectLocalService getJIRAProjectLocalService() {
+		return jiraProjectLocalService;
+	}
+
+	/**
+	 * Sets the j i r a project local service.
+	 *
+	 * @param jiraProjectLocalService the j i r a project local service
+	 */
+	public void setJIRAProjectLocalService(
+		com.liferay.socialcoding.service.JIRAProjectLocalService jiraProjectLocalService) {
+		this.jiraProjectLocalService = jiraProjectLocalService;
+	}
+
+	/**
+	 * Returns the j i r a project persistence.
+	 *
+	 * @return the j i r a project persistence
+	 */
+	public JIRAProjectPersistence getJIRAProjectPersistence() {
+		return jiraProjectPersistence;
+	}
+
+	/**
+	 * Sets the j i r a project persistence.
+	 *
+	 * @param jiraProjectPersistence the j i r a project persistence
+	 */
+	public void setJIRAProjectPersistence(
+		JIRAProjectPersistence jiraProjectPersistence) {
+		this.jiraProjectPersistence = jiraProjectPersistence;
 	}
 
 	/**
@@ -787,13 +843,18 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = jiraActionPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -805,8 +866,8 @@ public abstract class JIRAActionLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.socialcoding.service.JIRAActionLocalService.class)
-	protected com.liferay.socialcoding.service.JIRAActionLocalService jiraActionLocalService;
+	@BeanReference(type = JIRAActionLocalService.class)
+	protected JIRAActionLocalService jiraActionLocalService;
 	@BeanReference(type = JIRAActionPersistence.class)
 	protected JIRAActionPersistence jiraActionPersistence;
 	@BeanReference(type = JIRAActionFinder.class)
@@ -827,6 +888,10 @@ public abstract class JIRAActionLocalServiceBaseImpl
 	protected JIRAIssuePersistence jiraIssuePersistence;
 	@BeanReference(type = JIRAIssueFinder.class)
 	protected JIRAIssueFinder jiraIssueFinder;
+	@BeanReference(type = com.liferay.socialcoding.service.JIRAProjectLocalService.class)
+	protected com.liferay.socialcoding.service.JIRAProjectLocalService jiraProjectLocalService;
+	@BeanReference(type = JIRAProjectPersistence.class)
+	protected JIRAProjectPersistence jiraProjectPersistence;
 	@BeanReference(type = com.liferay.socialcoding.service.SVNRepositoryLocalService.class)
 	protected com.liferay.socialcoding.service.SVNRepositoryLocalService svnRepositoryLocalService;
 	@BeanReference(type = SVNRepositoryPersistence.class)

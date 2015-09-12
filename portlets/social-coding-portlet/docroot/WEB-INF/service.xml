@@ -105,7 +105,11 @@
 		<!-- Other fields -->
 
 		<column name="projectId" db-name="project" type="long" />
+<<<<<<< HEAD
 		<column name="key" db-name="pkey" type="String" />
+=======
+		<column name="issueNumber" db-name="issuenum" type="long" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<column name="summary" type="String" />
 		<column name="description" type="String" />
 		<column name="reporterJiraUserId" db-name="reporter" type="String" />
@@ -124,9 +128,12 @@
 		<finder name="ProjectId" return-type="Collection">
 			<finder-column name="projectId" />
 		</finder>
+<<<<<<< HEAD
 		<finder name="Key" return-type="JIRAIssue">
 			<finder-column name="key" />
 		</finder>
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<finder name="ReporterJiraUserId" return-type="Collection">
 			<finder-column name="reporterJiraUserId" />
 		</finder>
@@ -166,6 +173,26 @@
 			<finder-column name="status" />
 		</finder>
 	</entity>
+<<<<<<< HEAD
+=======
+	<entity name="JIRAProject" table="project" local-service="true" remote-service="false" data-source="jiraDataSource" session-factory="jiraSessionFactory" tx-manager="jiraTransactionManager" cache-enabled="false">
+
+		<!-- PK fields -->
+
+		<column name="jiraProjectId" db-name="id" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="key" db-name="pkey" type="String" />
+		<column name="name" db-name="pname" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="Key" return-type="JIRAProject">
+			<finder-column name="key" />
+		</finder>
+	</entity>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<entity name="SVNRepository" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

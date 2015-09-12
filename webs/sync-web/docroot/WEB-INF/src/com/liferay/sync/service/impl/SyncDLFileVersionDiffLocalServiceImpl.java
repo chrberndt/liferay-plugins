@@ -15,10 +15,22 @@
 package com.liferay.sync.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+=======
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -41,7 +53,11 @@ public class SyncDLFileVersionDiffLocalServiceImpl
 	public SyncDLFileVersionDiff addSyncDLFileVersionDiff(
 			long fileEntryId, long sourceFileVersionId,
 			long targetFileVersionId, File file)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		long syncDLFileVersionDiffId = counterLocalService.increment();
 
@@ -52,13 +68,25 @@ public class SyncDLFileVersionDiffLocalServiceImpl
 		syncDLFileVersionDiff.setSourceFileVersionId(sourceFileVersionId);
 		syncDLFileVersionDiff.setTargetFileVersionId(targetFileVersionId);
 
+<<<<<<< HEAD
+=======
+		Company company = companyLocalService.getCompanyByMx(
+			PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
+
+		Group group = company.getGroup();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
 
 		String dataFileName = getDataFileName(
 			fileEntryId, sourceFileVersionId, targetFileVersionId);
 
 		FileEntry dataFileEntry = PortletFileRepositoryUtil.addPortletFileEntry(
+<<<<<<< HEAD
 			fileEntry.getGroupId(), fileEntry.getUserId(),
+=======
+			group.getGroupId(), fileEntry.getUserId(),
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SyncDLFileVersionDiff.class.getName(),
 			syncDLFileVersionDiff.getSyncDLFileVersionDiffId(),
 			PortletKeys.DOCUMENT_LIBRARY,
@@ -85,28 +113,74 @@ public class SyncDLFileVersionDiffLocalServiceImpl
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void deleteExpiredSyncDLFileVersionDiffs()
 		throws PortalException, SystemException {
 
+=======
+	public void deleteExpiredSyncDLFileVersionDiffs() throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		List<SyncDLFileVersionDiff> syncDLFileVersionDiffs =
 			syncDLFileVersionDiffPersistence.findByExpirationDate(new Date());
 
 		for (SyncDLFileVersionDiff syncDLFileVersionDiff :
 				syncDLFileVersionDiffs) {
 
+<<<<<<< HEAD
 			PortletFileRepositoryUtil.deletePortletFileEntry(
 				syncDLFileVersionDiff.getDataFileEntryId());
 
 			syncDLFileVersionDiffPersistence.remove(
 				syncDLFileVersionDiff.getSyncDLFileVersionDiffId());
+=======
+			deleteSyncDLFileVersionDiff(syncDLFileVersionDiff);
+		}
+	}
+
+	@Override
+	public SyncDLFileVersionDiff deleteSyncDLFileVersionDiff(
+			SyncDLFileVersionDiff syncDLFileVersionDiff)
+		throws PortalException {
+
+		try {
+			PortletFileRepositoryUtil.deletePortletFileEntry(
+				syncDLFileVersionDiff.getDataFileEntryId());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to delete file entry " +
+						syncDLFileVersionDiff.getDataFileEntryId());
+			}
+		}
+
+		return super.deleteSyncDLFileVersionDiff(syncDLFileVersionDiff);
+	}
+
+	@Override
+	public void deleteSyncDLFileVersionDiffs(long fileEntryId)
+		throws PortalException {
+
+		List<SyncDLFileVersionDiff> syncDLFileVersionDiffs =
+			syncDLFileVersionDiffPersistence.findByFileEntryId(fileEntryId);
+
+		for (SyncDLFileVersionDiff syncDLFileVersionDiff :
+				syncDLFileVersionDiffs) {
+
+			deleteSyncDLFileVersionDiff(syncDLFileVersionDiff);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
 	public SyncDLFileVersionDiff fetchSyncDLFileVersionDiff(
+<<<<<<< HEAD
 			long fileEntryId, long sourceFileVersionId,
 			long targetFileVersionId)
 		throws SystemException {
+=======
+		long fileEntryId, long sourceFileVersionId, long targetFileVersionId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return syncDLFileVersionDiffPersistence.fetchByF_S_T(
 			fileEntryId, sourceFileVersionId, targetFileVersionId);
@@ -114,7 +188,11 @@ public class SyncDLFileVersionDiffLocalServiceImpl
 
 	@Override
 	public void refreshExpirationDate(long syncDLFileVersionDiffId)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		SyncDLFileVersionDiff syncDLFileVersionDiff =
 			syncDLFileVersionDiffPersistence.findByPrimaryKey(
@@ -146,4 +224,10 @@ public class SyncDLFileVersionDiffLocalServiceImpl
 		return sb.toString();
 	}
 
+<<<<<<< HEAD
+=======
+	private static Log _log = LogFactoryUtil.getLog(
+		SyncDLFileVersionDiffLocalServiceImpl.class);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

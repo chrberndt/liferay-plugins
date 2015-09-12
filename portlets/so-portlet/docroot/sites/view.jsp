@@ -20,27 +20,34 @@
 <%@ include file="/sites/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "my-sites");
+String defaultSearchTab = userPortletPreferences.getValue("defaultSearchTab", "my-favorites");
 
 String name = ParamUtil.getString(request, "name");
+
+int myFavoritesGroupsCount = SitesUtil.getFavoriteSitesGroupsCount(themeDisplay.getUserId(), name);
+
+if (defaultSearchTab.equals("my-favorites") && (myFavoritesGroupsCount == 0)) {
+	defaultSearchTab = "my-sites";
+}
+
+int mySitesGroupsCount = SitesUtil.getVisibleSitesCount(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, true);
+
+if (defaultSearchTab.equals("my-sites") && (mySitesGroupsCount == 0)) {
+	defaultSearchTab = "all-sites";
+}
+
+String tabs1 = ParamUtil.getString(request, "tabs1", defaultSearchTab);
 
 List<Group> groups = null;
 int groupsCount = 0;
 
-if (tabs1.equals("my-sites")) {
-	groups = SitesUtil.getVisibleSites(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, true, 0, maxResultSize);
-	groupsCount = SitesUtil.getVisibleSitesCount(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, true);
-
-	if (groupsCount == 0) {
-		tabs1 = "all-sites";
-
-		groups = SitesUtil.getVisibleSites(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, false, 0, maxResultSize);
-		groupsCount = SitesUtil.getVisibleSitesCount(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, false);
-	}
-}
-else if (tabs1.equals("my-favorites")) {
+if (tabs1.equals("my-favorites")) {
 	groups = SitesUtil.getFavoriteSitesGroups(themeDisplay.getUserId(), name, 0, maxResultSize);
-	groupsCount = SitesUtil.getFavoriteSitesGroupsCount(themeDisplay.getUserId(), name);
+	groupsCount = myFavoritesGroupsCount;
+}
+else if (tabs1.equals("my-sites")) {
+	groups = SitesUtil.getVisibleSites(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, true, 0, maxResultSize);
+	groupsCount = mySitesGroupsCount;
 }
 else {
 	groups = SitesUtil.getVisibleSites(themeDisplay.getCompanyId(), themeDisplay.getUserId(), name, false, 0, maxResultSize);
@@ -58,6 +65,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 <form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
+<<<<<<< HEAD
 
 	<div class="sites-tabs">
 		<aui:select label="" name="tabs1">
@@ -73,6 +81,23 @@ pageContext.setAttribute("portletURL", portletURL);
 		<input src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" type="image" value='<liferay-ui:message key="search" />' />
 	</div>
 
+=======
+
+	<div class="sites-tabs">
+		<aui:select label="" name="tabs1" value="<%= tabs1 %>">
+			<aui:option label="all-sites" value="all-sites" />
+			<aui:option label="my-sites" value="my-sites" />
+			<aui:option label="my-favorites" value="my-favorites" />
+		</aui:select>
+	</div>
+
+	<div class="search">
+		<input class="search-input" id="<portlet:namespace />name" name="<portlet:namespace />name" placeholder="<liferay-ui:message key="go-to" />" size="30" type="text" value="<%= HtmlUtil.escape(name) %>" />
+
+		<input src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" type="image" value='<liferay-ui:message key="search" />' />
+	</div>
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<div class="site-list-container">
 		<ul class="site-list">
 		</ul>
@@ -102,8 +127,19 @@ pageContext.setAttribute("portletURL", portletURL);
 		var addSiteButton = new A.Toolbar(
 			{
 				children: [
+<<<<<<< HEAD
 					<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
 						{
+=======
+
+					<%
+					boolean addSiteEnabled = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) && (enableOpenSites || enablePublicRestrictedSites || enablePrivateRestrictedSites || enablePrivateSites);
+					%>
+
+					<c:if test="<%= addSiteEnabled %>">
+						{
+							cssClass: 'site-controls-double',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							icon: 'icon-plus',
 							label: '<liferay-ui:message key="add-site" unicode="<%= true %>" />',
 							on: {
@@ -118,6 +154,10 @@ pageContext.setAttribute("portletURL", portletURL);
 						},
 					</c:if>
 					{
+<<<<<<< HEAD
+=======
+						cssClass: '<%= addSiteEnabled ? "site-controls-double" : "site-controls-single" %>',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						icon: 'icon-reorder',
 						label: '<liferay-ui:message key="sites-directory" unicode="<%= true %>" />',
 						on: {

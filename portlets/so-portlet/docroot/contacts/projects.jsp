@@ -43,11 +43,19 @@ if (user2 != null) {
 			endDate = dateFormatDate.format(projectsEntry.getEndDate());
 		}
 		else {
+<<<<<<< HEAD
 			endDate = LanguageUtil.get(pageContext, "current");
 		}
 	%>
 
 		<div class="field-group projects section" data-extension="true" data-sectionId="projects" data-title="<%= LanguageUtil.get(pageContext, "projects") %>">
+=======
+			endDate = LanguageUtil.get(request, "current");
+		}
+	%>
+
+		<div class="field-group projects section" data-extension="true" data-sectionId="projects" data-title="<%= LanguageUtil.get(request, "projects") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			<h3><%= HtmlUtil.escape(projectsEntry.getTitle()) %>:</h3>
 
 			<div class="project-date property-list">
@@ -67,11 +75,19 @@ if (user2 != null) {
 
 <c:if test="<%= showCompleteYourProfile && (themeDisplay.getUserId() == user2.getUserId()) && projectsEntries.isEmpty() %>">
 	<div class="profile-actions">
+<<<<<<< HEAD
 		<p class="portlet-msg alert alert-info"><liferay-ui:message key="add-projects" />:</p>
 
 		<div class="field-actions-toolbar">
 			<ul class="settings-actions">
 				<li class="action-field component lfr-token settings-field" data-extension="true" data-sectionId="projects" data-title="<%= LanguageUtil.get(pageContext, "projects") %>">
+=======
+		<p class="alert alert-info portlet-msg"><liferay-ui:message key="add-projects" />:</p>
+
+		<div class="field-actions-toolbar">
+			<ul class="settings-actions">
+				<li class="action-field component lfr-token settings-field" data-extension="true" data-sectionId="projects" data-title="<%= LanguageUtil.get(request, "projects") %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					<div class="settings-field-content">
 						<i class="icon-plus-sign"></i>
 

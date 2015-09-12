@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -45,8 +45,8 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	public Message addMessage(
 			long userId, long folderId, String sender, String to, String cc,
 			String bcc, Date sentDate, String subject, String body,
-			String flags, long remoteMessageId)
-		throws PortalException, SystemException {
+			String flags, long remoteMessageId, String contentType)
+		throws PortalException {
 
 		// Message
 
@@ -76,12 +76,14 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		message.setFlags(flags);
 		message.setSize(getSize(messageId, body));
 		message.setRemoteMessageId(remoteMessageId);
+		message.setContentType(removeBoundaryMarker(contentType));
 
 		messagePersistence.update(message);
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(Message.class);
+		Indexer<Message> indexer = IndexerRegistryUtil.getIndexer(
+			Message.class);
 
 		indexer.reindex(message);
 
@@ -89,17 +91,14 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Message deleteMessage(long messageId)
-		throws PortalException, SystemException {
-
+	public Message deleteMessage(long messageId) throws PortalException {
 		Message message = messagePersistence.findByPrimaryKey(messageId);
 
 		return deleteMessage(message);
 	}
 
 	@Override
-	public Message deleteMessage(Message message)
-		throws PortalException, SystemException {
+	public Message deleteMessage(Message message) throws PortalException {
 
 		// Message
 
@@ -112,16 +111,15 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(Message.class);
+		Indexer<Message> indexer = IndexerRegistryUtil.getIndexer(
+			Message.class);
 
 		indexer.delete(message);
 
 		return message;
 	}
 
-	public void deleteMessages(long folderId)
-		throws PortalException, SystemException {
-
+	public void deleteMessages(long folderId) throws PortalException {
 		List<Message> messages = messagePersistence.findByFolderId(folderId);
 
 		for (Message message : messages) {
@@ -129,9 +127,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		}
 	}
 
-	public int getAccountUnreadMessagesCount(long accountId)
-		throws SystemException {
-
+	public int getAccountUnreadMessagesCount(long accountId) {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Message.class, getClassLoader());
 
@@ -144,29 +140,25 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		return (int)dynamicQueryCount(dynamicQuery);
 	}
 
-	public List<Message> getCompanyMessages(long companyId, int start, int end)
-		throws SystemException {
+	public List<Message> getCompanyMessages(
+		long companyId, int start, int end) {
 
 		return messagePersistence.findByCompanyId(companyId, start, end);
 	}
 
-	public int getCompanyMessagesCount(long companyId) throws SystemException {
+	public int getCompanyMessagesCount(long companyId) {
 		return messagePersistence.countByCompanyId(companyId);
 	}
 
-	public List<Message> getFolderMessages(long folderId)
-		throws SystemException {
-
+	public List<Message> getFolderMessages(long folderId) {
 		return messagePersistence.findByFolderId(folderId);
 	}
 
-	public int getFolderMessagesCount(long folderId) throws SystemException {
+	public int getFolderMessagesCount(long folderId) {
 		return messagePersistence.countByFolderId(folderId);
 	}
 
-	public int getFolderUnreadMessagesCount(long folderId)
-		throws SystemException {
-
+	public int getFolderUnreadMessagesCount(long folderId) {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Message.class, getClassLoader());
 
@@ -180,20 +172,20 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	}
 
 	public Message getMessage(long folderId, long remoteMessageId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return messagePersistence.findByF_R(folderId, remoteMessageId);
 	}
 
 	public Message getRemoteMessage(long folderId, boolean oldest)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Message.class, getClassLoader());
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("folderId", folderId));
 		dynamicQuery.add(
-			RestrictionsFactoryUtil.gt("remoteMessageId", new Long(0)));
+			RestrictionsFactoryUtil.gt("remoteMessageId", Long.valueOf(0)));
 
 		if (oldest) {
 			dynamicQuery.addOrder(OrderFactoryUtil.asc("remoteMessageId"));
@@ -213,10 +205,8 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	}
 
 	public int populateMessages(
-			List<Message> messages, long folderId, String keywords,
-			int pageNumber, int messagesPerPage, String orderByField,
-			String orderByType)
-		throws SystemException {
+		List<Message> messages, long folderId, String keywords, int pageNumber,
+		int messagesPerPage, String orderByField, String orderByType) {
 
 		DynamicQuery countDynamicQuery = DynamicQueryFactoryUtil.forClass(
 			Message.class, getClassLoader());
@@ -253,14 +243,14 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		int end = messagesPerPage * pageNumber;
 
 		messages.addAll(
-			messagePersistence.findWithDynamicQuery(
+			messagePersistence.<Message>findWithDynamicQuery(
 				messageDynamicQuery, start, end));
 
 		return (int)dynamicQueryCount(countDynamicQuery);
 	}
 
 	public Message updateContent(long messageId, String body, String flags)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		Message message = messagePersistence.findByPrimaryKey(messageId);
 
@@ -276,7 +266,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 	}
 
 	public Message updateFlag(long messageId, int flag, boolean value)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		String flagString = String.valueOf(flag);
 
@@ -298,7 +288,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 			long messageId, long folderId, String sender, String to, String cc,
 			String bcc, Date sentDate, String subject, String body,
 			String flags, long remoteMessageId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		// Message
 
@@ -322,7 +312,8 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(Message.class);
+		Indexer<Message> indexer = IndexerRegistryUtil.getIndexer(
+			Message.class);
 
 		indexer.reindex(message);
 
@@ -345,7 +336,7 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		return StringUtil.shorten(HtmlContentUtil.getPlainText(body), 50);
 	}
 
-	protected long getSize(long messageId, String body) throws SystemException {
+	protected long getSize(long messageId, String body) {
 		if (Validator.isNull(body)) {
 			return 0;
 		}
@@ -360,6 +351,16 @@ public class MessageLocalServiceImpl extends MessageLocalServiceBaseImpl {
 		}
 
 		return size;
+	}
+
+	protected String removeBoundaryMarker(String contentType) {
+		int i = contentType.indexOf(CharPool.SEMICOLON);
+
+		if (i == -1) {
+			return contentType;
+		}
+
+		return contentType.substring(0, i);
 	}
 
 }

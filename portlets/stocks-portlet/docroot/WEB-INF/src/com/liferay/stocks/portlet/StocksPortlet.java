@@ -14,6 +14,10 @@
 
 package com.liferay.stocks.portlet;
 
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
@@ -23,7 +27,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.stocks.util.PortletKeys;
+<<<<<<< HEAD
 import com.liferay.util.bridges.mvc.MVCPortlet;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.IOException;
 

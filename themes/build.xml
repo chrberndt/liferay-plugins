@@ -5,6 +5,7 @@
 	<import file="../build-common-plugins.xml" />
 
 	<target name="create">
+<<<<<<< HEAD
 		<if>
 			<or>
 				<not>
@@ -46,5 +47,15 @@
 			<replacefilter token="@theme.display.name@" value="${theme.display.name}" />
 			<replacefilter token="@theme.name@" value="${theme.name}" />
 		</replace>
+=======
+		<property name="theme.display.name" value="" />
+		<property name="theme.name" value="" />
+
+		<gradle-execute task="createTheme">
+			<arg value="--build-file=../sdk.gradle" />
+			<arg value="-PthemeDisplayName=${theme.display.name}" />
+			<arg value="-PthemeName=${theme.name}" />
+		</gradle-execute>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</target>
 </project>

@@ -14,8 +14,11 @@
 
 package com.liferay.knowledgebase.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.knowledgebase.model.KBArticle;
 
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
@@ -34,11 +37,40 @@ import java.util.Date;
  * @see KBArticle
  * @generated
  */
+@ProviderType
 public class KBArticleCacheModel implements CacheModel<KBArticle>,
 	Externalizable {
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof KBArticleCacheModel)) {
+			return false;
+		}
+
+		KBArticleCacheModel kbArticleCacheModel = (KBArticleCacheModel)obj;
+
+		if (kbArticleId == kbArticleCacheModel.kbArticleId) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, kbArticleId);
+	}
+
+	@Override
 	public String toString() {
+<<<<<<< HEAD
 		StringBundler sb = new StringBundler(51);
+=======
+		StringBundler sb = new StringBundler(59);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -60,8 +92,12 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		sb.append(modifiedDate);
 		sb.append(", rootResourcePrimKey=");
 		sb.append(rootResourcePrimKey);
+		sb.append(", parentResourceClassNameId=");
+		sb.append(parentResourceClassNameId);
 		sb.append(", parentResourcePrimKey=");
 		sb.append(parentResourcePrimKey);
+		sb.append(", kbFolderId=");
+		sb.append(kbFolderId);
 		sb.append(", version=");
 		sb.append(version);
 		sb.append(", title=");
@@ -82,6 +118,10 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		sb.append(latest);
 		sb.append(", main=");
 		sb.append(main);
+		sb.append(", sourceURL=");
+		sb.append(sourceURL);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -134,7 +174,9 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		}
 
 		kbArticleImpl.setRootResourcePrimKey(rootResourcePrimKey);
+		kbArticleImpl.setParentResourceClassNameId(parentResourceClassNameId);
 		kbArticleImpl.setParentResourcePrimKey(parentResourcePrimKey);
+		kbArticleImpl.setKbFolderId(kbFolderId);
 		kbArticleImpl.setVersion(version);
 
 		if (title == null) {
@@ -177,6 +219,21 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		kbArticleImpl.setViewCount(viewCount);
 		kbArticleImpl.setLatest(latest);
 		kbArticleImpl.setMain(main);
+
+		if (sourceURL == null) {
+			kbArticleImpl.setSourceURL(StringPool.BLANK);
+		}
+		else {
+			kbArticleImpl.setSourceURL(sourceURL);
+		}
+
+		if (lastPublishDate == Long.MIN_VALUE) {
+			kbArticleImpl.setLastPublishDate(null);
+		}
+		else {
+			kbArticleImpl.setLastPublishDate(new Date(lastPublishDate));
+		}
+
 		kbArticleImpl.setStatus(status);
 		kbArticleImpl.setStatusByUserId(statusByUserId);
 
@@ -211,7 +268,9 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		rootResourcePrimKey = objectInput.readLong();
+		parentResourceClassNameId = objectInput.readLong();
 		parentResourcePrimKey = objectInput.readLong();
+		kbFolderId = objectInput.readLong();
 		version = objectInput.readInt();
 		title = objectInput.readUTF();
 		urlTitle = objectInput.readUTF();
@@ -222,6 +281,8 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		viewCount = objectInput.readInt();
 		latest = objectInput.readBoolean();
 		main = objectInput.readBoolean();
+		sourceURL = objectInput.readUTF();
+		lastPublishDate = objectInput.readLong();
 		status = objectInput.readInt();
 		statusByUserId = objectInput.readLong();
 		statusByUserName = objectInput.readUTF();
@@ -254,7 +315,9 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(rootResourcePrimKey);
+		objectOutput.writeLong(parentResourceClassNameId);
 		objectOutput.writeLong(parentResourcePrimKey);
+		objectOutput.writeLong(kbFolderId);
 		objectOutput.writeInt(version);
 
 		if (title == null) {
@@ -297,6 +360,15 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 		objectOutput.writeInt(viewCount);
 		objectOutput.writeBoolean(latest);
 		objectOutput.writeBoolean(main);
+
+		if (sourceURL == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sourceURL);
+		}
+
+		objectOutput.writeLong(lastPublishDate);
 		objectOutput.writeInt(status);
 		objectOutput.writeLong(statusByUserId);
 
@@ -320,7 +392,9 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 	public long createDate;
 	public long modifiedDate;
 	public long rootResourcePrimKey;
+	public long parentResourceClassNameId;
 	public long parentResourcePrimKey;
+	public long kbFolderId;
 	public int version;
 	public String title;
 	public String urlTitle;
@@ -331,6 +405,8 @@ public class KBArticleCacheModel implements CacheModel<KBArticle>,
 	public int viewCount;
 	public boolean latest;
 	public boolean main;
+	public String sourceURL;
+	public long lastPublishDate;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;

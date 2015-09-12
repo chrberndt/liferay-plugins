@@ -23,7 +23,11 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	int cur = ParamUtil.getInteger(request, "cur", 1);
 %>
 
+<<<<<<< HEAD
 	<img alt="large" src="<%= PortalUtil.getPathContext(request) %>/photo_gallery/photo_<%= cur %>_large.jpg" /><br />
+=======
+	<img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="large" />" src="<%= PortalUtil.getPathContext(request) %>/photo_gallery/photo_<%= cur %>_large.jpg" /><br />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	<%
 	if (cur == 1) {
@@ -48,7 +52,11 @@ else {
 %>
 
 	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">
+<<<<<<< HEAD
 	<img alt="thumbnail" src="<%= PortalUtil.getPathContext(request) %>/photo_gallery/photo_1_thumbnail.jpg" />
+=======
+		<img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="thumbnail" />" src="<%= PortalUtil.getPathContext(request) %>/photo_gallery/photo_1_thumbnail.jpg" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</a>
 
 <%

@@ -17,10 +17,7 @@
 <%@ include file="/admin/init.jsp" %>
 
 <c:if test="<%= !rootPortletId.equals(PortletKeys.KNOWLEDGE_BASE_ARTICLE) %>">
-	<liferay-ui:header
-		backURL="javascript:history.go(-1);"
-		title="error"
-	/>
+	<liferay-ui:error-header />
 </c:if>
 
 <c:choose>
@@ -35,4 +32,5 @@
 <liferay-ui:error exception="<%= NoSuchCommentException.class %>" message="the-comment-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchSubscriptionException.class %>" message="the-subscription-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchTemplateException.class %>" message="the-template-could-not-be-found" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+
+<liferay-ui:error-principal />

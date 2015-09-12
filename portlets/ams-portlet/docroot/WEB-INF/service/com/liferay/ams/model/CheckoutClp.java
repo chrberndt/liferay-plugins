@@ -14,16 +14,21 @@
 
 package com.liferay.ams.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.ams.service.CheckoutLocalServiceUtil;
 import com.liferay.ams.service.ClpSerializer;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -36,6 +41,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 	public CheckoutClp() {
 	}
@@ -84,6 +90,9 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 		attributes.put("checkOutDate", getCheckOutDate());
 		attributes.put("expectedCheckInDate", getExpectedCheckInDate());
 		attributes.put("actualCheckInDate", getActualCheckInDate());
+
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
 
 		return attributes;
 	}
@@ -149,6 +158,9 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 		if (actualCheckInDate != null) {
 			setActualCheckInDate(actualCheckInDate);
 		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -221,13 +233,19 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 	}
 
 	@Override
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@Override
@@ -443,7 +461,7 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			CheckoutLocalServiceUtil.addCheckout(this);
 		}
@@ -513,9 +531,23 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
 	}
 
 	@Override
@@ -604,7 +636,6 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 	private long _checkoutId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -613,4 +644,7 @@ public class CheckoutClp extends BaseModelImpl<Checkout> implements Checkout {
 	private Date _expectedCheckInDate;
 	private Date _actualCheckInDate;
 	private BaseModel<?> _checkoutRemoteModel;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

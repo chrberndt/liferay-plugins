@@ -42,7 +42,7 @@ if (entry == null) {
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
+	<aui:input name="alert" type="hidden" value="<%= portletName.equals(alertsEntryPortletId) %>" />
 
 	<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
 
@@ -114,7 +114,7 @@ if (entry == null) {
 		</div>
 
 		<aui:field-wrapper label="content">
-			<liferay-ui:input-editor height="150" toolbarSet="Basic" width="100%" />
+			<liferay-ui:input-editor contents="<%= content %>" height="150" toolbarSet="Basic" width="100%" />
 
 			<aui:input name="content" type="hidden" />
 		</aui:field-wrapper>
@@ -145,18 +145,30 @@ if (entry == null) {
 				%>
 
 				<a href="<%= currentUser.getDisplayURL(themeDisplay) %>">
+<<<<<<< HEAD
 					<img alt="<%= currentUser.getFullName() %>" src="<%= currentUser.getPortraitURL(themeDisplay) %>" />
+=======
+					<img alt="<%= HtmlUtil.escapeAttribute(currentUser.getFullName()) %>" src="<%= currentUser.getPortraitURL(themeDisplay) %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</a>
 			</span>
 		</div>
 
 		<div class="entry-header">
 			<div class="entry-action">
+<<<<<<< HEAD
 				<%= LanguageUtil.format(pageContext, "x-to-x", new Object[] {"<a href=\"" + currentUser.getDisplayURL(themeDisplay) + "\">" + HtmlUtil.escape(currentUser.getFullName()) + "</a>", "<span class=\"scope\" id=\"" + renderResponse.getNamespace() + "scope\"></span>"}, false) %>
 			</div>
 
 			<div class="entry-time">
 				<%= LanguageUtil.get(pageContext, "about-a-minute-ago") %>
+=======
+				<%= LanguageUtil.format(request, "x-to-x", new Object[] {"<a href=\"" + currentUser.getDisplayURL(themeDisplay) + "\">" + HtmlUtil.escape(currentUser.getFullName()) + "</a>", "<span class=\"scope\" id=\"" + renderResponse.getNamespace() + "scope\"></span>"}, false) %>
+			</div>
+
+			<div class="entry-time">
+				<%= LanguageUtil.get(request, "about-a-minute-ago") %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</div>
 		</div>
 
@@ -172,7 +184,11 @@ if (entry == null) {
 			<div class="entry-footer" id="<portlet:namespace />entryFooter">
 				<div class="entry-footer-toolbar">
 					<div class="edit-actions">
+<<<<<<< HEAD
 						<span class="toggle action hide">
+=======
+						<span class="action hide toggle">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							<a class="toggle-entry" data-entryId="preview" href="javascript:;">
 								<i class="icon-expand-alt"></i>
 
@@ -187,6 +203,7 @@ if (entry == null) {
 </div>
 
 <aui:script>
+<<<<<<< HEAD
 	function <portlet:namespace />initEditor() {
 		var ckEditor = CKEDITOR.instances['<portlet:namespace />editor'];
 
@@ -195,6 +212,8 @@ if (entry == null) {
 		return '<%= UnicodeFormatter.toString(content) %>';
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	function <portlet:namespace />closeEntry() {
 		Liferay.Util.getWindow('<portlet:namespace />Dialog').hide();
 	}
@@ -217,23 +236,45 @@ if (entry == null) {
 			preview.removeClass('important-entry');
 		}
 
+		var scope;
+
 		if (<%= entry != null %>) {
+<<<<<<< HEAD
 			var scope = A.one('#<portlet:namespace />scope').get('value');;
 		}
 		else {
 			var optValue = A.one('select[name="<portlet:namespace />distributionScope"]').get('value');
 			var scope = A.one('option[value=' + optValue + ']').get('text');
+=======
+			scope = A.one('#<portlet:namespace />scope').get('value');
+		}
+		else {
+			var optValue = A.one('select[name="<portlet:namespace />distributionScope"]').get('value');
+
+			scope = A.one('option[value=' + optValue + ']').get('text');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		A.one('#<portlet:namespace />scope').html(scope);
 
 		var url = A.one('#<portlet:namespace />url').get('value');
+<<<<<<< HEAD
 
 		if (url.length != 0) {
 			var title = '<a href="' + url + '">' + A.one('#<portlet:namespace />title').get('value') + '</a>';
 		}
 		else {
 			var title = A.one('#<portlet:namespace />title').get('value');
+=======
+
+		var title;
+
+		if (url.length != 0) {
+			title = '<a href="' + url + '">' + A.one('#<portlet:namespace />title').get('value') + '</a>';
+		}
+		else {
+			title = A.one('#<portlet:namespace />title').get('value');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		A.one('.preview #<portlet:namespace />title').html(title);
@@ -251,7 +292,7 @@ if (entry == null) {
 
 			toggle.removeClass('hide');
 
-			preview.addClass('announcement-collapsed')
+			preview.addClass('announcement-collapsed');
 		}
 		else {
 			var contentContainer = preview.one('.entry-content-container');
@@ -281,20 +322,31 @@ if (entry == null) {
 							var message = A.one('#<portlet:namespace />errorMessage');
 
 							if (message) {
+<<<<<<< HEAD
 								message.html('<span class="alert alert-error">' + responseData.message + '</span>');
+=======
+								message.html('<span class="alert alert-danger">' + responseData.message + '</span>');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							}
 						}
+						else if (<%= redirectMvcPath.equals("/manage_entries.jsp") %>) {
+							window.location.href = responseData.redirect;
+						}
 						else {
+<<<<<<< HEAD
 							if (<%= redirectMvcPath.equals("/manage_entries.jsp") %>) {
 								window.location.href = responseData.redirect;
 							}
 							else {
 								Liferay.Util.getWindow('<portlet:namespace />Dialog').hide();
 							}
+=======
+							Liferay.Util.getWindow('<portlet:namespace />Dialog').hide();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						}
 					}
 				},
-				dataType: 'json',
+				dataType: 'JSON',
 				form: {
 					id: form
 				}

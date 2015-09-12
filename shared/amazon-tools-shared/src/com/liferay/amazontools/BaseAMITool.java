@@ -16,15 +16,33 @@ package com.liferay.amazontools;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+<<<<<<< HEAD
+=======
+import com.amazonaws.services.autoscaling.AmazonAutoScalingClient;
+import com.amazonaws.services.cloudwatch.AmazonCloudWatchClient;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.amazonaws.services.ec2.AmazonEC2Client;
 import com.amazonaws.services.ec2.model.DescribeImagesRequest;
 import com.amazonaws.services.ec2.model.DescribeImagesResult;
 import com.amazonaws.services.ec2.model.Filter;
 import com.amazonaws.services.ec2.model.Image;
+<<<<<<< HEAD
+=======
+import com.amazonaws.services.identitymanagement.AmazonIdentityManagementClient;
+import com.amazonaws.services.s3.AmazonS3Client;
+
+import com.liferay.jsonwebserviceclient.JSONWebServiceClient;
+import com.liferay.jsonwebserviceclient.JSONWebServiceClientImpl;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+<<<<<<< HEAD
+=======
+import java.security.KeyStore;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,16 +53,63 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Ivica Cardic
+<<<<<<< HEAD
+=======
+ * @author Mladen Cikara
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  */
 public class BaseAMITool {
 
 	public BaseAMITool(String propertiesFileName) throws Exception {
 		properties = getProperties(propertiesFileName);
 
+<<<<<<< HEAD
 		amazonEC2Client = getAmazonEC2Client(
 			properties.getProperty("access.key"),
 			properties.getProperty("secret.key"),
 			properties.getProperty("endpoint"));
+=======
+		amazonAutoScalingClient = getAmazonAutoScalingClient(
+			properties.getProperty("access.key"),
+			properties.getProperty("secret.key"),
+			properties.getProperty("autoscaling.endpoint"));
+		amazonCloudWatchClient = getAmazonCloudWatchClient(
+			properties.getProperty("access.key"),
+			properties.getProperty("secret.key"));
+		amazonEC2Client = getAmazonEC2Client(
+			properties.getProperty("access.key"),
+			properties.getProperty("secret.key"),
+			properties.getProperty("ec2.endpoint"));
+		amazonIdentityManagementClient = getAmazonIdentityManagementClient(
+			properties.getProperty("access.key"),
+			properties.getProperty("secret.key"));
+		amazonS3Client = getAmazonS3Client(
+			properties.getProperty("access.key"),
+			properties.getProperty("secret.key"));
+	}
+
+	protected AmazonAutoScalingClient getAmazonAutoScalingClient(
+		String accessKey, String secretKey, String endpoint) {
+
+		AWSCredentials awsCredentials = new BasicAWSCredentials(
+			accessKey, secretKey);
+
+		AmazonAutoScalingClient amazonAutoScalingClient =
+			new AmazonAutoScalingClient(awsCredentials);
+
+		amazonAutoScalingClient.setEndpoint(endpoint);
+
+		return amazonAutoScalingClient;
+	}
+
+	protected AmazonCloudWatchClient getAmazonCloudWatchClient(
+		String accessKey, String secretKey) {
+
+		AWSCredentials awsCredentials = new BasicAWSCredentials(
+			accessKey, secretKey);
+
+		return new AmazonCloudWatchClient(awsCredentials);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	protected AmazonEC2Client getAmazonEC2Client(
@@ -60,10 +125,32 @@ public class BaseAMITool {
 		return amazonEC2Client;
 	}
 
+<<<<<<< HEAD
+=======
+	protected AmazonIdentityManagementClient getAmazonIdentityManagementClient(
+		String accessKey, String secretKey) {
+
+		AWSCredentials awsCredentials = new BasicAWSCredentials(
+			accessKey, secretKey);
+
+		return new AmazonIdentityManagementClient(awsCredentials);
+	}
+
+	protected AmazonS3Client getAmazonS3Client(
+		String accessKey, String secretKey) {
+
+		AWSCredentials awsCredentials = new BasicAWSCredentials(
+			accessKey, secretKey);
+
+		return new AmazonS3Client(awsCredentials);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	protected String getImageId(String imageName) {
 		DescribeImagesRequest describeImagesRequest =
 			new DescribeImagesRequest();
 
+<<<<<<< HEAD
 		List<Filter> filters = new ArrayList<Filter>();
 
 		Filter filter = new Filter();
@@ -91,10 +178,103 @@ public class BaseAMITool {
 		}
 
 		Image image = images.get(0);
+=======
+		Image image = null;
+
+		for (int i = 0; i < 6; i++) {
+			List<Filter> filters = new ArrayList<>();
+
+			Filter filter = new Filter();
+
+			filter.setName("name");
+
+			List<String> values = new ArrayList<>();
+
+			values.add(imageName);
+
+			filter.setValues(values);
+
+			filters.add(filter);
+
+			describeImagesRequest.setFilters(filters);
+
+			DescribeImagesResult describeImagesResult =
+				amazonEC2Client.describeImages(describeImagesRequest);
+
+			List<Image> images = describeImagesResult.getImages();
+
+			if (images.isEmpty()) {
+				sleep(30);
+
+				continue;
+			}
+
+			image = images.get(0);
+
+			break;
+		}
+
+		if (image == null) {
+			throw new RuntimeException(
+				"Image " + imageName + " does not exist");
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return image.getImageId();
 	}
 
+<<<<<<< HEAD
+=======
+	protected JSONWebServiceClient getJSONWebServiceClient(
+		String hostName, int hostPort, String keyStorePath,
+		String keyStorePassword, String login, String password) {
+
+		JSONWebServiceClientImpl jsonWebServiceClientImpl =
+			new JSONWebServiceClientImpl();
+
+		jsonWebServiceClientImpl.setHostName(hostName);
+		jsonWebServiceClientImpl.setHostPort(hostPort);
+		jsonWebServiceClientImpl.setLogin(login);
+		jsonWebServiceClientImpl.setPassword(password);
+
+		if ((keyStorePath != null) && (keyStorePassword != null)) {
+			KeyStore keyStore = getKeyStore(keyStorePath, keyStorePassword);
+
+			jsonWebServiceClientImpl.setKeyStore(keyStore);
+
+			jsonWebServiceClientImpl.setProtocol("https");
+		}
+
+		jsonWebServiceClientImpl.afterPropertiesSet();
+
+		return jsonWebServiceClientImpl;
+	}
+
+	protected KeyStore getKeyStore(String keyStorePath, String password) {
+		InputStream inputStream = null;
+
+		try {
+			KeyStore keyStore = KeyStore.getInstance("JKS");
+
+			inputStream = new FileInputStream(keyStorePath);
+
+			keyStore.load(inputStream, password.toCharArray());
+
+			return keyStore;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			try {
+				inputStream.close();
+			}
+			catch (Exception e) {
+			}
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	protected Properties getProperties(String propertiesFileName)
 		throws Exception {
 
@@ -129,7 +309,15 @@ public class BaseAMITool {
 		}
 	}
 
+<<<<<<< HEAD
 	protected AmazonEC2Client amazonEC2Client;
+=======
+	protected AmazonAutoScalingClient amazonAutoScalingClient;
+	protected AmazonCloudWatchClient amazonCloudWatchClient;
+	protected AmazonEC2Client amazonEC2Client;
+	protected AmazonIdentityManagementClient amazonIdentityManagementClient;
+	protected AmazonS3Client amazonS3Client;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	protected Properties properties;
 
 }

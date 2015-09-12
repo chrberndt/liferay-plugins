@@ -36,6 +36,31 @@ public class PortletPropsValues {
 		PortletProps.get(PortletPropsKeys.APPLE_CERTIFICATE_PATH));
 
 	public static final boolean APPLE_SANDBOX = GetterUtil.getBoolean(
+<<<<<<< HEAD
 		PortletProps.get(PortletPropsKeys.APPLE_SANDBOX));
+=======
+		PortletProps.get(PortletPropsKeys.APPLE_SANDBOX), true);
+
+	public static final String LIFERAY_PASSWORD = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.LIFERAY_PASSWORD));
+
+	public static final String LIFERAY_SERVER = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.LIFERAY_SERVER));
+
+	public static final int LIFERAY_TIMEOUT = GetterUtil.getInteger(
+		PortletProps.get(PortletPropsKeys.LIFERAY_TIMEOUT), 1000);
+
+	public static final String LIFERAY_USERNAME = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.LIFERAY_USERNAME));
+
+	public static final String SMS_TWILIO_ACCOUNT_SID = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.SMS_TWILIO_ACCOUNT_SID));
+
+	public static final String SMS_TWILIO_AUTH_TOKEN = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.SMS_TWILIO_AUTH_TOKEN));
+
+	public static final String SMS_TWILIO_NUMBER = GetterUtil.getString(
+		PortletProps.get(PortletPropsKeys.SMS_TWILIO_NUMBER));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

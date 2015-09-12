@@ -3,10 +3,13 @@
 
 <project name="build-common-portlet">
 	<import file="../build-common-plugin.xml" />
+<<<<<<< HEAD
 
 	<target name="build-css">
 		<build-css
 			module.dir="${basedir}"
 		/>
 	</target>
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </project>

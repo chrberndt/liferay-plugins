@@ -14,6 +14,7 @@
 
 package com.liferay.sync.hook.upgrade.v1_0_0;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -34,6 +35,13 @@ import com.liferay.sync.util.SyncUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.sync.model.SyncConstants;
+import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
+import com.liferay.sync.util.VerifyUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Dennis Ju
@@ -48,6 +56,7 @@ public class UpgradeSyncDLObject extends UpgradeProcess {
 		catch (Exception e) {
 		}
 
+<<<<<<< HEAD
 		updateSyncDLObjects();
 	}
 
@@ -147,6 +156,13 @@ public class UpgradeSyncDLObject extends UpgradeProcess {
 					syncDLObject.getTypePK(), syncDLObject.getTypeUuid());
 			}
 		}
+=======
+		SyncDLObjectLocalServiceUtil.deleteSyncDLObjects(
+			DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION,
+			SyncConstants.TYPE_FILE);
+
+		VerifyUtil.verify();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 }

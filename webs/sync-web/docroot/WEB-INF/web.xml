@@ -5,6 +5,13 @@
 		<filter-name>Download Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
+<<<<<<< HEAD
+=======
+			<param-name>auth.verifier.OAuthVerifier.urls.includes</param-name>
+			<param-value>/download/*</param-value>
+		</init-param>
+		<init-param>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.portal.servlet.filters.authverifier.AuthVerifierFilter</param-value>
 		</init-param>

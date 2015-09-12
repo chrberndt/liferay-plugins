@@ -37,8 +37,13 @@
 
 		<audio id="chatVideoOutRingtone" loop="loop" preload="auto" src="<%= PortalUtil.getStaticResourceURL(request, request.getContextPath() + "/audio/out_ringtone.ogg", portlet.getTimestamp()) %>"></audio>
 
+<<<<<<< HEAD
 		<div class="hide" id="chatVideoOverlay">
 			<div id="chatVideoOverlayCallTime"></div>
+=======
+		<div class="chat-video-overlay hide" id="chatVideoOverlay">
+			<div class="call-time"></div>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</div>
 
 		<div class="hide unmuted" id="chatVideoMuteCtrl"></div>

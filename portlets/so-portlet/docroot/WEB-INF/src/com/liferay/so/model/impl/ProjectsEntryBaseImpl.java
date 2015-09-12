@@ -14,7 +14,7 @@
 
 package com.liferay.so.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.so.model.ProjectsEntry;
 import com.liferay.so.service.ProjectsEntryLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.so.service.ProjectsEntryLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see ProjectsEntryImpl
- * @see com.liferay.so.model.ProjectsEntry
+ * @see ProjectsEntry
  * @generated
  */
+@ProviderType
 public abstract class ProjectsEntryBaseImpl extends ProjectsEntryModelImpl
 	implements ProjectsEntry {
 	/*
@@ -39,7 +40,7 @@ public abstract class ProjectsEntryBaseImpl extends ProjectsEntryModelImpl
 	 * Never modify or reference this class directly. All methods that expect a projects entry model instance should use the {@link ProjectsEntry} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			ProjectsEntryLocalServiceUtil.addProjectsEntry(this);
 		}

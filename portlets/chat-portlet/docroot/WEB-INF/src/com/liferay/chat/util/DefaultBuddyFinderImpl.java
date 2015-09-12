@@ -17,7 +17,10 @@ package com.liferay.chat.util;
 import com.liferay.chat.jabber.JabberUtil;
 import com.liferay.chat.service.StatusLocalServiceUtil;
 import com.liferay.chat.util.comparator.BuddyComparator;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,9 +33,13 @@ import java.util.List;
 public class DefaultBuddyFinderImpl implements BuddyFinder {
 
 	@Override
+<<<<<<< HEAD
 	public List<Object[]> getBuddies(long companyId, long userId)
 		throws SystemException {
 
+=======
+	public List<Object[]> getBuddies(long companyId, long userId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		long modifiedDate =
 			System.currentTimeMillis() - ChatConstants.ONLINE_DELTA;
 
@@ -77,7 +84,7 @@ public class DefaultBuddyFinderImpl implements BuddyFinder {
 					PortletPropsValues.BUDDY_LIST_ALLOWED_SOCIAL_RELATION_TYPES,
 					modifiedDate, 0, PortletPropsValues.BUDDY_LIST_MAX_BUDDIES);
 
-			buddies = new ArrayList<Object[]>(
+			buddies = new ArrayList<>(
 				groupBuddies.size() + socialBuddies.size());
 
 			buddies.addAll(groupBuddies);
@@ -95,7 +102,7 @@ public class DefaultBuddyFinderImpl implements BuddyFinder {
 			Collections.sort(buddies, buddyComparator);
 		}
 		else {
-			buddies = new ArrayList<Object[]>();
+			buddies = new ArrayList<>();
 		}
 
 		buddies = JabberUtil.getStatuses(companyId, userId, buddies);

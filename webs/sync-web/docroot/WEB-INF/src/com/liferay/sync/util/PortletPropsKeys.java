@@ -17,11 +17,25 @@ package com.liferay.sync.util;
 /**
  * @author Dennis Ju
  */
+<<<<<<< HEAD
 public class PortletPropsKeys {
+=======
+public class PortletPropsKeys
+	extends com.liferay.sync.shared.util.PortletPropsKeys {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	public static final String SYNC_AUTH_VERIFIER_PIPELINE =
 		"sync.auth.verifier.pipeline";
 
+<<<<<<< HEAD
+=======
+	public static final String SYNC_CLIENT_BATCH_FILE_MAX_SIZE =
+		"sync.client.batch.file.max.size";
+
+	public static final String SYNC_FILE_CHECKSUM_THRESHOLD_SIZE =
+		"sync.file.checksum.threshold.size";
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static final String SYNC_FILE_DIFF_CACHE_DELETE_INTERVAL =
 		"sync.file.diff.cache.delete.interval";
 
@@ -31,4 +45,13 @@ public class PortletPropsKeys {
 	public static final String SYNC_FILE_DIFF_CACHE_EXPIRATION_TIME =
 		"sync.file.diff.cache.expiration.time";
 
+<<<<<<< HEAD
+=======
+	public static final String SYNC_MAC_PACKAGE_FOLDER_EXTENSIONS =
+		"sync.mac.package.folder.extensions";
+
+	public static final String SYNC_MAC_PACKAGE_METADATA_FILE_NAMES =
+		"sync.mac.package.metadata.file.names";
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

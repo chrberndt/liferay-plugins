@@ -40,13 +40,8 @@ public class AdminOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Knowledge Base Search: ";
 
 	@Override
-	public Indexer getIndexer() {
+	public Indexer<KBArticle> getIndexer() {
 		return IndexerRegistryUtil.getIndexer(KBArticle.class);
-	}
-
-	@Override
-	public String getPortletId() {
-		return AdminIndexer.PORTLET_ID;
 	}
 
 	@Override

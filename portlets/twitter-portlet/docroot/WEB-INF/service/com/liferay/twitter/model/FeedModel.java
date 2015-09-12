@@ -14,8 +14,9 @@
 
 package com.liferay.twitter.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.twitter.model.impl.FeedModelImpl
  * @generated
  */
+@ProviderType
 public interface FeedModel extends AuditedModel, BaseModel<Feed> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -111,10 +113,9 @@ public interface FeedModel extends AuditedModel, BaseModel<Feed> {
 	 * Returns the user uuid of this feed.
 	 *
 	 * @return the user uuid of this feed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this feed.
@@ -191,9 +192,8 @@ public interface FeedModel extends AuditedModel, BaseModel<Feed> {
 	 * Returns the twitter user uuid of this feed.
 	 *
 	 * @return the twitter user uuid of this feed
-	 * @throws SystemException if a system exception occurred
 	 */
-	public String getTwitterUserUuid() throws SystemException;
+	public String getTwitterUserUuid();
 
 	/**
 	 * Sets the twitter user uuid of this feed.
@@ -268,19 +268,19 @@ public interface FeedModel extends AuditedModel, BaseModel<Feed> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Feed feed);
+	public int compareTo(com.liferay.twitter.model.Feed feed);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Feed> toCacheModel();
+	public CacheModel<com.liferay.twitter.model.Feed> toCacheModel();
 
 	@Override
-	public Feed toEscapedModel();
+	public com.liferay.twitter.model.Feed toEscapedModel();
 
 	@Override
-	public Feed toUnescapedModel();
+	public com.liferay.twitter.model.Feed toUnescapedModel();
 
 	@Override
 	public String toString();

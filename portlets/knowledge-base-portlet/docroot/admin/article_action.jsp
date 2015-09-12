@@ -22,18 +22,20 @@ String mvcPath = ParamUtil.getString(request, "mvcPath");
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 KBArticle kbArticle = (KBArticle)row.getObject();
+
+KBArticleURLHelper kbArticleURLHelper = new KBArticleURLHelper(renderRequest, renderResponse, templatePath);
 %>
 
 <liferay-ui:icon-menu cssClass="kb-article-action">
-	<liferay-portlet:renderURL var="viewURL">
-		<portlet:param name="mvcPath" value='<%= templatePath + "view_article.jsp" %>' />
-		<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
-	</liferay-portlet:renderURL>
+
+	<%
+	PortletURL viewURL = kbArticleURLHelper.createViewWithRedirectURL(kbArticle, currentURL);
+	%>
 
 	<liferay-ui:icon
 		image="view"
 		method="get"
-		url="<%= viewURL %>"
+		url="<%= viewURL.toString() %>"
 	/>
 
 	<c:if test="<%= KBArticlePermission.contains(permissionChecker, kbArticle, ActionKeys.UPDATE) %>">
@@ -44,9 +46,26 @@ KBArticle kbArticle = (KBArticle)row.getObject();
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
-			image="edit"
-			method="get"
+			iconCssClass="icon-edit"
+			message="edit"
 			url="<%= editURL %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= (AdminPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_KB_ARTICLE) && rootPortletId.equals(PortletKeys.KNOWLEDGE_BASE_ADMIN)) || (DisplayPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_KB_ARTICLE) && DisplayPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADMINISTRATOR) && rootPortletId.equals(PortletKeys.KNOWLEDGE_BASE_DISPLAY)) %>">
+		<liferay-portlet:renderURL var="addKBArticleURL">
+			<portlet:param name="mvcPath" value='<%= templatePath + "edit_article.jsp" %>' />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(kbArticle.getClassNameId()) %>" />
+			<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
+		</liferay-portlet:renderURL>
+
+		<liferay-ui:icon
+			image="add_article"
+			label="<%= true %>"
+			message="add-child-article"
+			method="get"
+			url="<%= addKBArticleURL %>"
 		/>
 	</c:if>
 
@@ -60,8 +79,8 @@ KBArticle kbArticle = (KBArticle)row.getObject();
 		/>
 
 		<liferay-ui:icon
-			image="permissions"
-			method="get"
+			iconCssClass="icon-lock"
+			message="permissions"
 			url="<%= permissionsURL %>"
 			useDialog="<%= true %>"
 		/>
@@ -76,7 +95,8 @@ KBArticle kbArticle = (KBArticle)row.getObject();
 				</liferay-portlet:actionURL>
 
 				<liferay-ui:icon
-					image="unsubscribe"
+					iconCssClass="icon-remove-sign"
+					message="unsubscribe"
 					url="<%= unsubscribeKBArticleURL %>"
 				/>
 			</c:when>
@@ -87,7 +107,8 @@ KBArticle kbArticle = (KBArticle)row.getObject();
 				</liferay-portlet:actionURL>
 
 				<liferay-ui:icon
-					image="subscribe"
+					iconCssClass="icon-ok-sign"
+					message="subscribe"
 					url="<%= subscribeKBArticleURL %>"
 				/>
 			</c:otherwise>
@@ -96,15 +117,17 @@ KBArticle kbArticle = (KBArticle)row.getObject();
 
 	<c:if test="<%= KBArticlePermission.contains(permissionChecker, kbArticle, ActionKeys.MOVE_KB_ARTICLE) %>">
 		<liferay-portlet:renderURL var="moveKBArticleURL">
-			<portlet:param name="mvcPath" value='<%= templatePath + "move_article.jsp" %>' />
+			<portlet:param name="mvcPath" value='<%= templatePath + "move_object.jsp" %>' />
 			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="resourceClassNameId" value="<%= String.valueOf(kbArticle.getClassNameId()) %>" />
 			<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
+			<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(kbArticle.getParentResourceClassNameId()) %>" />
+			<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(kbArticle.getParentResourcePrimKey()) %>" />
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
-			image="forward"
+			iconCssClass="icon-move"
 			message="move"
-			method="get"
 			url="<%= moveKBArticleURL %>"
 		/>
 	</c:if>

@@ -14,22 +14,25 @@
 
 package com.liferay.so.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
+ * @generated
  */
+@ProviderType
 public class FavoriteSiteFinderUtil {
 	public static int countByU_N(long userId, java.lang.String name,
-		java.lang.String groupRealName)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		java.lang.String groupRealName) {
 		return getFinder().countByU_N(userId, name, groupRealName);
 	}
 
 	public static java.util.List<java.lang.Object[]> findByU_N(long userId,
 		java.lang.String name, java.lang.String groupRealName, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		int end) {
 		return getFinder().findByU_N(userId, name, groupRealName, start, end);
 	}
 

@@ -258,7 +258,7 @@ public class LiferayMediaItemService implements MediaItemService {
 			SecurityToken securityToken)
 		throws Exception {
 
-		List<MediaItem> mediaItems = new ArrayList<MediaItem>();
+		List<MediaItem> mediaItems = new ArrayList<>();
 
 		for (UserId userId : userIds) {
 			long userIdLong = GetterUtil.getLong(
@@ -270,7 +270,11 @@ public class LiferayMediaItemService implements MediaItemService {
 				continue;
 			}
 
+<<<<<<< HEAD
 			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
+=======
+			List<FileEntry> fileEntries = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			GroupId.Type groupIdType = groupId.getType();
 
@@ -331,7 +335,11 @@ public class LiferayMediaItemService implements MediaItemService {
 
 		User user = UserLocalServiceUtil.getUserById(userIdLong);
 
+<<<<<<< HEAD
 		List<MediaItem> mediaItems = new ArrayList<MediaItem>();
+=======
+		List<MediaItem> mediaItems = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (!ShindigUtil.isValidUser(user)) {
 			return new RestfulCollection<MediaItem>(
@@ -376,7 +384,11 @@ public class LiferayMediaItemService implements MediaItemService {
 
 		User user = UserLocalServiceUtil.getUserById(userIdLong);
 
+<<<<<<< HEAD
 		List<MediaItem> mediaItems = new ArrayList<MediaItem>();
+=======
+		List<MediaItem> mediaItems = new ArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (!ShindigUtil.isValidUser(user)) {
 			return new RestfulCollection<MediaItem>(

@@ -14,10 +14,10 @@
 
 package com.liferay.opensocial.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.opensocial.model.OAuthConsumer;
 import com.liferay.opensocial.service.OAuthConsumerLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the OAuthConsumer service. Represents a row in the &quot;OpenSocial_OAuthConsumer&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see OAuthConsumerImpl
- * @see com.liferay.opensocial.model.OAuthConsumer
+ * @see OAuthConsumer
  * @generated
  */
+@ProviderType
 public abstract class OAuthConsumerBaseImpl extends OAuthConsumerModelImpl
 	implements OAuthConsumer {
 	/*
@@ -39,7 +40,7 @@ public abstract class OAuthConsumerBaseImpl extends OAuthConsumerModelImpl
 	 * Never modify or reference this class directly. All methods that expect a o auth consumer model instance should use the {@link OAuthConsumer} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			OAuthConsumerLocalServiceUtil.addOAuthConsumer(this);
 		}

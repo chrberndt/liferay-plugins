@@ -37,7 +37,11 @@
 
 		<div class="portlet-login signed-in-as">
 			<div class="profile-image">
+<<<<<<< HEAD
 				<a href="<%= portletURL %>"><img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= user.getPortraitURL(themeDisplay) %>"></a>
+=======
+				<a href="<%= portletURL %>"><img alt="<%= HtmlUtil.escapeAttribute(user.getFullName()) %>" src="<%= user.getPortraitURL(themeDisplay) %>"></a>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</div>
 
 			<a class="aui-buttonitem-content aui-state-default user-name" href="<%= portletURL %>"><span class="aui-button-label"><liferay-ui:message key="my-dashboard" /></span></a>

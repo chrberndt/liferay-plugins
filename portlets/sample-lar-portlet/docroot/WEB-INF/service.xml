@@ -25,6 +25,10 @@
 		<!-- Other fields -->
 
 		<column name="bookingNumber" type="String" />
+<<<<<<< HEAD
+=======
+		<column name="lastPublishDate" type="Date" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		<!-- Order -->
 

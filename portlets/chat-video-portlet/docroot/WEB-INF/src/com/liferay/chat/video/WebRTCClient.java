@@ -19,6 +19,12 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+<<<<<<< HEAD
+=======
+ * Represents a <a href="http://en.wikipedia.org/wiki/WebRTC">Web Real-Time
+ * Communication</a> (WebRTC) client. The clients are not thread-safe.
+ *
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @author Philippe Proulx
  */
 public class WebRTCClient {
@@ -100,6 +106,10 @@ public class WebRTCClient {
 	private long _presenceTime;
 	private long _userId;
 	private Map<WebRTCClient, WebRTCConnection> _webRTCConnections =
+<<<<<<< HEAD
 		new ConcurrentHashMap<WebRTCClient, WebRTCConnection>();
+=======
+		new ConcurrentHashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

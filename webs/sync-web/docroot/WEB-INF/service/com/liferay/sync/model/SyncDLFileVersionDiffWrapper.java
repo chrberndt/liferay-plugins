@@ -14,6 +14,11 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
@@ -30,6 +35,10 @@ import java.util.Map;
  * @see SyncDLFileVersionDiff
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	ModelWrapper<SyncDLFileVersionDiff> {
 	public SyncDLFileVersionDiffWrapper(
@@ -108,6 +117,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 		}
 	}
 
+<<<<<<< HEAD
 	/**
 	* Returns the primary key of this sync d l file version diff.
 	*
@@ -146,6 +156,42 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public void setSyncDLFileVersionDiffId(long syncDLFileVersionDiffId) {
 		_syncDLFileVersionDiff.setSyncDLFileVersionDiffId(syncDLFileVersionDiffId);
+=======
+	@Override
+	public java.lang.Object clone() {
+		return new SyncDLFileVersionDiffWrapper((SyncDLFileVersionDiff)_syncDLFileVersionDiff.clone());
+	}
+
+	@Override
+	public int compareTo(
+		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff) {
+		return _syncDLFileVersionDiff.compareTo(syncDLFileVersionDiff);
+	}
+
+	/**
+	* Returns the data file entry ID of this sync d l file version diff.
+	*
+	* @return the data file entry ID of this sync d l file version diff
+	*/
+	@Override
+	public long getDataFileEntryId() {
+		return _syncDLFileVersionDiff.getDataFileEntryId();
+	}
+
+	@Override
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+		return _syncDLFileVersionDiff.getExpandoBridge();
+	}
+
+	/**
+	* Returns the expiration date of this sync d l file version diff.
+	*
+	* @return the expiration date of this sync d l file version diff
+	*/
+	@Override
+	public Date getExpirationDate() {
+		return _syncDLFileVersionDiff.getExpirationDate();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -159,6 +205,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	}
 
 	/**
+<<<<<<< HEAD
 	* Sets the file entry ID of this sync d l file version diff.
 	*
 	* @param fileEntryId the file entry ID of this sync d l file version diff
@@ -166,6 +213,30 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_syncDLFileVersionDiff.setFileEntryId(fileEntryId);
+=======
+	* Returns the primary key of this sync d l file version diff.
+	*
+	* @return the primary key of this sync d l file version diff
+	*/
+	@Override
+	public long getPrimaryKey() {
+		return _syncDLFileVersionDiff.getPrimaryKey();
+	}
+
+	@Override
+	public java.io.Serializable getPrimaryKeyObj() {
+		return _syncDLFileVersionDiff.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the size of this sync d l file version diff.
+	*
+	* @return the size of this sync d l file version diff
+	*/
+	@Override
+	public long getSize() {
+		return _syncDLFileVersionDiff.getSize();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -179,6 +250,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	}
 
 	/**
+<<<<<<< HEAD
 	* Sets the source file version ID of this sync d l file version diff.
 	*
 	* @param sourceFileVersionId the source file version ID of this sync d l file version diff
@@ -186,6 +258,15 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public void setSourceFileVersionId(long sourceFileVersionId) {
 		_syncDLFileVersionDiff.setSourceFileVersionId(sourceFileVersionId);
+=======
+	* Returns the sync d l file version diff ID of this sync d l file version diff.
+	*
+	* @return the sync d l file version diff ID of this sync d l file version diff
+	*/
+	@Override
+	public long getSyncDLFileVersionDiffId() {
+		return _syncDLFileVersionDiff.getSyncDLFileVersionDiffId();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -198,6 +279,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 		return _syncDLFileVersionDiff.getTargetFileVersionId();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the target file version ID of this sync d l file version diff.
 	*
@@ -216,6 +298,36 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public long getDataFileEntryId() {
 		return _syncDLFileVersionDiff.getDataFileEntryId();
+=======
+	@Override
+	public int hashCode() {
+		return _syncDLFileVersionDiff.hashCode();
+	}
+
+	@Override
+	public boolean isCachedModel() {
+		return _syncDLFileVersionDiff.isCachedModel();
+	}
+
+	@Override
+	public boolean isEscapedModel() {
+		return _syncDLFileVersionDiff.isEscapedModel();
+	}
+
+	@Override
+	public boolean isNew() {
+		return _syncDLFileVersionDiff.isNew();
+	}
+
+	@Override
+	public void persist() {
+		_syncDLFileVersionDiff.persist();
+	}
+
+	@Override
+	public void setCachedModel(boolean cachedModel) {
+		_syncDLFileVersionDiff.setCachedModel(cachedModel);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -228,6 +340,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 		_syncDLFileVersionDiff.setDataFileEntryId(dataFileEntryId);
 	}
 
+<<<<<<< HEAD
 	/**
 	* Returns the size of this sync d l file version diff.
 	*
@@ -256,6 +369,24 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public java.util.Date getExpirationDate() {
 		return _syncDLFileVersionDiff.getExpirationDate();
+=======
+	@Override
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.model.BaseModel<?> baseModel) {
+		_syncDLFileVersionDiff.setExpandoBridgeAttributes(baseModel);
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(
+		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+		_syncDLFileVersionDiff.setExpandoBridgeAttributes(expandoBridge);
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_syncDLFileVersionDiff.setExpandoBridgeAttributes(serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -264,6 +395,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	* @param expirationDate the expiration date of this sync d l file version diff
 	*/
 	@Override
+<<<<<<< HEAD
 	public void setExpirationDate(java.util.Date expirationDate) {
 		_syncDLFileVersionDiff.setExpirationDate(expirationDate);
 	}
@@ -271,6 +403,20 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public boolean isNew() {
 		return _syncDLFileVersionDiff.isNew();
+=======
+	public void setExpirationDate(Date expirationDate) {
+		_syncDLFileVersionDiff.setExpirationDate(expirationDate);
+	}
+
+	/**
+	* Sets the file entry ID of this sync d l file version diff.
+	*
+	* @param fileEntryId the file entry ID of this sync d l file version diff
+	*/
+	@Override
+	public void setFileEntryId(long fileEntryId) {
+		_syncDLFileVersionDiff.setFileEntryId(fileEntryId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -278,6 +424,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 		_syncDLFileVersionDiff.setNew(n);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public boolean isCachedModel() {
 		return _syncDLFileVersionDiff.isCachedModel();
@@ -296,6 +443,16 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _syncDLFileVersionDiff.getPrimaryKeyObj();
+=======
+	/**
+	* Sets the primary key of this sync d l file version diff.
+	*
+	* @param primaryKey the primary key of this sync d l file version diff
+	*/
+	@Override
+	public void setPrimaryKey(long primaryKey) {
+		_syncDLFileVersionDiff.setPrimaryKey(primaryKey);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -303,6 +460,7 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 		_syncDLFileVersionDiff.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _syncDLFileVersionDiff.getExpandoBridge();
@@ -340,6 +498,46 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	@Override
 	public int hashCode() {
 		return _syncDLFileVersionDiff.hashCode();
+=======
+	/**
+	* Sets the size of this sync d l file version diff.
+	*
+	* @param size the size of this sync d l file version diff
+	*/
+	@Override
+	public void setSize(long size) {
+		_syncDLFileVersionDiff.setSize(size);
+	}
+
+	/**
+	* Sets the source file version ID of this sync d l file version diff.
+	*
+	* @param sourceFileVersionId the source file version ID of this sync d l file version diff
+	*/
+	@Override
+	public void setSourceFileVersionId(long sourceFileVersionId) {
+		_syncDLFileVersionDiff.setSourceFileVersionId(sourceFileVersionId);
+	}
+
+	/**
+	* Sets the sync d l file version diff ID of this sync d l file version diff.
+	*
+	* @param syncDLFileVersionDiffId the sync d l file version diff ID of this sync d l file version diff
+	*/
+	@Override
+	public void setSyncDLFileVersionDiffId(long syncDLFileVersionDiffId) {
+		_syncDLFileVersionDiff.setSyncDLFileVersionDiffId(syncDLFileVersionDiffId);
+	}
+
+	/**
+	* Sets the target file version ID of this sync d l file version diff.
+	*
+	* @param targetFileVersionId the target file version ID of this sync d l file version diff
+	*/
+	@Override
+	public void setTargetFileVersionId(long targetFileVersionId) {
+		_syncDLFileVersionDiff.setTargetFileVersionId(targetFileVersionId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -353,16 +551,20 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	}
 
 	@Override
+<<<<<<< HEAD
 	public com.liferay.sync.model.SyncDLFileVersionDiff toUnescapedModel() {
 		return new SyncDLFileVersionDiffWrapper(_syncDLFileVersionDiff.toUnescapedModel());
 	}
 
 	@Override
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public java.lang.String toString() {
 		return _syncDLFileVersionDiff.toString();
 	}
 
 	@Override
+<<<<<<< HEAD
 	public java.lang.String toXmlString() {
 		return _syncDLFileVersionDiff.toXmlString();
 	}
@@ -371,6 +573,15 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_syncDLFileVersionDiff.persist();
+=======
+	public com.liferay.sync.model.SyncDLFileVersionDiff toUnescapedModel() {
+		return new SyncDLFileVersionDiffWrapper(_syncDLFileVersionDiff.toUnescapedModel());
+	}
+
+	@Override
+	public java.lang.String toXmlString() {
+		return _syncDLFileVersionDiff.toXmlString();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -396,6 +607,10 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public SyncDLFileVersionDiff getWrappedSyncDLFileVersionDiff() {
 		return _syncDLFileVersionDiff;
 	}
@@ -406,9 +621,26 @@ public class SyncDLFileVersionDiffWrapper implements SyncDLFileVersionDiff,
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public boolean isEntityCacheEnabled() {
+		return _syncDLFileVersionDiff.isEntityCacheEnabled();
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _syncDLFileVersionDiff.isFinderCacheEnabled();
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void resetOriginalValues() {
 		_syncDLFileVersionDiff.resetOriginalValues();
 	}
 
+<<<<<<< HEAD
 	private SyncDLFileVersionDiff _syncDLFileVersionDiff;
+=======
+	private final SyncDLFileVersionDiff _syncDLFileVersionDiff;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

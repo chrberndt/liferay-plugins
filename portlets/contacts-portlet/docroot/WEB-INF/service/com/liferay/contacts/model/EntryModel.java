@@ -14,8 +14,9 @@
 
 package com.liferay.contacts.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.contacts.model.impl.EntryModelImpl
  * @generated
  */
+@ProviderType
 public interface EntryModel extends BaseModel<Entry>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -127,10 +129,9 @@ public interface EntryModel extends BaseModel<Entry>, GroupedModel {
 	 * Returns the user uuid of this entry.
 	 *
 	 * @return the user uuid of this entry
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this entry.
@@ -271,19 +272,19 @@ public interface EntryModel extends BaseModel<Entry>, GroupedModel {
 	public Object clone();
 
 	@Override
-	public int compareTo(Entry entry);
+	public int compareTo(com.liferay.contacts.model.Entry entry);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Entry> toCacheModel();
+	public CacheModel<com.liferay.contacts.model.Entry> toCacheModel();
 
 	@Override
-	public Entry toEscapedModel();
+	public com.liferay.contacts.model.Entry toEscapedModel();
 
 	@Override
-	public Entry toUnescapedModel();
+	public com.liferay.contacts.model.Entry toUnescapedModel();
 
 	@Override
 	public String toString();

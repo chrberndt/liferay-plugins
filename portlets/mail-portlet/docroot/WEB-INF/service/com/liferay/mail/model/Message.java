@@ -14,6 +14,8 @@
 
 package com.liferay.mail.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.model.PersistedModel;
 
 /**
@@ -25,6 +27,7 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.mail.model.impl.MessageModelImpl
  * @generated
  */
+@ProviderType
 public interface Message extends MessageModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -32,8 +35,9 @@ public interface Message extends MessageModel, PersistedModel {
 	 * Never modify this interface directly. Add methods to {@link com.liferay.mail.model.impl.MessageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public long getGroupId()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public boolean hasAttachments();
 
 	public boolean hasFlag(int flag);
 }

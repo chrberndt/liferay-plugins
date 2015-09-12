@@ -17,20 +17,31 @@
 <%@ include file="/display/init.jsp" %>
 
 <%
+<<<<<<< HEAD
 String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 String tabs3 = ParamUtil.getString(request, "tabs3", "article");
 String tabs2Names = "general,display-settings";
+=======
+String tabs2 = ParamUtil.getString(request, "tabs2", Validator.equals(portletResource, PortletKeys.KNOWLEDGE_BASE_ARTICLE_DEFAULT_INSTANCE) ? "display-settings" : "general");
+
+String tabs2Names = Validator.equals(portletResource, PortletKeys.KNOWLEDGE_BASE_ARTICLE_DEFAULT_INSTANCE) ? "display-settings" : "general,display-settings";
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 if (PortalUtil.isRSSFeedsEnabled()) {
 	tabs2Names += ",rss";
 }
+
+long kbFolderClassNameId = PortalUtil.getClassNameId(KBFolderConstants.getClassName());
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
 
 <liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL">
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
+<<<<<<< HEAD
 	<portlet:param name="tabs3" value="<%= tabs3 %>" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </liferay-portlet:renderURL>
 
 <liferay-ui:tabs
@@ -42,68 +53,82 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 <aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="preferences--resourceClassNameId--" type="hidden" value="<%= resourceClassNameId %>" />
+	<aui:input name="preferences--resourcePrimKey--" type="hidden" value="<%= resourcePrimKey %>" />
 
 	<aui:fieldset>
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<div class="kb-field-wrapper">
-					<aui:field-wrapper label="order-by">
-						<aui:select inlineField="<%= true %>" label="" name="preferences--kbArticlesOrderByCol--">
-							<aui:option label="author" selected='<%= kbArticlesOrderByCol.equals("user-name") %>' value="user-name" />
-							<aui:option label="create-date" selected='<%= kbArticlesOrderByCol.equals("create-date") %>' />
-							<aui:option label="modified-date" selected='<%= kbArticlesOrderByCol.equals("modified-date") %>' />
-							<aui:option label="priority" selected='<%= kbArticlesOrderByCol.equals("priority") %>' />
-							<aui:option label="title" selected='<%= kbArticlesOrderByCol.equals("title") %>' />
-							<aui:option label="view-count" selected='<%= kbArticlesOrderByCol.equals("view-count") %>' />
-						</aui:select>
+				<div class="input-append kb-field-wrapper">
+					<aui:field-wrapper label="article-or-folder">
 
-						<aui:select inlineField="<%= true %>" label="" name="preferences--kbArticlesOrderByType--">
-							<aui:option label="ascending" selected='<%= kbArticlesOrderByType.equals("asc") %>' value="asc" />
-							<aui:option label="descending" selected='<%= kbArticlesOrderByType.equals("desc") %>' value="desc" />
-						</aui:select>
+						<%
+						String title = StringPool.BLANK;
+
+						if (resourceClassNameId != kbFolderClassNameId) {
+							KBArticle kbArticle = KBArticleLocalServiceUtil.fetchLatestKBArticle(resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
+
+							if (kbArticle != null) {
+								title = kbArticle.getTitle();
+							}
+						}
+						else {
+							KBFolder kbFolder = KBFolderLocalServiceUtil.fetchKBFolder(resourcePrimKey);
+
+							if (kbFolder != null) {
+								title = kbFolder.getName();
+							}
+						}
+						%>
+
+						<liferay-ui:input-resource id="configurationKBObject" url="<%= title %>" />
+
+						<aui:button name="selectKBObjectButton" value="select" />
 					</aui:field-wrapper>
-
-					<aui:input label="show-priority-column" name="preferences--showKBArticlePriorityColumn--" type="checkbox" value="<%= showKBArticlePriorityColumn %>" />
-
-					<aui:input label="show-author-column" name="preferences--showKBArticleAuthorColumn--" type="checkbox" value="<%= showKBArticleAuthorColumn %>" />
-
-					<aui:input label="show-create-date-column" name="preferences--showKBArticleCreateDateColumn--" type="checkbox" value="<%= showKBArticleCreateDateColumn %>" />
-
-					<aui:input label="show-modified-date-column" name="preferences--showKBArticleModifiedDateColumn--" type="checkbox" value="<%= showKBArticleModifiedDateColumn %>" />
-
-					<aui:input label="show-status-column" name="preferences--showKBArticleStatusColumn--" type="checkbox" value="<%= showKBArticleStatusColumn %>" />
-
-					<aui:input label="show-views-column" name="preferences--showKBArticleViewsColumn--" type="checkbox" value="<%= showKBArticleViewsColumn %>" />
 				</div>
 			</c:when>
 			<c:when test='<%= tabs2.equals("display-settings") %>'>
+<<<<<<< HEAD
 				<liferay-ui:tabs
 					names="article,template"
 					param="tabs3"
 					url="<%= configurationRenderURL %>"
 				/>
+=======
+				<aui:field-wrapper cssClass="kb-field-wrapper">
+					<aui:input label="enable-description" name="preferences--enableKBArticleDescription--" type="checkbox" value="<%= enableKBArticleDescription %>" />
 
-				<c:choose>
-					<c:when test='<%= tabs3.equals("article") %>'>
-						<aui:input label="enable-description" name="preferences--enableKBArticleDescription--" type="checkbox" value="<%= enableKBArticleDescription %>" />
+					<aui:input label="enable-ratings" name="preferences--enableKBArticleRatings--" type="checkbox" value="<%= enableKBArticleRatings %>" />
 
-						<aui:input label="enable-ratings" name="preferences--enableKBArticleRatings--" type="checkbox" value="<%= enableKBArticleRatings %>" />
+					<div class="kb-ratings-type" id="<portlet:namespace />ratingsType">
+						<aui:input checked='<%= kbArticleRatingsType.equals("stars") %>' label="use-star-ratings" name="preferences--kbArticleRatingsType--" type="radio" value="stars" />
+						<aui:input checked='<%= kbArticleRatingsType.equals("thumbs") %>' label="use-thumbs-up-thumbs-down" name="preferences--kbArticleRatingsType--" type="radio" value="thumbs" />
+					</div>
 
-						<aui:input label="show-asset-entries" name="preferences--showKBArticleAssetEntries--" type="checkbox" value="<%= showKBArticleAssetEntries %>" />
+					<aui:input label="show-asset-entries" name="preferences--showKBArticleAssetEntries--" type="checkbox" value="<%= showKBArticleAssetEntries %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-						<aui:input label="enable-comments" name="preferences--enableKBArticleKBComments--" type="checkbox" value="<%= enableKBArticleKBComments %>" />
+					<aui:input label="enable-related-assets" name="preferences--enableKBArticleAssetLinks--" type="checkbox" value="<%= enableKBArticleAssetLinks %>" />
 
-						<aui:input label="show-comments" name="preferences--showKBArticleKBComments--" type="checkbox" value="<%= showKBArticleKBComments %>" />
+					<aui:input label="enable-view-count-increment" name="preferences--enableKBArticleViewCountIncrement--" type="checkbox" value="<%= enableKBArticleViewCountIncrement %>" />
 
-						<aui:input label="enable-view-count-increment" name="preferences--enableKBArticleViewCountIncrement--" type="checkbox" value="<%= enableKBArticleViewCountIncrement %>" />
-					</c:when>
-					<c:when test='<%= tabs3.equals("template") %>'>
-						<aui:input label="enable-comments" name="preferences--enableKBTemplateKBComments--" type="checkbox" value="<%= enableKBTemplateKBComments %>" />
+					<aui:input label="enable-subscriptions" name="preferences--enableKBArticleSubscriptions--" type="checkbox" value="<%= enableKBArticleSubscriptions %>" />
 
-						<aui:input label="show-comments" name="preferences--showKBTemplateKBComments--" type="checkbox" value="<%= showKBTemplateKBComments %>" />
-					</c:when>
-				</c:choose>
+					<aui:input label="enable-history" name="preferences--enableKBArticleHistory--" type="checkbox" value="<%= enableKBArticleHistory %>" />
+
+					<aui:input label="enable-print" name="preferences--enableKBArticlePrint--" type="checkbox" value="<%= enableKBArticlePrint %>" />
+
+					<liferay-ui:social-bookmarks-settings
+						displayPosition="<%= socialBookmarksDisplayPosition %>"
+						displayStyle="<%= socialBookmarksDisplayStyle %>"
+						enabled="<%= enableSocialBookmarks %>"
+						types="<%= socialBookmarksTypes %>"
+					/>
+				</aui:field-wrapper>
+
+				<aui:field-wrapper>
+					<aui:input label="content-root-prefix" name="preferences--contentRootPrefix--" type="input" value="<%= contentRootPrefix %>" />
+				</aui:field-wrapper>
 			</c:when>
 			<c:when test='<%= tabs2.equals("rss") %>'>
 				<liferay-ui:rss-settings
@@ -120,3 +145,43 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
+
+<c:choose>
+	<c:when test='<%= tabs2.equals("general") %>'>
+		<aui:script use="aui-base">
+			<liferay-portlet:renderURL portletName="<%= portletResource %>" var="selectConfigurationKBObjectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:param name="mvcPath" value="/display/select_configuration_object.jsp" />
+				<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(kbFolderClassNameId) %>" />
+				<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />
+			</liferay-portlet:renderURL>
+
+			A.one('#<portlet:namespace />selectKBObjectButton').on(
+				'click',
+				function(event) {
+					Liferay.Util.selectEntity(
+						{
+							dialog: {
+								constrain: true,
+								destroyOnHide: true,
+								modal: true
+							},
+							id: '<portlet:namespace />selectConfigurationKBObject',
+							title: '<liferay-ui:message key="select-parent" />',
+							uri: '<%= selectConfigurationKBObjectURL %>'
+						},
+						function(event) {
+							document.<portlet:namespace />fm.<portlet:namespace />resourceClassNameId.value = event.resourceclassnameid;
+							document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = event.resourceprimkey;
+							document.getElementById('<portlet:namespace />configurationKBObject').value = event.title;
+						}
+					);
+				}
+			);
+		</aui:script>
+	</c:when>
+	<c:when test='<%= tabs2.equals("display-settings") %>'>
+		<aui:script>
+			Liferay.Util.toggleBoxes('<portlet:namespace />enableKBArticleRatings', '<portlet:namespace />ratingsType');
+		</aui:script>
+	</c:when>
+</c:choose>

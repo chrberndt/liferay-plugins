@@ -14,12 +14,20 @@
 
 package com.liferay.notifications.hook.upgrade.v1_0_0;
 
+<<<<<<< HEAD
+=======
+import com.liferay.announcements.web.constants.AnnouncementsPortletKeys;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.notifications.util.PortletKeys;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.Validator;
+<<<<<<< HEAD
+=======
+import com.liferay.portlet.announcements.constants.AnnouncementsConstants;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,7 +98,13 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 					return;
 				}
 
+<<<<<<< HEAD
 				if (type.equals(PortletKeys.ANNOUNCEMENTS)) {
+=======
+				if (type.equals(_PORTLET_ID_ANNOUNCEMENTS) ||
+					type.equals(AnnouncementsPortletKeys.ANNOUNCEMENTS)) {
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					type = PortletKeys.SO_ANNOUNCEMENTS;
 				}
 
@@ -133,4 +147,9 @@ public class UpgradeUserNotificationEvent extends UpgradeProcess {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	private static final String _PORTLET_ID_ANNOUNCEMENTS = "84";
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

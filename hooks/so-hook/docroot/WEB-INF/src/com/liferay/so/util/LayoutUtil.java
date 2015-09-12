@@ -17,9 +17,14 @@
 
 package com.liferay.so.util;
 
+import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
+import com.liferay.message.boards.web.constants.MBPortletKeys;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -40,8 +45,11 @@ import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.site.navigation.breadcrumb.web.constants.BreadcrumbPortletKeys;
 import com.liferay.util.portlet.PortletProps;
+import com.liferay.wiki.constants.WikiPortletKeys;
 
 import java.util.List;
 import java.util.Locale;
@@ -135,36 +143,46 @@ public class LayoutUtil {
 			addResources(layout, portletId);
 
 			if (portletId.startsWith("1_WAR_eventsdisplayportlet")) {
-				updatePortletTitle(layout, portletId, "Events");
+				updatePortletTitle(layout, portletId, "events");
 			}
 			else if (portletId.startsWith("1_WAR_soannouncementsportlet")) {
-				updatePortletTitle(layout, portletId, "Announcements");
+				updatePortletTitle(layout, portletId, "announcements");
 			}
 			else if (portletId.startsWith("1_WAR_wysiwygportlet")) {
-				updatePortletTitle(layout, portletId, "Welcome");
+				updatePortletTitle(layout, portletId, "welcome");
 			}
 			else if (portletId.contains("_WAR_contactsportlet")) {
 				configureProfile(layout, portletId);
 				removePortletBorder(layout, portletId);
 			}
-			else if (portletId.startsWith(PortletKeys.ASSET_PUBLISHER)) {
+			else if (portletId.startsWith(
+						AssetPublisherPortletKeys.ASSET_PUBLISHER)) {
+
 				configureAssetPublisher(layout);
-				updatePortletTitle(layout, portletId, "Related Content");
+				updatePortletTitle(layout, portletId, "related-content");
 			}
-			else if (portletId.startsWith(PortletKeys.BLOGS_AGGREGATOR)) {
-				configureBlogsAggregator(layout);
-				updatePortletTitle(layout, portletId, "Recent Blogs");
-			}
-			else if (portletId.startsWith(PortletKeys.BREADCRUMB)) {
+			else if (portletId.startsWith(BreadcrumbPortletKeys.BREADCRUMB)) {
 				removePortletBorder(layout, portletId);
 			}
-			else if (portletId.startsWith(PortletKeys.MESSAGE_BOARDS)) {
+			else if (portletId.startsWith(
+						MBPortletKeys.MESSAGE_BOARDS)) {
+
 				configureMessageBoards(layout);
 				removePortletBorder(layout, portletId);
 			}
+<<<<<<< HEAD
 			else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) ||
 					 portletId.equals(PortletKeys.BLOGS) ||
 					 portletId.equals(PortletKeys.WIKI) ||
+=======
+			else if (portletId.startsWith(PortletKeys.BLOGS_AGGREGATOR)) {
+				configureBlogsAggregator(layout);
+				updatePortletTitle(layout, portletId, "recent-blogs");
+			}
+			else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) ||
+					 portletId.equals(PortletKeys.BLOGS) ||
+					 portletId.equals(WikiPortletKeys.WIKI) ||
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					 portletId.equals("1_WAR_calendarportlet") ||
 					 portletId.contains("_WAR_microblogsportlet") ||
 					 portletId.equals("1_WAR_privatemessagingportlet") ||
@@ -176,7 +194,11 @@ public class LayoutUtil {
 	}
 
 	public static void addResources(Layout layout, String portletId)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
@@ -215,7 +237,7 @@ public class LayoutUtil {
 	public static void configureMessageBoards(Layout layout) throws Exception {
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, PortletKeys.MESSAGE_BOARDS);
+				layout, MBPortletKeys.MESSAGE_BOARDS);
 
 		String[] ranks = {
 			"Bronze=0", "Silver=25", "Gold=100", "Platinum=250",
@@ -332,9 +354,7 @@ public class LayoutUtil {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portletId);
 
-		Locale[] locales = LanguageUtil.getAvailableLocales();
-
-		for (Locale locale : locales) {
+		for (Locale locale : LanguageUtil.getAvailableLocales()) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
 			if (Validator.isNotNull(languageId)) {

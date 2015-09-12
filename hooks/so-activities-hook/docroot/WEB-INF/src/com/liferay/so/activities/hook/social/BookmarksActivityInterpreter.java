@@ -14,6 +14,8 @@
 
 package com.liferay.so.activities.hook.social;
 
+import com.liferay.bookmarks.model.BookmarksEntry;
+import com.liferay.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -23,8 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetRenderer;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivitySet;
@@ -161,9 +161,13 @@ public class BookmarksActivityInterpreter extends SOSocialActivityInterpreter {
 			activity.getClassName(), activity.getClassPK());
 
 		String body = StringUtil.shorten(
+<<<<<<< HEAD
 			HtmlUtil.escape(
 				assetRenderer.getSummary(serviceContext.getLocale())),
 			200);
+=======
+			HtmlUtil.escape(assetRenderer.getSummary()), 200);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return new SocialActivityFeedEntry(title, body);
 	}

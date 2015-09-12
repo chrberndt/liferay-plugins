@@ -27,7 +27,7 @@ KBComment kbComment = (KBComment)request.getAttribute("template_comment.jsp-kb_c
 	<tr>
 		<td align="center" valign="top">
 			<liferay-ui:user-display
-				displayStyle="<%= 2 %>"
+				displayStyle="2"
 				userId="<%= kbComment.getUserId() %>"
 				userName="<%= kbComment.getUserName() %>"
 			/>
@@ -37,12 +37,12 @@ KBComment kbComment = (KBComment)request.getAttribute("template_comment.jsp-kb_c
 				<strong class="kb-question"><liferay-ui:message key="was-this-information-helpful" /></strong>
 
 				<c:choose>
-					<c:when test="<%= kbComment.getHelpful() %>">
+					<c:when test="<%= kbComment.getUserRating() == KBCommentConstants.USER_RATING_LIKE %>">
 						<strong class="kb-yes"><liferay-ui:message key="yes" /></strong>
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= kbComment.getUserRating() == KBCommentConstants.USER_RATING_DISLIKE %>">
 						<strong class="kb-no"><liferay-ui:message key="no" /></strong>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 			</div>
 
@@ -55,7 +55,11 @@ KBComment kbComment = (KBComment)request.getAttribute("template_comment.jsp-kb_c
 			<br />
 
 			<div>
+<<<<<<< HEAD
 				<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(kbComment.getModifiedDate()), false) %>
+=======
+				<%= LanguageUtil.format(request, "posted-on-x", dateFormatDateTime.format(kbComment.getModifiedDate()), false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</div>
 
 			<c:if test="<%= KBCommentPermission.contains(permissionChecker, kbComment, ActionKeys.DELETE) %>">

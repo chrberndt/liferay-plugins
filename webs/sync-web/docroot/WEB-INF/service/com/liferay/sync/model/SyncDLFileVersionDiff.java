@@ -14,6 +14,11 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.model.PersistedModel;
 
 /**
@@ -25,6 +30,10 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.sync.model.impl.SyncDLFileVersionDiffModelImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public interface SyncDLFileVersionDiff extends SyncDLFileVersionDiffModel,
 	PersistedModel {
 	/*

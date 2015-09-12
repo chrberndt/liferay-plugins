@@ -14,47 +14,56 @@
 
 package com.liferay.knowledgebase.admin.portlet;
 
-import com.liferay.knowledgebase.KBArticleContentException;
-import com.liferay.knowledgebase.KBArticlePriorityException;
-import com.liferay.knowledgebase.KBArticleTitleException;
-import com.liferay.knowledgebase.KBCommentContentException;
+import com.liferay.knowledgebase.KBArticleImportException;
 import com.liferay.knowledgebase.KBTemplateContentException;
 import com.liferay.knowledgebase.KBTemplateTitleException;
 import com.liferay.knowledgebase.NoSuchArticleException;
 import com.liferay.knowledgebase.NoSuchCommentException;
 import com.liferay.knowledgebase.NoSuchTemplateException;
 import com.liferay.knowledgebase.model.KBArticle;
-import com.liferay.knowledgebase.model.KBComment;
+import com.liferay.knowledgebase.model.KBArticleConstants;
+import com.liferay.knowledgebase.model.KBFolder;
+import com.liferay.knowledgebase.model.KBFolderConstants;
 import com.liferay.knowledgebase.model.KBTemplate;
+import com.liferay.knowledgebase.portlet.BaseKBPortlet;
 import com.liferay.knowledgebase.service.KBArticleServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentServiceUtil;
+import com.liferay.knowledgebase.service.KBFolderServiceUtil;
 import com.liferay.knowledgebase.service.KBTemplateServiceUtil;
 import com.liferay.knowledgebase.util.PortletKeys;
 import com.liferay.knowledgebase.util.WebKeys;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadException;
+=======
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+<<<<<<< HEAD
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
@@ -62,6 +71,9 @@ import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+=======
+import com.liferay.portlet.PortletURLFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.File;
 import java.io.IOException;
@@ -74,10 +86,11 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
+import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -86,6 +99,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  * @author Eric Min
  */
+<<<<<<< HEAD
 public class AdminPortlet extends MVCPortlet {
 
 	public void addAttachment(
@@ -150,6 +164,9 @@ public class AdminPortlet extends MVCPortlet {
 
 		KBArticleServiceUtil.deleteKBArticle(resourcePrimKey);
 	}
+=======
+public class AdminPortlet extends BaseKBPortlet {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	public void deleteKBArticles(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -165,20 +182,13 @@ public class AdminPortlet extends MVCPortlet {
 			themeDisplay.getScopeGroupId(), resourcePrimKeys);
 	}
 
-	public void deleteKBComment(
+	public void deleteKBFolder(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		long kbFolderId = ParamUtil.getLong(actionRequest, "kbFolderId");
 
-		if (!themeDisplay.isSignedIn()) {
-			return;
-		}
-
-		long kbCommentId = ParamUtil.getLong(actionRequest, "kbCommentId");
-
-		KBCommentServiceUtil.deleteKBComment(kbCommentId);
+		KBFolderServiceUtil.deleteKBFolder(kbFolderId);
 	}
 
 	public void deleteKBTemplate(
@@ -204,19 +214,54 @@ public class AdminPortlet extends MVCPortlet {
 			themeDisplay.getScopeGroupId(), kbTemplateIds);
 	}
 
-	public void moveKBArticle(
+	public void importFile(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
+		InputStream inputStream = null;
 
-		long parentResourcePrimKey = ParamUtil.getLong(
-			actionRequest, "parentResourcePrimKey");
-		double priority = ParamUtil.getDouble(actionRequest, "priority");
+		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		KBArticleServiceUtil.moveKBArticle(
-			resourcePrimKey, parentResourcePrimKey, priority);
+			UploadPortletRequest uploadPortletRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
+
+			long parentKBFolderId = ParamUtil.getLong(
+				uploadPortletRequest, "parentKBFolderId",
+				KBFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			String fileName = uploadPortletRequest.getFileName("file");
+
+			if (Validator.isNull(fileName)) {
+				throw new KBArticleImportException("File name is null");
+			}
+
+			boolean prioritizeByNumericalPrefix = ParamUtil.getBoolean(
+				uploadPortletRequest, "prioritizeByNumericalPrefix");
+
+			inputStream = uploadPortletRequest.getFileAsStream("file");
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				AdminPortlet.class.getName(), actionRequest);
+
+			serviceContext.setGuestPermissions(new String[] {ActionKeys.VIEW});
+
+			int importedKBArticlesCount =
+				KBArticleServiceUtil.addKBArticlesMarkdown(
+					themeDisplay.getScopeGroupId(), parentKBFolderId, fileName,
+				prioritizeByNumericalPrefix, inputStream, serviceContext);
+
+			SessionMessages.add(
+				actionRequest, "importedKBArticlesCount",
+				importedKBArticlesCount);
+		}
+		catch (KBArticleImportException kbaie) {
+			SessionErrors.add(actionRequest, kbaie.getClass(), kbaie);
+		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
 	}
 
 	@Override
@@ -231,10 +276,17 @@ public class AdminPortlet extends MVCPortlet {
 
 			KBArticle kbArticle = null;
 
+			long kbArticleClassNameId = PortalUtil.getClassNameId(
+				KBArticleConstants.getClassName());
+
+			long resourceClassNameId = ParamUtil.getLong(
+				renderRequest, "resourceClassNameId", kbArticleClassNameId);
 			long resourcePrimKey = ParamUtil.getLong(
 				renderRequest, "resourcePrimKey");
 
-			if (resourcePrimKey > 0) {
+			if ((resourcePrimKey > 0) &&
+				(resourceClassNameId == kbArticleClassNameId)) {
+
 				kbArticle = KBArticleServiceUtil.getLatestKBArticle(
 					resourcePrimKey, status);
 			}
@@ -269,6 +321,7 @@ public class AdminPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
+<<<<<<< HEAD
 	public void serveAttachment(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
@@ -332,6 +385,8 @@ public class AdminPortlet extends MVCPortlet {
 		}
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void subscribeGroupKBArticles(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -343,20 +398,6 @@ public class AdminPortlet extends MVCPortlet {
 
 		KBArticleServiceUtil.subscribeGroupKBArticles(
 			themeDisplay.getScopeGroupId(), portletId);
-	}
-
-	public void subscribeKBArticle(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
-
-		KBArticleServiceUtil.subscribeKBArticle(
-			themeDisplay.getScopeGroupId(), resourcePrimKey);
 	}
 
 	public void unsubscribeGroupKBArticles(
@@ -372,6 +413,7 @@ public class AdminPortlet extends MVCPortlet {
 			themeDisplay.getScopeGroupId(), portletId);
 	}
 
+<<<<<<< HEAD
 	public void unsubscribeKBArticle(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -473,6 +515,8 @@ public class AdminPortlet extends MVCPortlet {
 		}
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void updateKBArticlesPriorities(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -482,8 +526,7 @@ public class AdminPortlet extends MVCPortlet {
 
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
-		Map<Long, Double> resourcePrimKeyToPriorityMap =
-			new HashMap<Long, Double>();
+		Map<Long, Double> resourcePrimKeyToPriorityMap = new HashMap<>();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -503,38 +546,36 @@ public class AdminPortlet extends MVCPortlet {
 			themeDisplay.getScopeGroupId(), resourcePrimKeyToPriorityMap);
 	}
 
-	public void updateKBComment(
+	public void updateKBFolder(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (!themeDisplay.isSignedIn()) {
-			return;
-		}
-
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		long kbCommentId = ParamUtil.getLong(actionRequest, "kbCommentId");
+		long kbFolderId = ParamUtil.getLong(actionRequest, "kbFolderId");
 
-		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-		String content = ParamUtil.getString(actionRequest, "content");
-		boolean helpful = ParamUtil.getBoolean(actionRequest, "helpful");
+		long parentResourceClassNameId = ParamUtil.getLong(
+			actionRequest, "parentResourceClassNameId");
+		long parentResourcePrimKey = ParamUtil.getLong(
+			actionRequest, "parentResourcePrimKey");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			KBComment.class.getName(), actionRequest);
+			KBFolder.class.getName(), actionRequest);
 
 		if (cmd.equals(Constants.ADD)) {
-			KBCommentLocalServiceUtil.addKBComment(
-				themeDisplay.getUserId(), classNameId, classPK, content,
-				helpful, serviceContext);
+			KBFolderServiceUtil.addKBFolder(
+				themeDisplay.getScopeGroupId(), parentResourceClassNameId,
+				parentResourcePrimKey, name, description, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
-			KBCommentServiceUtil.updateKBComment(
-				kbCommentId, classNameId, classPK, content, helpful,
-				serviceContext);
+			KBFolderServiceUtil.updateKBFolder(
+				parentResourceClassNameId, parentResourcePrimKey, kbFolderId,
+				name, description);
 		}
 	}
 
@@ -565,17 +606,33 @@ public class AdminPortlet extends MVCPortlet {
 	}
 
 	@Override
-	protected void addSuccessMessage(
-		ActionRequest actionRequest, ActionResponse actionResponse) {
+	protected String buildEditURL(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			KBArticle kbArticle)
+		throws PortalException {
 
-		String actionName = ParamUtil.getString(
-			actionRequest, ActionRequest.ACTION_NAME);
+		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-		if (actionName.equals("updateAttachments")) {
-			return;
+			PortletURL portletURL = PortletURLFactoryUtil.create(
+				actionRequest, PortletKeys.KNOWLEDGE_BASE_ADMIN,
+				themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+			portletURL.setParameter(
+				"mvcPath", templatePath + "edit_article.jsp");
+			portletURL.setParameter(
+				"redirect", getRedirect(actionRequest, actionResponse));
+			portletURL.setParameter(
+				"resourcePrimKey",
+				String.valueOf(kbArticle.getResourcePrimKey()));
+			portletURL.setWindowState(actionRequest.getWindowState());
+
+			return portletURL.toString();
 		}
-
-		super.addSuccessMessage(actionRequest, actionResponse);
+		catch (WindowStateException wse) {
+			throw new PortalException(wse);
+		}
 	}
 
 	protected void checkExceededSizeLimit(HttpServletRequest request)
@@ -607,7 +664,7 @@ public class AdminPortlet extends MVCPortlet {
 			SessionErrors.contains(
 				renderRequest, NoSuchTemplateException.class.getName()) ||
 			SessionErrors.contains(
-				renderRequest, PrincipalException.class.getName())) {
+				renderRequest, PrincipalException.getNestedClasses())) {
 
 			include(templatePath + "error.jsp", renderRequest, renderResponse);
 		}
@@ -618,6 +675,7 @@ public class AdminPortlet extends MVCPortlet {
 
 	@Override
 	protected boolean isSessionErrorException(Throwable cause) {
+<<<<<<< HEAD
 		if (cause instanceof AssetCategoryException ||
 			cause instanceof AssetTagException ||
 			cause instanceof DuplicateFileException ||
@@ -627,13 +685,16 @@ public class AdminPortlet extends MVCPortlet {
 			cause instanceof KBArticlePriorityException ||
 			cause instanceof KBArticleTitleException ||
 			cause instanceof KBCommentContentException ||
+=======
+		if (cause instanceof KBArticleImportException ||
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			cause instanceof KBTemplateContentException ||
 			cause instanceof KBTemplateTitleException ||
-			cause instanceof NoSuchArticleException ||
-			cause instanceof NoSuchCommentException ||
-			cause instanceof NoSuchFileException ||
 			cause instanceof NoSuchTemplateException ||
+<<<<<<< HEAD
 			cause instanceof PrincipalException ||
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			super.isSessionErrorException(cause)) {
 
 			return true;

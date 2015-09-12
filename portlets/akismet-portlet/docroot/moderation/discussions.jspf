@@ -80,7 +80,7 @@
 				name="posted-by"
 			>
 				<div>
-					<%= message.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())) %>
+					<%= message.isAnonymous() ? LanguageUtil.get(request, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())) %>
 				</div>
 
 				<div>
@@ -90,6 +90,7 @@
 
 			<liferay-ui:search-container-column-jsp
 				align="right"
+				cssClass="entry-action"
 				path="/moderation/discussions_action.jsp"
 			/>
 		</liferay-ui:search-container-row>

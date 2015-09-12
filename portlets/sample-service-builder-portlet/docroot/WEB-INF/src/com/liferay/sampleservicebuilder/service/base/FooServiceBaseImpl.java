@@ -16,12 +16,15 @@ package com.liferay.sampleservicebuilder.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
@@ -76,7 +79,7 @@ public abstract class FooServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the foo remote service
 	 */
-	public com.liferay.sampleservicebuilder.service.FooService getFooService() {
+	public FooService getFooService() {
 		return fooService;
 	}
 
@@ -85,8 +88,7 @@ public abstract class FooServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param fooService the foo remote service
 	 */
-	public void setFooService(
-		com.liferay.sampleservicebuilder.service.FooService fooService) {
+	public void setFooService(FooService fooService) {
 		this.fooService = fooService;
 	}
 
@@ -431,13 +433,18 @@ public abstract class FooServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = fooPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -452,7 +459,7 @@ public abstract class FooServiceBaseImpl extends BaseServiceImpl
 	@BeanReference(type = com.liferay.sampleservicebuilder.service.FooLocalService.class)
 	protected com.liferay.sampleservicebuilder.service.FooLocalService fooLocalService;
 	@BeanReference(type = com.liferay.sampleservicebuilder.service.FooService.class)
-	protected com.liferay.sampleservicebuilder.service.FooService fooService;
+	protected FooService fooService;
 	@BeanReference(type = FooPersistence.class)
 	protected FooPersistence fooPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)

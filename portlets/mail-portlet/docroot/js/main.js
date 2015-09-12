@@ -70,13 +70,17 @@ AUI.add(
 								folderId: folderId
 							}
 						),
+<<<<<<< HEAD
 						dataType: 'json',
+=======
+						dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						method: 'POST',
 						on: {
 							success: function(event, id, obj) {
 								var responseData = this.get('responseData');
 
-								if ((responseData.status != 'success') || (responseData.value == 'false')) {
+								if (responseData.status != 'success' || responseData.value == 'false') {
 									return;
 								}
 
@@ -105,7 +109,11 @@ AUI.add(
 								messageIds: messageIds
 							}
 						),
+<<<<<<< HEAD
 						dataType: 'json',
+=======
+						dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						method: 'POST',
 						on: {
 							failure: function(event, id, obj) {
@@ -169,7 +177,11 @@ AUI.add(
 								value: value
 							}
 						),
+<<<<<<< HEAD
 						dataType: 'json',
+=======
+						dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						method: 'POST',
 						on: {
 							failure: function(event, id, obj) {
@@ -187,6 +199,7 @@ AUI.add(
 				);
 			},
 
+<<<<<<< HEAD
 			loadAccounts: function(accountId) {
 				var instance = this;
 
@@ -203,6 +216,8 @@ AUI.add(
 				instance.accountsContainer.io.start();
 			},
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			loadAccount: function(accountId, inboxFolderId) {
 				var instance = this;
 
@@ -242,6 +257,25 @@ AUI.add(
 				);
 
 				instance._hideWindow();
+<<<<<<< HEAD
+=======
+			},
+
+			loadAccounts: function(accountId) {
+				var instance = this;
+
+				instance.accountsContainer.io.set(
+					'data',
+					Liferay.Util.ns(
+						instance.namespace,
+						{
+							accountId: accountId
+						}
+					)
+				);
+
+				instance.accountsContainer.io.start();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			},
 
 			loadCompose: function(accountId, messageId, messageType, replyMessageId) {
@@ -321,10 +355,17 @@ AUI.add(
 						instance.namespace,
 						{
 							folderId: folderId,
+<<<<<<< HEAD
 							messageNumber: messageNumber,
 							orderByField: orderByField,
 							orderByType: orderByType,
 							keywords: keywords
+=======
+							keywords: keywords,
+							messageNumber: messageNumber,
+							orderByField: orderByField,
+							orderByType: orderByType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						}
 					)
 				);
@@ -380,12 +421,21 @@ AUI.add(
 					themeDisplay.getLayoutURL() + '/-/mail/move_messages',
 					{
 						data: Liferay.Util.ns(
+<<<<<<< HEAD
 							instance.namespace, {
+=======
+							instance.namespace,
+							{
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								folderId: folderId,
 								messageIds: messageIds
 							}
 						),
+<<<<<<< HEAD
 						dataType: 'json',
+=======
+						dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						method: 'POST',
 						on: {
 							failure: function(event, id, obj) {
@@ -541,9 +591,6 @@ AUI.add(
 				instance.messagesContainer.plug(
 					A.Plugin.IO,
 					{
-						autoLoad: false,
-						method: 'POST',
-						uri: themeDisplay.getLayoutURL() + '/-/mail/view_messages',
 						after: {
 							success: function() {
 								instance.messagesContainer.all('.flag-messages').on(
@@ -553,8 +600,13 @@ AUI.add(
 
 										var currentTarget = event.currentTarget;
 
+<<<<<<< HEAD
 										var flagType = currentTarget.getData('flagType');
 										var flagToggle = currentTarget.getData('flagToggle');
+=======
+										var flagToggle = currentTarget.getData('flagToggle');
+										var flagType = currentTarget.getData('flagType');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 										instance.flagMessages(flagType, flagToggle, messageIds);
 									}
@@ -563,7 +615,11 @@ AUI.add(
 								instance.messagesContainer.all('.move-messages').on(
 									'click',
 									function(event) {
+<<<<<<< HEAD
 										var folderId = A.Lang.String.trim(event.currentTarget.text());
+=======
+										var folderId = event.currentTarget.text().trim();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 										var messageIds = instance._getSelectedMessageIds();
 
@@ -571,7 +627,10 @@ AUI.add(
 									}
 								);
 							}
-						}
+						},
+						autoLoad: false,
+						method: 'POST',
+						uri: themeDisplay.getLayoutURL() + '/-/mail/view_messages'
 					}
 				);
 
@@ -605,6 +664,7 @@ AUI.add(
 						var link = event.currentTarget;
 
 						var li = link.ancestor('li');
+<<<<<<< HEAD
 
 						if (!li || !li.hasClass('disabled')) {
 							var folderId = link.getData('folderId');
@@ -613,6 +673,16 @@ AUI.add(
 							var orderByType = link.getData('orderByType');
 							var keywords = link.getData('keywords');
 
+=======
+
+						if (!li || !li.hasClass('disabled')) {
+							var folderId = link.getData('folderId');
+							var keywords = link.getData('keywords');
+							var messageNumber = link.getData('messageNumber');
+							var orderByField = link.getData('orderByField');
+							var orderByType = link.getData('orderByType');
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							instance.loadMessage(folderId, messageNumber, orderByField, orderByType, keywords);
 						}
 					},
@@ -626,7 +696,7 @@ AUI.add(
 
 						var messageId = link.getData('messageId');
 
-						instance.loadCompose(instance.accountId, messageId, "edit", 0);
+						instance.loadCompose(instance.accountId, messageId, 'edit', 0);
 					},
 					'.draft-link'
 				);
@@ -656,10 +726,17 @@ AUI.add(
 
 						if (!li || !li.hasClass('disabled')) {
 							var folderId = link.getData('folderId');
+<<<<<<< HEAD
 							var pageNumber = link.getData('pageNumber');
 							var orderByField = link.getData('orderByField');
 							var orderByType = link.getData('orderByType');
 							var keywords = link.getData('keywords');
+=======
+							var keywords = link.getData('keywords');
+							var orderByField = link.getData('orderByField');
+							var orderByType = link.getData('orderByType');
+							var pageNumber = link.getData('pageNumber');
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 							instance.loadMessages(folderId, pageNumber, orderByField, orderByType, keywords);
 						}

@@ -22,7 +22,6 @@ import com.liferay.microblogs.service.permission.MicroblogsEntryPermission;
 import com.liferay.microblogs.util.WebKeys;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -31,22 +30,30 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
-import com.liferay.portlet.asset.model.BaseAssetRenderer;
+import com.liferay.portlet.asset.model.BaseJSPAssetRenderer;
 
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Matthew Kong
  */
-public class MicroblogsEntryAssetRenderer extends BaseAssetRenderer {
+public class MicroblogsEntryAssetRenderer
+	extends BaseJSPAssetRenderer<MicroblogsEntry> {
 
 	public MicroblogsEntryAssetRenderer(MicroblogsEntry entry) {
 		_entry = entry;
+	}
+
+	@Override
+	public MicroblogsEntry getAssetObject() {
+		return _entry;
 	}
 
 	@Override
@@ -74,13 +81,27 @@ public class MicroblogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	@Override
-	public String getSummary(Locale locale) {
-		return HtmlUtil.stripHtml(_entry.getContent());
+	public String getJspPath(HttpServletRequest request, String template) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
+
+			return "/microblogs/asset/" + template + ".jsp";
+		}
+		else {
+			return null;
+		}
+	}
+
+	@Override
+	public String getSummary(
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		return _entry.getContent();
 	}
 
 	@Override
 	public String getTitle(Locale locale) {
-		return HtmlUtil.stripHtml(_entry.getContent());
+		return _entry.getContent();
 	}
 
 	@Override
@@ -107,12 +128,12 @@ public class MicroblogsEntryAssetRenderer extends BaseAssetRenderer {
 
 			long microblogsEntryId = _entry.getMicroblogsEntryId();
 
-			if (_entry.getReceiverMicroblogsEntryId() > 0) {
-				microblogsEntryId =_entry.getReceiverMicroblogsEntryId();
+			if (_entry.getParentMicroblogsEntryId() > 0) {
+				microblogsEntryId =_entry.getParentMicroblogsEntryId();
 			}
 
 			portletURL.setParameter(
-				"receiverMicroblogsEntryId", String.valueOf(microblogsEntryId));
+				"parentMicroblogsEntryId", String.valueOf(microblogsEntryId));
 
 			return portletURL.toString();
 		}
@@ -150,21 +171,14 @@ public class MicroblogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	@Override
-	public String render(
-			RenderRequest renderRequest, RenderResponse renderResponse,
+	public boolean include(
+			HttpServletRequest request, HttpServletResponse response,
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_ABSTRACT) ||
-			template.equals(TEMPLATE_FULL_CONTENT)) {
+		request.setAttribute(WebKeys.MICROBLOGS_ENTRY, _entry);
 
-			renderRequest.setAttribute(WebKeys.MICROBLOGS_ENTRY, _entry);
-
-			return "/microblogs/asset/" + template + ".jsp";
-		}
-		else {
-			return null;
-		}
+		return super.include(request, response, template);
 	}
 
 	private MicroblogsEntry _entry;

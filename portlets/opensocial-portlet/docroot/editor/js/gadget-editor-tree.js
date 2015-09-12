@@ -2,7 +2,10 @@ AUI.add(
 	'gadget-editor-tree',
 	function(A) {
 		var Lang = A.Lang;
+<<<<<<< HEAD
 		var AArray = A.Array;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		var isString = Lang.isString;
 		var isValue = Lang.isValue;
 
@@ -36,10 +39,17 @@ AUI.add(
 
 		var NEW_NODE = 'newNode';
 
+<<<<<<< HEAD
 		var OWNER_TREE = 'ownerTree';
 
 		var OVERFLOW = 'overflow';
 
+=======
+		var OVERFLOW = 'overflow';
+
+		var OWNER_TREE = 'ownerTree';
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		var PARENT_NODE = 'parentNode';
 
 		var PERMISSIONS = 'permissions';
@@ -54,9 +64,12 @@ AUI.add(
 
 		var TreeViewEditor = A.Component.create(
 			{
+<<<<<<< HEAD
 				EXTENDS: A.TreeView,
 
 				NAME: 'tree-view-editor',
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				ATTRS: {
 					activeEditable: {
@@ -75,6 +88,13 @@ AUI.add(
 					}
 				},
 
+<<<<<<< HEAD
+=======
+				EXTENDS: A.TreeView,
+
+				NAME: 'tree-view-editor',
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				prototype: {
 					addNewNodeToFolder: function(label, isLeaf, parentId) {
 						var instance = this;
@@ -153,9 +173,14 @@ AUI.add(
 						var fileEntryChildren = [];
 						var folderChildren = [];
 
+<<<<<<< HEAD
 						AArray.each(
 							children,
 							function(item, index, collection) {
+=======
+						children.forEach(
+							function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								if (item.isLeaf()) {
 									fileEntryChildren.push(item);
 								}
@@ -168,8 +193,12 @@ AUI.add(
 						fileEntryChildren.sort(arraySort);
 						folderChildren.sort(arraySort);
 
+<<<<<<< HEAD
 						AArray.each(
 							folderChildren,
+=======
+						folderChildren.forEach(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							function(item, index, collection) {
 								if (index != 0) {
 									instance.insertAfter(item, collection[index - 1]);
@@ -177,8 +206,12 @@ AUI.add(
 							}
 						);
 
+<<<<<<< HEAD
 						AArray.each(
 							fileEntryChildren,
+=======
+						fileEntryChildren.forEach(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							function(item, index, collection) {
 								if (index === 0) {
 									if (folderChildren.length > 0) {
@@ -199,18 +232,28 @@ AUI.add(
 
 		var TreeNodeEditor = A.Component.create(
 			{
+<<<<<<< HEAD
 				EXTENDS: A.TreeNodeIO,
 
 				NAME: 'tree-node-editor',
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				ATTRS: {
 					editable: {},
 
 					entryId: {
+<<<<<<< HEAD
 						value: STR_EMPTY,
 						setter: function(value) {
 							return String(value);
 						}
+=======
+						setter: function(value) {
+							return String(value);
+						},
+						value: STR_EMPTY
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					},
 
 					fileEntryLoaded: {
@@ -238,7 +281,25 @@ AUI.add(
 					}
 				},
 
+<<<<<<< HEAD
 				prototype: {
+=======
+				EXTENDS: A.TreeNodeIO,
+
+				NAME: 'tree-node-editor',
+
+				prototype: {
+					renderUI: function() {
+						var instance = this;
+
+						TreeNodeEditor.superclass.renderUI.apply(this, arguments);
+
+						instance._renderContextMenu();
+						instance._renderEditable();
+						instance._renderFileEntryLoaded();
+					},
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					bindUI: function() {
 						var instance = this;
 
@@ -252,6 +313,7 @@ AUI.add(
 						instance.on('entryIdChange', instance._onEntryIdChange);
 					},
 
+<<<<<<< HEAD
 					renderUI: function() {
 						var instance = this;
 
@@ -262,6 +324,8 @@ AUI.add(
 						instance._renderFileEntryLoaded();
 					},
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					appendChild: function(node) {
 						var instance = this;
 
@@ -284,8 +348,12 @@ AUI.add(
 
 							var ownerTree = instance.get(OWNER_TREE);
 
+<<<<<<< HEAD
 							AArray.each(
 								siblings,
+=======
+							siblings.forEach(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								function(sibling) {
 									if (sibling.isLeaf() === isLeaf) {
 										filteredSiblings.push(sibling);
@@ -336,9 +404,14 @@ AUI.add(
 
 						var ownerTree = instance.get(OWNER_TREE);
 
+<<<<<<< HEAD
 						AArray.each(
 							children,
 							function(item, index, collection) {
+=======
+						children.forEach(
+							function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								if (item.isLeaf()) {
 									fileEntryChildren.push(item);
 								}
@@ -351,8 +424,12 @@ AUI.add(
 						fileEntryChildren.sort(arraySort);
 						folderChildren.sort(arraySort);
 
+<<<<<<< HEAD
 						AArray.each(
 							folderChildren,
+=======
+						folderChildren.forEach(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							function(item, index, collection) {
 								if (index != 0) {
 									ownerTree.insertAfter(item, collection[index - 1]);
@@ -360,8 +437,12 @@ AUI.add(
 							}
 						);
 
+<<<<<<< HEAD
 						AArray.each(
 							fileEntryChildren,
+=======
+						fileEntryChildren.forEach(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							function(item, index, collection) {
 								if (index === 0) {
 									if (folderChildren.length > 0) {
@@ -538,9 +619,14 @@ AUI.add(
 										if (!overlayContext.get(RENDERED)) {
 											contextMenu.render();
 
+<<<<<<< HEAD
 											AArray.each(
 												contextMenu.get('children')[0],
 												function(item, index, collection) {
+=======
+											contextMenu.get('children')[0].forEach(
+												function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 													if (A.instanceOf(item, A.Button)) {
 														item.render();
 													}
@@ -751,7 +837,11 @@ AUI.add(
 							}
 							else {
 								publishMenuButton.show();
+<<<<<<< HEAD
 								publishMenuButton.get('boundingBox').addClass('last', true)
+=======
+								publishMenuButton.get('boundingBox').addClass('last', true);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								unpublishMenuButton.hide();
 							}
 						}
@@ -766,10 +856,13 @@ AUI.add(
 
 		var EditableEditor = A.Component.create(
 			{
+<<<<<<< HEAD
 				EXTENDS: A.Editable,
 
 				NAME: 'editable-editor',
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				ATTRS: {
 					entryId: {
 						setter: function(value) {
@@ -779,6 +872,13 @@ AUI.add(
 					}
 				},
 
+<<<<<<< HEAD
+=======
+				EXTENDS: A.Editable,
+
+				NAME: 'editable-editor',
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				prototype: {
 					_afterFocusedChangeEditable: function(event) {
 						var instance = this;
@@ -792,8 +892,11 @@ AUI.add(
 						var instance = this;
 
 						EditableEditor.superclass._defStartEditingFn.apply(this, arguments);
+<<<<<<< HEAD
 
 						var inputField = instance._comboBox._field;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 				}
 			}

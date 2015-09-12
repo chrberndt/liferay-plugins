@@ -97,7 +97,11 @@ to = sb.toString() + to;
 		<aui:field-wrapper>
 			<c:if test="<%= fileMaxSize != 0 %>">
 				<div class="portlet-msg-info">
+<<<<<<< HEAD
 					<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", String.valueOf(fileMaxSize), false) %>
+=======
+					<%= LanguageUtil.format(request, "upload-documents-no-larger-than-x-k", String.valueOf(fileMaxSize), false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</div>
 			</c:if>
 		</aui:field-wrapper>
@@ -142,7 +146,7 @@ to = sb.toString() + to;
 
 			var loadingMask = new A.LoadingMask(
 				{
-					'strings.loading': '<%= UnicodeLanguageUtil.get(pageContext, "sending-message") %>',
+					'strings.loading': '<%= UnicodeLanguageUtil.get(request, "sending-message") %>',
 					target: A.one('.private-messaging-portlet .message-body-container')
 				}
 			);
@@ -150,9 +154,15 @@ to = sb.toString() + to;
 			loadingMask.show();
 
 			A.io.request(
+<<<<<<< HEAD
 				'<liferay-portlet:resourceURL id="sendMessage"></liferay-portlet:resourceURL>',
 				{
 					dataType: 'json',
+=======
+				'<liferay-portlet:actionURL name="sendMessage"></liferay-portlet:actionURL>',
+				{
+					dataType: 'JSON',
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					form: {
 						id: form,
 						upload: true
@@ -161,7 +171,11 @@ to = sb.toString() + to;
 						complete: function(event, id, obj) {
 							var responseText = obj.responseText;
 
+<<<<<<< HEAD
 							var responseData = A.JSON.parse(responseText);
+=======
+							var responseData = JSON.parse(responseText);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 							if (responseData.success) {
 								Liferay.Util.getWindow('<portlet:namespace />Dialog').hide();

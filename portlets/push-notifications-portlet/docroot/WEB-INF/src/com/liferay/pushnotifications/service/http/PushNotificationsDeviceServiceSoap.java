@@ -14,6 +14,11 @@
 
 package com.liferay.pushnotifications.service.http;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -23,7 +28,11 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
+<<<<<<< HEAD
  * {@link com.liferay.pushnotifications.service.PushNotificationsDeviceServiceUtil} service utility. The
+=======
+ * {@link PushNotificationsDeviceServiceUtil} service utility. The
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -55,12 +64,22 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
+<<<<<<< HEAD
  * @author Silvio Santos
  * @see PushNotificationsDeviceServiceHttp
  * @see com.liferay.pushnotifications.model.PushNotificationsDeviceSoap
  * @see com.liferay.pushnotifications.service.PushNotificationsDeviceServiceUtil
  * @generated
  */
+=======
+ * @author Bruno Farache
+ * @see PushNotificationsDeviceServiceHttp
+ * @see com.liferay.pushnotifications.model.PushNotificationsDeviceSoap
+ * @see PushNotificationsDeviceServiceUtil
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class PushNotificationsDeviceServiceSoap {
 	public static com.liferay.pushnotifications.model.PushNotificationsDeviceSoap addPushNotificationsDevice(
 		java.lang.String token, java.lang.String platform)
@@ -94,5 +113,35 @@ public class PushNotificationsDeviceServiceSoap {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public static void sendPushNotification(long[] toUserIds,
+		java.lang.String payload) throws RemoteException {
+		try {
+			PushNotificationsDeviceServiceUtil.sendPushNotification(toUserIds,
+				payload);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void sendPushNotification(java.lang.String platform,
+		java.util.List<java.lang.String> tokens, java.lang.String payload)
+		throws RemoteException {
+		try {
+			PushNotificationsDeviceServiceUtil.sendPushNotification(platform,
+				tokens, payload);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private static Log _log = LogFactoryUtil.getLog(PushNotificationsDeviceServiceSoap.class);
 }

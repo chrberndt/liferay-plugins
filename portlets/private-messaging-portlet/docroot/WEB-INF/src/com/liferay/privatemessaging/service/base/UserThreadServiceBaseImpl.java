@@ -16,12 +16,21 @@ package com.liferay.privatemessaging.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.util.PortalUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.service.UserThreadService;
@@ -73,7 +82,11 @@ public abstract class UserThreadServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the user thread remote service
 	 */
+<<<<<<< HEAD
 	public com.liferay.privatemessaging.service.UserThreadService getUserThreadService() {
+=======
+	public UserThreadService getUserThreadService() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return userThreadService;
 	}
 
@@ -82,8 +95,12 @@ public abstract class UserThreadServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param userThreadService the user thread remote service
 	 */
+<<<<<<< HEAD
 	public void setUserThreadService(
 		com.liferay.privatemessaging.service.UserThreadService userThreadService) {
+=======
+	public void setUserThreadService(UserThreadService userThreadService) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		this.userThreadService = userThreadService;
 	}
 
@@ -316,6 +333,7 @@ public abstract class UserThreadServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query
@@ -324,6 +342,21 @@ public abstract class UserThreadServiceBaseImpl extends BaseServiceImpl
 		try {
 			DataSource dataSource = userThreadPersistence.getDataSource();
 
+=======
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = userThreadPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
 
@@ -336,8 +369,13 @@ public abstract class UserThreadServiceBaseImpl extends BaseServiceImpl
 
 	@BeanReference(type = com.liferay.privatemessaging.service.UserThreadLocalService.class)
 	protected com.liferay.privatemessaging.service.UserThreadLocalService userThreadLocalService;
+<<<<<<< HEAD
 	@BeanReference(type = com.liferay.privatemessaging.service.UserThreadService.class)
 	protected com.liferay.privatemessaging.service.UserThreadService userThreadService;
+=======
+	@BeanReference(type = UserThreadService.class)
+	protected UserThreadService userThreadService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = UserThreadPersistence.class)
 	protected UserThreadPersistence userThreadPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)

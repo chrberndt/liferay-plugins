@@ -17,7 +17,6 @@ package com.liferay.akismet.hook.action;
 import com.liferay.akismet.util.AkismetConstants;
 import com.liferay.akismet.util.AkismetUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -36,8 +35,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.wiki.model.WikiPage;
+import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -119,7 +118,7 @@ public class AkismetEditPageAction extends BaseStrutsPortletAction {
 
 	protected void updateSummary(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -172,6 +171,7 @@ public class AkismetEditPageAction extends BaseStrutsPortletAction {
 
 			// Latest version
 
+<<<<<<< HEAD
 			if (wikiPage.getVersion() >= latestVersion) {
 				if (previousVersionWikiPage != null) {
 					WikiPageLocalServiceUtil.revertPage(
@@ -186,6 +186,14 @@ public class AkismetEditPageAction extends BaseStrutsPortletAction {
 						wikiPage.getParentTitle(), wikiPage.getRedirectTitle(),
 						serviceContext);
 				}
+=======
+			if ((wikiPage.getVersion() >= latestVersion) &&
+				(previousVersionWikiPage != null)) {
+
+				WikiPageLocalServiceUtil.revertPage(
+					themeDisplay.getUserId(), wikiPage.getNodeId(),
+					wikiPage.getTitle(), previousVersion, serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			}
 
 			// Akismet
@@ -206,7 +214,8 @@ public class AkismetEditPageAction extends BaseStrutsPortletAction {
 
 			// Latest version
 
-			if ((latestContent != null) && ((previousContent == null) ||
+			if ((latestContent != null) &&
+				((previousContent == null) ||
 				 latestContent.equals(previousContent))) {
 
 				WikiPageLocalServiceUtil.revertPage(

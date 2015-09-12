@@ -14,6 +14,8 @@
 
 package com.liferay.mail.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.mail.model.Account;
 
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -26,10 +28,11 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see AccountPersistenceImpl
+ * @see com.liferay.mail.service.persistence.impl.AccountPersistenceImpl
  * @see AccountUtil
  * @generated
  */
+@ProviderType
 public interface AccountPersistence extends BasePersistence<Account> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -42,33 +45,28 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	*
 	* @param userId the user ID
 	* @return the matching accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findByUserId(long userId);
 
 	/**
 	* Returns a range of all the accounts where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
 	* @param start the lower bound of the range of accounts
 	* @param end the upper bound of the range of accounts (not inclusive)
 	* @return the range of matching accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findByUserId(
-		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findByUserId(long userId, int start, int end);
 
 	/**
 	* Returns an ordered range of all the accounts where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -76,12 +74,10 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param end the upper bound of the range of accounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findByUserId(
-		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findByUserId(long userId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator);
 
 	/**
 	* Returns the first account in the ordered set where userId = &#63;.
@@ -89,13 +85,11 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching account
-	* @throws com.liferay.mail.NoSuchAccountException if a matching account could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a matching account could not be found
 	*/
-	public com.liferay.mail.model.Account findByUserId_First(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account findByUserId_First(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Returns the first account in the ordered set where userId = &#63;.
@@ -103,11 +97,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching account, or <code>null</code> if a matching account could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account fetchByUserId_First(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account fetchByUserId_First(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator);
 
 	/**
 	* Returns the last account in the ordered set where userId = &#63;.
@@ -115,13 +107,11 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching account
-	* @throws com.liferay.mail.NoSuchAccountException if a matching account could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a matching account could not be found
 	*/
-	public com.liferay.mail.model.Account findByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account findByUserId_Last(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Returns the last account in the ordered set where userId = &#63;.
@@ -129,11 +119,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching account, or <code>null</code> if a matching account could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account fetchByUserId_Last(long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account fetchByUserId_Last(long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator);
 
 	/**
 	* Returns the accounts before and after the current account in the ordered set where userId = &#63;.
@@ -142,47 +130,37 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next account
-	* @throws com.liferay.mail.NoSuchAccountException if a account with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a account with the primary key could not be found
 	*/
-	public com.liferay.mail.model.Account[] findByUserId_PrevAndNext(
-		long accountId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account[] findByUserId_PrevAndNext(long accountId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Removes all the accounts where userId = &#63; from the database.
 	*
 	* @param userId the user ID
-	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByUserId(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public void removeByUserId(long userId);
 
 	/**
 	* Returns the number of accounts where userId = &#63;.
 	*
 	* @param userId the user ID
 	* @return the number of matching accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public int countByUserId(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public int countByUserId(long userId);
 
 	/**
-	* Returns the account where userId = &#63; and address = &#63; or throws a {@link com.liferay.mail.NoSuchAccountException} if it could not be found.
+	* Returns the account where userId = &#63; and address = &#63; or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param userId the user ID
 	* @param address the address
 	* @return the matching account
-	* @throws com.liferay.mail.NoSuchAccountException if a matching account could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a matching account could not be found
 	*/
-	public com.liferay.mail.model.Account findByU_A(long userId,
-		java.lang.String address)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account findByU_A(long userId, java.lang.String address)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Returns the account where userId = &#63; and address = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
@@ -190,11 +168,8 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param address the address
 	* @return the matching account, or <code>null</code> if a matching account could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account fetchByU_A(long userId,
-		java.lang.String address)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account fetchByU_A(long userId, java.lang.String address);
 
 	/**
 	* Returns the account where userId = &#63; and address = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -203,11 +178,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param address the address
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching account, or <code>null</code> if a matching account could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account fetchByU_A(long userId,
-		java.lang.String address, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account fetchByU_A(long userId, java.lang.String address,
+		boolean retrieveFromCache);
 
 	/**
 	* Removes the account where userId = &#63; and address = &#63; from the database.
@@ -215,12 +188,9 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param address the address
 	* @return the account that was removed
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account removeByU_A(long userId,
-		java.lang.String address)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account removeByU_A(long userId, java.lang.String address)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Returns the number of accounts where userId = &#63; and address = &#63;.
@@ -228,25 +198,22 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param userId the user ID
 	* @param address the address
 	* @return the number of matching accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public int countByU_A(long userId, java.lang.String address)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public int countByU_A(long userId, java.lang.String address);
 
 	/**
 	* Caches the account in the entity cache if it is enabled.
 	*
 	* @param account the account
 	*/
-	public void cacheResult(com.liferay.mail.model.Account account);
+	public void cacheResult(Account account);
 
 	/**
 	* Caches the accounts in the entity cache if it is enabled.
 	*
 	* @param accounts the accounts
 	*/
-	public void cacheResult(
-		java.util.List<com.liferay.mail.model.Account> accounts);
+	public void cacheResult(java.util.List<Account> accounts);
 
 	/**
 	* Creates a new account with the primary key. Does not add the account to the database.
@@ -254,102 +221,86 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	* @param accountId the primary key for the new account
 	* @return the new account
 	*/
-	public com.liferay.mail.model.Account create(long accountId);
+	public Account create(long accountId);
 
 	/**
 	* Removes the account with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param accountId the primary key of the account
 	* @return the account that was removed
-	* @throws com.liferay.mail.NoSuchAccountException if a account with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a account with the primary key could not be found
 	*/
-	public com.liferay.mail.model.Account remove(long accountId)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account remove(long accountId)
+		throws com.liferay.mail.NoSuchAccountException;
 
-	public com.liferay.mail.model.Account updateImpl(
-		com.liferay.mail.model.Account account)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account updateImpl(Account account);
 
 	/**
-	* Returns the account with the primary key or throws a {@link com.liferay.mail.NoSuchAccountException} if it could not be found.
+	* Returns the account with the primary key or throws a {@link NoSuchAccountException} if it could not be found.
 	*
 	* @param accountId the primary key of the account
 	* @return the account
-	* @throws com.liferay.mail.NoSuchAccountException if a account with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchAccountException if a account with the primary key could not be found
 	*/
-	public com.liferay.mail.model.Account findByPrimaryKey(long accountId)
-		throws com.liferay.mail.NoSuchAccountException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public Account findByPrimaryKey(long accountId)
+		throws com.liferay.mail.NoSuchAccountException;
 
 	/**
 	* Returns the account with the primary key or returns <code>null</code> if it could not be found.
 	*
 	* @param accountId the primary key of the account
 	* @return the account, or <code>null</code> if a account with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.mail.model.Account fetchByPrimaryKey(long accountId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public Account fetchByPrimaryKey(long accountId);
+
+	@Override
+	public java.util.Map<java.io.Serializable, Account> fetchByPrimaryKeys(
+		java.util.Set<java.io.Serializable> primaryKeys);
 
 	/**
 	* Returns all the accounts.
 	*
 	* @return the accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findAll()
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findAll();
 
 	/**
 	* Returns a range of all the accounts.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of accounts
 	* @param end the upper bound of the range of accounts (not inclusive)
 	* @return the range of accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findAll(int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findAll(int start, int end);
 
 	/**
 	* Returns an ordered range of all the accounts.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.mail.model.impl.AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AccountModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of accounts
 	* @param end the upper bound of the range of accounts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.mail.model.Account> findAll(int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<Account> findAll(int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Account> orderByComparator);
 
 	/**
 	* Removes all the accounts from the database.
-	*
-	* @throws SystemException if a system exception occurred
 	*/
-	public void removeAll()
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public void removeAll();
 
 	/**
 	* Returns the number of accounts.
 	*
 	* @return the number of accounts
-	* @throws SystemException if a system exception occurred
 	*/
-	public int countAll()
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public int countAll();
 }

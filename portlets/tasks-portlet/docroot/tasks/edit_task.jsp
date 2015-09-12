@@ -29,23 +29,35 @@ long assigneeUserId = BeanParamUtil.getLong(tasksEntry, request, "assigneeUserId
 
 boolean addDueDate = false;
 String dueDateClassName = "hide";
+<<<<<<< HEAD
 String dueDateToggleText = LanguageUtil.get(pageContext, "add-due-date");
+=======
+String dueDateToggleText = LanguageUtil.get(request, "add-due-date");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 	addDueDate = true;
 	dueDateClassName = StringPool.BLANK;
-	dueDateToggleText = LanguageUtil.get(pageContext, "remove-due-date");
+	dueDateToggleText = LanguageUtil.get(request, "remove-due-date");
 }
 %>
 
 <c:choose>
 	<c:when test="<%= (tasksEntry == null) && (tasksEntryId > 0) %>">
+<<<<<<< HEAD
 		<span class="alert alert-error"><liferay-ui:message key="task-could-not-be-found" /></span>
+=======
+		<span class="alert alert-danger"><liferay-ui:message key="task-could-not-be-found" /></span>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</c:when>
 	<c:otherwise>
 		<portlet:actionURL name="updateTasksEntry" var="updateTasksEntryURL" />
 
+<<<<<<< HEAD
 		<aui:form action="<%= updateTasksEntryURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveForm();" %>'>
+=======
+		<aui:form action="<%= updateTasksEntryURL %>" method="post" name="fm1">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			<aui:input name="mvcPath" type="hidden" value="/tasks/edit_task.jsp" />
 			<aui:input name="tasksEntryId" type="hidden" value="<%= tasksEntryId %>" />
 			<aui:input name="userId" type="hidden" value="<%= user.getUserId() %>" />
@@ -90,7 +102,7 @@ if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 						LinkedHashMap userParams = new LinkedHashMap();
 
 						userParams.put("inherit", Boolean.TRUE);
-						userParams.put("usersGroups", new Long(themeDisplay.getScopeGroupId()));
+						userParams.put("usersGroups", Long.valueOf(themeDisplay.getScopeGroupId()));
 
 						users = UserLocalServiceUtil.search(company.getCompanyId(), StringPool.BLANK, WorkflowConstants.STATUS_APPROVED, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new UserFirstNameComparator(true));
 					}
@@ -112,19 +124,25 @@ if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 					</optgroup>
 				</aui:select>
 
-				<aui:select name="priority">
-					<aui:option label="high" selected="<%= (priority == 1) %>" value="1" />
-					<aui:option label="normal" selected="<%= (priority == 2) %>" value="2" />
-					<aui:option label="low" selected="<%= (priority == 3) %>" value="3" />
+				<aui:select name="priority" value="<%= priority %>">
+					<aui:option label="high" value="1" />
+					<aui:option label="normal" value="2" />
+					<aui:option label="low" value="3" />
 				</aui:select>
 
 				<%
 				String taglibAddDueDateOnClick = renderResponse.getNamespace() + "displayInputDate();";
 				%>
 
+<<<<<<< HEAD
 				<label class="field-label due-date-label"><%= LanguageUtil.get(pageContext, "due-date") %></label>
 
 				<a class="field-content due-date-toggle" href="#" id="toggleDueDate" onClick="<%= taglibAddDueDateOnClick %>"><%= dueDateToggleText %></a>
+=======
+				<label class="due-date-label field-label"><%= LanguageUtil.get(request, "due-date") %></label>
+
+				<a class="due-date-toggle field-content" href="javascript:;" id="toggleDueDate" onClick="<%= taglibAddDueDateOnClick %>"><%= dueDateToggleText %></a>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 				<aui:input id="addDueDate" name="addDueDate" type="hidden" value="<%= addDueDate %>" />
 
@@ -148,25 +166,17 @@ if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 
 				<aui:input name="tags" type="assetTags" />
 
-				<aui:button-row cssClass="task-action">
+				<aui:button-row>
 					<aui:button type="submit" />
 
 					<c:if test="<%= tasksEntryId > 0 %>">
-						<portlet:renderURL var="viewURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+						<portlet:renderURL var="viewURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 							<portlet:param name="mvcPath" value="/tasks/view_task.jsp" />
 							<portlet:param name="tasksEntryId" value="<%= String.valueOf(tasksEntry.getTasksEntryId()) %>" />
 						</portlet:renderURL>
 
-						<%
-						String taglibOnClick = "Liferay.Tasks.openTask('" + viewURL.toString() + "');";
-						%>
-
-						<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
+						<aui:button onClick="<%= viewURL %>" value="cancel" />
 					</c:if>
-
-					<div class="task-action-right">
-						<aui:button onClick="Liferay.Tasks.closePopup();" value="close" />
-					</div>
 				</aui:button-row>
 			</aui:fieldset>
 		</aui:form>
@@ -194,11 +204,11 @@ if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 
 				if (checkboxValue == 'true') {
 					checkbox.set('value', false);
-					dueDateToggle.html('<%= LanguageUtil.get(pageContext, "add-due-date") %>');
+					dueDateToggle.html('<%= LanguageUtil.get(request, "add-due-date") %>');
 				}
 				else {
 					checkbox.set('value', true);
-					dueDateToggle.html('<%= LanguageUtil.get(pageContext, "remove-due-date") %>');
+					dueDateToggle.html('<%= LanguageUtil.get(request, "remove-due-date") %>');
 				}
 			}
 
@@ -212,24 +222,4 @@ if ((tasksEntry != null) && (tasksEntry.getDueDate() != null)) {
 		},
 		['aui-base']
 	);
-
-	function <portlet:namespace />saveForm() {
-		var A = AUI();
-
-		var form = A.one(document.<portlet:namespace />fm1);
-
-		var popup = Liferay.Tasks.getPopup();
-
-		popup.io.set('form', {id: form.getDOM()});
-		popup.io.set('uri', form.getAttribute('action'));
-
-		popup.io.once(
-			'success',
-			function() {
-				Liferay.Tasks.updateTaskList();
-			}
-		);
-
-		popup.io.start();
-	}
 </aui:script>

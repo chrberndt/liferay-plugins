@@ -60,9 +60,15 @@ ServletContext portalServletContext = ServletContextPool.get(portalServletContex
 	<aui:fieldset>
 		<aui:input name="name" />
 
+<<<<<<< HEAD
 		<aui:select name="version">
 			<aui:option label="<%= Constants.WSRP_V2 %>" selected="<%= version.equals(Constants.WSRP_V2) %>" value="<%= Constants.WSRP_V2 %>" />
 			<aui:option label="<%= Constants.WSRP_V1 %>" selected="<%= version.equals(Constants.WSRP_V1) %>" value="<%= Constants.WSRP_V1 %>" />
+=======
+		<aui:select name="version" value="<%= version %>">
+			<aui:option label="<%= Constants.WSRP_V2 %>" />
+			<aui:option label="<%= Constants.WSRP_V1 %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</aui:select>
 
 		<c:if test="<%= wsrpProducer != null %>">
@@ -81,11 +87,19 @@ ServletContext portalServletContext = ServletContextPool.get(portalServletContex
 
 			for (String portletId : portletIds) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
+<<<<<<< HEAD
 
 				if ((portlet == null) || portlet.isUndeployedPortlet()) {
 					continue;
 				}
 
+=======
+
+				if ((portlet == null) || portlet.isUndeployedPortlet()) {
+					continue;
+				}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				leftList.add(new KeyValuePair(portletId, PortalUtil.getPortletTitle(portlet, portalServletContext, locale)));
 			}
 
@@ -94,10 +108,17 @@ ServletContext portalServletContext = ServletContextPool.get(portalServletContex
 			// Right list
 
 			List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
+<<<<<<< HEAD
 
 			for (int i = 0; i < portletIds.length; i++) {
 				String portletId = portletIds[i];
 
+=======
+
+			for (int i = 0; i < portletIds.length; i++) {
+				String portletId = portletIds[i];
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				int index = portletId.indexOf(PortletConstants.INSTANCE_SEPARATOR);
 
 				if (index != -1) {
@@ -108,6 +129,7 @@ ServletContext portalServletContext = ServletContextPool.get(portalServletContex
 			Arrays.sort(portletIds);
 
 			Iterator<Portlet> itr = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false).iterator();
+<<<<<<< HEAD
 
 			while (itr.hasNext()) {
 				Portlet portlet = (Portlet)itr.next();
@@ -144,6 +166,44 @@ ServletContext portalServletContext = ServletContextPool.get(portalServletContex
 	<aui:button-row>
 		<aui:button type="submit" />
 
+=======
+
+			while (itr.hasNext()) {
+				Portlet portlet = (Portlet)itr.next();
+
+				if (portlet.isUndeployedPortlet()) {
+					continue;
+				}
+
+				if (!portlet.isRemoteable()) {
+					continue;
+				}
+
+				String portletId = portlet.getPortletId();
+
+				if (Arrays.binarySearch(portletIds, portletId) < 0) {
+					rightList.add(new KeyValuePair(portletId, PortalUtil.getPortletTitle(portlet, portalServletContext, locale)));
+				}
+			}
+
+			rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+			%>
+
+			<liferay-ui:input-move-boxes
+				leftBoxName="currentPortletIds"
+				leftList="<%= leftList %>"
+				leftTitle="current"
+				rightBoxName="availablePortletIds"
+				rightList="<%= rightList %>"
+				rightTitle="available"
+			/>
+		</aui:field-wrapper>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" />
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
@@ -167,12 +227,12 @@ PortletURL producersURL = renderResponse.createRenderURL();
 
 producersURL.setParameter("tabs1", "producers");
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "producers"), producersURL.toString());
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "producers"), producersURL.toString());
 
 if (wsrpProducer != null) {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "edit"), currentURL);
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-producer"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "add-producer"), currentURL);
 }
 %>

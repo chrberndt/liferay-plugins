@@ -85,6 +85,14 @@ public abstract class ExtRepositoryModelAdapter<T>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public Date getLastPublishDate() {
+		return null;
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public Object getModel() {
 		return _extRepositoryModel;
 	}
@@ -171,6 +179,14 @@ public abstract class ExtRepositoryModelAdapter<T>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public void setLastPublishDate(Date lastPublishDate) {
+		throw new UnsupportedOperationException("Model is read only");
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setModifiedDate(Date modifiedDate) {
 		throw new UnsupportedOperationException("Model is read only");
 	}

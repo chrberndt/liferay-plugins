@@ -14,7 +14,7 @@
 
 package com.liferay.socialcoding.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.socialcoding.model.SVNRevision;
 import com.liferay.socialcoding.service.SVNRevisionLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.socialcoding.service.SVNRevisionLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see SVNRevisionImpl
- * @see com.liferay.socialcoding.model.SVNRevision
+ * @see SVNRevision
  * @generated
  */
+@ProviderType
 public abstract class SVNRevisionBaseImpl extends SVNRevisionModelImpl
 	implements SVNRevision {
 	/*
@@ -39,7 +40,7 @@ public abstract class SVNRevisionBaseImpl extends SVNRevisionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a s v n revision model instance should use the {@link SVNRevision} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			SVNRevisionLocalServiceUtil.addSVNRevision(this);
 		}

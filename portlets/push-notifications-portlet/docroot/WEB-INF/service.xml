@@ -2,7 +2,11 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 
 <service-builder package-path="com.liferay.pushnotifications" auto-namespace-tables="false">
+<<<<<<< HEAD
 	<author>Silvio Santos</author>
+=======
+	<author>Bruno Farache</author>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<namespace>PushNotifications</namespace>
 	<entity name="PushNotificationsDevice" local-service="true" remote-service="true">
 
@@ -26,7 +30,11 @@
 			<finder-column name="token" />
 		</finder>
 		<finder name="U_P" return-type="Collection">
+<<<<<<< HEAD
 			<finder-column name="userId" />
+=======
+			<finder-column name="userId" arrayable-operator="OR" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			<finder-column name="platform" />
 		</finder>
 	</entity>

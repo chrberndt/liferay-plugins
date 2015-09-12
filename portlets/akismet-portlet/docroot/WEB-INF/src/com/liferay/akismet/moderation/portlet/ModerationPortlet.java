@@ -18,6 +18,7 @@ import com.liferay.akismet.util.AkismetConstants;
 import com.liferay.akismet.util.AkismetUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -34,17 +35,16 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.wiki.constants.WikiPortletKeys;
+import com.liferay.wiki.exception.NoSuchPageException;
+import com.liferay.wiki.model.WikiNode;
+import com.liferay.wiki.model.WikiPage;
+import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +131,7 @@ public class ModerationPortlet extends MVCPortlet {
 		long[] wikiPageIds = ParamUtil.getLongValues(
 			actionRequest, "notSpamWikiPageIds");
 
-		List<String> wikiPageLinks = new ArrayList<String>();
+		List<String> wikiPageLinks = new ArrayList<>();
 
 		for (long wikiPageId : wikiPageIds) {
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPageByPageId(
@@ -166,7 +166,8 @@ public class ModerationPortlet extends MVCPortlet {
 
 			// Latest version
 
-			if ((latestContent != null) && ((previousContent == null) ||
+			if ((latestContent != null) &&
+				((previousContent == null) ||
 				 latestContent.equals(previousContent))) {
 
 				ServiceContext serviceContext =
@@ -182,11 +183,11 @@ public class ModerationPortlet extends MVCPortlet {
 				sb.append("<a href=\"");
 
 				long plid = PortalUtil.getPlidFromPortletId(
-					wikiPage.getGroupId(), PortletKeys.WIKI);
+					wikiPage.getGroupId(), WikiPortletKeys.WIKI);
 
 				LiferayPortletURL liferayPortletURL =
 					PortletURLFactoryUtil.create(
-						actionRequest, PortletKeys.WIKI, plid,
+						actionRequest, WikiPortletKeys.WIKI, plid,
 						PortletRequest.RENDER_PHASE);
 
 				WikiNode wikiNode = wikiPage.getNode();
@@ -213,11 +214,11 @@ public class ModerationPortlet extends MVCPortlet {
 		}
 
 		if (!wikiPageLinks.isEmpty()) {
-			SessionMessages.add(actionRequest, "requestProcessed");
-
 			SessionMessages.add(
 				actionRequest, "anotherUserHasMadeChangesToThesePages",
 				StringUtil.merge(wikiPageLinks, "<br />"));
+
+			addSuccessMessage(actionRequest, actionResponse);
 
 			super.sendRedirect(actionRequest, actionResponse);
 		}

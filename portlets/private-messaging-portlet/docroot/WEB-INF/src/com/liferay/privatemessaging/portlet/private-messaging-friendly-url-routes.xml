@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
 
 <routes>
 	<route>
@@ -7,14 +7,14 @@
 		<implicit-parameter name="mvcPath">/view.jsp</implicit-parameter>
 	</route>
 	<route>
+		<pattern>/{mvcPath}</pattern>
+		<implicit-parameter name="p_p_state">exclusive</implicit-parameter>
+	</route>
+	<route>
 		<pattern>/thread/{mbThreadId:\d+}</pattern>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/thread/{mbThreadId:\d+}/{p_p_state}</pattern>
-	</route>
-	<route>
-		<pattern>/{mvcPath}</pattern>
-		<implicit-parameter name="p_p_state">exclusive</implicit-parameter>
 	</route>
 </routes>

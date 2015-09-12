@@ -18,15 +18,16 @@ import com.liferay.knowledgebase.model.KBComment;
 import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
 
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @deprecated As of 7.0.0, replaced by {@link KBCommentLocalServiceUtil#getActionableDynamicQuery()}
  * @generated
  */
+@Deprecated
 public abstract class KBCommentActionableDynamicQuery
 	extends BaseActionableDynamicQuery {
-	public KBCommentActionableDynamicQuery() throws SystemException {
+	public KBCommentActionableDynamicQuery() {
 		setBaseLocalService(KBCommentLocalServiceUtil.getService());
 		setClass(KBComment.class);
 

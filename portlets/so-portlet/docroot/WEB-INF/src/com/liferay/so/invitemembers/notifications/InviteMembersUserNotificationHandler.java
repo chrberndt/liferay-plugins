@@ -17,9 +17,15 @@
 
 package com.liferay.so.invitemembers.notifications;
 
+<<<<<<< HEAD
 import com.liferay.compat.portal.kernel.notifications.BaseUserNotificationHandler;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+=======
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -66,7 +72,18 @@ public class InviteMembersUserNotificationHandler
 		MemberRequest memberRequest =
 			MemberRequestLocalServiceUtil.fetchMemberRequest(memberRequestId);
 
+<<<<<<< HEAD
 		if (memberRequest == null) {
+=======
+		Group group = null;
+
+		if (memberRequest != null) {
+			group = GroupLocalServiceUtil.fetchGroup(
+				memberRequest.getGroupId());
+		}
+
+		if ((group == null) || (memberRequest == null)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvent(
 				userNotificationEvent.getUserNotificationEventId());
 
@@ -83,7 +100,12 @@ public class InviteMembersUserNotificationHandler
 				new Object[] {
 					getUserNameLink(memberRequest.getUserId(), serviceContext),
 					getSiteDescriptiveName(
+<<<<<<< HEAD
 						memberRequest.getGroupId(), serviceContext)});
+=======
+						memberRequest.getGroupId(), serviceContext)
+					});
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		LiferayPortletResponse liferayPortletResponse =
@@ -152,6 +174,7 @@ public class InviteMembersUserNotificationHandler
 		if (group.hasPublicLayouts()) {
 			sb.append(" href=\"");
 
+<<<<<<< HEAD
 			LiferayPortletResponse liferayPortletResponse =
 				serviceContext.getLiferayPortletResponse();
 
@@ -165,6 +188,10 @@ public class InviteMembersUserNotificationHandler
 			portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 			sb.append(portletURL);
+=======
+			sb.append(
+				group.getDisplayURL(serviceContext.getThemeDisplay(), false));
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			sb.append("\">");
 		}

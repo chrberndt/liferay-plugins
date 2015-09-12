@@ -53,8 +53,9 @@ String jiraUserId = ExpandoValueLocalServiceUtil.getData(company.getCompanyId(),
 					<portlet:renderURL var="editURL" windowState="<%= WindowState.MAXIMIZED.toString() %>" />
 
 					<liferay-ui:icon
-						image="edit"
+						iconCssClass="icon-edit"
 						label="<%= true %>"
+						message="edit"
 						url="<%= editURL %>"
 					/>
 				</c:if>
@@ -65,7 +66,11 @@ String jiraUserId = ExpandoValueLocalServiceUtil.getData(company.getCompanyId(),
 						<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" />">Set your JIRA login.</a>
 					</c:when>
 					<c:otherwise>
+<<<<<<< HEAD
 						<%= LanguageUtil.format(pageContext, (user2.isMale() ? "x-has-not-configured-his-jira-login" : "x-has-not-configured-her-jira-login"), HtmlUtil.escape(user2.getFullName()), false) %>
+=======
+						<%= LanguageUtil.format(request, (user2.isMale() ? "x-has-not-configured-his-jira-login" : "x-has-not-configured-her-jira-login"), HtmlUtil.escape(user2.getFullName()), false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -78,7 +83,11 @@ String jiraUserId = ExpandoValueLocalServiceUtil.getData(company.getCompanyId(),
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 
 			<div class="alert alert-info">
+<<<<<<< HEAD
 				<%= LanguageUtil.format(pageContext, "set-your-login-for-x-to-track-your-jira-activity", PortletPropsValues.JIRA_URL, false) %>
+=======
+				<%= LanguageUtil.format(request, "set-your-login-for-x-to-track-your-jira-activity", PortletPropsValues.JIRA_URL, false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</div>
 
 			<table class="lfr-table">
@@ -87,7 +96,11 @@ String jiraUserId = ExpandoValueLocalServiceUtil.getData(company.getCompanyId(),
 					<liferay-ui:message key="jira-login" />
 				</td>
 				<td>
+<<<<<<< HEAD
 					<input class="lfr-input-text" name="<portlet:namespace />jiraUserId" style="width: 150px;" type="text" value="<%= jiraUserId %>" />
+=======
+					<input class="lfr-input-text" name="<portlet:namespace />jiraUserId" style="width: 150px;" type="text" value="<%= HtmlUtil.escapeAttribute(jiraUserId) %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</td>
 			</tr>
 			</table>

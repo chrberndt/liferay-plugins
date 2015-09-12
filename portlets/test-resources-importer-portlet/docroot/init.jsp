@@ -18,10 +18,24 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
+<<<<<<< HEAD
 <%@ page import="com.liferay.portal.kernel.dao.orm.Criterion" %><%@
+=======
+<%@ page import="com.liferay.asset.categories.admin.web.constants.AssetCategoriesAdminPortletKeys" %><%@
+page import="com.liferay.dynamic.data.lists.model.DDLRecordSet" %><%@
+page import="com.liferay.dynamic.data.mapping.exception.NoSuchTemplateException" %><%@
+page import="com.liferay.dynamic.data.mapping.model.DDMStructure" %><%@
+page import="com.liferay.dynamic.data.mapping.model.DDMTemplate" %><%@
+page import="com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil" %><%@
+page import="com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil" %><%@
+page import="com.liferay.journal.exception.NoSuchArticleException" %><%@
+page import="com.liferay.journal.model.JournalArticle" %><%@
+page import="com.liferay.journal.service.JournalArticleLocalServiceUtil" %><%@
+page import="com.liferay.portal.kernel.dao.orm.Criterion" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.portal.kernel.dao.orm.DynamicQuery" %><%@
 page import="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" %><%@
@@ -29,12 +43,22 @@ page import="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.deploy.DeployManagerUtil" %><%@
 page import="com.liferay.portal.kernel.exception.PortalException" %><%@
 page import="com.liferay.portal.kernel.exception.SystemException" %><%@
-page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %><%@
 page import="com.liferay.portal.kernel.messaging.DestinationNames" %><%@
 page import="com.liferay.portal.kernel.messaging.Message" %><%@
 page import="com.liferay.portal.kernel.messaging.MessageBusUtil" %><%@
 page import="com.liferay.portal.kernel.plugin.PluginPackage" %><%@
 page import="com.liferay.portal.kernel.repository.model.FileEntry" %><%@
+<<<<<<< HEAD
+=======
+page import="com.liferay.portal.kernel.search.FacetedSearcher" %><%@
+page import="com.liferay.portal.kernel.search.Hits" %><%@
+page import="com.liferay.portal.kernel.search.Indexer" %><%@
+page import="com.liferay.portal.kernel.search.SearchContext" %><%@
+page import="com.liferay.portal.kernel.search.SearchContextFactory" %><%@
+page import="com.liferay.portal.kernel.search.facet.AssetEntriesFacet" %><%@
+page import="com.liferay.portal.kernel.search.facet.Facet" %><%@
+page import="com.liferay.portal.kernel.search.facet.ScopeFacet" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.portal.kernel.util.ArrayUtil" %><%@
 page import="com.liferay.portal.kernel.util.FileUtil" %><%@
 page import="com.liferay.portal.kernel.util.GetterUtil" %><%@
@@ -60,6 +84,7 @@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %><%@
 page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %><%@
 page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" %><%@
+<<<<<<< HEAD
 page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %><%@
@@ -68,6 +93,11 @@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServ
 page import="com.liferay.portlet.journal.model.JournalArticle" %><%@
 page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %><%@
 page import="com.liferay.portlet.wiki.model.WikiPage" %>
+=======
+page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %><%@
+page import="com.liferay.portlet.exportimport.lar.PortletDataHandlerKeys" %><%@
+page import="com.liferay.wiki.model.WikiPage" %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <%@ page import="java.io.File" %>
 

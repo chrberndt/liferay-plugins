@@ -9,13 +9,14 @@ AUI().use(
 			init: function(param) {
 				var instance = this;
 
+				instance._baseActionURL = param.baseActionURL;
 				instance._microblogsEntriesURL = param.microblogsEntriesURL;
 			},
 
 			closePopup: function() {
 				var instance = this;
 
-				var popup = instance.getPopup()
+				var popup = instance.getPopup();
 
 				if (popup) {
 					popup.hide();
@@ -74,6 +75,8 @@ AUI().use(
 						on: {
 							success: function() {
 								instance.updateMicroblogsList(url, updateContainer);
+
+								Liferay.fire('microblogPosted');
 							}
 						}
 					}
@@ -101,6 +104,18 @@ AUI().use(
 				instance._micrblogsEntries.io.set('uri', url);
 
 				instance._micrblogsEntries.io.start();
+			},
+
+			updateViewCount: function(microblogsEntryId) {
+				var instance = this;
+
+				var portletURL = new Liferay.PortletURL.createURL(instance._baseActionURL);
+
+				portletURL.setParameter('javax.portlet.action', 'updateMicroblogsEntryViewCount');
+				portletURL.setParameter('microblogsEntryId', microblogsEntryId);
+				portletURL.setWindowState('normal');
+
+				A.io.request(portletURL.toString());
 			}
 		};
 

@@ -20,6 +20,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
+<<<<<<< HEAD
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
 String keywords = ParamUtil.getString(request, "keywords");
@@ -47,16 +48,26 @@ int roleUsersCount = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
 	</c:otherwise>
 </c:choose>
 
+=======
+String tabs1 = ParamUtil.getString(request, "tabs1", "assign-social-office");
+%>
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 <liferay-portlet:renderURL var="portletURL">
 	<portlet:param name="tabs1" value="<%= tabs1 %>" />
 </liferay-portlet:renderURL>
 
 <liferay-ui:tabs
+<<<<<<< HEAD
 	names="users,organizations,user-groups"
+=======
+	names="assign-social-office,general"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	param="tabs1"
 	url="<%= portletURL.toString() %>"
 />
 
+<<<<<<< HEAD
 <aui:form action="<%= portletURL %>" method="post" name="fm">
 	<aui:input name="addIds" type="hidden" />
 	<aui:input name="removeIds" type="hidden" />
@@ -173,3 +184,13 @@ int roleUsersCount = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
 		}
 	);
 </aui:script>
+=======
+<c:choose>
+	<c:when test='<%= tabs1.equals("assign-social-office") %>'>
+		<liferay-util:include page="/assign_so.jsp" servletContext="<%= application %>" />
+	</c:when>
+	<c:when test='<%= tabs1.equals("general") %>'>
+		<liferay-util:include page="/general.jsp" servletContext="<%= application %>" />
+	</c:when>
+</c:choose>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

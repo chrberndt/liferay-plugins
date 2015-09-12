@@ -19,7 +19,11 @@
 
 <aui:button-row cssClass="controls">
 	<c:if test="<%= UserThreadLocalServiceUtil.getUserUserThreadCount(themeDisplay.getUserId(), false) > 0 %>">
+<<<<<<< HEAD
 		<aui:input cssClass="check-all" inline="<%= true %>" label="" name="checkAllMessages" title='<%= LanguageUtil.get(pageContext, "check-all-messages") %>' type="checkbox" />
+=======
+		<aui:input cssClass="check-all" inline="<%= true %>" label="" name="checkAllMessages" title='<%= LanguageUtil.get(request, "check-all-messages") %>' type="checkbox" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</c:if>
 
 	<aui:button cssClass="hide" name="markMessagesAsUnread" value="mark-as-unread" />
@@ -32,7 +36,11 @@
 </aui:button-row>
 
 <liferay-ui:search-container
+<<<<<<< HEAD
 	emptyResultsMessage="no-messages-found"
+=======
+	emptyResultsMessage="no-messages-were-found"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	total="<%= UserThreadLocalServiceUtil.getUserUserThreadCount(themeDisplay.getUserId(), false) %>"
 >
 	<liferay-ui:search-container-results
@@ -63,13 +71,14 @@
 			%>
 
 			<liferay-ui:user-display
-				displayStyle="<%= 2 %>"
+				displayStyle="2"
 				userId="<%= userId %>"
 			/>
 
 			<div class="last-thread">
 				<portlet:renderURL var="viewThreadURL">
 					<portlet:param name="mvcPath" value="/view.jsp" />
+					<portlet:param name="backURL" value="<%= currentURL %>" />
 					<portlet:param name="mbThreadId" value="<%= String.valueOf(userThread.getMbThreadId()) %>" />
 				</portlet:renderURL>
 
@@ -86,6 +95,7 @@
 						User curUser = users.get(i);
 					%>
 
+<<<<<<< HEAD
 						<c:choose>
 							<c:when test="<%= curUser.isActive() %>">
 								<span class="author-sender"><%= HtmlUtil.escape(curUser.getFullName()) %></span>
@@ -93,16 +103,29 @@
 							<c:otherwise>
 								<span class="author-sender line-through"><%= HtmlUtil.escape(curUser.getFullName()) %></span>
 
+=======
+						<span class="author-sender">
+							<span class="<%= !curUser.isActive() ? "line-through" : StringPool.BLANK %>"><%= HtmlUtil.escape(curUser.getFullName()) %></span>
+
+							<c:if test="<%= !curUser.isActive() %>">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								<liferay-ui:icon
 									image="../aui/question-sign"
 									message="deleted-user"
 								/>
+<<<<<<< HEAD
 							</c:otherwise>
 						</c:choose>
 
 						<c:if test="<%= i != users.size() - 1 %>">
 							,
 						</c:if>
+=======
+							</c:if>
+
+							<%= ((i + 1) < users.size()) ? StringPool.COMMA : StringPool.BLANK %>
+						</span>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 					<%
 					}

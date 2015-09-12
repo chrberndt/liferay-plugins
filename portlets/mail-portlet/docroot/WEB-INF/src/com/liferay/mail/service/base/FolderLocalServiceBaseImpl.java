@@ -14,6 +14,8 @@
 
 package com.liferay.mail.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.mail.model.Folder;
 import com.liferay.mail.service.FolderLocalService;
 import com.liferay.mail.service.persistence.AccountPersistence;
@@ -23,8 +25,12 @@ import com.liferay.mail.service.persistence.MessagePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -38,6 +44,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
@@ -57,6 +64,7 @@ import javax.sql.DataSource;
  * @see com.liferay.mail.service.FolderLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements FolderLocalService, IdentifiableBean {
 	/*
@@ -70,11 +78,10 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param folder the folder
 	 * @return the folder that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Folder addFolder(Folder folder) throws SystemException {
+	public Folder addFolder(Folder folder) {
 		folder.setNew(true);
 
 		return folderPersistence.update(folder);
@@ -97,12 +104,10 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param folderId the primary key of the folder
 	 * @return the folder that was removed
 	 * @throws PortalException if a folder with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Folder deleteFolder(long folderId)
-		throws PortalException, SystemException {
+	public Folder deleteFolder(long folderId) throws PortalException {
 		return folderPersistence.remove(folderId);
 	}
 
@@ -112,12 +117,10 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param folder the folder
 	 * @return the folder that was removed
 	 * @throws PortalException
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Folder deleteFolder(Folder folder)
-		throws PortalException, SystemException {
+	public Folder deleteFolder(Folder folder) throws PortalException {
 		return folderPersistence.remove(folder);
 	}
 
@@ -134,12 +137,9 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return folderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -154,12 +154,10 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return folderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -175,45 +173,40 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return folderPersistence.findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return folderPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return folderPersistence.countWithDynamicQuery(dynamicQuery, projection);
 	}
 
 	@Override
-	public Folder fetchFolder(long folderId) throws SystemException {
+	public Folder fetchFolder(long folderId) {
 		return folderPersistence.fetchByPrimaryKey(folderId);
 	}
 
@@ -223,17 +216,46 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param folderId the primary key of the folder
 	 * @return the folder
 	 * @throws PortalException if a folder with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Folder getFolder(long folderId)
-		throws PortalException, SystemException {
+	public Folder getFolder(long folderId) throws PortalException {
 		return folderPersistence.findByPrimaryKey(folderId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.mail.service.FolderLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Folder.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.mail.service.FolderLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(Folder.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("folderId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return folderLocalService.deleteFolder((Folder)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return folderPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -247,11 +269,9 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of folders
 	 * @param end the upper bound of the range of folders (not inclusive)
 	 * @return the range of folders
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Folder> getFolders(int start, int end)
-		throws SystemException {
+	public List<Folder> getFolders(int start, int end) {
 		return folderPersistence.findAll(start, end);
 	}
 
@@ -259,10 +279,9 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * Returns the number of folders.
 	 *
 	 * @return the number of folders
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getFoldersCount() throws SystemException {
+	public int getFoldersCount() {
 		return folderPersistence.countAll();
 	}
 
@@ -271,11 +290,10 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param folder the folder
 	 * @return the folder that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public Folder updateFolder(Folder folder) throws SystemException {
+	public Folder updateFolder(Folder folder) {
 		return folderPersistence.update(folder);
 	}
 
@@ -359,7 +377,7 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the folder local service
 	 */
-	public com.liferay.mail.service.FolderLocalService getFolderLocalService() {
+	public FolderLocalService getFolderLocalService() {
 		return folderLocalService;
 	}
 
@@ -368,8 +386,7 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param folderLocalService the folder local service
 	 */
-	public void setFolderLocalService(
-		com.liferay.mail.service.FolderLocalService folderLocalService) {
+	public void setFolderLocalService(FolderLocalService folderLocalService) {
 		this.folderLocalService = folderLocalService;
 	}
 
@@ -643,13 +660,18 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = folderPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -669,8 +691,8 @@ public abstract class FolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.mail.service.AttachmentLocalService attachmentLocalService;
 	@BeanReference(type = AttachmentPersistence.class)
 	protected AttachmentPersistence attachmentPersistence;
-	@BeanReference(type = com.liferay.mail.service.FolderLocalService.class)
-	protected com.liferay.mail.service.FolderLocalService folderLocalService;
+	@BeanReference(type = FolderLocalService.class)
+	protected FolderLocalService folderLocalService;
 	@BeanReference(type = FolderPersistence.class)
 	protected FolderPersistence folderPersistence;
 	@BeanReference(type = com.liferay.mail.service.MessageLocalService.class)

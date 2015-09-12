@@ -22,9 +22,45 @@ import com.liferay.util.portlet.PortletProps;
  */
 public class PortletPropsValues {
 
+<<<<<<< HEAD
 	public static final String SYNC_AUTH_VERIFIER_PIPELINE = PortletProps.get(
 		PortletPropsKeys.SYNC_AUTH_VERIFIER_PIPELINE);
 
+=======
+	public static final boolean SYNC_ALLOW_USER_PERSONAL_SITES =
+		GetterUtil.getBoolean(
+			PortletProps.get(PortletPropsKeys.SYNC_ALLOW_USER_PERSONAL_SITES));
+
+	public static final String SYNC_AUTH_VERIFIER_PIPELINE = PortletProps.get(
+		PortletPropsKeys.SYNC_AUTH_VERIFIER_PIPELINE);
+
+	public static final int SYNC_CLIENT_BATCH_FILE_MAX_SIZE =
+		GetterUtil.getInteger(
+			PortletProps.get(PortletPropsKeys.SYNC_CLIENT_BATCH_FILE_MAX_SIZE));
+
+	public static final int SYNC_CLIENT_MAX_CONNECTIONS = GetterUtil.getInteger(
+		PortletProps.get(PortletPropsKeys.SYNC_CLIENT_MAX_CONNECTIONS));
+
+	public static final int SYNC_CLIENT_MIN_BUILD_ANDROID =
+		GetterUtil.getInteger(
+			PortletProps.get(PortletPropsKeys.SYNC_CLIENT_MIN_BUILD_ANDROID));
+
+	public static final int SYNC_CLIENT_MIN_BUILD_DESKTOP =
+		GetterUtil.getInteger(
+			PortletProps.get(PortletPropsKeys.SYNC_CLIENT_MIN_BUILD_DESKTOP));
+
+	public static final int SYNC_CLIENT_MIN_BUILD_IOS = GetterUtil.getInteger(
+		PortletProps.get(PortletPropsKeys.SYNC_CLIENT_MIN_BUILD_IOS));
+
+	public static final int SYNC_CLIENT_POLL_INTERVAL = GetterUtil.getInteger(
+		PortletProps.get(PortletPropsKeys.SYNC_CLIENT_POLL_INTERVAL));
+
+	public static final int SYNC_FILE_CHECKSUM_THRESHOLD_SIZE =
+		GetterUtil.getInteger(
+			PortletProps.get(
+				PortletPropsKeys.SYNC_FILE_CHECKSUM_THRESHOLD_SIZE));
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static final int SYNC_FILE_DIFF_CACHE_DELETE_INTERVAL =
 		GetterUtil.getInteger(
 			PortletProps.get(
@@ -39,4 +75,29 @@ public class PortletPropsValues {
 			PortletProps.get(
 				PortletPropsKeys.SYNC_FILE_DIFF_CACHE_EXPIRATION_TIME));
 
+<<<<<<< HEAD
+=======
+	public static final String[] SYNC_MAC_PACKAGE_FOLDER_EXTENSIONS =
+		GetterUtil.getStringValues(
+			PortletProps.getArray(
+				PortletPropsKeys.SYNC_MAC_PACKAGE_FOLDER_EXTENSIONS));
+
+	public static final String[] SYNC_MAC_PACKAGE_METADATA_FILE_NAMES =
+		GetterUtil.getStringValues(
+			PortletProps.getArray(
+				PortletPropsKeys.SYNC_MAC_PACKAGE_METADATA_FILE_NAMES));
+
+	public static final boolean SYNC_OAUTH_ENABLED = GetterUtil.getBoolean(
+		PortletProps.get(PortletPropsKeys.SYNC_OAUTH_ENABLED));
+
+	public static final int SYNC_PAGINATION_DELTA = GetterUtil.getInteger(
+		PortletProps.get(PortletPropsKeys.SYNC_PAGINATION_DELTA));
+
+	public static final boolean SYNC_SERVICES_ENABLED = GetterUtil.getBoolean(
+		PortletProps.get(PortletPropsKeys.SYNC_SERVICES_ENABLED));
+
+	public static final boolean SYNC_VERIFY = GetterUtil.getBoolean(
+		PortletProps.get(PortletPropsKeys.SYNC_VERIFY));
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

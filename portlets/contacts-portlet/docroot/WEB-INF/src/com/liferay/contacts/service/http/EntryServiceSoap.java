@@ -14,6 +14,11 @@
 
 package com.liferay.contacts.service.http;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.contacts.service.EntryServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -23,7 +28,11 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
+<<<<<<< HEAD
  * {@link com.liferay.contacts.service.EntryServiceUtil} service utility. The
+=======
+ * {@link EntryServiceUtil} service utility. The
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -58,9 +67,16 @@ import java.rmi.RemoteException;
  * @author Brian Wing Shun Chan
  * @see EntryServiceHttp
  * @see com.liferay.contacts.model.EntrySoap
+<<<<<<< HEAD
  * @see com.liferay.contacts.service.EntryServiceUtil
  * @generated
  */
+=======
+ * @see EntryServiceUtil
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class EntryServiceSoap {
 	public static java.lang.String searchUsersAndContacts(long companyId,
 		java.lang.String keywords, int start, int end)

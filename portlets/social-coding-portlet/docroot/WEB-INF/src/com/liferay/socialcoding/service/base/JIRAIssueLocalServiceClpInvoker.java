@@ -14,6 +14,8 @@
 
 package com.liferay.socialcoding.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.socialcoding.service.JIRAIssueLocalServiceUtil;
 
 import java.util.Arrays;
@@ -22,6 +24,7 @@ import java.util.Arrays;
  * @author Brian Wing Shun Chan
  * @generated
  */
+@ProviderType
 public class JIRAIssueLocalServiceClpInvoker {
 	public JIRAIssueLocalServiceClpInvoker() {
 		_methodName0 = "addJIRAIssue";
@@ -88,24 +91,35 @@ public class JIRAIssueLocalServiceClpInvoker {
 
 		_methodParameterTypes11 = new String[] { "long" };
 
-		_methodName12 = "getPersistedModel";
+		_methodName12 = "getActionableDynamicQuery";
 
-		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes12 = new String[] {  };
 
-		_methodName13 = "getJIRAIssues";
+		_methodName14 = "deletePersistedModel";
 
-		_methodParameterTypes13 = new String[] { "int", "int" };
+		_methodParameterTypes14 = new String[] {
+				"com.liferay.portal.model.PersistedModel"
+			};
 
-		_methodName14 = "getJIRAIssuesCount";
+		_methodName15 = "getPersistedModel";
 
-		_methodParameterTypes14 = new String[] {  };
+		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
 
-		_methodName15 = "updateJIRAIssue";
+		_methodName16 = "getJIRAIssues";
 
-		_methodParameterTypes15 = new String[] {
+		_methodParameterTypes16 = new String[] { "int", "int" };
+
+		_methodName17 = "getJIRAIssuesCount";
+
+		_methodParameterTypes17 = new String[] {  };
+
+		_methodName18 = "updateJIRAIssue";
+
+		_methodParameterTypes18 = new String[] {
 				"com.liferay.socialcoding.model.JIRAIssue"
 			};
 
+<<<<<<< HEAD
 		_methodName64 = "getBeanIdentifier";
 
 		_methodParameterTypes64 = new String[] {  };
@@ -209,6 +223,111 @@ public class JIRAIssueLocalServiceClpInvoker {
 		_methodName88 = "updateJIRAIssues";
 
 		_methodParameterTypes88 = new String[] { "long" };
+=======
+		_methodName71 = "getBeanIdentifier";
+
+		_methodParameterTypes71 = new String[] {  };
+
+		_methodName72 = "setBeanIdentifier";
+
+		_methodParameterTypes72 = new String[] { "java.lang.String" };
+
+		_methodName77 = "getAssigneeJIRAIssues";
+
+		_methodParameterTypes77 = new String[] {
+				"java.util.Date", "long", "java.lang.String", "int", "int"
+			};
+
+		_methodName78 = "getAssigneeJIRAIssues";
+
+		_methodParameterTypes78 = new String[] {
+				"long", "java.lang.String", "int", "int"
+			};
+
+		_methodName79 = "getAssigneeJIRAIssues";
+
+		_methodParameterTypes79 = new String[] {
+				"long", "java.lang.String", "java.lang.String", "int", "int"
+			};
+
+		_methodName80 = "getAssigneeJIRAIssuesCount";
+
+		_methodParameterTypes80 = new String[] {
+				"java.util.Date", "long", "java.lang.String"
+			};
+
+		_methodName81 = "getAssigneeJIRAIssuesCount";
+
+		_methodParameterTypes81 = new String[] { "long", "java.lang.String" };
+
+		_methodName82 = "getAssigneeJIRAIssuesCount";
+
+		_methodParameterTypes82 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName83 = "getFirstAssigneeJIRAIssue";
+
+		_methodParameterTypes83 = new String[] { "long", "java.lang.String" };
+
+		_methodName84 = "getFirstReporterJIRAIssue";
+
+		_methodParameterTypes84 = new String[] { "long", "java.lang.String" };
+
+		_methodName85 = "getJIRAIssue";
+
+		_methodParameterTypes85 = new String[] { "long" };
+
+		_methodName86 = "getJIRAIssue";
+
+		_methodParameterTypes86 = new String[] { "java.lang.String" };
+
+		_methodName87 = "getLastAssigneeJIRAIssue";
+
+		_methodParameterTypes87 = new String[] { "long", "java.lang.String" };
+
+		_methodName88 = "getLastreporterJIRAIssue";
+
+		_methodParameterTypes88 = new String[] { "long", "java.lang.String" };
+
+		_methodName89 = "getReporterJIRAIssues";
+
+		_methodParameterTypes89 = new String[] {
+				"java.util.Date", "long", "java.lang.String", "int", "int"
+			};
+
+		_methodName90 = "getReporterJIRAIssues";
+
+		_methodParameterTypes90 = new String[] {
+				"long", "java.lang.String", "int", "int"
+			};
+
+		_methodName91 = "getReporterJIRAIssues";
+
+		_methodParameterTypes91 = new String[] {
+				"long", "java.lang.String", "java.lang.String", "int", "int"
+			};
+
+		_methodName92 = "getReporterJIRAIssuesCount";
+
+		_methodParameterTypes92 = new String[] {
+				"java.util.Date", "long", "java.lang.String"
+			};
+
+		_methodName93 = "getReporterJIRAIssuesCount";
+
+		_methodParameterTypes93 = new String[] { "long", "java.lang.String" };
+
+		_methodName94 = "getReporterJIRAIssuesCount";
+
+		_methodParameterTypes94 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName95 = "updateJIRAIssues";
+
+		_methodParameterTypes95 = new String[] { "long" };
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -255,7 +374,7 @@ public class JIRAIssueLocalServiceClpInvoker {
 			return JIRAIssueLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
-				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
+				(com.liferay.portal.kernel.util.OrderByComparator<?>)arguments[3]);
 		}
 
 		if (_methodName8.equals(name) &&
@@ -281,25 +400,36 @@ public class JIRAIssueLocalServiceClpInvoker {
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return JIRAIssueLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
-		}
-
-		if (_methodName13.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return JIRAIssueLocalServiceUtil.getJIRAIssues(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return JIRAIssueLocalServiceUtil.getActionableDynamicQuery();
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return JIRAIssueLocalServiceUtil.getJIRAIssuesCount();
+			return JIRAIssueLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+		}
+
+		if (_methodName16.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getJIRAIssues(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName17.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getJIRAIssuesCount();
+		}
+
+		if (_methodName18.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
 			return JIRAIssueLocalServiceUtil.updateJIRAIssue((com.liferay.socialcoding.model.JIRAIssue)arguments[0]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return JIRAIssueLocalServiceUtil.getBeanIdentifier();
@@ -307,13 +437,27 @@ public class JIRAIssueLocalServiceClpInvoker {
 
 		if (_methodName65.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+=======
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getBeanIdentifier();
+		}
+
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			JIRAIssueLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
+<<<<<<< HEAD
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+=======
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssues((java.util.Date)arguments[0],
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2],
@@ -321,52 +465,88 @@ public class JIRAIssueLocalServiceClpInvoker {
 				((Integer)arguments[4]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
+=======
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssues(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
 				((Integer)arguments[3]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+=======
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssues(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
 				((Integer)arguments[4]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+=======
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssuesCount((java.util.Date)arguments[0],
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+=======
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssuesCount(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+=======
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getAssigneeJIRAIssuesCount(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+=======
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getFirstAssigneeJIRAIssue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+=======
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getFirstReporterJIRAIssue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName78.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return JIRAIssueLocalServiceUtil.getJIRAIssue(((Long)arguments[0]).longValue());
@@ -379,18 +559,42 @@ public class JIRAIssueLocalServiceClpInvoker {
 
 		if (_methodName80.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+=======
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getJIRAIssue(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+			return JIRAIssueLocalServiceUtil.getJIRAIssue((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getLastAssigneeJIRAIssue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName81.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+=======
+		if (_methodName88.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getLastreporterJIRAIssue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName82.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
+=======
+		if (_methodName89.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssues((java.util.Date)arguments[0],
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2],
@@ -398,42 +602,72 @@ public class JIRAIssueLocalServiceClpInvoker {
 				((Integer)arguments[4]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName83.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+=======
+		if (_methodName90.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssues(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
 				((Integer)arguments[3]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName84.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+=======
+		if (_methodName91.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssues(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue(),
 				((Integer)arguments[4]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName85.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+=======
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssuesCount((java.util.Date)arguments[0],
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName86.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+=======
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssuesCount(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName87.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+=======
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return JIRAIssueLocalServiceUtil.getReporterJIRAIssuesCount(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName88.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+=======
+		if (_methodName95.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			JIRAIssueLocalServiceUtil.updateJIRAIssues(((Long)arguments[0]).longValue());
 
 			return null;
@@ -468,30 +702,29 @@ public class JIRAIssueLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName13;
-	private String[] _methodParameterTypes13;
 	private String _methodName14;
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
+<<<<<<< HEAD
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
 	private String _methodName70;
 	private String[] _methodParameterTypes70;
+=======
+	private String _methodName16;
+	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
 	private String _methodName72;
 	private String[] _methodParameterTypes72;
-	private String _methodName73;
-	private String[] _methodParameterTypes73;
-	private String _methodName74;
-	private String[] _methodParameterTypes74;
-	private String _methodName75;
-	private String[] _methodParameterTypes75;
-	private String _methodName76;
-	private String[] _methodParameterTypes76;
 	private String _methodName77;
 	private String[] _methodParameterTypes77;
 	private String _methodName78;
@@ -516,4 +749,21 @@ public class JIRAIssueLocalServiceClpInvoker {
 	private String[] _methodParameterTypes87;
 	private String _methodName88;
 	private String[] _methodParameterTypes88;
+<<<<<<< HEAD
+=======
+	private String _methodName89;
+	private String[] _methodParameterTypes89;
+	private String _methodName90;
+	private String[] _methodParameterTypes90;
+	private String _methodName91;
+	private String[] _methodParameterTypes91;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
+	private String _methodName95;
+	private String[] _methodParameterTypes95;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

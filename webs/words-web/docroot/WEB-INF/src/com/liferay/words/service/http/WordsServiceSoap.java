@@ -14,6 +14,11 @@
 
 package com.liferay.words.service.http;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -23,7 +28,11 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
+<<<<<<< HEAD
  * {@link com.liferay.words.service.WordsServiceUtil} service utility. The
+=======
+ * {@link WordsServiceUtil} service utility. The
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -47,9 +56,16 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  * @see WordsServiceHttp
+<<<<<<< HEAD
  * @see com.liferay.words.service.WordsServiceUtil
  * @generated
  */
+=======
+ * @see WordsServiceUtil
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class WordsServiceSoap {
 	public static java.lang.String[] checkSpelling(java.lang.String text)
 		throws RemoteException {

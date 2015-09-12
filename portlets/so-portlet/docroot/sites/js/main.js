@@ -72,7 +72,11 @@ AUI.add(
 					}
 				}
 			);
+<<<<<<< HEAD
 		}
+=======
+		};
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		Liferay.namespace('SO');
 
@@ -126,7 +130,7 @@ AUI().use(
 				return new A.DataSource.IO(
 					{
 						ioConfig: {
-							method: "post"
+							method: 'POST'
 						},
 						on: {
 							request: function(event) {
@@ -153,7 +157,7 @@ AUI().use(
 						},
 						source: url
 					}
-				)
+				);
 			},
 
 			createDirectoryList: function(directoryList) {
@@ -278,7 +282,7 @@ AUI().use(
 				var siteListURL = config.siteListURL;
 				var siteSearchInput = config.siteSearchInput;
 
-				var siteList = new Liferay.SO.SiteList(
+				siteList = new Liferay.SO.SiteList(
 					{
 						inputNode: siteSearchInput,
 						listNode: siteList,
@@ -316,21 +320,29 @@ AUI().use(
 			_updateSiteList: function(event) {
 				var instance = this;
 
-				var data = A.JSON.parse(event.data.responseText);
+				var data = JSON.parse(event.data.responseText);
 
-				var results = data.sites;
 				var count = data.count;
+				var results = data.sites;
 
 				var buffer = [];
 
 				var getSiteActionHtml = function(actionClassNames, actionLinkClassName, actionTitle, actionURL) {
+<<<<<<< HEAD
 					var siteActionTemplate =
 						'<span class="{actionClassNames}" title="{actionTitle}">' +
+=======
+					var siteActionTemplate = '<span class="{actionClassNames}" title="{actionTitle}">' +
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							'<a class="{actionLinkClassName}" href="{actionURL}">' +
 							'</a>' +
 						'</span>';
 
+<<<<<<< HEAD
 					return 	A.Lang.sub(
+=======
+					return	A.Lang.sub(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						siteActionTemplate,
 						{
 							actionClassNames: actionClassNames,
@@ -347,15 +359,18 @@ AUI().use(
 					);
 				}
 				else {
+<<<<<<< HEAD
 					var siteTemplate =
 						'<li class="{classNames}">' +
+=======
+					var siteTemplate = '<li class="{classNames}">' +
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							'{favoriteHTML}' +
 							'<span class="name">{siteName}</span>' +
 						'</li>';
 
 					buffer.push(
-						A.Array.map(
-							results,
+						results.map(
 							function(result) {
 								var classNames = [];
 
@@ -370,6 +385,7 @@ AUI().use(
 								var favoriteHTML;
 
 								if (result.favoriteURL == '') {
+<<<<<<< HEAD
 									favoriteHTML = getSiteActionHtml('favorite', 'disabled', Liferay.Language.get("you-must-be-a-member-of-the-site-to-add-to-favorites"), '#');
 								}
 								else {
@@ -379,6 +395,15 @@ AUI().use(
 									else {
 										favoriteHTML = getSiteActionHtml('action unfavorite', '', Liferay.Language.get("remove-from-favorites"), result.unfavoriteURL);
 									}
+=======
+									favoriteHTML = getSiteActionHtml('favorite', 'disabled', Liferay.Language.get('you-must-be-a-member-of-the-site-to-add-to-favorites'), '#');
+								}
+								else if (result.favoriteURL) {
+									favoriteHTML = getSiteActionHtml('action favorite', '', Liferay.Language.get('add-to-favorites'), result.favoriteURL);
+								}
+								else {
+									favoriteHTML = getSiteActionHtml('action unfavorite', '', Liferay.Language.get('remove-from-favorites'), result.unfavoriteURL);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								}
 
 								var name = result.name;
@@ -387,7 +412,7 @@ AUI().use(
 									name = '<a href="' + result.publicLayoutsURL + '">' + name + '</a>';
 
 									if (result.privateLayoutsURL) {
-										name += '<a class="private-pages" href="' + result.privateLayoutsURL + '"> (' + Liferay.Language.get("private-pages") + ')</a>';
+										name += '<a class="private-pages" href="' + result.privateLayoutsURL + '"> (' + Liferay.Language.get('private-pages') + ')</a>';
 									}
 								}
 								else if (!result.publicLayoutsURL && result.privateLayoutsURL) {

@@ -15,7 +15,11 @@
 package com.liferay.pushnotifications.model.impl;
 
 /**
+<<<<<<< HEAD
  * @author Bruno Farache
+=======
+ * @author Silvio Santos
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  */
 public class PushNotificationsDeviceImpl
 	extends PushNotificationsDeviceBaseImpl {

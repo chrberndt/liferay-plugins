@@ -17,8 +17,13 @@
 <%@ include file="/init.jsp" %>
 
 <%
+<<<<<<< HEAD
 String titleXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title");
 String descriptionXml = LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description");
+=======
+String titleXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "title"), StringPool.BLANK);
+String descriptionXml = GetterUtil.getString(LocalizationUtil.getLocalizationXmlFromPreferences(portletPreferences, renderRequest, "description"), StringPool.BLANK);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 boolean requireCaptcha = GetterUtil.getBoolean(portletPreferences.getValue("requireCaptcha", StringPool.BLANK));
 String successURL = portletPreferences.getValue("successURL", StringPool.BLANK);
 
@@ -32,7 +37,6 @@ boolean saveToDatabase = GetterUtil.getBoolean(portletPreferences.getValue("save
 String databaseTableName = portletPreferences.getValue("databaseTableName", StringPool.BLANK);
 
 boolean saveToFile = GetterUtil.getBoolean(portletPreferences.getValue("saveToFile", StringPool.BLANK));
-String fileName = portletPreferences.getValue("fileName", StringPool.BLANK);
 
 boolean fieldsEditingDisabled = false;
 
@@ -64,7 +68,7 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 
 				<aui:input name="preferences--requireCaptcha--" type="checkbox" value="<%= requireCaptcha %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="redirect-url-on-success" name="preferences--successURL--" value="<%= HtmlUtil.toInputSafe(successURL) %>" />
+				<aui:input label="redirect-url-on-success" name="preferences--successURL--" value="<%= HtmlUtil.toInputSafe(successURL) %>" wrapperCssClass="lfr-input-text-container" />
 			</aui:fieldset>
 		</liferay-ui:panel>
 
@@ -72,21 +76,20 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 			<aui:fieldset cssClass="handle-data" label="email">
 				<liferay-ui:error key="emailAddressInvalid" message="please-enter-a-valid-email-address" />
 				<liferay-ui:error key="emailAddressRequired" message="please-enter-an-email-address" />
-				<liferay-ui:error key="fileNameInvalid" message="please-enter-a-valid-path-and-file-name" />
 				<liferay-ui:error key="handlingRequired" message="please-select-an-action-for-the-handling-of-form-data" />
 				<liferay-ui:error key="subjectRequired" message="please-enter-a-subject" />
 
 				<aui:input label="send-as-email" name="preferences--sendAsEmail--" type="checkbox" value="<%= sendAsEmail %>" />
 
 				<aui:fieldset>
-					<aui:input cssClass="lfr-input-text-container" label="name-from" name="preferences--emailFromName--" value="<%= emailFromName %>" />
+					<aui:input label="name-from" name="preferences--emailFromName--" value="<%= emailFromName %>" wrapperCssClass="lfr-input-text-container" />
 
-					<aui:input cssClass="lfr-input-text-container" label="address-from" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
+					<aui:input label="address-from" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" wrapperCssClass="lfr-input-text-container" />
 				</aui:fieldset>
 
-				<aui:input cssClass="lfr-input-text-container" helpMessage="add-email-addresses-separated-by-commas" label="addresses-to" name="preferences--emailAddress--" value="<%= emailAddress %>" />
+				<aui:input helpMessage="add-email-addresses-separated-by-commas" label="addresses-to" name="preferences--emailAddress--" value="<%= emailAddress %>" wrapperCssClass="lfr-input-text-container" />
 
-				<aui:input cssClass="lfr-input-text-container" name="preferences--subject--" value="<%= subject %>" />
+				<aui:input name="preferences--subject--" value="<%= subject %>" wrapperCssClass="lfr-input-text-container" />
 
 			</aui:fieldset>
 
@@ -97,7 +100,7 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 			<aui:fieldset cssClass="handle-data" label="file">
 				<aui:input name="preferences--saveToFile--" type="checkbox" value="<%= saveToFile %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="path-and-file-name" name="preferences--fileName--" value="<%= fileName %>" />
+				<liferay-ui:message arguments="<%= HtmlUtil.escape(WebFormUtil.getFileName(themeDisplay, portletResource)) %>" key="form-data-will-be-saved-to-x" />
 			</aui:fieldset>
 		</liferay-ui:panel>
 
@@ -137,7 +140,7 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 				<aui:input name="updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 
 				<%
-				String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes") ;
+				String formFieldsIndexesParam = ParamUtil.getString(renderRequest, "formFieldsIndexes");
 
 				int[] formFieldsIndexes = null;
 
@@ -190,74 +193,63 @@ if (WebFormUtil.getTableRowsCount(company.getCompanyId(), databaseTableName) > 0
 	</aui:button-row>
 </aui:form>
 
-<%
-String modules = "aui-base";
+<c:if test="<%= !fieldsEditingDisabled %>">
+	<aui:script use="aui-base,liferay-auto-fields">
+		var toggleOptions = function(event) {
+			var instance = this;
 
-if (!fieldsEditingDisabled) {
-	modules += ",liferay-auto-fields";
-}
-%>
+			var formRow = instance.ancestor('.lfr-form-row');
+			var value = instance.val();
 
-<aui:script use="<%= modules %>">
-	var toggleOptions = function(event) {
-		var select = this;
+			var optionsDiv = formRow.one('.options');
 
-		var formRow = select.ancestor('.lfr-form-row');
-		var value = select.val();
+			if ((value === 'options') || (value === 'radio')) {
+				optionsDiv.all('label').show();
+				optionsDiv.show();
+			}
+			else {
+				optionsDiv.hide();
+			}
 
-		var optionsDiv = formRow.one('.options');
+			var labelName = formRow.one('.label-name');
+			var optionalControl = formRow.one('.optional-control').ancestor();
+			var paragraphDiv = formRow.one('.paragraph');
 
-		if ((value == 'options') || (value == 'radio')) {
-			optionsDiv.all('label').show();
-			optionsDiv.show();
-		}
-		else if (value == 'paragraph') {
+			if (value === 'paragraph') {
+				var inputName = labelName.one('input.field');
 
-			// Show just the text field and not the labels since there
-			// are multiple choice inputs
+				var formFieldsIndex = instance.attr('id').match(/\d+$/);
 
-			optionsDiv.all('label').hide();
-			optionsDiv.show();
-		}
-		else {
-			optionsDiv.hide();
-		}
+				inputName.val('<liferay-ui:message key="paragraph" />' + formFieldsIndex);
+				inputName.fire('change');
 
-		var optionalControl = formRow.one('.optional-control').ancestor();
-		var labelName = formRow.one('.label-name');
+				labelName.hide();
+				optionalControl.hide();
+				paragraphDiv.show();
 
-		if (value == 'paragraph') {
-			var inputName = labelName.one('input.field');
+				optionalControl.all('input[type="checkbox"]').attr('checked', 'true');
+				optionalControl.all('input[type="hidden"]').attr('value', 'true');
+			}
+			else {
+				labelName.show();
+				optionalControl.show();
+				paragraphDiv.hide();
+			}
+		};
 
-			var formFieldsIndex = select.attr('id').match(/\d+$/);
+		var webFields = A.one('.webFields');
 
-			inputName.val('<liferay-ui:message key="paragraph" />' + formFieldsIndex);
-			inputName.fire('change');
+		webFields.all('select').each(toggleOptions);
 
-			labelName.hide();
-			optionalControl.hide();
-
-			optionalControl.all('input[type="checkbox"]').attr('checked', 'true');
-			optionalControl.all('input[type="hidden"]').attr('value', 'true');
-		}
-		else {
-			optionalControl.show();
-			labelName.show();
-		}
-	};
-
-	var toggleValidationOptions = function(event) {
-		this.next().toggle();
-	};
-
-	var webFields = A.one('.webFields');
-
-	webFields.all('select').each(toggleOptions);
-
-	<c:if test="<%= !fieldsEditingDisabled %>">
 		webFields.delegate(['change', 'click', 'keydown'], toggleOptions, 'select');
 
-		webFields.delegate('click', toggleValidationOptions, '.validation-link');
+		<c:if test="<%= PortletPropsValues.VALIDATION_SCRIPT_ENABLED %>">
+			var toggleValidationOptions = function(event) {
+				this.next().toggle();
+			};
+
+			webFields.delegate('click', toggleValidationOptions, '.validation-link');
+		</c:if>
 
 		webFields.delegate(
 			'change',
@@ -277,6 +269,7 @@ if (!fieldsEditingDisabled) {
 			{
 				contentBox: webFields,
 				fieldIndexes: '<portlet:namespace />formFieldsIndexes',
+				namespace: '<portlet:namespace />',
 				sortable: true,
 				sortableHandle: '.field-label',
 
@@ -287,5 +280,5 @@ if (!fieldsEditingDisabled) {
 				url: '<%= editFieldURL %>'
 			}
 		).render();
-	</c:if>
-</aui:script>
+	</aui:script>
+</c:if>

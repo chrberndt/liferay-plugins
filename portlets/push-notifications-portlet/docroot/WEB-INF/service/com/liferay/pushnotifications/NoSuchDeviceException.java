@@ -17,12 +17,19 @@ package com.liferay.pushnotifications;
 import com.liferay.portal.NoSuchModelException;
 
 /**
+<<<<<<< HEAD
  * @author Bruno Farache
+=======
+ * @author Silvio Santos
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  */
 public class NoSuchDeviceException extends NoSuchModelException {
 
 	public NoSuchDeviceException() {
+<<<<<<< HEAD
 		super();
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public NoSuchDeviceException(String msg) {

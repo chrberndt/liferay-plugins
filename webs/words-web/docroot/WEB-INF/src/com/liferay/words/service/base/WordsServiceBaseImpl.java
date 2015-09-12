@@ -16,6 +16,11 @@ package com.liferay.words.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,6 +28,10 @@ import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.util.PortalUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.words.service.WordsService;
 
@@ -53,7 +62,11 @@ public abstract class WordsServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the words remote service
 	 */
+<<<<<<< HEAD
 	public com.liferay.words.service.WordsService getWordsService() {
+=======
+	public WordsService getWordsService() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return wordsService;
 	}
 
@@ -62,8 +75,12 @@ public abstract class WordsServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param wordsService the words remote service
 	 */
+<<<<<<< HEAD
 	public void setWordsService(
 		com.liferay.words.service.WordsService wordsService) {
+=======
+	public void setWordsService(WordsService wordsService) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		this.wordsService = wordsService;
 	}
 
@@ -269,6 +286,7 @@ public abstract class WordsServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query
@@ -277,6 +295,21 @@ public abstract class WordsServiceBaseImpl extends BaseServiceImpl
 		try {
 			DataSource dataSource = InfrastructureUtil.getDataSource();
 
+=======
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = InfrastructureUtil.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
 
@@ -287,8 +320,13 @@ public abstract class WordsServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
+<<<<<<< HEAD
 	@BeanReference(type = com.liferay.words.service.WordsService.class)
 	protected com.liferay.words.service.WordsService wordsService;
+=======
+	@BeanReference(type = WordsService.class)
+	protected WordsService wordsService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ClassNameLocalService.class)

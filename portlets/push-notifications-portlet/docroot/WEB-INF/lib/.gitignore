@@ -1,4 +1,9 @@
 /commons-logging.jar
+<<<<<<< HEAD
+=======
+/jstl-api.jar
+/jstl-impl.jar
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /log4j.jar
 /util-bridges.jar
 /util-java.jar

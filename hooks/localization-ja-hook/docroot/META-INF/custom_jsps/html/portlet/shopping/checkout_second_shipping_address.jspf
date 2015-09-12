@@ -76,7 +76,11 @@
 		<liferay-ui:message key="city" />:
 	</th>
 	<td>
+<<<<<<< HEAD
 		<%= HtmlUtil.escape(order.getShippingCity()) %>
+=======
+		<%= HtmlUtil.escape(order.getShippingCity()) %>:
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</td>
 </tr>
 <tr>

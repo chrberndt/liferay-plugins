@@ -14,12 +14,28 @@
 
 package com.liferay.samplelar.service.base;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -31,6 +47,16 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.exportimport.lar.ExportImportHelperUtil;
+import com.liferay.portlet.exportimport.lar.ManifestSummary;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.samplelar.model.SampleLARBooking;
 import com.liferay.samplelar.service.SampleLARBookingLocalService;
@@ -54,6 +80,10 @@ import javax.sql.DataSource;
  * @see com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public abstract class SampleLARBookingLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements SampleLARBookingLocalService,
 		IdentifiableBean {
@@ -68,12 +98,19 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 *
 	 * @param sampleLARBooking the sample l a r booking
 	 * @return the sample l a r booking that was added
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public SampleLARBooking addSampleLARBooking(
+<<<<<<< HEAD
 		SampleLARBooking sampleLARBooking) throws SystemException {
+=======
+		SampleLARBooking sampleLARBooking) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sampleLARBooking.setNew(true);
 
 		return sampleLARBookingPersistence.update(sampleLARBooking);
@@ -96,12 +133,19 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param sampleLARBookingId the primary key of the sample l a r booking
 	 * @return the sample l a r booking that was removed
 	 * @throws PortalException if a sample l a r booking with the primary key could not be found
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public SampleLARBooking deleteSampleLARBooking(long sampleLARBookingId)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.remove(sampleLARBookingId);
 	}
 
@@ -110,12 +154,19 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 *
 	 * @param sampleLARBooking the sample l a r booking
 	 * @return the sample l a r booking that was removed
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public SampleLARBooking deleteSampleLARBooking(
+<<<<<<< HEAD
 		SampleLARBooking sampleLARBooking) throws SystemException {
+=======
+		SampleLARBooking sampleLARBooking) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.remove(sampleLARBooking);
 	}
 
@@ -132,12 +183,18 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
+=======
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -152,12 +209,19 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
+=======
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
@@ -174,17 +238,25 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+=======
+	 */
+	@Override
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the number of rows that match the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -194,10 +266,20 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
+=======
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the number of rows that match the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -208,17 +290,33 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection) throws SystemException {
+=======
+	 * Returns the number of rows matching the dynamic query.
+	 *
+	 * @param dynamicQuery the dynamic query
+	 * @param projection the projection to apply to the query
+	 * @return the number of rows matching the dynamic query
+	 */
+	@Override
+	public long dynamicQueryCount(DynamicQuery dynamicQuery,
+		Projection projection) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
+<<<<<<< HEAD
 	public SampleLARBooking fetchSampleLARBooking(long sampleLARBookingId)
 		throws SystemException {
+=======
+	public SampleLARBooking fetchSampleLARBooking(long sampleLARBookingId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.fetchByPrimaryKey(sampleLARBookingId);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the sample l a r booking with the matching UUID and company.
 	 *
 	 * @param uuid the sample l a r booking's UUID
@@ -234,16 +332,25 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	}
 
 	/**
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 * Returns the sample l a r booking matching the UUID and group.
 	 *
 	 * @param uuid the sample l a r booking's UUID
 	 * @param groupId the primary key of the group
 	 * @return the matching sample l a r booking, or <code>null</code> if a matching sample l a r booking could not be found
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SampleLARBooking fetchSampleLARBookingByUuidAndGroupId(String uuid,
 		long groupId) throws SystemException {
+=======
+	 */
+	@Override
+	public SampleLARBooking fetchSampleLARBookingByUuidAndGroupId(String uuid,
+		long groupId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
@@ -253,21 +360,120 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param sampleLARBookingId the primary key of the sample l a r booking
 	 * @return the sample l a r booking
 	 * @throws PortalException if a sample l a r booking with the primary key could not be found
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SampleLARBooking getSampleLARBooking(long sampleLARBookingId)
 		throws PortalException, SystemException {
+=======
+	 */
+	@Override
+	public SampleLARBooking getSampleLARBooking(long sampleLARBookingId)
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findByPrimaryKey(sampleLARBookingId);
 	}
 
 	@Override
+<<<<<<< HEAD
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
+=======
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(SampleLARBooking.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("sampleLARBookingId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(SampleLARBooking.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("sampleLARBookingId");
+	}
+
+	@Override
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		final PortletDataContext portletDataContext) {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+				@Override
+				public long performCount() throws PortalException {
+					ManifestSummary manifestSummary = portletDataContext.getManifestSummary();
+
+					StagedModelType stagedModelType = getStagedModelType();
+
+					long modelAdditionCount = super.performCount();
+
+					manifestSummary.addModelAdditionCount(stagedModelType.toString(),
+						modelAdditionCount);
+
+					long modelDeletionCount = ExportImportHelperUtil.getModelDeletionCount(portletDataContext,
+							stagedModelType);
+
+					manifestSummary.addModelDeletionCount(stagedModelType.toString(),
+						modelDeletionCount);
+
+					return modelAdditionCount;
+				}
+			};
+
+		initActionableDynamicQuery(exportActionableDynamicQuery);
+
+		exportActionableDynamicQuery.setAddCriteriaMethod(new ActionableDynamicQuery.AddCriteriaMethod() {
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					portletDataContext.addDateRangeCriteria(dynamicQuery,
+						"modifiedDate");
+				}
+			});
+
+		exportActionableDynamicQuery.setCompanyId(portletDataContext.getCompanyId());
+
+		exportActionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
+
+		exportActionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod() {
+				@Override
+				public void performAction(Object object)
+					throws PortalException {
+					SampleLARBooking stagedModel = (SampleLARBooking)object;
+
+					StagedModelDataHandlerUtil.exportStagedModel(portletDataContext,
+						stagedModel);
+				}
+			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(SampleLARBooking.class.getName())));
+
+		return exportActionableDynamicQuery;
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return sampleLARBookingLocalService.deleteSampleLARBooking((SampleLARBooking)persistedModel);
+	}
+
+	@Override
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Returns the sample l a r booking with the matching UUID and company.
 	 *
 	 * @param uuid the sample l a r booking's UUID
@@ -281,6 +487,36 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 		long companyId) throws PortalException, SystemException {
 		return sampleLARBookingPersistence.findByUuid_C_First(uuid, companyId,
 			null);
+=======
+	 * Returns all the sample l a r bookings matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the sample l a r bookings
+	 * @param companyId the primary key of the company
+	 * @return the matching sample l a r bookings, or an empty list if no matches were found
+	 */
+	@Override
+	public List<SampleLARBooking> getSampleLARBookingsByUuidAndCompanyId(
+		String uuid, long companyId) {
+		return sampleLARBookingPersistence.findByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of sample l a r bookings matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the sample l a r bookings
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of sample l a r bookings
+	 * @param end the upper bound of the range of sample l a r bookings (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching sample l a r bookings, or an empty list if no matches were found
+	 */
+	@Override
+	public List<SampleLARBooking> getSampleLARBookingsByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<SampleLARBooking> orderByComparator) {
+		return sampleLARBookingPersistence.findByUuid_C(uuid, companyId, start,
+			end, orderByComparator);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -290,11 +526,18 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param groupId the primary key of the group
 	 * @return the matching sample l a r booking
 	 * @throws PortalException if a matching sample l a r booking could not be found
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public SampleLARBooking getSampleLARBookingByUuidAndGroupId(String uuid,
 		long groupId) throws PortalException, SystemException {
+=======
+	 */
+	@Override
+	public SampleLARBooking getSampleLARBookingByUuidAndGroupId(String uuid,
+		long groupId) throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findByUUID_G(uuid, groupId);
 	}
 
@@ -308,11 +551,17 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param start the lower bound of the range of sample l a r bookings
 	 * @param end the upper bound of the range of sample l a r bookings (not inclusive)
 	 * @return the range of sample l a r bookings
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<SampleLARBooking> getSampleLARBookings(int start, int end)
 		throws SystemException {
+=======
+	 */
+	@Override
+	public List<SampleLARBooking> getSampleLARBookings(int start, int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.findAll(start, end);
 	}
 
@@ -320,10 +569,16 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * Returns the number of sample l a r bookings.
 	 *
 	 * @return the number of sample l a r bookings
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int getSampleLARBookingsCount() throws SystemException {
+=======
+	 */
+	@Override
+	public int getSampleLARBookingsCount() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.countAll();
 	}
 
@@ -332,12 +587,19 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 *
 	 * @param sampleLARBooking the sample l a r booking
 	 * @return the sample l a r booking that was updated
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public SampleLARBooking updateSampleLARBooking(
+<<<<<<< HEAD
 		SampleLARBooking sampleLARBooking) throws SystemException {
+=======
+		SampleLARBooking sampleLARBooking) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingPersistence.update(sampleLARBooking);
 	}
 
@@ -346,7 +608,11 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 *
 	 * @return the sample l a r booking local service
 	 */
+<<<<<<< HEAD
 	public com.liferay.samplelar.service.SampleLARBookingLocalService getSampleLARBookingLocalService() {
+=======
+	public SampleLARBookingLocalService getSampleLARBookingLocalService() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return sampleLARBookingLocalService;
 	}
 
@@ -356,7 +622,11 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	 * @param sampleLARBookingLocalService the sample l a r booking local service
 	 */
 	public void setSampleLARBookingLocalService(
+<<<<<<< HEAD
 		com.liferay.samplelar.service.SampleLARBookingLocalService sampleLARBookingLocalService) {
+=======
+		SampleLARBookingLocalService sampleLARBookingLocalService) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		this.sampleLARBookingLocalService = sampleLARBookingLocalService;
 	}
 
@@ -594,6 +864,7 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query
@@ -602,6 +873,21 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 		try {
 			DataSource dataSource = sampleLARBookingPersistence.getDataSource();
 
+=======
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = sampleLARBookingPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
 
@@ -613,7 +899,11 @@ public abstract class SampleLARBookingLocalServiceBaseImpl
 	}
 
 	@BeanReference(type = com.liferay.samplelar.service.SampleLARBookingLocalService.class)
+<<<<<<< HEAD
 	protected com.liferay.samplelar.service.SampleLARBookingLocalService sampleLARBookingLocalService;
+=======
+	protected SampleLARBookingLocalService sampleLARBookingLocalService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = SampleLARBookingPersistence.class)
 	protected SampleLARBookingPersistence sampleLARBookingPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)

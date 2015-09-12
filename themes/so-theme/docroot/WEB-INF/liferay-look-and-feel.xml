@@ -1,10 +1,18 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.2.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_2_0.dtd">
 
 <look-and-feel>
 	<compatibility>
 		<version>6.1.0+</version>
 		<version>6.2.0+</version>
+=======
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 7.0.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_7_0_0.dtd">
+
+<look-and-feel>
+	<compatibility>
+		<version>7.0.0+</version>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</compatibility>
 	<theme id="so" name="Social Office">
 		<color-scheme id="01" name="Classic">

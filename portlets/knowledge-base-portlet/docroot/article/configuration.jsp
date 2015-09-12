@@ -46,6 +46,7 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 	<aui:fieldset>
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
+<<<<<<< HEAD
 				<div class="input-append kb-field-wrapper">
 					<aui:field-wrapper label="article">
 
@@ -60,17 +61,22 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 						%>
 
 						<liferay-ui:input-resource id="configurationKBArticle" url="<%= (kbArticle != null) ? kbArticle.getTitle() : StringPool.BLANK %>" />
+=======
+				<div class="form-group kb-field-wrapper">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-						<liferay-portlet:renderURL portletName="<%= portletResource %>" var="selectConfigurationKBArticleURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-							<portlet:param name="mvcPath" value="/article/select_configuration_article.jsp" />
-						</liferay-portlet:renderURL>
+					<%
+					KBArticle kbArticle = KBArticleLocalServiceUtil.fetchLatestKBArticle(resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
+					%>
 
-						<%
-						String taglibOnClick = "var selectConfigurationKBArticleWindow = window.open('" + selectConfigurationKBArticleURL + "&" + HtmlUtil.escapeJS(PortalUtil.getPortletNamespace(portletResource)) + "&selResourcePrimKey=' + document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "resourcePrimKey.value, 'selectConfigurationKBArticle', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); selectConfigurationKBArticleWindow.focus();";
-						%>
+					<aui:input label="article" name="configurationKBArticle" type="resource" value="<%= (kbArticle != null) ? kbArticle.getTitle() : StringPool.BLANK %>" />
 
+<<<<<<< HEAD
 						<aui:button onClick="<%= taglibOnClick %>" value="select" />
 					</aui:field-wrapper>
+=======
+					<aui:button name="selectKBArticleButton" value="select" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</div>
 			</c:when>
 			<c:when test='<%= tabs2.equals("display-settings") %>'>
@@ -78,13 +84,29 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 
 				<aui:input label="enable-ratings" name="preferences--enableKBArticleRatings--" type="checkbox" value="<%= enableKBArticleRatings %>" />
 
+				<div class="kb-ratings-type" id="<portlet:namespace />ratingsType">
+					<aui:input checked='<%= kbArticleRatingsType.equals("stars") %>' label="use-star-ratings" name="preferences--kbArticleRatingsType--" type="radio" value="stars" />
+					<aui:input checked='<%= kbArticleRatingsType.equals("thumbs") %>' label="use-thumbs-up-thumbs-down" name="preferences--kbArticleRatingsType--" type="radio" value="thumbs" />
+				</div>
+
 				<aui:input label="show-asset-entries" name="preferences--showKBArticleAssetEntries--" type="checkbox" value="<%= showKBArticleAssetEntries %>" />
 
-				<aui:input label="enable-comments" name="preferences--enableKBArticleKBComments--" type="checkbox" value="<%= enableKBArticleKBComments %>" />
-
-				<aui:input label="show-comments" name="preferences--showKBArticleKBComments--" type="checkbox" value="<%= showKBArticleKBComments %>" />
+				<aui:input label="enable-related-assets" name="preferences--enableKBArticleAssetLinks--" type="checkbox" value="<%= enableKBArticleAssetLinks %>" />
 
 				<aui:input label="enable-view-count-increment" name="preferences--enableKBArticleViewCountIncrement--" type="checkbox" value="<%= enableKBArticleViewCountIncrement %>" />
+
+				<aui:input label="enable-subscriptions" name="preferences--enableKBArticleSubscriptions--" type="checkbox" value="<%= enableKBArticleSubscriptions %>" />
+
+				<aui:input label="enable-history" name="preferences--enableKBArticleHistory--" type="checkbox" value="<%= enableKBArticleHistory %>" />
+
+				<aui:input label="enable-print" name="preferences--enableKBArticlePrint--" type="checkbox" value="<%= enableKBArticlePrint %>" />
+
+				<liferay-ui:social-bookmarks-settings
+					displayPosition="<%= socialBookmarksDisplayPosition %>"
+					displayStyle="<%= socialBookmarksDisplayStyle %>"
+					enabled="<%= enableSocialBookmarks %>"
+					types="<%= socialBookmarksTypes %>"
+				/>
 			</c:when>
 			<c:when test='<%= tabs2.equals("rss") %>'>
 				<liferay-ui:rss-settings
@@ -102,6 +124,7 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 	</aui:fieldset>
 </aui:form>
 
+<<<<<<< HEAD
 <c:if test='<%= tabs2.equals("general") %>'>
 	<aui:script>
 		function <portlet:namespace />selectConfigurationKBArticle(resourcePrimKey, title) {
@@ -110,3 +133,43 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 		}
 	</aui:script>
 </c:if>
+=======
+<c:choose>
+	<c:when test='<%= tabs2.equals("general") %>'>
+		<aui:script use="aui-base">
+			<liferay-portlet:renderURL portletName="<%= portletResource %>" var="selectConfigurationKBArticleURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:param name="mvcPath" value="/article/select_configuration_object.jsp" />
+				<portlet:param name="parentResourceClassNameId" value="<%= String.valueOf(PortalUtil.getClassNameId(KBFolderConstants.getClassName())) %>" />
+				<portlet:param name="parentResourcePrimKey" value="<%= String.valueOf(KBFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />
+			</liferay-portlet:renderURL>
+
+			A.one('#<portlet:namespace />selectKBArticleButton').on(
+				'click',
+				function(event) {
+					Liferay.Util.selectEntity(
+						{
+							dialog: {
+								constrain: true,
+								destroyOnHide: true,
+								modal: true
+							},
+							id: '<portlet:namespace />selectConfigurationKBObject',
+							title: '<liferay-ui:message key="select-parent" />',
+							uri: '<%= selectConfigurationKBArticleURL %>'
+						},
+						function(event) {
+							document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = event.resourceprimkey;
+							document.getElementById('<portlet:namespace />configurationKBArticle').value = event.title;
+						}
+					);
+				}
+			);
+		</aui:script>
+	</c:when>
+	<c:when test='<%= tabs2.equals("display-settings") %>'>
+		<aui:script>
+			Liferay.Util.toggleBoxes('<portlet:namespace />enableKBArticleRatingsCheckbox', '<portlet:namespace />ratingsType');
+		</aui:script>
+	</c:when>
+</c:choose>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

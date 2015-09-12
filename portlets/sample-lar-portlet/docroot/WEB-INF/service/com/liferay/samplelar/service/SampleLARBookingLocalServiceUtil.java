@@ -14,6 +14,11 @@
 
 package com.liferay.samplelar.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableLocalService;
@@ -32,6 +37,10 @@ import com.liferay.portal.service.InvokableLocalService;
  * @see com.liferay.samplelar.service.impl.SampleLARBookingLocalServiceImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SampleLARBookingLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -44,6 +53,7 @@ public class SampleLARBookingLocalServiceUtil {
 	*
 	* @param sampleLARBooking the sample l a r booking
 	* @return the sample l a r booking that was added
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.samplelar.model.SampleLARBooking addSampleLARBooking(
@@ -52,6 +62,23 @@ public class SampleLARBookingLocalServiceUtil {
 		return getService().addSampleLARBooking(sampleLARBooking);
 	}
 
+=======
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking addSampleLARBooking(
+		com.liferay.samplelar.model.SampleLARBooking sampleLARBooking) {
+		return getService().addSampleLARBooking(sampleLARBooking);
+	}
+
+	public static com.liferay.samplelar.model.SampleLARBooking addSampleLARBooking(
+		long userId, long groupId, java.lang.String bookingNumber,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addSampleLARBooking(userId, groupId, bookingNumber,
+			serviceContext);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Creates a new sample l a r booking with the primary key. Does not add the sample l a r booking to the database.
 	*
@@ -64,6 +91,7 @@ public class SampleLARBookingLocalServiceUtil {
 	}
 
 	/**
+<<<<<<< HEAD
 	* Deletes the sample l a r booking with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param sampleLARBookingId the primary key of the sample l a r booking
@@ -76,6 +104,14 @@ public class SampleLARBookingLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteSampleLARBooking(sampleLARBookingId);
+=======
+	* @throws PortalException
+	*/
+	public static com.liferay.portal.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePersistedModel(persistedModel);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -83,6 +119,7 @@ public class SampleLARBookingLocalServiceUtil {
 	*
 	* @param sampleLARBooking the sample l a r booking
 	* @return the sample l a r booking that was removed
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.samplelar.model.SampleLARBooking deleteSampleLARBooking(
@@ -91,6 +128,31 @@ public class SampleLARBookingLocalServiceUtil {
 		return getService().deleteSampleLARBooking(sampleLARBooking);
 	}
 
+=======
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking deleteSampleLARBooking(
+		com.liferay.samplelar.model.SampleLARBooking sampleLARBooking) {
+		return getService().deleteSampleLARBooking(sampleLARBooking);
+	}
+
+	/**
+	* Deletes the sample l a r booking with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param sampleLARBookingId the primary key of the sample l a r booking
+	* @return the sample l a r booking that was removed
+	* @throws PortalException if a sample l a r booking with the primary key could not be found
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking deleteSampleLARBooking(
+		long sampleLARBookingId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deleteSampleLARBooking(sampleLARBookingId);
+	}
+
+	public static void deleteSampleLARBookings(long groupId) {
+		getService().deleteSampleLARBookings(groupId);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return getService().dynamicQuery();
 	}
@@ -100,12 +162,18 @@ public class SampleLARBookingLocalServiceUtil {
 	*
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@SuppressWarnings("rawtypes")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
@@ -120,12 +188,19 @@ public class SampleLARBookingLocalServiceUtil {
 	* @param start the lower bound of the range of model instances
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@SuppressWarnings("rawtypes")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -141,6 +216,7 @@ public class SampleLARBookingLocalServiceUtil {
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	@SuppressWarnings("rawtypes")
@@ -149,11 +225,19 @@ public class SampleLARBookingLocalServiceUtil {
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService()
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the number of rows that match the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -163,10 +247,20 @@ public class SampleLARBookingLocalServiceUtil {
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the number of rows matching the dynamic query
+	*/
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the number of rows that match the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
@@ -178,16 +272,32 @@ public class SampleLARBookingLocalServiceUtil {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
 		com.liferay.portal.kernel.dao.orm.Projection projection)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @param projection the projection to apply to the query
+	* @return the number of rows matching the dynamic query
+	*/
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
 	public static com.liferay.samplelar.model.SampleLARBooking fetchSampleLARBooking(
+<<<<<<< HEAD
 		long sampleLARBookingId)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+		long sampleLARBookingId) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().fetchSampleLARBooking(sampleLARBookingId);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the sample l a r booking with the matching UUID and company.
 	*
 	* @param uuid the sample l a r booking's UUID
@@ -203,11 +313,14 @@ public class SampleLARBookingLocalServiceUtil {
 	}
 
 	/**
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	* Returns the sample l a r booking matching the UUID and group.
 	*
 	* @param uuid the sample l a r booking's UUID
 	* @param groupId the primary key of the group
 	* @return the matching sample l a r booking, or <code>null</code> if a matching sample l a r booking could not be found
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.samplelar.model.SampleLARBooking fetchSampleLARBookingByUuidAndGroupId(
@@ -229,16 +342,45 @@ public class SampleLARBookingLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSampleLARBooking(sampleLARBookingId);
+=======
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking fetchSampleLARBookingByUuidAndGroupId(
+		java.lang.String uuid, long groupId) {
+		return getService().fetchSampleLARBookingByUuidAndGroupId(uuid, groupId);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return getService().getActionableDynamicQuery();
+	}
+
+	/**
+	* Returns the Spring bean ID for this bean.
+	*
+	* @return the Spring bean ID for this bean
+	*/
+	public static java.lang.String getBeanIdentifier() {
+		return getService().getBeanIdentifier();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		com.liferay.portlet.exportimport.lar.PortletDataContext portletDataContext) {
+		return getService().getExportActionableDynamicQuery(portletDataContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the sample l a r booking with the matching UUID and company.
 	*
 	* @param uuid the sample l a r booking's UUID
@@ -253,6 +395,18 @@ public class SampleLARBookingLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getSampleLARBookingByUuidAndCompanyId(uuid, companyId);
+=======
+	* Returns the sample l a r booking with the primary key.
+	*
+	* @param sampleLARBookingId the primary key of the sample l a r booking
+	* @return the sample l a r booking
+	* @throws PortalException if a sample l a r booking with the primary key could not be found
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking getSampleLARBooking(
+		long sampleLARBookingId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getSampleLARBooking(sampleLARBookingId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
@@ -262,6 +416,7 @@ public class SampleLARBookingLocalServiceUtil {
 	* @param groupId the primary key of the group
 	* @return the matching sample l a r booking
 	* @throws PortalException if a matching sample l a r booking could not be found
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.samplelar.model.SampleLARBooking getSampleLARBookingByUuidAndGroupId(
@@ -271,6 +426,20 @@ public class SampleLARBookingLocalServiceUtil {
 		return getService().getSampleLARBookingByUuidAndGroupId(uuid, groupId);
 	}
 
+=======
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking getSampleLARBookingByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getSampleLARBookingByUuidAndGroupId(uuid, groupId);
+	}
+
+	public static java.util.List<com.liferay.samplelar.model.SampleLARBooking> getSampleLARBookings(
+		long groupId, int start, int end) {
+		return getService().getSampleLARBookings(groupId, start, end);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Returns a range of all the sample l a r bookings.
 	*
@@ -281,15 +450,22 @@ public class SampleLARBookingLocalServiceUtil {
 	* @param start the lower bound of the range of sample l a r bookings
 	* @param end the upper bound of the range of sample l a r bookings (not inclusive)
 	* @return the range of sample l a r bookings
+<<<<<<< HEAD
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.samplelar.model.SampleLARBooking> getSampleLARBookings(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
+=======
+	*/
+	public static java.util.List<com.liferay.samplelar.model.SampleLARBooking> getSampleLARBookings(
+		int start, int end) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().getSampleLARBookings(start, end);
 	}
 
 	/**
+<<<<<<< HEAD
 	* Returns the number of sample l a r bookings.
 	*
 	* @return the number of sample l a r bookings
@@ -329,6 +505,49 @@ public class SampleLARBookingLocalServiceUtil {
 	*/
 	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
 		getService().setBeanIdentifier(beanIdentifier);
+=======
+	* Returns all the sample l a r bookings matching the UUID and company.
+	*
+	* @param uuid the UUID of the sample l a r bookings
+	* @param companyId the primary key of the company
+	* @return the matching sample l a r bookings, or an empty list if no matches were found
+	*/
+	public static java.util.List<com.liferay.samplelar.model.SampleLARBooking> getSampleLARBookingsByUuidAndCompanyId(
+		java.lang.String uuid, long companyId) {
+		return getService()
+				   .getSampleLARBookingsByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	* Returns a range of sample l a r bookings matching the UUID and company.
+	*
+	* @param uuid the UUID of the sample l a r bookings
+	* @param companyId the primary key of the company
+	* @param start the lower bound of the range of sample l a r bookings
+	* @param end the upper bound of the range of sample l a r bookings (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the range of matching sample l a r bookings, or an empty list if no matches were found
+	*/
+	public static java.util.List<com.liferay.samplelar.model.SampleLARBooking> getSampleLARBookingsByUuidAndCompanyId(
+		java.lang.String uuid, long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.samplelar.model.SampleLARBooking> orderByComparator) {
+		return getService()
+				   .getSampleLARBookingsByUuidAndCompanyId(uuid, companyId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the number of sample l a r bookings.
+	*
+	* @return the number of sample l a r bookings
+	*/
+	public static int getSampleLARBookingsCount() {
+		return getService().getSampleLARBookingsCount();
+	}
+
+	public static int getSampleLARBookingsCount(long groupId) {
+		return getService().getSampleLARBookingsCount(groupId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static java.lang.Object invokeMethod(java.lang.String name,
@@ -337,6 +556,7 @@ public class SampleLARBookingLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+<<<<<<< HEAD
 	public static com.liferay.samplelar.model.SampleLARBooking addSampleLARBooking(
 		long userId, long groupId, java.lang.String bookingNumber,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -350,13 +570,37 @@ public class SampleLARBookingLocalServiceUtil {
 	public static void deleteSampleLARBookings(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteSampleLARBookings(groupId);
+=======
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+	}
+
+	/**
+	* Updates the sample l a r booking in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param sampleLARBooking the sample l a r booking
+	* @return the sample l a r booking that was updated
+	*/
+	public static com.liferay.samplelar.model.SampleLARBooking updateSampleLARBooking(
+		com.liferay.samplelar.model.SampleLARBooking sampleLARBooking) {
+		return getService().updateSampleLARBooking(sampleLARBooking);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static com.liferay.samplelar.model.SampleLARBooking updateSampleLARBooking(
 		long userId, long sampleLARBookingId, java.lang.String bookingNumber,
 		com.liferay.portal.service.ServiceContext serviceContext)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService()
 				   .updateSampleLARBooking(userId, sampleLARBookingId,
 			bookingNumber, serviceContext);
@@ -388,6 +632,10 @@ public class SampleLARBookingLocalServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setService(SampleLARBookingLocalService service) {
 	}
 

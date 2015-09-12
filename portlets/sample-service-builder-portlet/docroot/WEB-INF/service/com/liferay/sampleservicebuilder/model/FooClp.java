@@ -14,14 +14,18 @@
 
 package com.liferay.sampleservicebuilder.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.lar.StagedModelType;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import com.liferay.sampleservicebuilder.service.ClpSerializer;
 import com.liferay.sampleservicebuilder.service.FooLocalServiceUtil;
@@ -37,6 +41,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class FooClp extends BaseModelImpl<Foo> implements Foo {
 	public FooClp() {
 	}
@@ -88,6 +93,9 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 		attributes.put("field3", getField3());
 		attributes.put("field4", getField4());
 		attributes.put("field5", getField5());
+
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
 
 		return attributes;
 	}
@@ -171,6 +179,9 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 		if (field5 != null) {
 			setField5(field5);
 		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -289,13 +300,19 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 	}
 
 	@Override
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@Override
@@ -487,12 +504,6 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 		}
 	}
 
-	@Override
-	public StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				Foo.class.getName()));
-	}
-
 	public BaseModel<?> getFooRemoteModel() {
 		return _fooRemoteModel;
 	}
@@ -543,7 +554,7 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			FooLocalServiceUtil.addFoo(this);
 		}
@@ -614,9 +625,23 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
 	}
 
 	@Override
@@ -725,7 +750,6 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -735,4 +759,7 @@ public class FooClp extends BaseModelImpl<Foo> implements Foo {
 	private Date _field4;
 	private String _field5;
 	private BaseModel<?> _fooRemoteModel;
+	private Class<?> _clpSerializerClass = com.liferay.sampleservicebuilder.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

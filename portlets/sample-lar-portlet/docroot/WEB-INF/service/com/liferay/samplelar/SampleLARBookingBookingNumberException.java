@@ -22,7 +22,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 public class SampleLARBookingBookingNumberException extends PortalException {
 
 	public SampleLARBookingBookingNumberException() {
+<<<<<<< HEAD
 		super();
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public SampleLARBookingBookingNumberException(String msg) {

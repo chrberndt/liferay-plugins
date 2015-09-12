@@ -14,6 +14,11 @@
 
 package com.liferay.privatemessaging.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
@@ -32,6 +37,10 @@ import com.liferay.portal.service.InvokableService;
  * @see com.liferay.privatemessaging.service.impl.UserThreadServiceImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class UserThreadServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -48,6 +57,7 @@ public class UserThreadServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -67,29 +77,64 @@ public class UserThreadServiceUtil {
 		long mbThreadId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+	public static com.liferay.portlet.messageboards.model.MBMessage getLastThreadMessage(
+		long mbThreadId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().getLastThreadMessage(mbThreadId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long mbThreadId, int start, int end, boolean ascending)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().getThreadMessages(mbThreadId, start, end, ascending);
 	}
 
 	public static int getThreadMessagesCount(long mbThreadId)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService().getThreadMessagesCount(mbThreadId);
 	}
 
 	public static java.util.List<com.liferay.privatemessaging.model.UserThread> getUserUserThreads(
 		boolean deleted)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portal.security.auth.PrincipalException {
 		return getService().getUserUserThreads(deleted);
 	}
 
+=======
+		throws com.liferay.portal.security.auth.PrincipalException {
+		return getService().getUserUserThreads(deleted);
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static void clearService() {
 		_service = null;
 	}
@@ -116,6 +161,10 @@ public class UserThreadServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setService(UserThreadService service) {
 	}
 

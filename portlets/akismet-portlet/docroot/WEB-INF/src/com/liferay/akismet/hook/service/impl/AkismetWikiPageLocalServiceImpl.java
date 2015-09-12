@@ -21,7 +21,6 @@ import com.liferay.akismet.util.AkismetUtil;
 import com.liferay.akismet.util.PortletPropsKeys;
 import com.liferay.akismet.util.PrefsPortletPropsUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -31,9 +30,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiPageLocalService;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceWrapper;
+import com.liferay.wiki.model.WikiPage;
+import com.liferay.wiki.service.WikiPageLocalService;
+import com.liferay.wiki.service.WikiPageLocalServiceWrapper;
 
 import java.util.Map;
 
@@ -55,21 +54,14 @@ public class AkismetWikiPageLocalServiceImpl
 			String content, String summary, boolean minorEdit, String format,
 			boolean head, String parentTitle, String redirectTitle,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		int workflowAction = serviceContext.getWorkflowAction();
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 			return super.addPage(
-				userId, nodeId, redirectTitle, content, summary, minorEdit,
+				userId, nodeId, title, content, summary, minorEdit,
 				serviceContext);
-		}
-
-		boolean enabled = isWikiEnabled(userId, nodeId, serviceContext);
-
-		if (enabled) {
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
 		WikiPage page = super.addPage(
@@ -78,7 +70,7 @@ public class AkismetWikiPageLocalServiceImpl
 
 		AkismetData akismetData = updateAkismetData(page, serviceContext);
 
-		if (!enabled) {
+		if (!isWikiEnabled(userId, nodeId, serviceContext)) {
 			return page;
 		}
 
@@ -100,16 +92,7 @@ public class AkismetWikiPageLocalServiceImpl
 			page.setSummary(AkismetConstants.WIKI_PAGE_PENDING_APPROVAL);
 			page.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-			page = super.updateWikiPage(page);
-
-			ServiceContext newServiceContext = new ServiceContext();
-
-			newServiceContext.setFormDate(page.getModifiedDate());
-
-			return super.updatePage(
-				userId, nodeId, title, page.getVersion(), null,
-				StringPool.BLANK, true, format, parentTitle, redirectTitle,
-				newServiceContext);
+			return super.updateWikiPage(page);
 		}
 		finally {
 			NotificationThreadLocal.setEnabled(notificationEnabled);
@@ -122,7 +105,7 @@ public class AkismetWikiPageLocalServiceImpl
 			String content, String summary, boolean minorEdit, String format,
 			String parentTitle, String redirectTitle,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		int workflowAction = serviceContext.getWorkflowAction();
 
@@ -132,20 +115,13 @@ public class AkismetWikiPageLocalServiceImpl
 				format, parentTitle, redirectTitle, serviceContext);
 		}
 
-		boolean enabled = isWikiEnabled(userId, nodeId, serviceContext);
-
-		if (enabled) {
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
-		}
-
 		WikiPage page = super.updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit, format,
 			parentTitle, redirectTitle, serviceContext);
 
 		AkismetData akismetData = updateAkismetData(page, serviceContext);
 
-		if (!enabled) {
+		if (!isWikiEnabled(userId, nodeId, serviceContext)) {
 			return page;
 		}
 
@@ -172,21 +148,17 @@ public class AkismetWikiPageLocalServiceImpl
 			WikiPage previousPage = AkismetUtil.getWikiPage(
 				page.getNodeId(), page.getTitle(), page.getVersion(), true);
 
+			if (previousPage == null) {
+				return page;
+			}
+
 			ServiceContext newServiceContext = new ServiceContext();
 
 			newServiceContext.setFormDate(page.getModifiedDate());
 
-			if (previousPage != null) {
-				return super.revertPage(
-					userId, nodeId, title, previousPage.getVersion(),
-					newServiceContext);
-			}
-			else {
-				return super.updatePage(
-					userId, nodeId, title, page.getVersion(), null,
-					StringPool.BLANK, true, format, parentTitle, redirectTitle,
-					newServiceContext);
-			}
+			return super.revertPage(
+				userId, nodeId, title, previousPage.getVersion(),
+				newServiceContext);
 		}
 		finally {
 			NotificationThreadLocal.setEnabled(notificationEnabled);
@@ -208,7 +180,7 @@ public class AkismetWikiPageLocalServiceImpl
 
 	protected boolean isWikiEnabled(
 			long userId, long nodeId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!AkismetUtil.hasRequiredInfo(serviceContext)) {
 			return false;
@@ -236,8 +208,7 @@ public class AkismetWikiPageLocalServiceImpl
 	}
 
 	protected AkismetData updateAkismetData(
-			WikiPage page, ServiceContext serviceContext)
-		throws SystemException {
+		WikiPage page, ServiceContext serviceContext) {
 
 		if (!AkismetUtil.hasRequiredInfo(serviceContext)) {
 			return null;

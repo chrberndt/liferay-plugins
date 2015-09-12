@@ -16,14 +16,26 @@ package com.liferay.sync.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
+<<<<<<< HEAD
 import com.liferay.portal.service.persistence.RepositoryPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+=======
+import com.liferay.portal.service.persistence.OrganizationPersistence;
+import com.liferay.portal.service.persistence.RepositoryPersistence;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
@@ -118,7 +130,11 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the sync d l object remote service
 	 */
+<<<<<<< HEAD
 	public com.liferay.sync.service.SyncDLObjectService getSyncDLObjectService() {
+=======
+	public SyncDLObjectService getSyncDLObjectService() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return syncDLObjectService;
 	}
 
@@ -127,8 +143,12 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @param syncDLObjectService the sync d l object remote service
 	 */
+<<<<<<< HEAD
 	public void setSyncDLObjectService(
 		com.liferay.sync.service.SyncDLObjectService syncDLObjectService) {
+=======
+	public void setSyncDLObjectService(SyncDLObjectService syncDLObjectService) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		this.syncDLObjectService = syncDLObjectService;
 	}
 
@@ -170,6 +190,28 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Returns the sync preferences local service.
+	 *
+	 * @return the sync preferences local service
+	 */
+	public com.liferay.sync.service.SyncPreferencesLocalService getSyncPreferencesLocalService() {
+		return syncPreferencesLocalService;
+	}
+
+	/**
+	 * Sets the sync preferences local service.
+	 *
+	 * @param syncPreferencesLocalService the sync preferences local service
+	 */
+	public void setSyncPreferencesLocalService(
+		com.liferay.sync.service.SyncPreferencesLocalService syncPreferencesLocalService) {
+		this.syncPreferencesLocalService = syncPreferencesLocalService;
+	}
+
+	/**
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -302,6 +344,66 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
+=======
+	 * Returns the organization local service.
+	 *
+	 * @return the organization local service
+	 */
+	public com.liferay.portal.service.OrganizationLocalService getOrganizationLocalService() {
+		return organizationLocalService;
+	}
+
+	/**
+	 * Sets the organization local service.
+	 *
+	 * @param organizationLocalService the organization local service
+	 */
+	public void setOrganizationLocalService(
+		com.liferay.portal.service.OrganizationLocalService organizationLocalService) {
+		this.organizationLocalService = organizationLocalService;
+	}
+
+	/**
+	 * Returns the organization remote service.
+	 *
+	 * @return the organization remote service
+	 */
+	public com.liferay.portal.service.OrganizationService getOrganizationService() {
+		return organizationService;
+	}
+
+	/**
+	 * Sets the organization remote service.
+	 *
+	 * @param organizationService the organization remote service
+	 */
+	public void setOrganizationService(
+		com.liferay.portal.service.OrganizationService organizationService) {
+		this.organizationService = organizationService;
+	}
+
+	/**
+	 * Returns the organization persistence.
+	 *
+	 * @return the organization persistence
+	 */
+	public OrganizationPersistence getOrganizationPersistence() {
+		return organizationPersistence;
+	}
+
+	/**
+	 * Sets the organization persistence.
+	 *
+	 * @param organizationPersistence the organization persistence
+	 */
+	public void setOrganizationPersistence(
+		OrganizationPersistence organizationPersistence) {
+		this.organizationPersistence = organizationPersistence;
+	}
+
+	/**
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	 * Returns the repository local service.
 	 *
 	 * @return the repository local service
@@ -644,6 +746,7 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query
@@ -652,6 +755,21 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 		try {
 			DataSource dataSource = syncDLObjectPersistence.getDataSource();
 
+=======
+	 * Performs a SQL query.
+	 *
+	 * @param sql the sql query
+	 */
+	protected void runSQL(String sql) {
+		try {
+			DataSource dataSource = syncDLObjectPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
 
@@ -669,11 +787,20 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	@BeanReference(type = com.liferay.sync.service.SyncDLObjectLocalService.class)
 	protected com.liferay.sync.service.SyncDLObjectLocalService syncDLObjectLocalService;
 	@BeanReference(type = com.liferay.sync.service.SyncDLObjectService.class)
+<<<<<<< HEAD
 	protected com.liferay.sync.service.SyncDLObjectService syncDLObjectService;
+=======
+	protected SyncDLObjectService syncDLObjectService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = SyncDLObjectPersistence.class)
 	protected SyncDLObjectPersistence syncDLObjectPersistence;
 	@BeanReference(type = SyncDLObjectFinder.class)
 	protected SyncDLObjectFinder syncDLObjectFinder;
+<<<<<<< HEAD
+=======
+	@BeanReference(type = com.liferay.sync.service.SyncPreferencesLocalService.class)
+	protected com.liferay.sync.service.SyncPreferencesLocalService syncPreferencesLocalService;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ClassNameLocalService.class)
@@ -688,6 +815,15 @@ public abstract class SyncDLObjectServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.portal.service.GroupService groupService;
 	@BeanReference(type = GroupPersistence.class)
 	protected GroupPersistence groupPersistence;
+<<<<<<< HEAD
+=======
+	@BeanReference(type = com.liferay.portal.service.OrganizationLocalService.class)
+	protected com.liferay.portal.service.OrganizationLocalService organizationLocalService;
+	@BeanReference(type = com.liferay.portal.service.OrganizationService.class)
+	protected com.liferay.portal.service.OrganizationService organizationService;
+	@BeanReference(type = OrganizationPersistence.class)
+	protected OrganizationPersistence organizationPersistence;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@BeanReference(type = com.liferay.portal.service.RepositoryLocalService.class)
 	protected com.liferay.portal.service.RepositoryLocalService repositoryLocalService;
 	@BeanReference(type = com.liferay.portal.service.RepositoryService.class)

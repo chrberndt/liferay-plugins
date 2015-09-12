@@ -15,7 +15,6 @@
 package com.liferay.twitter.service.impl;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -50,53 +49,40 @@ import java.util.List;
  */
 public class FeedLocalServiceImpl extends FeedLocalServiceBaseImpl {
 
-	public void updateFeed(long userId)
-		throws PortalException, SystemException {
-
+	public void updateFeed(long userId) throws PortalException {
 		User user = userLocalService.getUserById(userId);
 
 		updateFeed(user);
 	}
 
-	public void updateFeeds() throws SystemException {
+	public void updateFeeds() {
 		for (long companyId : PortalUtil.getCompanyIds()) {
 			updateFeeds(companyId);
 		}
 	}
 
-	public void updateFeeds(long companyId) throws SystemException {
+	public void updateFeeds(long companyId) {
+		LinkedHashMap<String, Object> userParams = new LinkedHashMap<>();
 
-		ShardUtil.pushCompanyService(companyId);
+		userParams.put("contactTwitterSn", Boolean.TRUE);
 
-		try {
-			LinkedHashMap<String, Object> userParams =
-				new LinkedHashMap<String, Object>();
+		List<User> users = userLocalService.search(
+			companyId, null, WorkflowConstants.STATUS_APPROVED, userParams,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
-			userParams.put("contactTwitterSn", Boolean.TRUE);
-
-			List<User> users = userLocalService.search(
-				companyId, null, WorkflowConstants.STATUS_APPROVED, userParams,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-
-			for (User user : users) {
-				try {
-					updateFeed(user);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e, e);
-					}
+		for (User user : users) {
+			try {
+				updateFeed(user);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
 				}
 			}
 		}
-		finally {
-			ShardUtil.popCompanyService();
-		}
 	}
 
-	protected void updateFeed(User user)
-		throws PortalException, SystemException {
-
+	protected void updateFeed(User user) throws PortalException {
 		Contact contact = user.getContact();
 
 		String twitterScreenName = contact.getTwitterSn();

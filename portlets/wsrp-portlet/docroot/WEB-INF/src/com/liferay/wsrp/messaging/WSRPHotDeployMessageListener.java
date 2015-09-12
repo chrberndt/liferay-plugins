@@ -14,11 +14,30 @@
 
 package com.liferay.wsrp.messaging;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.messaging.HotDeployMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.wsrp.service.WSRPConsumerPortletLocalServiceUtil;
 import com.liferay.wsrp.util.ExtensionHelperUtil;
 
+=======
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.HotDeployMessageListener;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
+import com.liferay.registry.ServiceReference;
+import com.liferay.registry.ServiceTracker;
+import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.wsrp.jmx.WSRPConsumerPortletManager;
+import com.liferay.wsrp.service.WSRPConsumerPortletLocalServiceUtil;
+import com.liferay.wsrp.util.ExtensionHelperUtil;
+
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /**
  * @author Shuyang Zhou
  */
@@ -28,6 +47,22 @@ public class WSRPHotDeployMessageListener extends HotDeployMessageListener {
 		super(servletContextNames);
 	}
 
+<<<<<<< HEAD
+=======
+	public void afterPropertiesSet() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		_serviceTracker = registry.trackServices(
+			MBeanServer.class, new MBeanServerServiceTrackerCustomizer());
+
+		_serviceTracker.open();
+	}
+
+	public void destroy() {
+		_serviceTracker.close();
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	protected void onDeploy(Message message) throws Exception {
 		ExtensionHelperUtil.initialize();
@@ -42,4 +77,54 @@ public class WSRPHotDeployMessageListener extends HotDeployMessageListener {
 		WSRPConsumerPortletLocalServiceUtil.destroyWSRPConsumerPortlets();
 	}
 
+<<<<<<< HEAD
+=======
+	private static Log _log = LogFactoryUtil.getLog(
+		WSRPHotDeployMessageListener.class);
+
+	private ServiceTracker<MBeanServer, MBeanServer> _serviceTracker;
+
+	private class MBeanServerServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<MBeanServer, MBeanServer> {
+
+		@Override
+		public MBeanServer addingService(
+			ServiceReference<MBeanServer> serviceReference) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			MBeanServer mBeanServer = registry.getService(serviceReference);
+
+			try {
+				mBeanServer.registerMBean(
+					new WSRPConsumerPortletManager(),
+					new ObjectName(
+						"com.liferay.wsrp:classification=wsrp," +
+							"name=WSRPConsumerPortletManager"));
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to register WSRPConsumerPortletManager", e);
+				}
+			}
+
+			return mBeanServer;
+		}
+
+		@Override
+		public void modifiedService(
+			ServiceReference<MBeanServer> serviceReference,
+			MBeanServer mBeanServer) {
+		}
+
+		@Override
+		public void removedService(
+			ServiceReference<MBeanServer> serviceReference,
+			MBeanServer mBeanServer) {
+		}
+
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

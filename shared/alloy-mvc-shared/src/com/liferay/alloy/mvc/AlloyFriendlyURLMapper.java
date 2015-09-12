@@ -22,7 +22,11 @@ import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.util.StringUtil;
+=======
+import com.liferay.portal.kernel.util.Validator;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.HashMap;
@@ -40,7 +44,11 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 	@Override
 	public String buildPath(LiferayPortletURL liferayPortletURL) {
+<<<<<<< HEAD
 		Map<String, String> routeParameters = new HashMap<String, String>();
+=======
+		Map<String, String> routeParameters = new HashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		buildRouteParameters(liferayPortletURL, routeParameters);
 
@@ -48,7 +56,13 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 		String lifecycle = liferayPortletURL.getLifecycle();
 
+<<<<<<< HEAD
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+=======
+		String delta = routeParameters.get("delta");
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE) || (delta != null)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			routeParameters.put("method", HttpMethods.POST);
 		}
 		else {
@@ -105,7 +119,11 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 				0, friendlyURLPath.length() - 1);
 		}
 
+<<<<<<< HEAD
 		Map<String, String> routeParameters = new HashMap<String, String>();
+=======
+		Map<String, String> routeParameters = new HashMap<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (!router.urlToParameters(friendlyURLPath, routeParameters)) {
 			if (_log.isWarnEnabled()) {
@@ -127,13 +145,26 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		addParameter(namespace, parameterMap, "p_p_id", portletId);
 		addParameter(parameterMap, "p_p_lifecycle", getLifecycle(request));
 
+<<<<<<< HEAD
+=======
+		String format = routeParameters.get("format");
+
+		if (Validator.isNotNull(format)) {
+			addParameter(parameterMap, "p_p_state", "exclusive");
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		populateParams(parameterMap, namespace, routeParameters);
 	}
 
 	protected String getLifecycle(HttpServletRequest request) {
+<<<<<<< HEAD
 		String method = request.getMethod();
 
 		if (StringUtil.equalsIgnoreCase(method, HttpMethods.POST)) {
+=======
+		if (PortalUtil.isMultipartRequest(request)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return "1";
 		}
 

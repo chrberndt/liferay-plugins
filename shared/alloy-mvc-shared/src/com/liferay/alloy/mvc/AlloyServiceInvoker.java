@@ -15,6 +15,10 @@
 package com.liferay.alloy.mvc;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.dao.orm.Projection;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -46,8 +50,18 @@ public class AlloyServiceInvoker {
 		try {
 			Class<?> serviceClass = classLoader.loadClass(serviceClassName);
 
+<<<<<<< HEAD
 			dynamicQueryCountMethod = serviceClass.getMethod(
 				"dynamicQueryCount", new Class[] {DynamicQuery.class});
+=======
+			deleteModelMethod = serviceClass.getMethod(
+				"delete" + simpleClassName, new Class[] {long.class});
+			dynamicQueryCountMethod1 = serviceClass.getMethod(
+				"dynamicQueryCount", new Class[] {DynamicQuery.class});
+			dynamicQueryCountMethod2 = serviceClass.getMethod(
+				"dynamicQueryCount",
+				new Class[] {DynamicQuery.class, Projection.class});
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			dynamicQueryMethod1 = serviceClass.getMethod(
 				"dynamicQuery", new Class[0]);
 			dynamicQueryMethod2 = serviceClass.getMethod(
@@ -57,8 +71,15 @@ public class AlloyServiceInvoker {
 				new Class[] {DynamicQuery.class, int.class, int.class});
 			dynamicQueryMethod4 = serviceClass.getMethod(
 				"dynamicQuery",
+<<<<<<< HEAD
 				new Class[] {DynamicQuery.class, int.class, int.class,
 					OrderByComparator.class});
+=======
+				new Class[] {
+					DynamicQuery.class, int.class, int.class,
+					OrderByComparator.class
+				});
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			fetchModelMethod = serviceClass.getMethod(
 				"fetch" + simpleClassName, new Class[] {long.class});
 			getModelsCountMethod = serviceClass.getMethod(
@@ -100,10 +121,26 @@ public class AlloyServiceInvoker {
 		return dynamicQuery;
 	}
 
+<<<<<<< HEAD
+=======
+	public BaseModel<?> deleteModel(BaseModel<?> baseModel) throws Exception {
+		return (BaseModel<?>)deleteModelMethod.invoke(
+			false, baseModel.getPrimaryKeyObj());
+	}
+
+	public BaseModel<?> deleteModel(long classPK) throws Exception {
+		return (BaseModel<?>)deleteModelMethod.invoke(false, classPK);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #executeDynamicQuery(DynamicQuery)}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery) throws Exception {
 		return executeDynamicQuery(dynamicQuery);
@@ -113,6 +150,10 @@ public class AlloyServiceInvoker {
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #executeDynamicQueryCount(DynamicQuery)}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws Exception {
 		return executeDynamicQueryCount(dynamicQuery);
 	}
@@ -136,7 +177,11 @@ public class AlloyServiceInvoker {
 	@SuppressWarnings("rawtypes")
 	public List executeDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
+<<<<<<< HEAD
 			OrderByComparator obc)
+=======
+			OrderByComparator<?> obc)
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		throws Exception {
 
 		return (List)dynamicQueryMethod4.invoke(
@@ -157,7 +202,11 @@ public class AlloyServiceInvoker {
 
 	@SuppressWarnings("rawtypes")
 	public List executeDynamicQuery(
+<<<<<<< HEAD
 			Object[] properties, int start, int end, OrderByComparator obc)
+=======
+			Object[] properties, int start, int end, OrderByComparator<?> obc)
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		throws Exception {
 
 		return executeDynamicQuery(
@@ -167,7 +216,19 @@ public class AlloyServiceInvoker {
 	public long executeDynamicQueryCount(DynamicQuery dynamicQuery)
 		throws Exception {
 
+<<<<<<< HEAD
 		return (Long)dynamicQueryCountMethod.invoke(false, dynamicQuery);
+=======
+		return (Long)dynamicQueryCountMethod1.invoke(false, dynamicQuery);
+	}
+
+	public long executeDynamicQueryCount(
+			DynamicQuery dynamicQuery, Projection projection)
+		throws Exception {
+
+		return (Long)dynamicQueryCountMethod2.invoke(
+			false, dynamicQuery, projection);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public long executeDynamicQueryCount(Object[] properties) throws Exception {
@@ -187,7 +248,13 @@ public class AlloyServiceInvoker {
 		return (Integer)getModelsCountMethod.invoke(false);
 	}
 
+<<<<<<< HEAD
 	protected Method dynamicQueryCountMethod;
+=======
+	protected Method deleteModelMethod;
+	protected Method dynamicQueryCountMethod1;
+	protected Method dynamicQueryCountMethod2;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	protected Method dynamicQueryMethod1;
 	protected Method dynamicQueryMethod2;
 	protected Method dynamicQueryMethod3;

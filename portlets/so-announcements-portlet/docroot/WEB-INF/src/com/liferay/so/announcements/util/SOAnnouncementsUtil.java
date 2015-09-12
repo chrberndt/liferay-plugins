@@ -34,7 +34,10 @@ import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.List;
 
 /**
@@ -42,6 +45,7 @@ import java.util.List;
  */
 public class SOAnnouncementsUtil {
 
+<<<<<<< HEAD
 	public static List<Group> getGroups(ThemeDisplay themeDisplay)
 		throws Exception {
 
@@ -140,6 +144,8 @@ public class SOAnnouncementsUtil {
 		return filteredUserGroups;
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static boolean hasGroups(ThemeDisplay themeDisplay)
 		throws Exception {
 

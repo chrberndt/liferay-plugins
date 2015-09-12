@@ -14,6 +14,11 @@
 
 package com.liferay.samplelar.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -26,6 +31,10 @@ import java.util.List;
  * @author Mate Thurzo
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SampleLARBookingSoap implements Serializable {
 	public static SampleLARBookingSoap toSoapModel(SampleLARBooking model) {
 		SampleLARBookingSoap soapModel = new SampleLARBookingSoap();
@@ -39,6 +48,10 @@ public class SampleLARBookingSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setBookingNumber(model.getBookingNumber());
+<<<<<<< HEAD
+=======
+		soapModel.setLastPublishDate(model.getLastPublishDate());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		return soapModel;
 	}
@@ -165,6 +178,17 @@ public class SampleLARBookingSoap implements Serializable {
 		_bookingNumber = bookingNumber;
 	}
 
+<<<<<<< HEAD
+=======
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _uuid;
 	private long _sampleLARBookingId;
 	private long _groupId;
@@ -174,4 +198,8 @@ public class SampleLARBookingSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _bookingNumber;
+<<<<<<< HEAD
+=======
+	private Date _lastPublishDate;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

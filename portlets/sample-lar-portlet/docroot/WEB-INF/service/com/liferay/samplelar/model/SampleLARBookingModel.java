@@ -14,8 +14,14 @@
 
 package com.liferay.samplelar.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.AutoEscape;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.StagedGroupedModel;
@@ -40,6 +46,10 @@ import java.util.Date;
  * @see com.liferay.samplelar.model.impl.SampleLARBookingModelImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 	StagedGroupedModel {
 	/*
@@ -145,10 +155,16 @@ public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 	 * Returns the user uuid of this sample l a r booking.
 	 *
 	 * @return the user uuid of this sample l a r booking
+<<<<<<< HEAD
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public String getUserUuid() throws SystemException;
+=======
+	 */
+	@Override
+	public String getUserUuid();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	/**
 	 * Sets the user uuid of this sample l a r booking.
@@ -222,6 +238,23 @@ public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 	 */
 	public void setBookingNumber(String bookingNumber);
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Returns the last publish date of this sample l a r booking.
+	 *
+	 * @return the last publish date of this sample l a r booking
+	 */
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this sample l a r booking.
+	 *
+	 * @param lastPublishDate the last publish date of this sample l a r booking
+	 */
+	public void setLastPublishDate(Date lastPublishDate);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public boolean isNew();
 
@@ -259,12 +292,18 @@ public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 	public Object clone();
 
 	@Override
+<<<<<<< HEAD
 	public int compareTo(SampleLARBooking sampleLARBooking);
+=======
+	public int compareTo(
+		com.liferay.samplelar.model.SampleLARBooking sampleLARBooking);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public int hashCode();
 
 	@Override
+<<<<<<< HEAD
 	public CacheModel<SampleLARBooking> toCacheModel();
 
 	@Override
@@ -272,6 +311,15 @@ public interface SampleLARBookingModel extends BaseModel<SampleLARBooking>,
 
 	@Override
 	public SampleLARBooking toUnescapedModel();
+=======
+	public CacheModel<com.liferay.samplelar.model.SampleLARBooking> toCacheModel();
+
+	@Override
+	public com.liferay.samplelar.model.SampleLARBooking toEscapedModel();
+
+	@Override
+	public com.liferay.samplelar.model.SampleLARBooking toUnescapedModel();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public String toString();

@@ -2,5 +2,10 @@
 <!DOCTYPE project>
 
 <project name="so-configurations-portlet" basedir="." default="deploy">
+<<<<<<< HEAD
+=======
+	<property name="import.shared" value="so-configurations-shared" />
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<import file="../build-common-portlet.xml" />
 </project>

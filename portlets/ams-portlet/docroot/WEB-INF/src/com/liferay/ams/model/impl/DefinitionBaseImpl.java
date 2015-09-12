@@ -14,10 +14,10 @@
 
 package com.liferay.ams.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.ams.model.Definition;
 import com.liferay.ams.service.DefinitionLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the Definition service. Represents a row in the &quot;AMS_Definition&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see DefinitionImpl
- * @see com.liferay.ams.model.Definition
+ * @see Definition
  * @generated
  */
+@ProviderType
 public abstract class DefinitionBaseImpl extends DefinitionModelImpl
 	implements Definition {
 	/*
@@ -39,7 +40,7 @@ public abstract class DefinitionBaseImpl extends DefinitionModelImpl
 	 * Never modify or reference this class directly. All methods that expect a definition model instance should use the {@link Definition} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			DefinitionLocalServiceUtil.addDefinition(this);
 		}

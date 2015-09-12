@@ -23,7 +23,6 @@ import com.liferay.opensocial.service.OAuthConsumerLocalServiceUtil;
 import com.liferay.opensocial.util.PortletPropsValues;
 import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -40,6 +39,10 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.security.permission.ActionKeys;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -146,7 +149,7 @@ public class ShindigUtil {
 	}
 
 	public static String getFileEntryURL(String portalURL, long fileEntryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 
@@ -223,8 +226,12 @@ public class ShindigUtil {
 		if (folder == null) {
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddGroupPermissions(true);
-			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setGroupPermissions(
+				new String[] {
+					ActionKeys.ADD_DOCUMENT, ActionKeys.DELETE,
+					ActionKeys.UPDATE, ActionKeys.VIEW
+				});
+			serviceContext.setGuestPermissions(new String[] {ActionKeys.VIEW});
 			serviceContext.setScopeGroupId(repositoryId);
 
 			folder = DLAppServiceUtil.addFolder(
@@ -311,9 +318,7 @@ public class ShindigUtil {
 		return oAuthSpec.getServices();
 	}
 
-	public static String getOwnerId(Layout layout)
-		throws PortalException, SystemException {
-
+	public static String getOwnerId(Layout layout) throws PortalException {
 		Group group = layout.getGroup();
 
 		long classPK = group.getClassPK();
@@ -469,16 +474,16 @@ public class ShindigUtil {
 	private static ContainerConfig _containerConfig;
 
 	private static AutoResetThreadLocal<String> _host =
-		new AutoResetThreadLocal<String>(
+		new AutoResetThreadLocal<>(
 			ShindigUtil.class + "._host", StringPool.BLANK);
 	private static Set<String> _ignoreGadgetSpecCache =
-		new ConcurrentHashSet<String>();
+		new ConcurrentHashSet<>();
 
 	@Inject
 	private static Processor _processor;
 
 	private static AutoResetThreadLocal<String> _scheme =
-		new AutoResetThreadLocal<String>(
+		new AutoResetThreadLocal<>(
 			ShindigUtil.class + "._scheme", StringPool.BLANK);
 
 }

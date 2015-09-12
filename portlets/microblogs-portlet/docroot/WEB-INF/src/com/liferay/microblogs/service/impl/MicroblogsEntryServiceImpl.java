@@ -22,7 +22,6 @@ import com.liferay.microblogs.service.base.MicroblogsEntryServiceBaseImpl;
 import com.liferay.microblogs.service.permission.MicroblogsEntryPermission;
 import com.liferay.microblogs.service.permission.MicroblogsPermission;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 
@@ -34,22 +33,21 @@ import java.util.List;
 public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 
 	public MicroblogsEntry addMicroblogsEntry(
-			long userId, String content, int type, long receiverUserId,
-			long receiverMicroblogsEntryId, int socialRelationType,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+			long userId, String content, int type, long parentMicroblogsEntryId,
+			int socialRelationType, ServiceContext serviceContext)
+		throws PortalException {
 
 		MicroblogsPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
 			ActionKeys.ADD_ENTRY);
 
 		return microblogsEntryLocalService.addMicroblogsEntry(
-			userId, content, type, receiverUserId, receiverMicroblogsEntryId,
-			socialRelationType, serviceContext);
+			userId, content, type, parentMicroblogsEntryId, socialRelationType,
+			serviceContext);
 	}
 
 	public MicroblogsEntry deleteMicroblogsEntry(long microblogsEntryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		MicroblogsEntryPermission.check(
 			getPermissionChecker(), microblogsEntryId, ActionKeys.DELETE);
@@ -59,7 +57,7 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 	}
 
 	public List<MicroblogsEntry> getMicroblogsEntries(int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.findByUserId(
 			getGuestOrUserId(), start, end);
@@ -67,27 +65,25 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 
 	public List<MicroblogsEntry> getMicroblogsEntries(
 			String assetTagName, int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.findByU_ATN(
 			getGuestOrUserId(), assetTagName, start, end);
 	}
 
-	public int getMicroblogsEntriesCount()
-		throws PortalException, SystemException {
-
+	public int getMicroblogsEntriesCount() throws PortalException {
 		return microblogsEntryFinder.countByUserId(getGuestOrUserId());
 	}
 
 	public int getMicroblogsEntriesCount(String assetTagName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.countByU_ATN(
 			getGuestOrUserId(), assetTagName);
 	}
 
 	public MicroblogsEntry getMicroblogsEntry(long microblogsEntryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		MicroblogsEntryPermission.check(
 			getPermissionChecker(), microblogsEntryId, ActionKeys.VIEW);
@@ -98,7 +94,7 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 
 	public List<MicroblogsEntry> getUserMicroblogsEntries(
 			long microblogsEntryUserId, int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.findByU_MU(
 			getGuestOrUserId(), microblogsEntryUserId, start, end);
@@ -106,14 +102,14 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 
 	public List<MicroblogsEntry> getUserMicroblogsEntries(
 			long microblogsEntryUserId, int type, int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.findByU_T_MU(
 			getGuestOrUserId(), type, microblogsEntryUserId, start, end);
 	}
 
 	public int getUserMicroblogsEntriesCount(long microblogsEntryUserId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.countByU_MU(
 			getGuestOrUserId(), microblogsEntryUserId);
@@ -121,7 +117,7 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 
 	public int getUserMicroblogsEntriesCount(
 			long microblogsEntryUserId, int type)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return microblogsEntryFinder.countByU_T_MU(
 			getGuestOrUserId(), type, microblogsEntryUserId);
@@ -130,7 +126,7 @@ public class MicroblogsEntryServiceImpl extends MicroblogsEntryServiceBaseImpl {
 	public MicroblogsEntry updateMicroblogsEntry(
 			long microblogsEntryId, String content, int socialRelationType,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		MicroblogsEntryPermission.check(
 			getPermissionChecker(), microblogsEntryId, ActionKeys.UPDATE);

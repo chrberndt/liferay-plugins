@@ -14,6 +14,12 @@
 
 package com.liferay.sync.model.impl;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.util.HashUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
@@ -34,16 +40,56 @@ import java.util.Date;
  * @see SyncDLObject
  * @generated
  */
+<<<<<<< HEAD
 public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 	Externalizable {
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
+=======
+@ProviderType
+public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
+	Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SyncDLObjectCacheModel)) {
+			return false;
+		}
+
+		SyncDLObjectCacheModel syncDLObjectCacheModel = (SyncDLObjectCacheModel)obj;
+
+		if (syncDLObjectId == syncDLObjectCacheModel.syncDLObjectId) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, syncDLObjectId);
+	}
+
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(53);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("{syncDLObjectId=");
 		sb.append(syncDLObjectId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+<<<<<<< HEAD
+=======
+		sb.append(", userId=");
+		sb.append(userId);
+		sb.append(", userName=");
+		sb.append(userName);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", createTime=");
 		sb.append(createTime);
 		sb.append(", modifiedTime=");
@@ -52,6 +98,11 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 		sb.append(repositoryId);
 		sb.append(", parentFolderId=");
 		sb.append(parentFolderId);
+<<<<<<< HEAD
+=======
+		sb.append(", treePath=");
+		sb.append(treePath);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", extension=");
@@ -66,6 +117,11 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 		sb.append(extraSettings);
 		sb.append(", version=");
 		sb.append(version);
+<<<<<<< HEAD
+=======
+		sb.append(", versionId=");
+		sb.append(versionId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", size=");
 		sb.append(size);
 		sb.append(", checksum=");
@@ -95,11 +151,33 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 
 		syncDLObjectImpl.setSyncDLObjectId(syncDLObjectId);
 		syncDLObjectImpl.setCompanyId(companyId);
+<<<<<<< HEAD
+=======
+		syncDLObjectImpl.setUserId(userId);
+
+		if (userName == null) {
+			syncDLObjectImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			syncDLObjectImpl.setUserName(userName);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		syncDLObjectImpl.setCreateTime(createTime);
 		syncDLObjectImpl.setModifiedTime(modifiedTime);
 		syncDLObjectImpl.setRepositoryId(repositoryId);
 		syncDLObjectImpl.setParentFolderId(parentFolderId);
 
+<<<<<<< HEAD
+=======
+		if (treePath == null) {
+			syncDLObjectImpl.setTreePath(StringPool.BLANK);
+		}
+		else {
+			syncDLObjectImpl.setTreePath(treePath);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (name == null) {
 			syncDLObjectImpl.setName(StringPool.BLANK);
 		}
@@ -149,6 +227,10 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 			syncDLObjectImpl.setVersion(version);
 		}
 
+<<<<<<< HEAD
+=======
+		syncDLObjectImpl.setVersionId(versionId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		syncDLObjectImpl.setSize(size);
 
 		if (checksum == null) {
@@ -206,10 +288,19 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		syncDLObjectId = objectInput.readLong();
 		companyId = objectInput.readLong();
+<<<<<<< HEAD
+=======
+		userId = objectInput.readLong();
+		userName = objectInput.readUTF();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		createTime = objectInput.readLong();
 		modifiedTime = objectInput.readLong();
 		repositoryId = objectInput.readLong();
 		parentFolderId = objectInput.readLong();
+<<<<<<< HEAD
+=======
+		treePath = objectInput.readUTF();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		name = objectInput.readUTF();
 		extension = objectInput.readUTF();
 		mimeType = objectInput.readUTF();
@@ -217,6 +308,10 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 		changeLog = objectInput.readUTF();
 		extraSettings = objectInput.readUTF();
 		version = objectInput.readUTF();
+<<<<<<< HEAD
+=======
+		versionId = objectInput.readLong();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		size = objectInput.readLong();
 		checksum = objectInput.readUTF();
 		event = objectInput.readUTF();
@@ -233,11 +328,33 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 		throws IOException {
 		objectOutput.writeLong(syncDLObjectId);
 		objectOutput.writeLong(companyId);
+<<<<<<< HEAD
+=======
+		objectOutput.writeLong(userId);
+
+		if (userName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userName);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		objectOutput.writeLong(createTime);
 		objectOutput.writeLong(modifiedTime);
 		objectOutput.writeLong(repositoryId);
 		objectOutput.writeLong(parentFolderId);
 
+<<<<<<< HEAD
+=======
+		if (treePath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(treePath);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -287,6 +404,10 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 			objectOutput.writeUTF(version);
 		}
 
+<<<<<<< HEAD
+=======
+		objectOutput.writeLong(versionId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		objectOutput.writeLong(size);
 
 		if (checksum == null) {
@@ -332,10 +453,19 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 
 	public long syncDLObjectId;
 	public long companyId;
+<<<<<<< HEAD
+=======
+	public long userId;
+	public String userName;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long createTime;
 	public long modifiedTime;
 	public long repositoryId;
 	public long parentFolderId;
+<<<<<<< HEAD
+=======
+	public String treePath;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String name;
 	public String extension;
 	public String mimeType;
@@ -343,6 +473,10 @@ public class SyncDLObjectCacheModel implements CacheModel<SyncDLObject>,
 	public String changeLog;
 	public String extraSettings;
 	public String version;
+<<<<<<< HEAD
+=======
+	public long versionId;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long size;
 	public String checksum;
 	public String event;

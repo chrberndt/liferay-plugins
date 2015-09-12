@@ -47,7 +47,10 @@ public class ScriptingExecutorHotDeployMessageListener
 	extends HotDeployMessageListener {
 
 	public ScriptingExecutorHotDeployMessageListener() {
+<<<<<<< HEAD
 		super();
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public ScriptingExecutorHotDeployMessageListener(

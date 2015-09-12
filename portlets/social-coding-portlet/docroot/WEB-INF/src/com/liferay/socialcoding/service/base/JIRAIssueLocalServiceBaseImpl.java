@@ -14,10 +14,16 @@
 
 package com.liferay.socialcoding.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -31,6 +37,7 @@ import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.socialcoding.model.JIRAIssue;
 import com.liferay.socialcoding.service.JIRAIssueLocalService;
@@ -41,6 +48,7 @@ import com.liferay.socialcoding.service.persistence.JIRAChangeGroupPersistence;
 import com.liferay.socialcoding.service.persistence.JIRAChangeItemPersistence;
 import com.liferay.socialcoding.service.persistence.JIRAIssueFinder;
 import com.liferay.socialcoding.service.persistence.JIRAIssuePersistence;
+import com.liferay.socialcoding.service.persistence.JIRAProjectPersistence;
 import com.liferay.socialcoding.service.persistence.SVNRepositoryPersistence;
 import com.liferay.socialcoding.service.persistence.SVNRevisionPersistence;
 
@@ -62,6 +70,7 @@ import javax.sql.DataSource;
  * @see com.liferay.socialcoding.service.JIRAIssueLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements JIRAIssueLocalService, IdentifiableBean {
 	/*
@@ -75,12 +84,10 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param jiraIssue the j i r a issue
 	 * @return the j i r a issue that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public JIRAIssue addJIRAIssue(JIRAIssue jiraIssue)
-		throws SystemException {
+	public JIRAIssue addJIRAIssue(JIRAIssue jiraIssue) {
 		jiraIssue.setNew(true);
 
 		return jiraIssuePersistence.update(jiraIssue);
@@ -103,12 +110,11 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param jiraIssueId the primary key of the j i r a issue
 	 * @return the j i r a issue that was removed
 	 * @throws PortalException if a j i r a issue with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public JIRAIssue deleteJIRAIssue(long jiraIssueId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return jiraIssuePersistence.remove(jiraIssueId);
 	}
 
@@ -117,12 +123,10 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param jiraIssue the j i r a issue
 	 * @return the j i r a issue that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public JIRAIssue deleteJIRAIssue(JIRAIssue jiraIssue)
-		throws SystemException {
+	public JIRAIssue deleteJIRAIssue(JIRAIssue jiraIssue) {
 		return jiraIssuePersistence.remove(jiraIssue);
 	}
 
@@ -139,12 +143,9 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return jiraIssuePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -159,12 +160,10 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return jiraIssuePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);
 	}
@@ -181,46 +180,41 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return jiraIssuePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end, orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return jiraIssuePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return jiraIssuePersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
-	public JIRAIssue fetchJIRAIssue(long jiraIssueId) throws SystemException {
+	public JIRAIssue fetchJIRAIssue(long jiraIssueId) {
 		return jiraIssuePersistence.fetchByPrimaryKey(jiraIssueId);
 	}
 
@@ -230,17 +224,46 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param jiraIssueId the primary key of the j i r a issue
 	 * @return the j i r a issue
 	 * @throws PortalException if a j i r a issue with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public JIRAIssue getJIRAIssue(long jiraIssueId)
-		throws PortalException, SystemException {
+	public JIRAIssue getJIRAIssue(long jiraIssueId) throws PortalException {
 		return jiraIssuePersistence.findByPrimaryKey(jiraIssueId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAIssueLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(JIRAIssue.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraIssueId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.socialcoding.service.JIRAIssueLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(JIRAIssue.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("jiraIssueId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return jiraIssueLocalService.deleteJIRAIssue((JIRAIssue)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return jiraIssuePersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -254,11 +277,9 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param start the lower bound of the range of j i r a issues
 	 * @param end the upper bound of the range of j i r a issues (not inclusive)
 	 * @return the range of j i r a issues
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<JIRAIssue> getJIRAIssues(int start, int end)
-		throws SystemException {
+	public List<JIRAIssue> getJIRAIssues(int start, int end) {
 		return jiraIssuePersistence.findAll(start, end);
 	}
 
@@ -266,10 +287,9 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * Returns the number of j i r a issues.
 	 *
 	 * @return the number of j i r a issues
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getJIRAIssuesCount() throws SystemException {
+	public int getJIRAIssuesCount() {
 		return jiraIssuePersistence.countAll();
 	}
 
@@ -278,12 +298,10 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param jiraIssue the j i r a issue
 	 * @return the j i r a issue that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public JIRAIssue updateJIRAIssue(JIRAIssue jiraIssue)
-		throws SystemException {
+	public JIRAIssue updateJIRAIssue(JIRAIssue jiraIssue) {
 		return jiraIssuePersistence.update(jiraIssue);
 	}
 
@@ -443,7 +461,7 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the j i r a issue local service
 	 */
-	public com.liferay.socialcoding.service.JIRAIssueLocalService getJIRAIssueLocalService() {
+	public JIRAIssueLocalService getJIRAIssueLocalService() {
 		return jiraIssueLocalService;
 	}
 
@@ -453,7 +471,7 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param jiraIssueLocalService the j i r a issue local service
 	 */
 	public void setJIRAIssueLocalService(
-		com.liferay.socialcoding.service.JIRAIssueLocalService jiraIssueLocalService) {
+		JIRAIssueLocalService jiraIssueLocalService) {
 		this.jiraIssueLocalService = jiraIssueLocalService;
 	}
 
@@ -492,6 +510,44 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	public void setJIRAIssueFinder(JIRAIssueFinder jiraIssueFinder) {
 		this.jiraIssueFinder = jiraIssueFinder;
+	}
+
+	/**
+	 * Returns the j i r a project local service.
+	 *
+	 * @return the j i r a project local service
+	 */
+	public com.liferay.socialcoding.service.JIRAProjectLocalService getJIRAProjectLocalService() {
+		return jiraProjectLocalService;
+	}
+
+	/**
+	 * Sets the j i r a project local service.
+	 *
+	 * @param jiraProjectLocalService the j i r a project local service
+	 */
+	public void setJIRAProjectLocalService(
+		com.liferay.socialcoding.service.JIRAProjectLocalService jiraProjectLocalService) {
+		this.jiraProjectLocalService = jiraProjectLocalService;
+	}
+
+	/**
+	 * Returns the j i r a project persistence.
+	 *
+	 * @return the j i r a project persistence
+	 */
+	public JIRAProjectPersistence getJIRAProjectPersistence() {
+		return jiraProjectPersistence;
+	}
+
+	/**
+	 * Sets the j i r a project persistence.
+	 *
+	 * @param jiraProjectPersistence the j i r a project persistence
+	 */
+	public void setJIRAProjectPersistence(
+		JIRAProjectPersistence jiraProjectPersistence) {
+		this.jiraProjectPersistence = jiraProjectPersistence;
 	}
 
 	/**
@@ -785,13 +841,18 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = jiraIssuePersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -819,12 +880,16 @@ public abstract class JIRAIssueLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.liferay.socialcoding.service.JIRAChangeItemLocalService jiraChangeItemLocalService;
 	@BeanReference(type = JIRAChangeItemPersistence.class)
 	protected JIRAChangeItemPersistence jiraChangeItemPersistence;
-	@BeanReference(type = com.liferay.socialcoding.service.JIRAIssueLocalService.class)
-	protected com.liferay.socialcoding.service.JIRAIssueLocalService jiraIssueLocalService;
+	@BeanReference(type = JIRAIssueLocalService.class)
+	protected JIRAIssueLocalService jiraIssueLocalService;
 	@BeanReference(type = JIRAIssuePersistence.class)
 	protected JIRAIssuePersistence jiraIssuePersistence;
 	@BeanReference(type = JIRAIssueFinder.class)
 	protected JIRAIssueFinder jiraIssueFinder;
+	@BeanReference(type = com.liferay.socialcoding.service.JIRAProjectLocalService.class)
+	protected com.liferay.socialcoding.service.JIRAProjectLocalService jiraProjectLocalService;
+	@BeanReference(type = JIRAProjectPersistence.class)
+	protected JIRAProjectPersistence jiraProjectPersistence;
 	@BeanReference(type = com.liferay.socialcoding.service.SVNRepositoryLocalService.class)
 	protected com.liferay.socialcoding.service.SVNRepositoryLocalService svnRepositoryLocalService;
 	@BeanReference(type = SVNRepositoryPersistence.class)

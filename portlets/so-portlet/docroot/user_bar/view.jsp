@@ -49,6 +49,7 @@ catch (NoSuchRoleException nsre) {
 			Group group = user.getGroup();
 			%>
 
+<<<<<<< HEAD
 			<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="dashboardURL" windowState="<%= LiferayWindowState.NORMAL.toString() %>">
 				<portlet:param name="struts_action" value="/my_sites/view" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -57,6 +58,10 @@ catch (NoSuchRoleException nsre) {
 
 			<a class="so-logo" href="<%= dashboardURL %>">
 				<img alt="<liferay-ui:message key="social-office" /> <liferay-ui:message key="logo" />" height="32" src="<%= PortalUtil.getPathContext(request) + "/user_bar/images/so_logo.png" %>" width="32" />
+=======
+			<a class="so-logo" href="<%= group.getDisplayURL(themeDisplay, true) %>">
+				<img alt="<liferay-ui:message escapeAttribute="<%= true %>" key="social-office" /> <liferay-ui:message escapeAttribute="<%= true %>" key="logo" />" height="32" src='<%= PortalUtil.getPathContext(request) + "/user_bar/images/so_logo.png" %>' width="32" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</a>
 
 			<nav>
@@ -89,6 +94,7 @@ catch (NoSuchRoleException nsre) {
 	</liferay-util:body-top>
 </c:if>
 
+<<<<<<< HEAD
 <aui:script>
 	function <portlet:namespace />openWindow() {
 		Liferay.Util.openWindow(
@@ -175,3 +181,92 @@ catch (NoSuchRoleException nsre) {
 		);
 	}
 </aui:script>
+=======
+	<aui:script>
+		function <portlet:namespace />openWindow() {
+			Liferay.Util.openWindow(
+				{
+					dialog: {
+						align: {
+							node: null,
+							points: ['tc', 'tc']
+						},
+						constrain2view: true,
+						cssClass: 'so-portlet-sites-dialog',
+						modal: true,
+						resizable: false,
+						width: 650
+					},
+					title: '<%= UnicodeLanguageUtil.get(request, "sites-directory") %>',
+
+					<liferay-portlet:renderURL portletName="<%= PortletKeys.SO_SITES %>" var="viewSitesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+						<portlet:param name="mvcPath" value="/sites/view_sites.jsp" />
+					</liferay-portlet:renderURL>
+
+					uri: '<%= viewSitesURL %>'
+				}
+			);
+		}
+	</aui:script>
+
+	<aui:script use="aui-base">
+		if (!('placeholder' in document.createElement('input'))) {
+			var searchInput = A.one('#<%= PortalUtil.getPortletNamespace(PortletKeys.SO_SITES) %>name');
+
+			if (searchInput) {
+				var placeholder = searchInput.getAttribute('placeholder');
+
+				searchInput.val(placeholder);
+
+				searchInput.on(
+					'click',
+					function(event) {
+						if (searchInput.val() == placeholder) {
+							searchInput.val('');
+						}
+					}
+				);
+
+				searchInput.on(
+					'blur',
+					function(event) {
+						if (!searchInput.val()) {
+							searchInput.val(placeholder);
+						}
+					}
+				);
+			}
+		}
+
+		var navAccountControlsBtn = A.one('#<%= PortalUtil.getPortletNamespace(PortletKeys.DOCKBAR) %>navAccountControlsNavbarBtn');
+
+		if (navAccountControlsBtn) {
+			navAccountControlsBtn.on(
+				'click',
+				function(event) {
+					var sitesDirectory = A.one('.portlet-dockbar .sites-directory');
+
+					if (!sitesDirectory) {
+						var mySitesMenu = A.one('.portlet-dockbar .my-sites .my-sites-menu');
+
+						var sitesDirectoryString = '<li class="last sites-directory"><a href="javascript:;" onclick="<portlet:namespace />openWindow();"><i class="icon-reorder"></i><span class="site-name"> ' + Liferay.Language.get('sites-directory') + '</span></a></li>';
+
+						if (mySitesMenu) {
+							mySitesMenu.insert(sitesDirectoryString);
+						}
+						else {
+							var navAccountControls = A.one('.nav-account-controls');
+
+							var dividerVertical = navAccountControls.one('.divider-vertical ');
+
+							if (dividerVertical) {
+								navAccountControls.insertBefore(sitesDirectoryString, dividerVertical);
+							}
+						}
+					}
+				}
+			);
+		}
+	</aui:script>
+</c:if>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

@@ -92,7 +92,11 @@ boolean helpful = BeanParamUtil.getBoolean(kbComment, request, "helpful", true);
 							<div class="separator"><!-- --></div>
 
 							<div class="kb-all-comments">
+<<<<<<< HEAD
 								<%= LanguageUtil.format(pageContext, "all-comments-x", total, false) %>
+=======
+								<%= LanguageUtil.format(request, "all-comments-x", total, false) %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							</div>
 						</c:if>
 

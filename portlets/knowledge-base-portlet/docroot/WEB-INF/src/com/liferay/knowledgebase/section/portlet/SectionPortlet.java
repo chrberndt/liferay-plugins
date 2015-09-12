@@ -14,23 +14,19 @@
 
 package com.liferay.knowledgebase.section.portlet;
 
-import com.liferay.knowledgebase.KBArticleContentException;
-import com.liferay.knowledgebase.KBArticlePriorityException;
-import com.liferay.knowledgebase.KBArticleTitleException;
-import com.liferay.knowledgebase.KBCommentContentException;
 import com.liferay.knowledgebase.NoSuchArticleException;
 import com.liferay.knowledgebase.NoSuchCommentException;
 import com.liferay.knowledgebase.model.KBArticle;
-import com.liferay.knowledgebase.model.KBComment;
+import com.liferay.knowledgebase.model.KBFolderConstants;
+import com.liferay.knowledgebase.portlet.BaseKBPortlet;
+import com.liferay.knowledgebase.service.KBArticleLocalServiceUtil;
 import com.liferay.knowledgebase.service.KBArticleServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentServiceUtil;
 import com.liferay.knowledgebase.service.permission.KBArticlePermission;
 import com.liferay.knowledgebase.util.ActionKeys;
-import com.liferay.knowledgebase.util.PortletKeys;
 import com.liferay.knowledgebase.util.WebKeys;
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -38,19 +34,18 @@ import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+=======
+import com.liferay.portal.kernel.servlet.SessionErrors;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+<<<<<<< HEAD
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
@@ -58,17 +53,14 @@ import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -76,6 +68,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Peter Shin
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
 public class SectionPortlet extends MVCPortlet {
 
 	public void addAttachment(
@@ -171,6 +164,9 @@ public class SectionPortlet extends MVCPortlet {
 		KBArticleServiceUtil.moveKBArticle(
 			resourcePrimKey, parentResourcePrimKey, priority);
 	}
+=======
+public class SectionPortlet extends BaseKBPortlet {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public void render(
@@ -182,15 +178,7 @@ public class SectionPortlet extends MVCPortlet {
 
 			renderRequest.setAttribute(WebKeys.KNOWLEDGE_BASE_STATUS, status);
 
-			KBArticle kbArticle = null;
-
-			long resourcePrimKey = ParamUtil.getLong(
-				renderRequest, "resourcePrimKey");
-
-			if (resourcePrimKey > 0) {
-				kbArticle = KBArticleServiceUtil.getLatestKBArticle(
-					resourcePrimKey, status);
-			}
+			KBArticle kbArticle = getKBArticle(renderRequest, status);
 
 			renderRequest.setAttribute(
 				WebKeys.KNOWLEDGE_BASE_KB_ARTICLE, kbArticle);
@@ -209,138 +197,32 @@ public class SectionPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
-	public void serveAttachment(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(resourceRequest, "fileEntryId");
-
-		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
-			fileEntryId);
-
-		PortletResponseUtil.sendFile(
-			resourceRequest, resourceResponse, fileEntry.getTitle(),
-			fileEntry.getContentStream(), fileEntry.getMimeType());
-	}
-
-	public void serveKBArticleRSS(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		if (!PortalUtil.isRSSFeedsEnabled()) {
-			PortalUtil.sendRSSFeedsDisabledError(
-				resourceRequest, resourceResponse);
-
-			return;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long resourcePrimKey = ParamUtil.getLong(
-			resourceRequest, "resourcePrimKey");
-
-		int rssDelta = ParamUtil.getInteger(resourceRequest, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(
-			resourceRequest, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(resourceRequest, "rssFormat");
-
-		String rss = KBArticleServiceUtil.getKBArticleRSS(
-			resourcePrimKey, WorkflowConstants.STATUS_APPROVED, rssDelta,
-			rssDisplayStyle, rssFormat, themeDisplay);
-
-		PortletResponseUtil.sendFile(
-			resourceRequest, resourceResponse, null,
-			rss.getBytes(StringPool.UTF8), ContentTypes.TEXT_XML_UTF8);
-	}
-
 	@Override
-	public void serveResource(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+	protected void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		try {
-			String resourceID = resourceRequest.getResourceID();
+		if (SessionErrors.contains(
+				renderRequest, NoSuchArticleException.class.getName()) ||
+			SessionErrors.contains(
+				renderRequest, NoSuchCommentException.class.getName()) ||
+			SessionErrors.contains(
+				renderRequest, NoSuchSubscriptionException.class.getName()) ||
+			SessionErrors.contains(
+				renderRequest, PrincipalException.getNestedClasses())) {
 
-			if (resourceID.equals("attachment")) {
-				serveAttachment(resourceRequest, resourceResponse);
-			}
-			else if (resourceID.equals("kbArticleRSS")) {
-				serveKBArticleRSS(resourceRequest, resourceResponse);
-			}
+			include(templatePath + "error.jsp", renderRequest, renderResponse);
 		}
-		catch (IOException ioe) {
-			throw ioe;
-		}
-		catch (PortletException pe) {
-			throw pe;
-		}
-		catch (Exception e) {
-			throw new PortletException(e);
+		else {
+			super.doDispatch(renderRequest, renderResponse);
 		}
 	}
 
-	public void subscribeKBArticle(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+	protected KBArticle getKBArticle(RenderRequest renderRequest, int status)
+		throws PortalException {
 
 		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
-
-		KBArticleServiceUtil.subscribeKBArticle(
-			themeDisplay.getScopeGroupId(), resourcePrimKey);
-	}
-
-	public void unsubscribeKBArticle(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
-
-		KBArticleServiceUtil.unsubscribeKBArticle(resourcePrimKey);
-	}
-
-	public void updateAttachments(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		String portletId = PortalUtil.getPortletId(actionRequest);
-
-		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
-
-		String dirName = ParamUtil.getString(actionRequest, "dirName");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			KBArticle.class.getName(), actionRequest);
-
-		dirName = KBArticleServiceUtil.updateAttachments(
-			portletId, resourcePrimKey, dirName, serviceContext);
-
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-		redirect = HttpUtil.setParameter(
-			redirect, actionResponse.getNamespace() + "dirName", dirName);
-
-		actionRequest.setAttribute(WebKeys.REDIRECT, redirect);
-	}
-
-	public void updateKBArticle(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String portletId = PortalUtil.getPortletId(actionRequest);
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		long resourcePrimKey = ParamUtil.getLong(
+<<<<<<< HEAD
 			actionRequest, "resourcePrimKey");
 
 		long parentResourcePrimKey = ParamUtil.getLong(
@@ -403,46 +285,32 @@ public class SectionPortlet extends MVCPortlet {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+=======
+			renderRequest, "resourcePrimKey");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-		if (!themeDisplay.isSignedIn()) {
-			return;
+		if (resourcePrimKey > 0) {
+			return KBArticleServiceUtil.getLatestKBArticle(
+				resourcePrimKey, status);
 		}
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		String urlTitle = ParamUtil.getString(renderRequest, "urlTitle");
 
-		long kbCommentId = ParamUtil.getLong(actionRequest, "kbCommentId");
-
-		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-		String content = ParamUtil.getString(actionRequest, "content");
-		boolean helpful = ParamUtil.getBoolean(actionRequest, "helpful");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			KBComment.class.getName(), actionRequest);
-
-		if (cmd.equals(Constants.ADD)) {
-			KBCommentLocalServiceUtil.addKBComment(
-				themeDisplay.getUserId(), classNameId, classPK, content,
-				helpful, serviceContext);
-		}
-		else if (cmd.equals(Constants.UPDATE)) {
-			KBCommentServiceUtil.updateKBComment(
-				kbCommentId, classNameId, classPK, content, helpful,
-				serviceContext);
-		}
-	}
-
-	@Override
-	protected void addSuccessMessage(
-		ActionRequest actionRequest, ActionResponse actionResponse) {
-
-		String actionName = ParamUtil.getString(
-			actionRequest, ActionRequest.ACTION_NAME);
-
-		if (actionName.equals("updateAttachments")) {
-			return;
+		if (Validator.isNull(urlTitle)) {
+			return null;
 		}
 
+		long groupId = PortalUtil.getScopeGroupId(renderRequest);
+
+		String kbFolderUrlTitle = ParamUtil.getString(
+			renderRequest, "kbFolderUrlTitle");
+
+		if (Validator.isNotNull(kbFolderUrlTitle)) {
+			return KBArticleLocalServiceUtil.getKBArticleByUrlTitle(
+				groupId, kbFolderUrlTitle, urlTitle);
+		}
+
+<<<<<<< HEAD
 		super.addSuccessMessage(actionRequest, actionResponse);
 	}
 
@@ -480,6 +348,10 @@ public class SectionPortlet extends MVCPortlet {
 		else {
 			super.doDispatch(renderRequest, renderResponse);
 		}
+=======
+		return KBArticleLocalServiceUtil.getKBArticleByUrlTitle(
+			groupId, KBFolderConstants.DEFAULT_PARENT_FOLDER_ID, urlTitle);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	protected int getStatus(RenderRequest renderRequest) throws Exception {
@@ -517,6 +389,7 @@ public class SectionPortlet extends MVCPortlet {
 		return WorkflowConstants.STATUS_APPROVED;
 	}
 
+<<<<<<< HEAD
 	@Override
 	protected boolean isSessionErrorException(Throwable cause) {
 		if (cause instanceof AssetCategoryException ||
@@ -540,4 +413,6 @@ public class SectionPortlet extends MVCPortlet {
 		return false;
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

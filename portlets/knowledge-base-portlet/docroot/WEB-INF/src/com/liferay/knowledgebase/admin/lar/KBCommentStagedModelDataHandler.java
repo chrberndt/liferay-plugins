@@ -16,6 +16,7 @@ package com.liferay.knowledgebase.admin.lar;
 
 import com.liferay.knowledgebase.model.KBComment;
 import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
+<<<<<<< HEAD
 import com.liferay.knowledgebase.service.persistence.KBCommentUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -26,6 +27,19 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 
+=======
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.exportimport.lar.BaseStagedModelDataHandler;
+import com.liferay.portlet.exportimport.lar.ExportImportPathUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.StagedModelModifiedDateComparator;
+
+import java.util.List;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.Map;
 
 /**
@@ -37,6 +51,7 @@ public class KBCommentStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {KBComment.class.getName()};
 
 	@Override
+<<<<<<< HEAD
 	public void deleteStagedModel(
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
@@ -47,10 +62,45 @@ public class KBCommentStagedModelDataHandler
 
 		if (kbComment != null) {
 			KBCommentLocalServiceUtil.deleteKBComment(kbComment);
+=======
+	public void deleteStagedModel(KBComment kbComment) throws PortalException {
+		KBCommentLocalServiceUtil.deleteKBComment(kbComment);
+	}
+
+	@Override
+	public void deleteStagedModel(
+			String uuid, long groupId, String className, String extraData)
+		throws PortalException {
+
+		KBComment kbComment = fetchStagedModelByUuidAndGroupId(uuid, groupId);
+
+		if (kbComment != null) {
+			deleteStagedModel(kbComment);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public KBComment fetchStagedModelByUuidAndGroupId(
+		String uuid, long groupId) {
+
+		return KBCommentLocalServiceUtil.fetchKBCommentByUuidAndGroupId(
+			uuid, groupId);
+	}
+
+	@Override
+	public List<KBComment> fetchStagedModelsByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return KBCommentLocalServiceUtil.getKBCommentsByUuidAndCompanyId(
+			uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new StagedModelModifiedDateComparator<KBComment>());
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -93,7 +143,11 @@ public class KBCommentStagedModelDataHandler
 		KBComment importedKBComment = null;
 
 		if (portletDataContext.isDataStrategyMirror()) {
+<<<<<<< HEAD
 			KBComment existingKBComment = KBCommentUtil.fetchByUUID_G(
+=======
+			KBComment existingKBComment = fetchStagedModelByUuidAndGroupId(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				kbComment.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingKBComment == null) {
@@ -101,21 +155,35 @@ public class KBCommentStagedModelDataHandler
 
 				importedKBComment = KBCommentLocalServiceUtil.addKBComment(
 					userId, kbComment.getClassNameId(), newClassPK,
+<<<<<<< HEAD
 					kbComment.getContent(), kbComment.getHelpful(),
+=======
+					kbComment.getContent(), kbComment.getUserRating(),
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					serviceContext);
 			}
 			else {
 				importedKBComment = KBCommentLocalServiceUtil.updateKBComment(
 					existingKBComment.getKbCommentId(),
 					kbComment.getClassNameId(), newClassPK,
+<<<<<<< HEAD
 					kbComment.getContent(), kbComment.getHelpful(),
 					serviceContext);
+=======
+					kbComment.getContent(), kbComment.getUserRating(),
+					kbComment.getStatus(), serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			}
 		}
 		else {
 			importedKBComment = KBCommentLocalServiceUtil.addKBComment(
 				userId, kbComment.getClassNameId(), newClassPK,
+<<<<<<< HEAD
 				kbComment.getContent(), kbComment.getHelpful(), serviceContext);
+=======
+				kbComment.getContent(), kbComment.getUserRating(),
+				serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		portletDataContext.importClassedModel(kbComment, importedKBComment);

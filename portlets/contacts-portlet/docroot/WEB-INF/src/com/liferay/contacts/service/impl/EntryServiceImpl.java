@@ -21,7 +21,10 @@ import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.base.EntryServiceBaseImpl;
 import com.liferay.contacts.util.ContactsUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -37,7 +40,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 
 	public JSONArray searchUsersAndContacts(
 			long companyId, String keywords, int start, int end)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 

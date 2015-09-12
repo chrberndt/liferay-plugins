@@ -61,8 +61,13 @@ $theme.include($body_top_include)
 							$join_url.setParameter("addUserIds", "$user_id")
 							$join_url.setWindowState("normal")
 
+<<<<<<< HEAD
 							<a class="aui-button button action request member-button" href="$join_url" id="memberButton">
 								<span class="aui-button-content"><span class="aui-button-label">#language("join-site")</span></span>
+=======
+							<a class="action request member-link" href="$join_url" id="memberButton">
+								<span>#language("join-site")</span>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 							</a>
 						#elseif (($page_group.getType() == 2) && !$membership_request)
 							#set ($membership_request_url = $portletURLFactory.create($request, "174", $page.getPlid(), "ACTION_PHASE"))
@@ -76,6 +81,7 @@ $theme.include($body_top_include)
 
 							$membership_request_url.setParameter("comments", $languageUtil.format($locale, "x-wishes-to-join-x", $arguments.toArray(), false))
 
+<<<<<<< HEAD
 							<a class="aui-button button action request member-button" href="$membership_request_url" id="memberButton">
 								<span class="aui-button-content">
 									<span class="aui-button-label">#language ("request-membership")</span>
@@ -87,6 +93,15 @@ $theme.include($body_top_include)
 									<span class="aui-button-label">#language ("membership-requested")</span>
 								</span>
 							</a>
+=======
+							<a class="action request member-link" href="$membership_request_url" id="memberButton">
+								<span>#language ("request-membership")</span>
+							</a>
+						#elseif ($membership_request)
+							<span class="action request member-link" id="memberButton">
+								<span>#language ("membership-requested")</span>
+							</span>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						#end
 					#end
 				#end
@@ -95,7 +110,11 @@ $theme.include($body_top_include)
 			#if ($is_signed_in)
 				#if ((!$page_group.isControlPanel()) && $user.isSetupComplete() && ($show_add_controls || $show_edit_controls || $show_preview_controls || $show_toggle_controls))
 					<a class="config-icon" href="javascript:;" id="toggleDockbar">
+<<<<<<< HEAD
 						<img alt="#language("configuration") #language("icon")" height="16" src="$images_folder/custom/cog.png" width="16" />
+=======
+						<i alt="#language("configuration") #language("icon")" class="icon-cog"></i>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 						<span class="aui-helper-hidden">
 							#language("toggle") #language("javax.portlet.title.145")

@@ -14,8 +14,9 @@
 
 package com.liferay.chat.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -37,6 +38,7 @@ import java.io.Serializable;
  * @see com.liferay.chat.model.impl.EntryModelImpl
  * @generated
  */
+@ProviderType
 public interface EntryModel extends BaseModel<Entry> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -104,9 +106,8 @@ public interface EntryModel extends BaseModel<Entry> {
 	 * Returns the from user uuid of this entry.
 	 *
 	 * @return the from user uuid of this entry
-	 * @throws SystemException if a system exception occurred
 	 */
-	public String getFromUserUuid() throws SystemException;
+	public String getFromUserUuid();
 
 	/**
 	 * Sets the from user uuid of this entry.
@@ -133,9 +134,8 @@ public interface EntryModel extends BaseModel<Entry> {
 	 * Returns the to user uuid of this entry.
 	 *
 	 * @return the to user uuid of this entry
-	 * @throws SystemException if a system exception occurred
 	 */
-	public String getToUserUuid() throws SystemException;
+	public String getToUserUuid();
 
 	/**
 	 * Sets the to user uuid of this entry.
@@ -210,19 +210,19 @@ public interface EntryModel extends BaseModel<Entry> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Entry entry);
+	public int compareTo(com.liferay.chat.model.Entry entry);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Entry> toCacheModel();
+	public CacheModel<com.liferay.chat.model.Entry> toCacheModel();
 
 	@Override
-	public Entry toEscapedModel();
+	public com.liferay.chat.model.Entry toEscapedModel();
 
 	@Override
-	public Entry toUnescapedModel();
+	public com.liferay.chat.model.Entry toUnescapedModel();
 
 	@Override
 	public String toString();

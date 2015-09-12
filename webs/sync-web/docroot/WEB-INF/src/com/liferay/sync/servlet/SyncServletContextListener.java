@@ -14,6 +14,10 @@
 
 package com.liferay.sync.servlet;
 
+<<<<<<< HEAD
+=======
+import com.liferay.oauth.model.OAuthApplication;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -21,6 +25,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.SerialDestination;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.scheduler.CronText;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
@@ -28,18 +33,46 @@ import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+=======
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.StorageType;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
+import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portlet.documentlibrary.model.DLSyncEvent;
 import com.liferay.portlet.documentlibrary.service.DLSyncEventLocalServiceUtil;
 import com.liferay.sync.messaging.SyncDLFileVersionDiffMessageListener;
 import com.liferay.sync.messaging.SyncDLObjectMessageListener;
 import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
+<<<<<<< HEAD
 import com.liferay.sync.util.PortletPropsValues;
 
 import java.util.Calendar;
+=======
+import com.liferay.sync.service.SyncPreferencesLocalServiceUtil;
+import com.liferay.sync.util.PortletPropsKeys;
+import com.liferay.sync.util.PortletPropsValues;
+import com.liferay.sync.util.VerifyUtil;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import javax.portlet.PortletPreferences;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -79,10 +112,18 @@ public class SyncServletContextListener
 			for (DLSyncEvent dlSyncEvent : dlSyncEvents) {
 				Message message = new Message();
 
+<<<<<<< HEAD
 				Map<String, Object> values = new HashMap<String, Object>(4);
 
 				values.put("event", dlSyncEvent.getEvent());
 				values.put("modifiedTime", dlSyncEvent.getModifiedTime());
+=======
+				Map<String, Object> values = new HashMap<>(4);
+
+				values.put("event", dlSyncEvent.getEvent());
+				values.put("modifiedTime", dlSyncEvent.getModifiedTime());
+				values.put("syncEventId", dlSyncEvent.getSyncEventId());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				values.put("type", dlSyncEvent.getType());
 				values.put("typePK", dlSyncEvent.getTypePK());
 
@@ -92,8 +133,11 @@ public class SyncServletContextListener
 					DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
 					message);
 			}
+<<<<<<< HEAD
 
 			DLSyncEventLocalServiceUtil.deleteDLSyncEvents();
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -102,8 +146,11 @@ public class SyncServletContextListener
 
 	@Override
 	protected void doPortalDestroy() throws Exception {
+<<<<<<< HEAD
 		DLSyncEventLocalServiceUtil.deleteDLSyncEvents();
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		MessageBusUtil.unregisterMessageListener(
 			DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
 			_syncDLObjectMessageListener);
@@ -112,11 +159,68 @@ public class SyncServletContextListener
 			MessageBusUtil.unregisterMessageListener(
 				SyncDLFileVersionDiffMessageListener.DESTINATION_NAME,
 				_syncDLFileVersionDiffMessageListener);
+<<<<<<< HEAD
+=======
+
+			SchedulerEngineHelperUtil.unschedule(
+				SyncDLFileVersionDiffMessageListener.class.getName(),
+				StorageType.MEMORY_CLUSTERED);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
 	protected void doPortalInit() {
+<<<<<<< HEAD
+=======
+		try {
+			if (PortletPropsValues.SYNC_VERIFY) {
+				VerifyUtil.verify();
+			}
+
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+
+			for (Company company : companies) {
+				boolean oAuthEnabled = PrefsPropsUtil.getBoolean(
+					company.getCompanyId(), PortletPropsKeys.SYNC_OAUTH_ENABLED,
+					PortletPropsValues.SYNC_OAUTH_ENABLED);
+
+				if (!oAuthEnabled) {
+					continue;
+				}
+
+				ServiceContext serviceContext = new ServiceContext();
+
+				User user = UserLocalServiceUtil.getDefaultUser(
+					company.getCompanyId());
+
+				serviceContext.setUserId(user.getUserId());
+
+				OAuthApplication oAuthApplication =
+					SyncPreferencesLocalServiceUtil.enableOAuth(
+						company.getCompanyId(), serviceContext);
+
+				PortletPreferences portletPreferences =
+					PrefsPropsUtil.getPreferences(company.getCompanyId());
+
+				portletPreferences.setValue(
+					PortletPropsKeys.SYNC_OAUTH_APPLICATION_ID,
+					String.valueOf(oAuthApplication.getOAuthApplicationId()));
+				portletPreferences.setValue(
+					PortletPropsKeys.SYNC_OAUTH_CONSUMER_KEY,
+					oAuthApplication.getConsumerKey());
+				portletPreferences.setValue(
+					PortletPropsKeys.SYNC_OAUTH_CONSUMER_SECRET,
+					oAuthApplication.getConsumerSecret());
+
+				portletPreferences.store();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		_syncDLObjectMessageListener = new SyncDLObjectMessageListener();
 
 		registerMessageListener(
@@ -154,6 +258,7 @@ public class SyncServletContextListener
 
 	protected void scheduleDLFileVersionDiffMessageListener() {
 		try {
+<<<<<<< HEAD
 			Calendar calendar = CalendarFactoryUtil.getCalendar();
 
 			CronText cronText = new CronText(
@@ -167,6 +272,19 @@ public class SyncServletContextListener
 
 			SchedulerEngineHelperUtil.schedule(
 				trigger, StorageType.MEMORY_CLUSTERED, null,
+=======
+			SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+			schedulerEntry.setEventListenerClass(
+				SyncDLFileVersionDiffMessageListener.class.getName());
+			schedulerEntry.setTimeUnit(TimeUnit.HOUR);
+			schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+			schedulerEntry.setTriggerValue(
+				PortletPropsValues.SYNC_FILE_DIFF_CACHE_DELETE_INTERVAL);
+
+			SchedulerEngineHelperUtil.schedule(
+				schedulerEntry.getTrigger(), StorageType.MEMORY_CLUSTERED, null,
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				SyncDLFileVersionDiffMessageListener.DESTINATION_NAME, null, 0);
 		}
 		catch (Exception e) {

@@ -14,6 +14,11 @@
 
 package com.liferay.contacts.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
@@ -32,6 +37,10 @@ import com.liferay.portal.service.InvokableService;
  * @see com.liferay.contacts.service.impl.EntryServiceImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class EntryServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -48,6 +57,7 @@ public class EntryServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -57,6 +67,8 @@ public class EntryServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
@@ -65,12 +77,28 @@ public class EntryServiceUtil {
 
 	public static com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end)
+<<<<<<< HEAD
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+=======
+		throws com.liferay.portal.kernel.exception.PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getService()
 				   .searchUsersAndContacts(companyId, keywords, start, end);
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public static void clearService() {
 		_service = null;
 	}
@@ -97,6 +125,10 @@ public class EntryServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setService(EntryService service) {
 	}
 

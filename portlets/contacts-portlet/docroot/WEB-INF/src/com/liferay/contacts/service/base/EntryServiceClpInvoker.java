@@ -14,6 +14,11 @@
 
 package com.liferay.contacts.service.base;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.contacts.service.EntryServiceUtil;
 
 import java.util.Arrays;
@@ -22,6 +27,10 @@ import java.util.Arrays;
  * @author Brian Wing Shun Chan
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class EntryServiceClpInvoker {
 	public EntryServiceClpInvoker() {
 		_methodName26 = "getBeanIdentifier";

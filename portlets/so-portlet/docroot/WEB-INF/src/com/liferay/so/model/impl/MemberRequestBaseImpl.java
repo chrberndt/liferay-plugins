@@ -14,7 +14,7 @@
 
 package com.liferay.so.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.so.model.MemberRequest;
 import com.liferay.so.service.MemberRequestLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.so.service.MemberRequestLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see MemberRequestImpl
- * @see com.liferay.so.model.MemberRequest
+ * @see MemberRequest
  * @generated
  */
+@ProviderType
 public abstract class MemberRequestBaseImpl extends MemberRequestModelImpl
 	implements MemberRequest {
 	/*
@@ -39,7 +40,7 @@ public abstract class MemberRequestBaseImpl extends MemberRequestModelImpl
 	 * Never modify or reference this class directly. All methods that expect a member request model instance should use the {@link MemberRequest} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			MemberRequestLocalServiceUtil.addMemberRequest(this);
 		}

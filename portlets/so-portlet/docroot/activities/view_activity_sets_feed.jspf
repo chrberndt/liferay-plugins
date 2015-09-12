@@ -21,8 +21,14 @@
 for (SocialActivitySet activitySet : results) {
 	SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret("SO", activitySet, ServiceContextFactory.getInstance(request));
 
+	start++;
+
 	if (activityFeedEntry == null) {
 		continue;
+	}
+
+	if (count >= _DELTA) {
+		break;
 	}
 
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(activityFeedEntry.getPortletId());
@@ -47,7 +53,11 @@ for (SocialActivitySet activitySet : results) {
 		<div class="user-portrait">
 			<span class="avatar">
 				<a href="<%= userDisplayURL %>">
+<<<<<<< HEAD
 					<img alt="<%= HtmlUtil.escape(userFullName) %>" src="<%= userPortraitURL %>" />
+=======
+					<img alt="<%= HtmlUtil.escapeAttribute(userFullName) %>" src="<%= userPortraitURL %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				</a>
 			</span>
 		</div>
@@ -74,7 +84,7 @@ for (SocialActivitySet activitySet : results) {
 						long classPK = (Long)commentsClassNameAndClassPK[1];
 
 						if (className.equals(MicroblogsEntry.class.getName())) {
-							commentsCount = MicroblogsEntryLocalServiceUtil.getReceiverMicroblogsEntryMicroblogsEntriesCount(MicroblogsEntryConstants.TYPE_REPLY, classPK);
+							commentsCount = MicroblogsEntryLocalServiceUtil.getParentMicroblogsEntryMicroblogsEntriesCount(MicroblogsEntryConstants.TYPE_REPLY, classPK);
 						}
 						else {
 							commentsCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(className, classPK, WorkflowConstants.STATUS_APPROVED);
@@ -88,7 +98,11 @@ for (SocialActivitySet activitySet : results) {
 							%>
 
 							<c:if test="<%= (microblogsEntry != null) && (microblogsEntry.getSocialRelationType() == MicroblogsEntryConstants.TYPE_EVERYONE) %>">
+<<<<<<< HEAD
 								<span class="repost action">
+=======
+								<span class="action repost">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 									<a data-microblogsEntryId="<%= classPK %>" href="javascript:;"><liferay-ui:message key="repost" /></a>
 								</span>
 							</c:if>
@@ -137,5 +151,6 @@ for (SocialActivitySet activitySet : results) {
 	</aui:script>
 
 <%
+	count++;
 }
 %>

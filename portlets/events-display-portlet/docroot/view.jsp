@@ -92,11 +92,24 @@ for (CalendarBooking calendarBooking : calendarBookings) {
 	long startTime = calendarBooking.getStartTime();
 
 	if (calendarBooking.isAllDay()) {
+<<<<<<< HEAD
 		startTime -= timeZone.getRawOffset();
 
 		if (timeZone.inDaylightTime(new Date(startTime))) {
 			startTime -= timeZone.getDSTSavings();
 		}
+=======
+		startTime -= timeZone.getOffset(startTime);
+	}
+
+	startTimeJCalendar.setTimeInMillis(startTime);
+
+	if ((startTimeJCalendar.get(Calendar.DAY_OF_YEAR) <= jCalendar.get(Calendar.DAY_OF_YEAR)) && (startTimeJCalendar.get(Calendar.YEAR) <= jCalendar.get(Calendar.YEAR))) {
+		todayBookings.add(calendarBooking);
+	}
+	else {
+		upcomingBookings.add(calendarBooking);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	startTimeJCalendar.setTimeInMillis(startTime);

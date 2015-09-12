@@ -13,10 +13,21 @@
 	<model name="com.liferay.sync.model.SyncDLObject">
 		<field name="syncDLObjectId" type="long" />
 		<field name="companyId" type="long" />
+<<<<<<< HEAD
+=======
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<field name="createTime" type="long" />
 		<field name="modifiedTime" type="long" />
 		<field name="repositoryId" type="long" />
 		<field name="parentFolderId" type="long" />
+<<<<<<< HEAD
+=======
+		<field name="treePath" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<field name="name" type="String">
 			<hint name="max-length">255</hint>
 		</field>
@@ -30,6 +41,10 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="version" type="String" />
+<<<<<<< HEAD
+=======
+		<field name="versionId" type="long" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<field name="size" type="long" />
 		<field name="checksum" type="String" />
 		<field name="event" type="String" />

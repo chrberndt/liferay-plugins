@@ -16,11 +16,17 @@
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
+<<<<<<< HEAD
 <%@ page import="com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" %><%@
 page import="com.liferay.portal.kernel.util.GetterUtil" %><%@
 page import="com.liferay.portal.kernel.util.PropsKeys" %><%@
 page import="com.liferay.portal.kernel.util.PropsUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
+=======
+<%@ page import="com.liferay.portal.kernel.util.Validator" %><%@
+page import="com.liferay.registry.Registry" %><%@
+page import="com.liferay.registry.RegistryUtil" %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <%@ page import="javax.management.Attribute" %><%@
 page import="javax.management.AttributeList" %><%@

@@ -40,6 +40,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletResponse;
@@ -115,7 +116,7 @@ public class LiferayPersonService implements PersonService {
 			SecurityToken securityToken)
 		throws Exception {
 
-		List<Person> people = new ArrayList<Person>();
+		List<Person> people = new ArrayList<>();
 
 		for (UserId userId : userIds) {
 			Person person = null;
@@ -183,7 +184,7 @@ public class LiferayPersonService implements PersonService {
 	}
 
 	protected List<ListField> getEmails(User user) throws Exception {
-		List<ListField> emails = new ArrayList<ListField>();
+		List<ListField> emails = new ArrayList<>();
 
 		ListField email = new ListFieldImpl(
 			Field.PRIMARY.toString(), user.getEmailAddress());
@@ -240,7 +241,7 @@ public class LiferayPersonService implements PersonService {
 	protected List<ListField> getPhoneNumbers(String className, long classPK)
 		throws Exception {
 
-		List<ListField> phoneNumbers = new ArrayList<ListField>();
+		List<ListField> phoneNumbers = new ArrayList<>();
 
 		List<com.liferay.portal.model.Phone> liferayPhones =
 			PhoneServiceUtil.getPhones(className, classPK);
@@ -337,7 +338,10 @@ public class LiferayPersonService implements PersonService {
 		}
 
 		if (fields.contains(Person.Field.UTC_OFFSET.toString())) {
-			person.setUtcOffset(new Long(user.getTimeZone().getRawOffset()));
+			TimeZone timeZone = user.getTimeZone();
+
+			person.setUtcOffset(
+				Long.valueOf(timeZone.getOffset(System.currentTimeMillis())));
 		}
 
 		if (securityToken.getOwnerId().equals(person.getId())) {

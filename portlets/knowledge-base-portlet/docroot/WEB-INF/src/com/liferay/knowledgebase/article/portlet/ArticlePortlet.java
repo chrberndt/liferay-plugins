@@ -14,22 +14,16 @@
 
 package com.liferay.knowledgebase.article.portlet;
 
-import com.liferay.knowledgebase.KBArticleContentException;
-import com.liferay.knowledgebase.KBArticlePriorityException;
-import com.liferay.knowledgebase.KBArticleTitleException;
-import com.liferay.knowledgebase.KBCommentContentException;
 import com.liferay.knowledgebase.NoSuchArticleException;
 import com.liferay.knowledgebase.NoSuchCommentException;
 import com.liferay.knowledgebase.model.KBArticle;
-import com.liferay.knowledgebase.model.KBComment;
+import com.liferay.knowledgebase.portlet.BaseKBPortlet;
 import com.liferay.knowledgebase.service.KBArticleServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentLocalServiceUtil;
-import com.liferay.knowledgebase.service.KBCommentServiceUtil;
 import com.liferay.knowledgebase.service.permission.KBArticlePermission;
 import com.liferay.knowledgebase.util.ActionKeys;
-import com.liferay.knowledgebase.util.PortletKeys;
 import com.liferay.knowledgebase.util.WebKeys;
 import com.liferay.portal.NoSuchSubscriptionException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -39,19 +33,18 @@ import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+=======
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+<<<<<<< HEAD
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
@@ -59,9 +52,10 @@ import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -69,8 +63,6 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -78,6 +70,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Peter Shin
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
 public class ArticlePortlet extends MVCPortlet {
 
 	public void addAttachment(
@@ -173,6 +166,9 @@ public class ArticlePortlet extends MVCPortlet {
 		KBArticleServiceUtil.moveKBArticle(
 			resourcePrimKey, parentResourcePrimKey, priority);
 	}
+=======
+public class ArticlePortlet extends BaseKBPortlet {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public void render(
@@ -215,6 +211,7 @@ public class ArticlePortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
+<<<<<<< HEAD
 	public void serveAttachment(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
@@ -438,6 +435,8 @@ public class ArticlePortlet extends MVCPortlet {
 		}
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	protected void addSuccessMessage(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
@@ -445,9 +444,7 @@ public class ArticlePortlet extends MVCPortlet {
 		String actionName = ParamUtil.getString(
 			actionRequest, ActionRequest.ACTION_NAME);
 
-		if (actionName.equals("deleteKBArticle") ||
-			actionName.equals("updateAttachments")) {
-
+		if (actionName.equals("deleteKBArticle")) {
 			return;
 		}
 
@@ -481,7 +478,7 @@ public class ArticlePortlet extends MVCPortlet {
 			SessionErrors.contains(
 				renderRequest, NoSuchSubscriptionException.class.getName()) ||
 			SessionErrors.contains(
-				renderRequest, PrincipalException.class.getName())) {
+				renderRequest, PrincipalException.getNestedClasses())) {
 
 			include(templatePath + "error.jsp", renderRequest, renderResponse);
 		}
@@ -504,7 +501,7 @@ public class ArticlePortlet extends MVCPortlet {
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 
 		if (((defaultValue == 0) && mvcPath.equals(viewTemplate)) ||
-			mvcPath.equals("/article/select_configuration_article.jsp")) {
+			mvcPath.equals("/article/select_configuration_object.jsp")) {
 
 			return 0;
 		}
@@ -562,6 +559,7 @@ public class ArticlePortlet extends MVCPortlet {
 		return WorkflowConstants.STATUS_APPROVED;
 	}
 
+<<<<<<< HEAD
 	@Override
 	protected boolean isSessionErrorException(Throwable cause) {
 		if (cause instanceof AssetCategoryException ||
@@ -585,4 +583,6 @@ public class ArticlePortlet extends MVCPortlet {
 		return false;
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

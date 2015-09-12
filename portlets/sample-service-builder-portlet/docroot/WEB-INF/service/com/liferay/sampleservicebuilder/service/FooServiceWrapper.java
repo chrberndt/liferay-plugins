@@ -14,6 +14,8 @@
 
 package com.liferay.sampleservicebuilder.service;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
@@ -23,6 +25,7 @@ import com.liferay.portal.service.ServiceWrapper;
  * @see FooService
  * @generated
  */
+@ProviderType
 public class FooServiceWrapper implements FooService,
 	ServiceWrapper<FooService> {
 	public FooServiceWrapper(FooService fooService) {
@@ -39,6 +42,25 @@ public class FooServiceWrapper implements FooService,
 		return _fooService.getBeanIdentifier();
 	}
 
+	@Override
+	public com.liferay.portal.model.User getUser(long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _fooService.getUser(userId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.portal.model.Group> getUserSitesGroups()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _fooService.getUserSitesGroups();
+	}
+
+	@Override
+	public java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return _fooService.invokeMethod(name, parameterTypes, arguments);
+	}
+
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -49,30 +71,10 @@ public class FooServiceWrapper implements FooService,
 		_fooService.setBeanIdentifier(beanIdentifier);
 	}
 
-	@Override
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _fooService.invokeMethod(name, parameterTypes, arguments);
-	}
-
-	@Override
-	public com.liferay.portal.model.User getUser(long userId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _fooService.getUser(userId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.portal.model.Group> getUserSitesGroups()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _fooService.getUserSitesGroups();
-	}
-
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+	@Deprecated
 	public FooService getWrappedFooService() {
 		return _fooService;
 	}
@@ -80,6 +82,7 @@ public class FooServiceWrapper implements FooService,
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+	@Deprecated
 	public void setWrappedFooService(FooService fooService) {
 		_fooService = fooService;
 	}

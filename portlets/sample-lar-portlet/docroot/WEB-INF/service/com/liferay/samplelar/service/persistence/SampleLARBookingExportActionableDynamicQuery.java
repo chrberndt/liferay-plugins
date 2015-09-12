@@ -14,6 +14,7 @@
 
 package com.liferay.samplelar.service.persistence;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -24,16 +25,42 @@ import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.lar.StagedModelType;
 import com.liferay.portal.util.PortalUtil;
 
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.exportimport.lar.ExportImportHelperUtil;
+import com.liferay.portlet.exportimport.lar.ManifestSummary;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.portlet.exportimport.lar.StagedModelDataHandlerUtil;
+import com.liferay.portlet.exportimport.lar.StagedModelType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.samplelar.model.SampleLARBooking;
 
 /**
  * @author Mate Thurzo
+<<<<<<< HEAD
  * @generated
  */
 public class SampleLARBookingExportActionableDynamicQuery
 	extends SampleLARBookingActionableDynamicQuery {
 	public SampleLARBookingExportActionableDynamicQuery(
 		PortletDataContext portletDataContext) throws SystemException {
+=======
+ * @deprecated As of 7.0.0, replaced by {@link com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil#getExportActionableDynamicQuery(PortletDataContext)}
+ * @generated
+ */
+@Deprecated
+@ProviderType
+public class SampleLARBookingExportActionableDynamicQuery
+	extends SampleLARBookingActionableDynamicQuery {
+	public SampleLARBookingExportActionableDynamicQuery(
+		PortletDataContext portletDataContext) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		_portletDataContext = portletDataContext;
 
 		setCompanyId(_portletDataContext.getCompanyId());
@@ -42,7 +69,11 @@ public class SampleLARBookingExportActionableDynamicQuery
 	}
 
 	@Override
+<<<<<<< HEAD
 	public long performCount() throws PortalException, SystemException {
+=======
+	public long performCount() throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		ManifestSummary manifestSummary = _portletDataContext.getManifestSummary();
 
 		StagedModelType stagedModelType = getStagedModelType();
@@ -72,9 +103,13 @@ public class SampleLARBookingExportActionableDynamicQuery
 	}
 
 	@Override
+<<<<<<< HEAD
 	@SuppressWarnings("unused")
 	protected void performAction(Object object)
 		throws PortalException, SystemException {
+=======
+	protected void performAction(Object object) throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		SampleLARBooking stagedModel = (SampleLARBooking)object;
 
 		StagedModelDataHandlerUtil.exportStagedModel(_portletDataContext,

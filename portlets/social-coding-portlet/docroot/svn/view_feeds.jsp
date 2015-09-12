@@ -40,10 +40,17 @@
 	String title = null;
 
 	if (all) {
+<<<<<<< HEAD
 		title = LanguageUtil.format(pageContext, "all-commits-on-x", svnURL, false);
 	}
 	else {
 		title = LanguageUtil.format(pageContext, "x's-commits-on-x", new Object[] {HtmlUtil.escape(user2.getFullName()), svnURL}, false);
+=======
+		title = LanguageUtil.format(request, "all-commits-on-x", svnURL, false);
+	}
+	else {
+		title = LanguageUtil.format(request, "x's-commits-on-x", new Object[] {HtmlUtil.escape(user2.getFullName()), svnURL}, false);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	SyndFeed syndFeed = new SyndFeedImpl();
@@ -63,7 +70,7 @@
 		SyndEntry syndEntry = new SyndEntryImpl();
 
 		syndEntry.setAuthor(HtmlUtil.escape(user2.getFullName()));
-		syndEntry.setTitle(LanguageUtil.get(pageContext, "revision") + StringPool.SPACE + svnRevision.getRevisionNumber());
+		syndEntry.setTitle(LanguageUtil.get(request, "revision") + StringPool.SPACE + svnRevision.getRevisionNumber());
 		syndEntry.setLink(link);
 		syndEntry.setPublishedDate(svnRevision.getCreateDate());
 
@@ -90,7 +97,11 @@
 			sb.append(PortalUtil.getPathContext(request));
 			sb.append("/icons/svn.png\" />SVN</a><br />");
 
+<<<<<<< HEAD
 			sb.append("<a href=\"")
+=======
+			sb.append("<a href=\"");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			sb.append(PortletPropsValues.JIRA_URL);
 			sb.append("/browse/");
 			sb.append(jiraIssue.getKey());

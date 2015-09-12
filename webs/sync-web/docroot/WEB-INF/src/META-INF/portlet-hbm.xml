@@ -4,8 +4,13 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.sync.model.SyncDLFileVersionDiff" />
 	<import class="com.liferay.sync.model.SyncDLObject" />
+<<<<<<< HEAD
 	<class name="com.liferay.sync.model.impl.SyncDLFileVersionDiffImpl" table="SyncDLFileVersionDiff">
 		<cache usage="read-write" />
+=======
+	<import class="com.liferay.sync.model.SyncPreferences" />
+	<class name="com.liferay.sync.model.impl.SyncDLFileVersionDiffImpl" table="SyncDLFileVersionDiff">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<id name="syncDLFileVersionDiffId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -17,22 +22,40 @@
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.sync.model.impl.SyncDLObjectImpl" table="SyncDLObject">
+<<<<<<< HEAD
 		<cache usage="read-write" />
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<id name="syncDLObjectId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+<<<<<<< HEAD
+=======
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<property name="createTime" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="modifiedTime" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="repositoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+<<<<<<< HEAD
+=======
+		<property name="treePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="extension" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mimeType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="changeLog" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+<<<<<<< HEAD
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+=======
+		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringClobType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="versionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<property name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" column="size_" />
 		<property name="checksum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="event" type="com.liferay.portal.dao.orm.hibernate.StringType" />

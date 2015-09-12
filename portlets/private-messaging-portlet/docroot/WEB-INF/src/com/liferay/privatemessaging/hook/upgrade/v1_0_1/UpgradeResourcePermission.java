@@ -17,8 +17,13 @@
 
 package com.liferay.privatemessaging.hook.upgrade.v1_0_1;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+import com.liferay.message.boards.web.constants.MBPortletKeys;
+import com.liferay.portal.kernel.exception.PortalException;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -33,7 +38,10 @@ import com.liferay.portal.service.RepositoryLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+<<<<<<< HEAD
 import com.liferay.portal.util.PortletKeys;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 import java.util.List;
@@ -57,10 +65,17 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 	}
 
 	private void upgradeDLFolderResourcePermission(Company company, Group group)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
 
 		Repository repository = RepositoryLocalServiceUtil.fetchRepository(
 			group.getGroupId(), PortletKeys.MESSAGE_BOARDS);
+=======
+		throws PortalException {
+
+		Repository repository = RepositoryLocalServiceUtil.fetchRepository(
+			group.getGroupId(), MBPortletKeys.MESSAGE_BOARDS);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (repository == null) {
 			return;
@@ -85,7 +100,11 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 	}
 
 	private void upgradeDLResourcePermission(Company company, Group group)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		int count =
 			ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(

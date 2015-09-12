@@ -14,11 +14,12 @@
 
 package com.liferay.contacts.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.contacts.model.Entry;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
@@ -26,7 +27,7 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * The persistence utility for the entry service. This utility wraps {@link EntryPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the entry service. This utility wraps {@link com.liferay.contacts.service.persistence.impl.EntryPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -34,9 +35,10 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see EntryPersistence
- * @see EntryPersistenceImpl
+ * @see com.liferay.contacts.service.persistence.impl.EntryPersistenceImpl
  * @generated
  */
+@ProviderType
 public class EntryUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -61,16 +63,19 @@ public class EntryUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#countWithDynamicQuery(DynamicQuery)
 	 */
+<<<<<<< HEAD
 	public static long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
+=======
+	public static long countWithDynamicQuery(DynamicQuery dynamicQuery) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return getPersistence().countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
-	public static List<Entry> findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public static List<Entry> findWithDynamicQuery(DynamicQuery dynamicQuery) {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -78,7 +83,7 @@ public class EntryUtil {
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int)
 	 */
 	public static List<Entry> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -86,8 +91,7 @@ public class EntryUtil {
 	 * @see com.liferay.portal.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery, int, int, OrderByComparator)
 	 */
 	public static List<Entry> findWithDynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator<Entry> orderByComparator) {
 		return getPersistence()
 				   .findWithDynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
@@ -96,15 +100,14 @@ public class EntryUtil {
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel)
 	 */
-	public static Entry update(Entry entry) throws SystemException {
+	public static Entry update(Entry entry) {
 		return getPersistence().update(entry);
 	}
 
 	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, ServiceContext)
 	 */
-	public static Entry update(Entry entry, ServiceContext serviceContext)
-		throws SystemException {
+	public static Entry update(Entry entry, ServiceContext serviceContext) {
 		return getPersistence().update(entry, serviceContext);
 	}
 
@@ -113,10 +116,8 @@ public class EntryUtil {
 	*
 	* @param userId the user ID
 	* @return the matching entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findByUserId(long userId) {
 		return getPersistence().findByUserId(userId);
 	}
 
@@ -124,18 +125,15 @@ public class EntryUtil {
 	* Returns a range of all the entries where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
 	* @param start the lower bound of the range of entries
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @return the range of matching entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findByUserId(
-		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findByUserId(long userId, int start, int end) {
 		return getPersistence().findByUserId(userId, start, end);
 	}
 
@@ -143,7 +141,7 @@ public class EntryUtil {
 	* Returns an ordered range of all the entries where userId = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param userId the user ID
@@ -151,12 +149,9 @@ public class EntryUtil {
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findByUserId(
-		long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findByUserId(long userId, int start, int end,
+		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence()
 				   .findByUserId(userId, start, end, orderByComparator);
 	}
@@ -167,14 +162,11 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching entry
-	* @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public static com.liferay.contacts.model.Entry findByUserId_First(
-		long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry findByUserId_First(long userId,
+		OrderByComparator<Entry> orderByComparator)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
@@ -184,12 +176,9 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching entry, or <code>null</code> if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry fetchByUserId_First(
-		long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry fetchByUserId_First(long userId,
+		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence().fetchByUserId_First(userId, orderByComparator);
 	}
 
@@ -199,14 +188,11 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching entry
-	* @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public static com.liferay.contacts.model.Entry findByUserId_Last(
-		long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry findByUserId_Last(long userId,
+		OrderByComparator<Entry> orderByComparator)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
@@ -216,12 +202,9 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching entry, or <code>null</code> if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry fetchByUserId_Last(
-		long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry fetchByUserId_Last(long userId,
+		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
 	}
 
@@ -232,14 +215,11 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next entry
-	* @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a entry with the primary key could not be found
 	*/
-	public static com.liferay.contacts.model.Entry[] findByUserId_PrevAndNext(
-		long entryId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry[] findByUserId_PrevAndNext(long entryId, long userId,
+		OrderByComparator<Entry> orderByComparator)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence()
 				   .findByUserId_PrevAndNext(entryId, userId, orderByComparator);
 	}
@@ -248,10 +228,8 @@ public class EntryUtil {
 	* Removes all the entries where userId = &#63; from the database.
 	*
 	* @param userId the user ID
-	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByUserId(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static void removeByUserId(long userId) {
 		getPersistence().removeByUserId(userId);
 	}
 
@@ -260,26 +238,21 @@ public class EntryUtil {
 	*
 	* @param userId the user ID
 	* @return the number of matching entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByUserId(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int countByUserId(long userId) {
 		return getPersistence().countByUserId(userId);
 	}
 
 	/**
-	* Returns the entry where userId = &#63; and emailAddress = &#63; or throws a {@link com.liferay.contacts.NoSuchEntryException} if it could not be found.
+	* Returns the entry where userId = &#63; and emailAddress = &#63; or throws a {@link NoSuchEntryException} if it could not be found.
 	*
 	* @param userId the user ID
 	* @param emailAddress the email address
 	* @return the matching entry
-	* @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public static com.liferay.contacts.model.Entry findByU_EA(long userId,
-		java.lang.String emailAddress)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry findByU_EA(long userId, java.lang.String emailAddress)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().findByU_EA(userId, emailAddress);
 	}
 
@@ -289,11 +262,8 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param emailAddress the email address
 	* @return the matching entry, or <code>null</code> if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry fetchByU_EA(long userId,
-		java.lang.String emailAddress)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry fetchByU_EA(long userId, java.lang.String emailAddress) {
 		return getPersistence().fetchByU_EA(userId, emailAddress);
 	}
 
@@ -304,11 +274,9 @@ public class EntryUtil {
 	* @param emailAddress the email address
 	* @param retrieveFromCache whether to use the finder cache
 	* @return the matching entry, or <code>null</code> if a matching entry could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry fetchByU_EA(long userId,
-		java.lang.String emailAddress, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry fetchByU_EA(long userId, java.lang.String emailAddress,
+		boolean retrieveFromCache) {
 		return getPersistence()
 				   .fetchByU_EA(userId, emailAddress, retrieveFromCache);
 	}
@@ -319,12 +287,9 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param emailAddress the email address
 	* @return the entry that was removed
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry removeByU_EA(long userId,
-		java.lang.String emailAddress)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry removeByU_EA(long userId, java.lang.String emailAddress)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().removeByU_EA(userId, emailAddress);
 	}
 
@@ -334,10 +299,8 @@ public class EntryUtil {
 	* @param userId the user ID
 	* @param emailAddress the email address
 	* @return the number of matching entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByU_EA(long userId, java.lang.String emailAddress)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int countByU_EA(long userId, java.lang.String emailAddress) {
 		return getPersistence().countByU_EA(userId, emailAddress);
 	}
 
@@ -346,7 +309,7 @@ public class EntryUtil {
 	*
 	* @param entry the entry
 	*/
-	public static void cacheResult(com.liferay.contacts.model.Entry entry) {
+	public static void cacheResult(Entry entry) {
 		getPersistence().cacheResult(entry);
 	}
 
@@ -355,8 +318,7 @@ public class EntryUtil {
 	*
 	* @param entries the entries
 	*/
-	public static void cacheResult(
-		java.util.List<com.liferay.contacts.model.Entry> entries) {
+	public static void cacheResult(List<Entry> entries) {
 		getPersistence().cacheResult(entries);
 	}
 
@@ -366,7 +328,7 @@ public class EntryUtil {
 	* @param entryId the primary key for the new entry
 	* @return the new entry
 	*/
-	public static com.liferay.contacts.model.Entry create(long entryId) {
+	public static Entry create(long entryId) {
 		return getPersistence().create(entryId);
 	}
 
@@ -375,33 +337,26 @@ public class EntryUtil {
 	*
 	* @param entryId the primary key of the entry
 	* @return the entry that was removed
-	* @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a entry with the primary key could not be found
 	*/
-	public static com.liferay.contacts.model.Entry remove(long entryId)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry remove(long entryId)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().remove(entryId);
 	}
 
-	public static com.liferay.contacts.model.Entry updateImpl(
-		com.liferay.contacts.model.Entry entry)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry updateImpl(Entry entry) {
 		return getPersistence().updateImpl(entry);
 	}
 
 	/**
-	* Returns the entry with the primary key or throws a {@link com.liferay.contacts.NoSuchEntryException} if it could not be found.
+	* Returns the entry with the primary key or throws a {@link NoSuchEntryException} if it could not be found.
 	*
 	* @param entryId the primary key of the entry
 	* @return the entry
-	* @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
-	* @throws SystemException if a system exception occurred
+	* @throws NoSuchEntryException if a entry with the primary key could not be found
 	*/
-	public static com.liferay.contacts.model.Entry findByPrimaryKey(
-		long entryId)
-		throws com.liferay.contacts.NoSuchEntryException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static Entry findByPrimaryKey(long entryId)
+		throws com.liferay.contacts.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
@@ -410,22 +365,22 @@ public class EntryUtil {
 	*
 	* @param entryId the primary key of the entry
 	* @return the entry, or <code>null</code> if a entry with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.contacts.model.Entry fetchByPrimaryKey(
-		long entryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static Entry fetchByPrimaryKey(long entryId) {
 		return getPersistence().fetchByPrimaryKey(entryId);
+	}
+
+	public static java.util.Map<java.io.Serializable, Entry> fetchByPrimaryKeys(
+		java.util.Set<java.io.Serializable> primaryKeys) {
+		return getPersistence().fetchByPrimaryKeys(primaryKeys);
 	}
 
 	/**
 	* Returns all the entries.
 	*
 	* @return the entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findAll() {
 		return getPersistence().findAll();
 	}
 
@@ -433,17 +388,14 @@ public class EntryUtil {
 	* Returns a range of all the entries.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of entries
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @return the range of entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findAll(
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findAll(int start, int end) {
 		return getPersistence().findAll(start, end);
 	}
 
@@ -451,29 +403,23 @@ public class EntryUtil {
 	* Returns an ordered range of all the entries.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of entries
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.contacts.model.Entry> findAll(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static List<Entry> findAll(int start, int end,
+		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**
 	* Removes all the entries from the database.
-	*
-	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
@@ -481,10 +427,8 @@ public class EntryUtil {
 	* Returns the number of entries.
 	*
 	* @return the number of entries
-	* @throws SystemException if a system exception occurred
 	*/
-	public static int countAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int countAll() {
 		return getPersistence().countAll();
 	}
 
@@ -502,6 +446,7 @@ public class EntryUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+	@Deprecated
 	public void setPersistence(EntryPersistence persistence) {
 	}
 

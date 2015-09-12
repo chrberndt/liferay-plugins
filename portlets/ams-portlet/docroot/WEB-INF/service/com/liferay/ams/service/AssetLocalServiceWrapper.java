@@ -14,6 +14,8 @@
 
 package com.liferay.ams.service;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
@@ -23,6 +25,7 @@ import com.liferay.portal.service.ServiceWrapper;
  * @see AssetLocalService
  * @generated
  */
+@ProviderType
 public class AssetLocalServiceWrapper implements AssetLocalService,
 	ServiceWrapper<AssetLocalService> {
 	public AssetLocalServiceWrapper(AssetLocalService assetLocalService) {
@@ -34,12 +37,10 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	*
 	* @param asset the asset
 	* @return the asset that was added
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.liferay.ams.model.Asset addAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.ams.model.Asset asset) {
 		return _assetLocalService.addAsset(asset);
 	}
 
@@ -55,32 +56,38 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	}
 
 	/**
+	* Deletes the asset from the database. Also notifies the appropriate model listeners.
+	*
+	* @param asset the asset
+	* @return the asset that was removed
+	*/
+	@Override
+	public com.liferay.ams.model.Asset deleteAsset(
+		com.liferay.ams.model.Asset asset) {
+		return _assetLocalService.deleteAsset(asset);
+	}
+
+	/**
 	* Deletes the asset with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param assetId the primary key of the asset
 	* @return the asset that was removed
 	* @throws PortalException if a asset with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.liferay.ams.model.Asset deleteAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _assetLocalService.deleteAsset(assetId);
 	}
 
 	/**
-	* Deletes the asset from the database. Also notifies the appropriate model listeners.
-	*
-	* @param asset the asset
-	* @return the asset that was removed
-	* @throws SystemException if a system exception occurred
+	* @throws PortalException
 	*/
 	@Override
-	public com.liferay.ams.model.Asset deleteAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetLocalService.deleteAsset(asset);
+	public com.liferay.portal.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _assetLocalService.deletePersistedModel(persistedModel);
 	}
 
 	@Override
@@ -93,13 +100,10 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	*
 	* @param dynamicQuery the dynamic query
 	* @return the matching rows
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
-	@SuppressWarnings("rawtypes")
-	public java.util.List dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
 		return _assetLocalService.dynamicQuery(dynamicQuery);
 	}
 
@@ -114,13 +118,11 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	* @param start the lower bound of the range of model instances
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @return the range of matching rows
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
-	@SuppressWarnings("rawtypes")
-	public java.util.List dynamicQuery(
+	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		int end) {
 		return _assetLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -136,53 +138,50 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	* @param end the upper bound of the range of model instances (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
-	@SuppressWarnings("rawtypes")
-	public java.util.List dynamicQuery(
+	public <T> java.util.List<T> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return _assetLocalService.dynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
 	/**
-	* Returns the number of rows that match the dynamic query.
+	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
-	* @return the number of rows that match the dynamic query
-	* @throws SystemException if a system exception occurred
+	* @return the number of rows matching the dynamic query
 	*/
 	@Override
 	public long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
 		return _assetLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
-	* Returns the number of rows that match the dynamic query.
+	* Returns the number of rows matching the dynamic query.
 	*
 	* @param dynamicQuery the dynamic query
 	* @param projection the projection to apply to the query
-	* @return the number of rows that match the dynamic query
-	* @throws SystemException if a system exception occurred
+	* @return the number of rows matching the dynamic query
 	*/
 	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
-		com.liferay.portal.kernel.dao.orm.Projection projection)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
 		return _assetLocalService.dynamicQueryCount(dynamicQuery, projection);
 	}
 
 	@Override
-	public com.liferay.ams.model.Asset fetchAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public com.liferay.ams.model.Asset fetchAsset(long assetId) {
 		return _assetLocalService.fetchAsset(assetId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return _assetLocalService.getActionableDynamicQuery();
 	}
 
 	/**
@@ -191,21 +190,11 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	* @param assetId the primary key of the asset
 	* @return the asset
 	* @throws PortalException if a asset with the primary key could not be found
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public com.liferay.ams.model.Asset getAsset(long assetId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException {
 		return _assetLocalService.getAsset(assetId);
-	}
-
-	@Override
-	public com.liferay.portal.model.PersistedModel getPersistedModel(
-		java.io.Serializable primaryKeyObj)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _assetLocalService.getPersistedModel(primaryKeyObj);
 	}
 
 	/**
@@ -218,11 +207,10 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	* @param start the lower bound of the range of assets
 	* @param end the upper bound of the range of assets (not inclusive)
 	* @return the range of assets
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
 	public java.util.List<com.liferay.ams.model.Asset> getAssets(int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		int end) {
 		return _assetLocalService.getAssets(start, end);
 	}
 
@@ -230,26 +218,10 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	* Returns the number of assets.
 	*
 	* @return the number of assets
-	* @throws SystemException if a system exception occurred
 	*/
 	@Override
-	public int getAssetsCount()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public int getAssetsCount() {
 		return _assetLocalService.getAssetsCount();
-	}
-
-	/**
-	* Updates the asset in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
-	*
-	* @param asset the asset
-	* @return the asset that was updated
-	* @throws SystemException if a system exception occurred
-	*/
-	@Override
-	public com.liferay.ams.model.Asset updateAsset(
-		com.liferay.ams.model.Asset asset)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetLocalService.updateAsset(asset);
 	}
 
 	/**
@@ -262,14 +234,11 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 		return _assetLocalService.getBeanIdentifier();
 	}
 
-	/**
-	* Sets the Spring bean ID for this bean.
-	*
-	* @param beanIdentifier the Spring bean ID for this bean
-	*/
 	@Override
-	public void setBeanIdentifier(java.lang.String beanIdentifier) {
-		_assetLocalService.setBeanIdentifier(beanIdentifier);
+	public com.liferay.portal.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _assetLocalService.getPersistedModel(primaryKeyObj);
 	}
 
 	@Override
@@ -280,8 +249,31 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	}
 
 	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	@Override
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_assetLocalService.setBeanIdentifier(beanIdentifier);
+	}
+
+	/**
+	* Updates the asset in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param asset the asset
+	* @return the asset that was updated
+	*/
+	@Override
+	public com.liferay.ams.model.Asset updateAsset(
+		com.liferay.ams.model.Asset asset) {
+		return _assetLocalService.updateAsset(asset);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+	@Deprecated
 	public AssetLocalService getWrappedAssetLocalService() {
 		return _assetLocalService;
 	}
@@ -289,6 +281,7 @@ public class AssetLocalServiceWrapper implements AssetLocalService,
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+	@Deprecated
 	public void setWrappedAssetLocalService(AssetLocalService assetLocalService) {
 		_assetLocalService = assetLocalService;
 	}

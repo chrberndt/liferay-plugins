@@ -14,13 +14,17 @@
 
 package com.liferay.mail.model.impl;
 
+import com.liferay.mail.model.Attachment;
+import com.liferay.mail.service.AttachmentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -30,7 +34,17 @@ public class MessageImpl extends MessageBaseImpl {
 	public MessageImpl() {
 	}
 
-	public long getGroupId() throws PortalException, SystemException {
+	@Override
+	public String getBcc() {
+		return normalizeAddress(super.getBcc());
+	}
+
+	@Override
+	public String getCc() {
+		return normalizeAddress(super.getCc());
+	}
+
+	public long getGroupId() throws PortalException {
 		User user = UserLocalServiceUtil.getUser(getUserId());
 
 		Group group = user.getGroup();
@@ -38,10 +52,35 @@ public class MessageImpl extends MessageBaseImpl {
 		return group.getGroupId();
 	}
 
+	@Override
+	public String getTo() {
+		return normalizeAddress(super.getTo());
+	}
+
+	public boolean hasAttachments() {
+		String contentType = getContentType();
+
+		if ((contentType != null) && contentType.startsWith(_MULTIPART_MIXED)) {
+			return true;
+		}
+
+		List<Attachment> attachments =
+			AttachmentLocalServiceUtil.getAttachments(getMessageId());
+
+		return !attachments.isEmpty();
+	}
+
 	public boolean hasFlag(int flag) {
 		int[] flags = StringUtil.split(getFlags(), 0);
 
 		return ArrayUtil.contains(flags, flag);
 	}
+
+	protected String normalizeAddress(String address) {
+		return StringUtil.replace(
+			address, StringPool.COMMA, StringPool.COMMA_AND_SPACE);
+	}
+
+	private static final String _MULTIPART_MIXED = "multipart/MIXED";
 
 }

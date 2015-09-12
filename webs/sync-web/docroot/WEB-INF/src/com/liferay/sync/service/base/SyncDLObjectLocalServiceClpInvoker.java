@@ -14,6 +14,11 @@
 
 package com.liferay.sync.service.base;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
 
 import java.util.Arrays;
@@ -22,6 +27,10 @@ import java.util.Arrays;
  * @author Brian Wing Shun Chan
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLObjectLocalServiceClpInvoker {
 	public SyncDLObjectLocalServiceClpInvoker() {
 		_methodName0 = "addSyncDLObject";
@@ -88,6 +97,7 @@ public class SyncDLObjectLocalServiceClpInvoker {
 
 		_methodParameterTypes11 = new String[] { "long" };
 
+<<<<<<< HEAD
 		_methodName12 = "getPersistedModel";
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
@@ -128,6 +138,73 @@ public class SyncDLObjectLocalServiceClpInvoker {
 		_methodName81 = "getLatestModifiedTime";
 
 		_methodParameterTypes81 = new String[] {  };
+=======
+		_methodName12 = "getActionableDynamicQuery";
+
+		_methodParameterTypes12 = new String[] {  };
+
+		_methodName14 = "deletePersistedModel";
+
+		_methodParameterTypes14 = new String[] {
+				"com.liferay.portal.model.PersistedModel"
+			};
+
+		_methodName15 = "getPersistedModel";
+
+		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
+
+		_methodName16 = "getSyncDLObjects";
+
+		_methodParameterTypes16 = new String[] { "int", "int" };
+
+		_methodName17 = "getSyncDLObjectsCount";
+
+		_methodParameterTypes17 = new String[] {  };
+
+		_methodName18 = "updateSyncDLObject";
+
+		_methodParameterTypes18 = new String[] {
+				"com.liferay.sync.model.SyncDLObject"
+			};
+
+		_methodName85 = "getBeanIdentifier";
+
+		_methodParameterTypes85 = new String[] {  };
+
+		_methodName86 = "setBeanIdentifier";
+
+		_methodParameterTypes86 = new String[] { "java.lang.String" };
+
+		_methodName91 = "addSyncDLObject";
+
+		_methodParameterTypes91 = new String[] {
+				"long", "long", "java.lang.String", "long", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String", "java.util.Date", "long",
+				"java.lang.String", "java.lang.String", "long",
+				"java.lang.String"
+			};
+
+		_methodName92 = "deleteSyncDLObjects";
+
+		_methodParameterTypes92 = new String[] {
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName93 = "fetchSyncDLObject";
+
+		_methodParameterTypes93 = new String[] { "java.lang.String", "long" };
+
+		_methodName94 = "getLatestModifiedTime";
+
+		_methodParameterTypes94 = new String[] {  };
+
+		_methodName95 = "getSyncDLObjects";
+
+		_methodParameterTypes95 = new String[] { "long", "long" };
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -174,7 +251,11 @@ public class SyncDLObjectLocalServiceClpInvoker {
 			return SyncDLObjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
+<<<<<<< HEAD
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
+=======
+				(com.liferay.portal.kernel.util.OrderByComparator<?>)arguments[3]);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		if (_methodName8.equals(name) &&
@@ -200,15 +281,34 @@ public class SyncDLObjectLocalServiceClpInvoker {
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
+<<<<<<< HEAD
 			return SyncDLObjectLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
+=======
+			return SyncDLObjectLocalServiceUtil.getActionableDynamicQuery();
+		}
+
+		if (_methodName14.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
+		}
+
+		if (_methodName15.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+		}
+
+		if (_methodName16.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return SyncDLObjectLocalServiceUtil.getSyncDLObjects(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
 			return SyncDLObjectLocalServiceUtil.getSyncDLObjectsCount();
@@ -226,11 +326,31 @@ public class SyncDLObjectLocalServiceClpInvoker {
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+=======
+		if (_methodName17.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.getSyncDLObjectsCount();
+		}
+
+		if (_methodName18.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.updateSyncDLObject((com.liferay.sync.model.SyncDLObject)arguments[0]);
+		}
+
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.getBeanIdentifier();
+		}
+
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			SyncDLObjectLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
+<<<<<<< HEAD
 		if (_methodName80.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return SyncDLObjectLocalServiceUtil.addSyncDLObject(((Long)arguments[0]).longValue(),
@@ -256,6 +376,58 @@ public class SyncDLObjectLocalServiceClpInvoker {
 			return SyncDLObjectLocalServiceUtil.getLatestModifiedTime();
 		}
 
+=======
+		if (_methodName91.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.addSyncDLObject(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2],
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
+				((Long)arguments[5]).longValue(),
+				(java.lang.String)arguments[6], (java.lang.String)arguments[7],
+				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(java.lang.String)arguments[13],
+				((Long)arguments[14]).longValue(),
+				((Long)arguments[15]).longValue(),
+				(java.lang.String)arguments[16],
+				(java.lang.String)arguments[17], (java.util.Date)arguments[18],
+				((Long)arguments[19]).longValue(),
+				(java.lang.String)arguments[20],
+				(java.lang.String)arguments[21],
+				((Long)arguments[22]).longValue(),
+				(java.lang.String)arguments[23]);
+		}
+
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+			SyncDLObjectLocalServiceUtil.deleteSyncDLObjects((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.fetchSyncDLObject((java.lang.String)arguments[0],
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.getLatestModifiedTime();
+		}
+
+		if (_methodName95.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
+			return SyncDLObjectLocalServiceUtil.getSyncDLObjects(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		throw new UnsupportedOperationException();
 	}
 
@@ -285,12 +457,16 @@ public class SyncDLObjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
+<<<<<<< HEAD
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _methodName14;
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
+<<<<<<< HEAD
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
@@ -299,4 +475,26 @@ public class SyncDLObjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes80;
 	private String _methodName81;
 	private String[] _methodParameterTypes81;
+=======
+	private String _methodName16;
+	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
+	private String _methodName91;
+	private String[] _methodParameterTypes91;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
+	private String _methodName95;
+	private String[] _methodParameterTypes95;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

@@ -14,6 +14,8 @@
 
 package com.liferay.knowledgebase.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ import java.util.List;
  * @see com.liferay.knowledgebase.service.http.KBTemplateServiceSoap
  * @generated
  */
+@ProviderType
 public class KBTemplateSoap implements Serializable {
 	public static KBTemplateSoap toSoapModel(KBTemplate model) {
 		KBTemplateSoap soapModel = new KBTemplateSoap();
@@ -41,6 +44,7 @@ public class KBTemplateSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setContent(model.getContent());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
 	}
@@ -173,6 +177,14 @@ public class KBTemplateSoap implements Serializable {
 		_content = content;
 	}
 
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
+	}
+
 	private String _uuid;
 	private long _kbTemplateId;
 	private long _groupId;
@@ -183,4 +195,5 @@ public class KBTemplateSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _title;
 	private String _content;
+	private Date _lastPublishDate;
 }

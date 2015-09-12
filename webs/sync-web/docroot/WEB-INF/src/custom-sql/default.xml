@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <custom-sql>
+<<<<<<< HEAD
 	<sql id="com.liferay.sync.service.persistence.SyncDLObjectFinder.findByDeleteEvent">
 		<![CDATA[
 			SELECT
@@ -41,6 +42,24 @@
 				(SyncDLObject.modifiedTime > ?) AND
 				(SyncDLObject.repositoryId = ?) AND
 				(SyncDLObject.type_ = 'folder')
+=======
+	<sql id="com.liferay.sync.service.persistence.SyncDLObjectFinder.findByTypePKs">
+		<![CDATA[
+			SELECT
+				DISTINCT primKey
+			FROM
+				ResourcePermission
+			WHERE
+				(companyId = ?) AND
+				(
+					(name = CAST_TEXT('com.liferay.portlet.documentlibrary.model.DLFileEntry')) OR
+					(name = CAST_TEXT('com.liferay.portlet.documentlibrary.model.DLFolder'))
+				) AND
+				(scope = ?) AND
+				[$TYPE_PKS$] AND
+				(MOD(actionIds, 2) = 1) AND
+				[$ROLE_IDS_OR_OWNER_ID$]
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		]]>
 	</sql>
 </custom-sql>

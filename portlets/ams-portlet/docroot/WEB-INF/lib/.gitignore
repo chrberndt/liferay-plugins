@@ -1,4 +1,10 @@
 /alloy-mvc-shared.jar
+<<<<<<< HEAD
+=======
+/asm-tree.jar
+/asm-util.jar
+/asm.jar
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /commons-logging.jar
 /jstl-api.jar
 /jstl-impl.jar

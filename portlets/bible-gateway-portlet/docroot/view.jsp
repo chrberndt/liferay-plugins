@@ -270,11 +270,19 @@
 	function <portlet:namespace />compare() {
 		var url = 'http://bible.gospelcom.net/cgi-bin/bible?showfn=yes&passage=' + encodeURIComponent(A.one('#<portlet:namespace />passage').val());
 
+<<<<<<< HEAD
 		var versionCheckboxes = A.all('input[name=<portlet:namespace />versionCheckbox]');
 
 		A.each(
 			versionCheckboxes,
 			function(item, index, collection) {
+=======
+		var versionCheckboxes = A.all('input[name=<portlet:namespace />version]');
+
+		A.each(
+			versionCheckboxes,
+			function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				if (item.attr('checked')) {
 					url += '&' + item.val() + '_version=yes';
 				}
@@ -323,7 +331,11 @@
 		if (startRestrict.attr('selectedIndex') > endRestrict.attr('selectedIndex')) {
 			A.each(
 				endRestrict.all('option'),
+<<<<<<< HEAD
 				function(item, index, collection) {
+=======
+				function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					if (item.val() == text) {
 						endRestrict.attr('selectedIndex', index);
 					}
@@ -346,7 +358,11 @@
 		else if (startRestrict.attr('selectedIndex') > endRestrict.attr('selectedIndex')) {
 			A.each(
 				endRestrict.all('option'),
+<<<<<<< HEAD
 				function(item, index, collection) {
+=======
+				function(item, index) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					if (item.val() == text) {
 						startRestrict.attr('selectedIndex', index);
 					}

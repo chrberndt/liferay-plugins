@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 6.2.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_6_2_0.dtd">
+=======
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN" "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 <routes>
 	<route>
@@ -20,6 +24,21 @@
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 	</route>
 	<route>
+<<<<<<< HEAD
+=======
+		<pattern>/{instanceId}/{urlTitle}</pattern>
+		<implicit-parameter name="mvcPath">/section/view_article.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/{resourcePrimKey:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="mvcPath">/section/view_article.jsp</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{instanceId}/{kbFolderUrlTitle}/{urlTitle}</pattern>
+		<implicit-parameter name="mvcPath">/section/view_article.jsp</implicit-parameter>
+	</route>
+	<route>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		<pattern>/{instanceId}/{resourcePrimKey:\d+}/{status:-?\d+}/history</pattern>
 		<implicit-parameter name="mvcPath">/section/history.jsp</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
@@ -28,8 +47,11 @@
 		<pattern>/{instanceId}/{resourcePrimKey:\d+}/{status:-?\d+}/history/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/section/history.jsp</implicit-parameter>
 	</route>
+<<<<<<< HEAD
 	<route>
 		<pattern>/{instanceId}/{resourcePrimKey:\d+}/{p_p_state}</pattern>
 		<implicit-parameter name="mvcPath">/section/view_article.jsp</implicit-parameter>
 	</route>
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </routes>

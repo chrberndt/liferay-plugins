@@ -55,7 +55,7 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 					Map<String, String> sectionsMap = new TreeMap<String, String>();
 
 					for (String section : PortletPropsValues.ADMIN_KB_ARTICLE_SECTIONS) {
-						sectionsMap.put(LanguageUtil.get(pageContext, section), section);
+						sectionsMap.put(LanguageUtil.get(request, section), section);
 					}
 
 					for (Map.Entry<String, String> entry : sectionsMap.entrySet()) {
@@ -69,28 +69,28 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 
 				</aui:select>
 
-				<aui:select label="article-display-style" name="preferences--kbArticleDisplayStyle--">
-					<aui:option label="title" selected='<%= kbArticleDisplayStyle.equals("title") %>' />
-					<aui:option label="abstract" selected='<%= kbArticleDisplayStyle.equals("abstract") %>' />
+				<aui:select label="article-display-style" name="preferences--kbArticleDisplayStyle--" value="<%= kbArticleDisplayStyle %>">
+					<aui:option label="title" />
+					<aui:option label="abstract" />
 				</aui:select>
 
-				<aui:select label="article-window-state" name="preferences--kbArticleWindowState--">
-					<aui:option label="maximized" selected="<%= kbArticleWindowState.equals(WindowState.MAXIMIZED.toString()) %>" value="<%= WindowState.MAXIMIZED.toString() %>" />
-					<aui:option label="normal" selected="<%= kbArticleWindowState.equals(WindowState.NORMAL.toString()) %>" value="<%= WindowState.NORMAL.toString() %>" />
+				<aui:select label="article-window-state" name="preferences--kbArticleWindowState--" value="<%= kbArticleWindowState %>">
+					<aui:option label="maximized" value="<%= WindowState.MAXIMIZED.toString() %>" />
+					<aui:option label="normal" value="<%= WindowState.NORMAL.toString() %>" />
 				</aui:select>
 
 				<div class="kb-block-labels kb-field-wrapper">
-					<aui:select inlineField="<%= true %>" label="order-by" name="preferences--kbArticlesOrderByCol--">
-						<aui:option label="create-date" selected='<%= kbArticlesOrderByCol.equals("create-date") %>' />
-						<aui:option label="modified-date" selected='<%= kbArticlesOrderByCol.equals("modified-date") %>' />
-						<aui:option label="priority" selected='<%= kbArticlesOrderByCol.equals("priority") %>' />
-						<aui:option label="title" selected='<%= kbArticlesOrderByCol.equals("title") %>' />
-						<aui:option label="view-count" selected='<%= kbArticlesOrderByCol.equals("view-count") %>' />
+					<aui:select inlineField="<%= true %>" label="order-by" name="preferences--kbArticlesOrderByCol--" value="<%= kbArticlesOrderByCol %>">
+						<aui:option label="create-date" />
+						<aui:option label="modified-date" />
+						<aui:option label="priority" />
+						<aui:option label="title" />
+						<aui:option label="view-count" />
 					</aui:select>
 
-					<aui:select inlineField="<%= true %>" label="<%= StringPool.NBSP %>" name="preferences--kbArticlesOrderByType--">
-						<aui:option label="ascending" selected='<%= kbArticlesOrderByType.equals("asc") %>' value="asc" />
-						<aui:option label="descending" selected='<%= kbArticlesOrderByType.equals("desc") %>' value="desc" />
+					<aui:select inlineField="<%= true %>" label="<%= StringPool.NBSP %>" name="preferences--kbArticlesOrderByType--" value="<%= kbArticlesOrderByType %>">
+						<aui:option label="ascending" value="asc" />
+						<aui:option label="descending" value="desc" />
 					</aui:select>
 				</div>
 
@@ -119,13 +119,29 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 
 				<aui:input label="enable-ratings" name="preferences--enableKBArticleRatings--" type="checkbox" value="<%= enableKBArticleRatings %>" />
 
+				<div class="kb-ratings-type" id="<portlet:namespace />ratingsType">
+					<aui:input checked='<%= kbArticleRatingsType.equals("stars") %>' label="use-star-ratings" name="preferences--kbArticleRatingsType--" type="radio" value="stars" />
+					<aui:input checked='<%= kbArticleRatingsType.equals("thumbs") %>' label="use-thumbs-up-thumbs-down" name="preferences--kbArticleRatingsType--" type="radio" value="thumbs" />
+				</div>
+
 				<aui:input label="show-asset-entries" name="preferences--showKBArticleAssetEntries--" type="checkbox" value="<%= showKBArticleAssetEntries %>" />
 
-				<aui:input label="enable-comments" name="preferences--enableKBArticleKBComments--" type="checkbox" value="<%= enableKBArticleKBComments %>" />
-
-				<aui:input label="show-comments" name="preferences--showKBArticleKBComments--" type="checkbox" value="<%= showKBArticleKBComments %>" />
+				<aui:input label="enable-related-assets" name="preferences--enableKBArticleAssetLinks--" type="checkbox" value="<%= enableKBArticleAssetLinks %>" />
 
 				<aui:input label="enable-view-count-increment" name="preferences--enableKBArticleViewCountIncrement--" type="checkbox" value="<%= enableKBArticleViewCountIncrement %>" />
+
+				<aui:input label="enable-subscriptions" name="preferences--enableKBArticleSubscriptions--" type="checkbox" value="<%= enableKBArticleSubscriptions %>" />
+
+				<aui:input label="enable-history" name="preferences--enableKBArticleHistory--" type="checkbox" value="<%= enableKBArticleHistory %>" />
+
+				<aui:input label="enable-print" name="preferences--enableKBArticlePrint--" type="checkbox" value="<%= enableKBArticlePrint %>" />
+
+				<liferay-ui:social-bookmarks-settings
+					displayPosition="<%= socialBookmarksDisplayPosition %>"
+					displayStyle="<%= socialBookmarksDisplayStyle %>"
+					enabled="<%= enableSocialBookmarks %>"
+					types="<%= socialBookmarksTypes %>"
+				/>
 			</c:when>
 			<c:when test='<%= tabs2.equals("rss") %>'>
 				<liferay-ui:rss-settings
@@ -142,3 +158,9 @@ if (PortalUtil.isRSSFeedsEnabled()) {
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
+
+<c:if test='<%= tabs2.equals("display-settings") %>'>
+	<aui:script>
+		Liferay.Util.toggleBoxes('<portlet:namespace />enableKBArticleRatingsCheckbox', '<portlet:namespace />ratingsType');
+	</aui:script>
+</c:if>

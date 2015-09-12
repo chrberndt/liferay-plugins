@@ -14,6 +14,8 @@
 
 package com.liferay.so.service;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
@@ -32,6 +34,7 @@ import com.liferay.portal.service.InvokableService;
  * @see com.liferay.so.service.impl.SocialOfficeServiceImpl
  * @generated
  */
+@ProviderType
 public class SocialOfficeServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -48,13 +51,9 @@ public class SocialOfficeServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
-	/**
-	* Sets the Spring bean ID for this bean.
-	*
-	* @param beanIdentifier the Spring bean ID for this bean
-	*/
-	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
-		getService().setBeanIdentifier(beanIdentifier);
+	public static long[] getUserSocialOfficeGroupIds()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getUserSocialOfficeGroupIds();
 	}
 
 	public static java.lang.Object invokeMethod(java.lang.String name,
@@ -63,16 +62,18 @@ public class SocialOfficeServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static long[] getUserSocialOfficeGroupIds()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserSocialOfficeGroupIds();
+	public static boolean isSocialOfficeGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().isSocialOfficeGroup(groupId);
 	}
 
-	public static boolean isSocialOfficeGroup(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().isSocialOfficeGroup(groupId);
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
 	}
 
 	public static void clearService() {
@@ -101,6 +102,7 @@ public class SocialOfficeServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+	@Deprecated
 	public void setService(SocialOfficeService service) {
 	}
 

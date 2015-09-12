@@ -14,10 +14,10 @@
 
 package com.liferay.opensocial.model.impl;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.opensocial.model.OAuthToken;
 import com.liferay.opensocial.service.OAuthTokenLocalServiceUtil;
-
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the OAuthToken service. Represents a row in the &quot;OpenSocial_OAuthToken&quot; database table, with each column mapped to a property of this class.
@@ -28,9 +28,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  *
  * @author Brian Wing Shun Chan
  * @see OAuthTokenImpl
- * @see com.liferay.opensocial.model.OAuthToken
+ * @see OAuthToken
  * @generated
  */
+@ProviderType
 public abstract class OAuthTokenBaseImpl extends OAuthTokenModelImpl
 	implements OAuthToken {
 	/*
@@ -39,7 +40,7 @@ public abstract class OAuthTokenBaseImpl extends OAuthTokenModelImpl
 	 * Never modify or reference this class directly. All methods that expect a o auth token model instance should use the {@link OAuthToken} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			OAuthTokenLocalServiceUtil.addOAuthToken(this);
 		}

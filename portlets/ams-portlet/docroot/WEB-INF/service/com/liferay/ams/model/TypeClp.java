@@ -14,11 +14,13 @@
 
 package com.liferay.ams.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.ams.service.ClpSerializer;
 import com.liferay.ams.service.TypeLocalServiceUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -34,6 +36,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class TypeClp extends BaseModelImpl<Type> implements Type {
 	public TypeClp() {
 	}
@@ -76,6 +79,9 @@ public class TypeClp extends BaseModelImpl<Type> implements Type {
 		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
 
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+
 		return attributes;
 	}
 
@@ -98,6 +104,9 @@ public class TypeClp extends BaseModelImpl<Type> implements Type {
 		if (name != null) {
 			setName(name);
 		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -219,7 +228,7 @@ public class TypeClp extends BaseModelImpl<Type> implements Type {
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			TypeLocalServiceUtil.addType(this);
 		}
@@ -280,9 +289,23 @@ public class TypeClp extends BaseModelImpl<Type> implements Type {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
 	}
 
 	@Override
@@ -330,4 +353,7 @@ public class TypeClp extends BaseModelImpl<Type> implements Type {
 	private long _groupId;
 	private String _name;
 	private BaseModel<?> _typeRemoteModel;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

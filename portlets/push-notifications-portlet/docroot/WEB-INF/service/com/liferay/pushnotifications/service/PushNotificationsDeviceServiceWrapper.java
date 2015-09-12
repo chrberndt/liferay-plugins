@@ -14,15 +14,28 @@
 
 package com.liferay.pushnotifications.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
  * Provides a wrapper for {@link PushNotificationsDeviceService}.
  *
+<<<<<<< HEAD
  * @author Silvio Santos
  * @see PushNotificationsDeviceService
  * @generated
  */
+=======
+ * @author Bruno Farache
+ * @see PushNotificationsDeviceService
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class PushNotificationsDeviceServiceWrapper
 	implements PushNotificationsDeviceService,
 		ServiceWrapper<PushNotificationsDeviceService> {
@@ -31,6 +44,24 @@ public class PushNotificationsDeviceServiceWrapper
 		_pushNotificationsDeviceService = pushNotificationsDeviceService;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public com.liferay.pushnotifications.model.PushNotificationsDevice addPushNotificationsDevice(
+		java.lang.String token, java.lang.String platform)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _pushNotificationsDeviceService.addPushNotificationsDevice(token,
+			platform);
+	}
+
+	@Override
+	public com.liferay.pushnotifications.model.PushNotificationsDevice deletePushNotificationsDevice(
+		java.lang.String token)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _pushNotificationsDeviceService.deletePushNotificationsDevice(token);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Returns the Spring bean ID for this bean.
 	*
@@ -41,6 +72,7 @@ public class PushNotificationsDeviceServiceWrapper
 		return _pushNotificationsDeviceService.getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -51,6 +83,8 @@ public class PushNotificationsDeviceServiceWrapper
 		_pushNotificationsDeviceService.setBeanIdentifier(beanIdentifier);
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
@@ -60,6 +94,7 @@ public class PushNotificationsDeviceServiceWrapper
 	}
 
 	@Override
+<<<<<<< HEAD
 	public com.liferay.pushnotifications.model.PushNotificationsDevice addPushNotificationsDevice(
 		java.lang.String token, java.lang.String platform)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -74,11 +109,38 @@ public class PushNotificationsDeviceServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _pushNotificationsDeviceService.deletePushNotificationsDevice(token);
+=======
+	public void sendPushNotification(java.lang.String platform,
+		java.util.List<java.lang.String> tokens, java.lang.String payload)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_pushNotificationsDeviceService.sendPushNotification(platform, tokens,
+			payload);
+	}
+
+	@Override
+	public void sendPushNotification(long[] toUserIds, java.lang.String payload)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_pushNotificationsDeviceService.sendPushNotification(toUserIds, payload);
+	}
+
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	@Override
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_pushNotificationsDeviceService.setBeanIdentifier(beanIdentifier);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public PushNotificationsDeviceService getWrappedPushNotificationsDeviceService() {
 		return _pushNotificationsDeviceService;
 	}
@@ -86,6 +148,10 @@ public class PushNotificationsDeviceServiceWrapper
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setWrappedPushNotificationsDeviceService(
 		PushNotificationsDeviceService pushNotificationsDeviceService) {
 		_pushNotificationsDeviceService = pushNotificationsDeviceService;

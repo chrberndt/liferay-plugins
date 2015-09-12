@@ -81,7 +81,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	public WSRPConsumerPortlet addWSRPConsumerPortlet(
 			long wsrpConsumerId, String name, String portletHandle,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		WSRPConsumer wsrpConsumer = wsrpConsumerPersistence.findByPrimaryKey(
 			wsrpConsumerId);
@@ -114,7 +114,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	public WSRPConsumerPortlet addWSRPConsumerPortlet(
 			String wsrpConsumerUuid, String name, String portletHandle,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		WSRPConsumer wsrpConsumer = wsrpConsumerLocalService.getWSRPConsumer(
 			wsrpConsumerUuid);
@@ -127,7 +127,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	@Override
 	public WSRPConsumerPortlet deleteWSRPConsumerPortlet(
 			long wsrpConsumerPortletId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		WSRPConsumerPortlet wsrpConsumerPortlet =
 			wsrpConsumerPortletPersistence.findByPrimaryKey(
@@ -138,7 +138,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	}
 
 	public void deleteWSRPConsumerPortlet(String wsrpConsumerPortletUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<WSRPConsumerPortlet> wsrpConsumerPortlets =
 			wsrpConsumerPortletPersistence.findByUuid(wsrpConsumerPortletUuid);
@@ -153,7 +153,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public WSRPConsumerPortlet deleteWSRPConsumerPortlet(
 			WSRPConsumerPortlet wsrpConsumerPortlet)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		wsrpConsumerPortletPersistence.remove(wsrpConsumerPortlet);
 
@@ -168,7 +168,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	}
 
 	public void deleteWSRPConsumerPortlets(long wsrpConsumerId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<WSRPConsumerPortlet> wsrpConsumerPortlets =
 			wsrpConsumerPortletPersistence.findByWsrpConsumerId(wsrpConsumerId);
@@ -211,9 +211,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 		}
 	}
 
-	public void destroyWSRPConsumerPortlets()
-		throws PortalException, SystemException {
-
+	public void destroyWSRPConsumerPortlets() throws PortalException {
 		List<WSRPConsumerPortlet> wsrpConsumerPortlets =
 			wsrpConsumerPortletPersistence.findAll();
 
@@ -230,7 +228,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 
 	public WSRPConsumerPortlet getWSRPConsumerPortlet(
 			long wsrpConsumerId, String portletHandle)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return wsrpConsumerPortletPersistence.findByW_P(
 			wsrpConsumerId, portletHandle);
@@ -238,7 +236,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 
 	public WSRPConsumerPortlet getWSRPConsumerPortlet(
 			String wsrpConsumerPortletUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<WSRPConsumerPortlet> wsrpConsumerPortlets =
 			wsrpConsumerPortletPersistence.findByUuid(wsrpConsumerPortletUuid);
@@ -253,16 +251,13 @@ public class WSRPConsumerPortletLocalServiceImpl
 	}
 
 	public List<WSRPConsumerPortlet> getWSRPConsumerPortlets(
-			long wsrpConsumerId, int start, int end)
-		throws SystemException {
+		long wsrpConsumerId, int start, int end) {
 
 		return wsrpConsumerPortletPersistence.findByWsrpConsumerId(
 			wsrpConsumerId, start, end);
 	}
 
-	public int getWSRPConsumerPortletsCount(long wsrpConsumerId)
-		throws SystemException {
-
+	public int getWSRPConsumerPortletsCount(long wsrpConsumerId) {
 		return wsrpConsumerPortletPersistence.countByWsrpConsumerId(
 			wsrpConsumerId);
 	}
@@ -303,7 +298,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	public void initWSRPConsumerPortlet(
 			long companyId, long wsrpConsumerId, long wsrpConsumerPortletId,
 			String wsrpConsumerPortletUuid, String name, String portletHandle)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		boolean initializationFailed = false;
 
@@ -346,7 +341,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void initWSRPConsumerPortlets() throws SystemException {
+	public void initWSRPConsumerPortlets() {
 		for (WSRPConsumerPortlet wsrpConsumerPortlet :
 				wsrpConsumerPortletPersistence.findAll()) {
 
@@ -370,7 +365,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 
 	public WSRPConsumerPortlet updateWSRPConsumerPortlet(
 			long wsrpConsumerPortletId, String name)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		validate(name);
 
@@ -393,7 +388,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 		MarkupType[] markupTypes = portletDescription.getMarkupTypes();
 
 		for (MarkupType markupType : markupTypes) {
-			Set<String> mimeTypePortletModes = new HashSet<String>();
+			Set<String> mimeTypePortletModes = new HashSet<>();
 
 			for (String portletMode : markupType.getModes()) {
 				portletMode = StringUtil.toLowerCase(portletMode);
@@ -408,7 +403,7 @@ public class WSRPConsumerPortletLocalServiceImpl
 			portlet.getPortletModes().put(
 				markupType.getMimeType(), mimeTypePortletModes);
 
-			Set<String> mimeTypeWindowStates = new HashSet<String>();
+			Set<String> mimeTypeWindowStates = new HashSet<>();
 
 			for (String windowState : markupType.getWindowStates()) {
 				windowState = StringUtil.toLowerCase(windowState);
@@ -523,7 +518,6 @@ public class WSRPConsumerPortletLocalServiceImpl
 
 		portlet.setCompanyId(companyId);
 		portlet.setPortletId(portletId);
-		portlet.setTimestamp(System.currentTimeMillis());
 
 		PortletApp portletApp = PortletLocalServiceUtil.getPortletApp(
 			ClpSerializer.getServletContextName());
@@ -685,10 +679,10 @@ public class WSRPConsumerPortletLocalServiceImpl
 		WSRPConsumerPortletLocalServiceImpl.class);
 
 	private static Map<String, Portlet> _portletsPool =
-		new ConcurrentHashMap<String, Portlet>();
+		new ConcurrentHashMap<>();
 
 	private Class<ConsumerPortlet> _consumerPortletClass;
 	private Map<Long, Tuple> _failedWSRPConsumerPortlets =
-		new ConcurrentHashMap<Long, Tuple>();
+		new ConcurrentHashMap<>();
 
 }

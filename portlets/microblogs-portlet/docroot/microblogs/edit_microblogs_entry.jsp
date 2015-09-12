@@ -25,7 +25,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 long microblogsEntryId = ParamUtil.getLong(request, "microblogsEntryId");
 
 if (microblogsEntryId <= 0) {
-	microblogsEntryId = GetterUtil.getLong(request.getAttribute("view_comments.jsp-receiverMicroblogsEntryId"));
+	microblogsEntryId = GetterUtil.getLong(request.getAttribute("view_comments.jsp-parentMicroblogsEntryId"));
 }
 
 MicroblogsEntry microblogsEntry = null;
@@ -40,8 +40,6 @@ if (microblogsEntryId > 0) {
 
 String modifiedDate = StringPool.BLANK;
 
-long receiverUserId = 0;
-
 String receiverUserDisplayURL = StringPool.BLANK;
 String receiverUserFullName = StringPool.BLANK;
 String receiverUserPortaitURL = StringPool.BLANK;
@@ -53,8 +51,11 @@ boolean repost = ParamUtil.getBoolean(request, "repost");
 if ((microblogsEntry != null) && !edit) {
 	modifiedDate = dateFormatDateTime.format(microblogsEntry.getModifiedDate());
 
+<<<<<<< HEAD
 	receiverUserId = microblogsEntry.getUserId();
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	receiverUserFullName = HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry));
 
 	try {
@@ -92,14 +93,18 @@ if (comment) {
 
 	<c:choose>
 		<c:when test="<%= microblogsEntry == null %>">
+<<<<<<< HEAD
 			<div class="alert alert-error">
+=======
+			<div class="alert alert-danger">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				<liferay-ui:message key="entry-could-not-be-found" />
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="microblogs-entry">
 				<span class="thumbnail">
-					<a href="<%= receiverUserDisplayURL %>"><img alt="<%= receiverUserFullName %>" src="<%= receiverUserPortaitURL %>" /></a>
+					<a href="<%= receiverUserDisplayURL %>"><img alt="<%= HtmlUtil.escapeAttribute(receiverUserFullName) %>" src="<%= receiverUserPortaitURL %>" /></a>
 				</span>
 
 				<div class="entry-bubble">
@@ -125,13 +130,16 @@ if (comment) {
 <aui:form action="<%= updateMicroblogsEntryURL %>" cssClass="<%= formCssClass %>" name="<%= formName %>">
 	<portlet:renderURL var="commentsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 		<portlet:param name="mvcPath" value="/microblogs/view_comments.jsp" />
+<<<<<<< HEAD
 		<portlet:param name="receiverMicroblogsEntryId" value="<%= String.valueOf(microblogsEntryId) %>" />
+=======
+		<portlet:param name="parentMicroblogsEntryId" value="<%= String.valueOf(microblogsEntryId) %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</portlet:renderURL>
 
 	<aui:input name="redirect" type="hidden" value="<%= comment ? commentsURL : redirect %>" />
 	<aui:input name="microblogsEntryId" type="hidden" value="<%= edit ? microblogsEntryId : 0 %>" />
-	<aui:input name="receiverUserId" type="hidden" value="<%= receiverUserId %>" />
-	<aui:input name="receiverMicroblogsEntryId" type="hidden" value="<%= microblogsEntryId %>" />
+	<aui:input name="parentMicroblogsEntryId" type="hidden" value="<%= microblogsEntryId %>" />
 
 	<aui:model-context bean="<%= microblogsEntry %>" model="<%= MicroblogsEntry.class %>" />
 
@@ -149,7 +157,11 @@ if (comment) {
 	<c:if test="<%= !repost %>">
 		<c:if test="<%= comment %>">
 			<span class="thumbnail">
+<<<<<<< HEAD
 				<a href="<%= user.getDisplayURL(themeDisplay) %>"><img alt="<%= HtmlUtil.escape(user.getFullName()) %>" src="<%= user.getPortraitURL(themeDisplay) %>" /></a>
+=======
+				<a href="<%= user.getDisplayURL(themeDisplay) %>"><img alt="<%= HtmlUtil.escapeAttribute(user.getFullName()) %>" src="<%= user.getPortraitURL(themeDisplay) %>" /></a>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			</span>
 		</c:if>
 
@@ -204,10 +216,10 @@ if (comment) {
 			}
 			%>
 
-			<aui:select inlineLabel="true" label="viewable-by" name="socialRelationType">
-				<aui:option label="everyone" selected="<%= socialRelationType == MicroblogsEntryConstants.TYPE_EVERYONE %>" value="<%= MicroblogsEntryConstants.TYPE_EVERYONE %>" />
-				<aui:option label="connections" selected="<%= socialRelationType == SocialRelationConstants.TYPE_BI_CONNECTION %>" value="<%= SocialRelationConstants.TYPE_BI_CONNECTION %>" />
-				<aui:option label="followers" selected="<%= socialRelationType == SocialRelationConstants.TYPE_UNI_FOLLOWER %>" value="<%= SocialRelationConstants.TYPE_UNI_FOLLOWER %>" />
+			<aui:select inlineLabel="true" label="viewable-by" name="socialRelationType" value="<%= socialRelationType %>">
+				<aui:option label="everyone" value="<%= MicroblogsEntryConstants.TYPE_EVERYONE %>" />
+				<aui:option label="connections" value="<%= SocialRelationConstants.TYPE_BI_CONNECTION %>" />
+				<aui:option label="followers" value="<%= SocialRelationConstants.TYPE_UNI_FOLLOWER %>" />
 			</aui:select>
 		</c:if>
 	</div>
@@ -219,7 +231,7 @@ if (comment) {
 			return '[@' + MAP_USERS[str] + ']';
 		},
 		userName: function(str, match) {
-			return '<span>' + str + '</span>'
+			return '<span>' + str + '</span>';
 		}
 	};
 
@@ -228,6 +240,7 @@ if (comment) {
 	var REGEX_USER_NAME = /@(.*[^\s]+)$/;
 
 	var TPL_SEARCH_RESULTS = '<div class="microblogs-autocomplete">' +
+<<<<<<< HEAD
 		'<div class="thumbnail">' +
 			'<img alt="{fullName}" src="{portraitURL}" />' +
 		'</div>' +
@@ -237,6 +250,21 @@ if (comment) {
 			'<span class="job-title">{jobTitle}</span>' +
 		'</div>' +
 	'</div>';
+=======
+			'<div class="thumbnail">' +
+				'<img alt="{fullName}" src="{portraitURL}" />' +
+			'</div>' +
+			'<div>' +
+				'<span class="user-name">{fullName}</span>' +
+				'<br />' +
+				'<span class="small">{emailAddress}</span>' +
+				'<br />' +
+				'<span class="job-title">{jobTitle}</span>' +
+			'</div>' +
+		'</div>';
+
+	var autocompleteDiv;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	var form = A.one('#<portlet:namespace /><%= formName %>');
 
@@ -246,10 +274,17 @@ if (comment) {
 
 			var countdown = form.one('.microblogs-countdown');
 			var submitButton = form.one('.microblogs-post');
+<<<<<<< HEAD
 
 			var remaining = (150 - contentInput.val().length);
 
 			var disabled = ((remaining == 150) || (contentInput.get('value') == '') || (remaining < 0));
+=======
+
+			var remaining = 150 - contentInput.val().length;
+
+			var disabled = remaining == 150 || contentInput.get('value') == '' || remaining < 0;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			countdown.html(remaining);
 
@@ -268,7 +303,7 @@ if (comment) {
 
 			var inputValue = '<%= ((microblogsEntry != null) && (edit)) ? StringUtil.replace(HtmlUtil.escapeJS(microblogsEntry.getContent()), "\'", "\\'") : StringPool.BLANK %>';
 
-			if ((autocomplete.height() < 45) || (highlighterContent.height() < 45)) {
+			if (autocomplete.height() < 45 || highlighterContent.height() < 45) {
 				autocomplete.height(45);
 
 				highlighterContent.height(45);
@@ -352,8 +387,7 @@ if (comment) {
 		};
 
 		var resultFormatter = function(query, results) {
-			return A.Array.map(
-				results,
+			return results.map(
 				function(result) {
 					var userData = result.raw;
 
@@ -417,11 +451,11 @@ if (comment) {
 
 			MAP_USERS[fullName] = screenName;
 
-			autocompleteDiv.hide()
+			autocompleteDiv.hide();
 		};
 
 		var createAutocomplete = function(contentTextarea) {
-			return autocompleteDiv = new A.AutoComplete(
+			autocompleteDiv = new A.AutoComplete(
 				{
 					inputNode: contentTextarea,
 					maxResults: 5,
@@ -440,7 +474,9 @@ if (comment) {
 					source: <%= MicroblogsUtil.getJSONRecipients(user.getUserId(), themeDisplay) %>
 				}
 			).render();
-		}
+
+			return autocompleteDiv;
+		};
 
 		<c:choose>
 			<c:when test="<%= !edit %>">

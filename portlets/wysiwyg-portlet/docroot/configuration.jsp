@@ -21,7 +21,7 @@
 <aui:form action="<%= configurationActionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 
-	<liferay-ui:input-editor />
+	<liferay-ui:input-editor contents="<%= message %>" />
 
 	<aui:input name="preferences--message--" type="hidden" />
 
@@ -29,10 +29,13 @@
 </aui:form>
 
 <aui:script>
+<<<<<<< HEAD
 	function <portlet:namespace />initEditor() {
 		return '<%= UnicodeFormatter.toString(message) %>';
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	function <portlet:namespace />saveMessage() {
 		var message = window.<portlet:namespace />editor.getHTML();
 

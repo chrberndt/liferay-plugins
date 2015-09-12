@@ -17,16 +17,23 @@
  */
 --%>
 
+<<<<<<< HEAD
 <liferay-portlet:actionURL name="updateMessage" var="updateDiscussionURL"/>
 
 <liferay-ui:discussion
 	className="<%= TasksEntry.class.getName() %>"
 	classPK="<%= tasksEntry.getTasksEntryId() %>"
 	formAction="<%= updateDiscussionURL %>"
+=======
+<liferay-ui:discussion
+	className="<%= TasksEntry.class.getName() %>"
+	classPK="<%= tasksEntry.getTasksEntryId() %>"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	formName="fm2"
 	ratingsEnabled="<%= false %>"
 	redirect="<%= currentURL %>"
 	userId="<%= tasksEntry.getUserId() %>"
+<<<<<<< HEAD
 />
 
 <aui:script>
@@ -39,3 +46,6 @@
 		}
 	);
 </aui:script>
+=======
+/>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1

@@ -14,6 +14,8 @@
 
 package com.liferay.microblogs.service.http;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.microblogs.service.MicroblogsEntryServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -23,7 +25,7 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.microblogs.service.MicroblogsEntryServiceUtil} service utility. The
+ * {@link MicroblogsEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -58,19 +60,20 @@ import java.rmi.RemoteException;
  * @author Brian Wing Shun Chan
  * @see MicroblogsEntryServiceHttp
  * @see com.liferay.microblogs.model.MicroblogsEntrySoap
- * @see com.liferay.microblogs.service.MicroblogsEntryServiceUtil
+ * @see MicroblogsEntryServiceUtil
  * @generated
  */
+@ProviderType
 public class MicroblogsEntryServiceSoap {
 	public static com.liferay.microblogs.model.MicroblogsEntrySoap addMicroblogsEntry(
-		long userId, java.lang.String content, int type, long receiverUserId,
-		long receiverMicroblogsEntryId, int socialRelationType,
+		long userId, java.lang.String content, int type,
+		long parentMicroblogsEntryId, int socialRelationType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.microblogs.model.MicroblogsEntry returnValue = MicroblogsEntryServiceUtil.addMicroblogsEntry(userId,
-					content, type, receiverUserId, receiverMicroblogsEntryId,
-					socialRelationType, serviceContext);
+					content, type, parentMicroblogsEntryId, socialRelationType,
+					serviceContext);
 
 			return com.liferay.microblogs.model.MicroblogsEntrySoap.toSoapModel(returnValue);
 		}

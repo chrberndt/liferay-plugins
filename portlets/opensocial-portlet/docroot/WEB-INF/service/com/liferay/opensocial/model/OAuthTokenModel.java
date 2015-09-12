@@ -14,8 +14,9 @@
 
 package com.liferay.opensocial.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.opensocial.model.impl.OAuthTokenModelImpl
  * @generated
  */
+@ProviderType
 public interface OAuthTokenModel extends AuditedModel, BaseModel<OAuthToken> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -111,10 +113,9 @@ public interface OAuthTokenModel extends AuditedModel, BaseModel<OAuthToken> {
 	 * Returns the user uuid of this o auth token.
 	 *
 	 * @return the user uuid of this o auth token
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this o auth token.
@@ -328,19 +329,19 @@ public interface OAuthTokenModel extends AuditedModel, BaseModel<OAuthToken> {
 	public Object clone();
 
 	@Override
-	public int compareTo(OAuthToken oAuthToken);
+	public int compareTo(com.liferay.opensocial.model.OAuthToken oAuthToken);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<OAuthToken> toCacheModel();
+	public CacheModel<com.liferay.opensocial.model.OAuthToken> toCacheModel();
 
 	@Override
-	public OAuthToken toEscapedModel();
+	public com.liferay.opensocial.model.OAuthToken toEscapedModel();
 
 	@Override
-	public OAuthToken toUnescapedModel();
+	public com.liferay.opensocial.model.OAuthToken toUnescapedModel();
 
 	@Override
 	public String toString();

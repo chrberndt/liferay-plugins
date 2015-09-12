@@ -14,7 +14,7 @@
 
 package com.liferay.privatemessaging.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.privatemessaging.model.UserThread;
 import com.liferay.privatemessaging.service.UserThreadLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.privatemessaging.service.UserThreadLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see UserThreadImpl
- * @see com.liferay.privatemessaging.model.UserThread
+ * @see UserThread
  * @generated
  */
+@ProviderType
 public abstract class UserThreadBaseImpl extends UserThreadModelImpl
 	implements UserThread {
 	/*
@@ -39,7 +40,7 @@ public abstract class UserThreadBaseImpl extends UserThreadModelImpl
 	 * Never modify or reference this class directly. All methods that expect a user thread model instance should use the {@link UserThread} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			UserThreadLocalServiceUtil.addUserThread(this);
 		}

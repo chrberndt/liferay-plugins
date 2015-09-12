@@ -14,8 +14,9 @@
 
 package com.liferay.testpacl.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.testpacl.model.impl.FooModelImpl
  * @generated
  */
+@ProviderType
 public interface FooModel extends BaseModel<Foo>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -127,10 +129,9 @@ public interface FooModel extends BaseModel<Foo>, GroupedModel {
 	 * Returns the user uuid of this foo.
 	 *
 	 * @return the user uuid of this foo
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this foo.
@@ -305,19 +306,19 @@ public interface FooModel extends BaseModel<Foo>, GroupedModel {
 	public Object clone();
 
 	@Override
-	public int compareTo(Foo foo);
+	public int compareTo(com.liferay.testpacl.model.Foo foo);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Foo> toCacheModel();
+	public CacheModel<com.liferay.testpacl.model.Foo> toCacheModel();
 
 	@Override
-	public Foo toEscapedModel();
+	public com.liferay.testpacl.model.Foo toEscapedModel();
 
 	@Override
-	public Foo toUnescapedModel();
+	public com.liferay.testpacl.model.Foo toUnescapedModel();
 
 	@Override
 	public String toString();

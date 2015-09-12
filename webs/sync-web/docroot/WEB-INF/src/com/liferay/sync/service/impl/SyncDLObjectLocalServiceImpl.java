@@ -19,13 +19,27 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.Folder;
+=======
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.FileUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.sync.model.SyncConstants;
 import com.liferay.sync.model.SyncDLObject;
 import com.liferay.sync.service.base.SyncDLObjectLocalServiceBaseImpl;
+<<<<<<< HEAD
+=======
+import com.liferay.sync.util.PortletPropsValues;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +53,7 @@ public class SyncDLObjectLocalServiceImpl
 
 	@Override
 	public SyncDLObject addSyncDLObject(
+<<<<<<< HEAD
 			long companyId, long modifiedTime, long repositoryId,
 			long parentFolderId, String name, String extension, String mimeType,
 			String description, String changeLog, String extraSettings,
@@ -46,6 +61,16 @@ public class SyncDLObjectLocalServiceImpl
 			Date lockExpirationDate, long lockUserId, String lockUserName,
 			String type, long typePK, String typeUuid)
 		throws PortalException, SystemException {
+=======
+			long companyId, long userId, String userName, long modifiedTime,
+			long repositoryId, long parentFolderId, String treePath,
+			String name, String extension, String mimeType, String description,
+			String changeLog, String extraSettings, String version,
+			long versionId, long size, String checksum, String event,
+			Date lockExpirationDate, long lockUserId, String lockUserName,
+			String type, long typePK, String typeUuid)
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (!isDefaultRepository(parentFolderId)) {
 			return null;
@@ -55,9 +80,15 @@ public class SyncDLObjectLocalServiceImpl
 			type, typePK);
 
 		if (syncDLObject == null) {
+<<<<<<< HEAD
 			long syncId = counterLocalService.increment();
 
 			syncDLObject = syncDLObjectPersistence.create(syncId);
+=======
+			long syncDLObjectId = counterLocalService.increment();
+
+			syncDLObject = syncDLObjectPersistence.create(syncDLObjectId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			syncDLObject.setCompanyId(companyId);
 			syncDLObject.setCreateTime(modifiedTime);
@@ -65,33 +96,84 @@ public class SyncDLObjectLocalServiceImpl
 			syncDLObject.setType(type);
 			syncDLObject.setTypePK(typePK);
 			syncDLObject.setTypeUuid(typeUuid);
+<<<<<<< HEAD
+=======
+
+			if (type.equals(SyncConstants.TYPE_PRIVATE_WORKING_COPY)) {
+				SyncDLObject approvedSyncDLObject =
+					syncDLObjectPersistence.fetchByT_T(
+						SyncConstants.TYPE_FILE, typePK);
+
+				approvedSyncDLObject.setModifiedTime(modifiedTime);
+				approvedSyncDLObject.setLockExpirationDate(lockExpirationDate);
+				approvedSyncDLObject.setLockUserId(lockUserId);
+				approvedSyncDLObject.setLockUserName(lockUserName);
+
+				syncDLObjectPersistence.update(approvedSyncDLObject);
+			}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 		else if (syncDLObject.getModifiedTime() >= modifiedTime) {
 			return null;
 		}
 		else if (type.equals(SyncConstants.TYPE_FILE)) {
 			SyncDLObject pwcSyncDLObject = syncDLObjectPersistence.fetchByT_T(
+<<<<<<< HEAD
 				SyncConstants.TYPE_PRIVATE_WORKNG_COPY, typePK);
+=======
+				SyncConstants.TYPE_PRIVATE_WORKING_COPY, typePK);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			if (pwcSyncDLObject != null) {
 				DLFileEntry dlFileEntry =
 					dlFileEntryLocalService.fetchDLFileEntry(typePK);
 
+<<<<<<< HEAD
 				if ((dlFileEntry != null) && !dlFileEntry.isCheckedOut()) {
+=======
+				if ((dlFileEntry == null) || !dlFileEntry.isCheckedOut()) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					syncDLObjectPersistence.remove(pwcSyncDLObject);
 				}
 			}
 		}
+<<<<<<< HEAD
 
 		syncDLObject.setModifiedTime(modifiedTime);
 		syncDLObject.setParentFolderId(parentFolderId);
+=======
+		else if (type.equals(SyncConstants.TYPE_PRIVATE_WORKING_COPY)) {
+			if (event.equals(SyncConstants.EVENT_RESTORE) ||
+				event.equals(SyncConstants.EVENT_TRASH)) {
+
+				SyncDLObject approvedSyncDLObject =
+					syncDLObjectPersistence.fetchByT_T(
+						SyncConstants.TYPE_FILE, typePK);
+
+				approvedSyncDLObject.setEvent(event);
+
+				syncDLObjectPersistence.update(approvedSyncDLObject);
+			}
+		}
+
+		syncDLObject.setUserId(userId);
+		syncDLObject.setUserName(userName);
+		syncDLObject.setModifiedTime(modifiedTime);
+		syncDLObject.setParentFolderId(parentFolderId);
+		syncDLObject.setTreePath(treePath);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		syncDLObject.setName(name);
 		syncDLObject.setExtension(extension);
 		syncDLObject.setMimeType(mimeType);
 		syncDLObject.setDescription(description);
 		syncDLObject.setChangeLog(changeLog);
+<<<<<<< HEAD
 		syncDLObject.setExtraSettings(extraSettings);
 		syncDLObject.setVersion(version);
+=======
+		syncDLObject.setVersion(version);
+		syncDLObject.setVersionId(versionId);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		syncDLObject.setSize(size);
 		syncDLObject.setChecksum(checksum);
 		syncDLObject.setEvent(event);
@@ -99,11 +181,74 @@ public class SyncDLObjectLocalServiceImpl
 		syncDLObject.setLockUserId(lockUserId);
 		syncDLObject.setLockUserName(lockUserName);
 
+<<<<<<< HEAD
 		return syncDLObjectPersistence.update(syncDLObject);
 	}
 
 	@Override
 	public long getLatestModifiedTime() throws SystemException {
+=======
+		syncDLObject = syncDLObjectPersistence.update(syncDLObject);
+
+		if (type.equals(SyncConstants.TYPE_FILE) &&
+			ArrayUtil.contains(
+				PortletPropsValues.SYNC_MAC_PACKAGE_METADATA_FILE_NAMES,
+				syncDLObject.getName())) {
+
+			SyncDLObject parentFolderSyncDLObject =
+				syncDLObjectPersistence.fetchByT_T(
+					SyncConstants.TYPE_FOLDER,
+					syncDLObject.getParentFolderId());
+
+			String parentFolderExtension = FileUtil.getExtension(
+				parentFolderSyncDLObject.getName());
+
+			if (ArrayUtil.contains(
+					PortletPropsValues.SYNC_MAC_PACKAGE_FOLDER_EXTENSIONS,
+					parentFolderExtension)) {
+
+				JSONObject extraSettingsJSONObject =
+					JSONFactoryUtil.createJSONObject(
+						parentFolderSyncDLObject.getExtraSettings());
+
+				extraSettingsJSONObject.put("macPackage", true);
+
+				parentFolderSyncDLObject.setExtraSettings(
+					extraSettingsJSONObject.toString());
+
+				syncDLObjectPersistence.update(parentFolderSyncDLObject);
+			}
+		}
+
+		if ((event.equals(SyncConstants.EVENT_DELETE) ||
+			 event.equals(SyncConstants.EVENT_TRASH)) &&
+			!type.equals(SyncConstants.TYPE_FOLDER)) {
+
+			try {
+				syncDLFileVersionDiffLocalService.deleteSyncDLFileVersionDiffs(
+					typePK);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		return syncDLObject;
+	}
+
+	@Override
+	public void deleteSyncDLObjects(String version, String type) {
+		syncDLObjectPersistence.removeByV_T(version, type);
+	}
+
+	@Override
+	public SyncDLObject fetchSyncDLObject(String type, long typePK) {
+		return syncDLObjectPersistence.fetchByT_T(type, typePK);
+	}
+
+	@Override
+	public long getLatestModifiedTime() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			SyncDLObject.class, SyncDLObject.class.getClassLoader());
 
@@ -121,8 +266,20 @@ public class SyncDLObjectLocalServiceImpl
 		return modifiedTimes.get(0);
 	}
 
+<<<<<<< HEAD
 	protected boolean isDefaultRepository(long folderId)
 		throws PortalException, SystemException {
+=======
+	@Override
+	public List<SyncDLObject> getSyncDLObjects(
+		long repositoryId, long parentFolderId) {
+
+		return syncDLObjectPersistence.findByR_P(repositoryId, parentFolderId);
+	}
+
+	protected boolean isDefaultRepository(long folderId)
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return true;
@@ -133,4 +290,10 @@ public class SyncDLObjectLocalServiceImpl
 		return folder.isDefaultRepository();
 	}
 
+<<<<<<< HEAD
+=======
+	private static Log _log = LogFactoryUtil.getLog(
+		SyncDLObjectLocalServiceImpl.class);
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

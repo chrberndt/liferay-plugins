@@ -22,7 +22,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 public class SyncDLObjectChecksumException extends PortalException {
 
 	public SyncDLObjectChecksumException() {
+<<<<<<< HEAD
 		super();
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public SyncDLObjectChecksumException(String msg) {

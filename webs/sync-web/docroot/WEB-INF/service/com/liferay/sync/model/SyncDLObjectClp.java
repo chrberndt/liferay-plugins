@@ -14,6 +14,7 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -21,6 +22,20 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.service.UserLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.sync.service.ClpSerializer;
 import com.liferay.sync.service.SyncDLObjectLocalServiceUtil;
@@ -36,6 +51,10 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	implements SyncDLObject {
 	public SyncDLObjectClp() {
@@ -77,10 +96,19 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 
 		attributes.put("syncDLObjectId", getSyncDLObjectId());
 		attributes.put("companyId", getCompanyId());
+<<<<<<< HEAD
+=======
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("repositoryId", getRepositoryId());
 		attributes.put("parentFolderId", getParentFolderId());
+<<<<<<< HEAD
+=======
+		attributes.put("treePath", getTreePath());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		attributes.put("name", getName());
 		attributes.put("extension", getExtension());
 		attributes.put("mimeType", getMimeType());
@@ -88,6 +116,10 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		attributes.put("changeLog", getChangeLog());
 		attributes.put("extraSettings", getExtraSettings());
 		attributes.put("version", getVersion());
+<<<<<<< HEAD
+=======
+		attributes.put("versionId", getVersionId());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		attributes.put("size", getSize());
 		attributes.put("checksum", getChecksum());
 		attributes.put("event", getEvent());
@@ -98,6 +130,12 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		attributes.put("typePK", getTypePK());
 		attributes.put("typeUuid", getTypeUuid());
 
+<<<<<<< HEAD
+=======
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return attributes;
 	}
 
@@ -115,6 +153,21 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 			setCompanyId(companyId);
 		}
 
+<<<<<<< HEAD
+=======
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		Long createTime = (Long)attributes.get("createTime");
 
 		if (createTime != null) {
@@ -139,6 +192,15 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 			setParentFolderId(parentFolderId);
 		}
 
+<<<<<<< HEAD
+=======
+		String treePath = (String)attributes.get("treePath");
+
+		if (treePath != null) {
+			setTreePath(treePath);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
@@ -181,6 +243,15 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 			setVersion(version);
 		}
 
+<<<<<<< HEAD
+=======
+		Long versionId = (Long)attributes.get("versionId");
+
+		if (versionId != null) {
+			setVersionId(versionId);
+		}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		Long size = (Long)attributes.get("size");
 
 		if (size != null) {
@@ -234,6 +305,12 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		if (typeUuid != null) {
 			setTypeUuid(typeUuid);
 		}
+<<<<<<< HEAD
+=======
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -283,6 +360,71 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public long getUserId() {
+		return _userId;
+	}
+
+	@Override
+	public void setUserId(long userId) {
+		_userId = userId;
+
+		if (_syncDLObjectRemoteModel != null) {
+			try {
+				Class<?> clazz = _syncDLObjectRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserId", long.class);
+
+				method.invoke(_syncDLObjectRemoteModel, userId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+	}
+
+	@Override
+	public String getUserName() {
+		return _userName;
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		_userName = userName;
+
+		if (_syncDLObjectRemoteModel != null) {
+			try {
+				Class<?> clazz = _syncDLObjectRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserName", String.class);
+
+				method.invoke(_syncDLObjectRemoteModel, userName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long getCreateTime() {
 		return _createTime;
 	}
@@ -375,6 +517,32 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public String getTreePath() {
+		return _treePath;
+	}
+
+	@Override
+	public void setTreePath(String treePath) {
+		_treePath = treePath;
+
+		if (_syncDLObjectRemoteModel != null) {
+			try {
+				Class<?> clazz = _syncDLObjectRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTreePath", String.class);
+
+				method.invoke(_syncDLObjectRemoteModel, treePath);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String getName() {
 		return _name;
 	}
@@ -536,6 +704,32 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public long getVersionId() {
+		return _versionId;
+	}
+
+	@Override
+	public void setVersionId(long versionId) {
+		_versionId = versionId;
+
+		if (_syncDLObjectRemoteModel != null) {
+			try {
+				Class<?> clazz = _syncDLObjectRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVersionId", long.class);
+
+				method.invoke(_syncDLObjectRemoteModel, versionId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long getSize() {
 		return _size;
 	}
@@ -652,13 +846,28 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String getLockUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getLockUserId(), "uuid", _lockUserUuid);
+=======
+	public String getLockUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getLockUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
 	public void setLockUserUuid(String lockUserUuid) {
+<<<<<<< HEAD
 		_lockUserUuid = lockUserUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -754,7 +963,30 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void setCreateDate(java.util.Date createDate) {
+=======
+	public java.lang.String buildTreePath() {
+		try {
+			String methodName = "buildTreePath";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void setCreateDate(Date createDate) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		try {
 			String methodName = "setCreateDate";
 
@@ -770,7 +1002,11 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void setModifiedDate(java.util.Date modifiedDate) {
+=======
+	public void setModifiedDate(Date modifiedDate) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		try {
 			String methodName = "setModifiedDate";
 
@@ -785,6 +1021,22 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public void updateTreePath(String treePath) {
+		try {
+			_treePath = treePath;
+
+			invokeOnRemoteModel("updateTreePath",
+				new Class<?>[] { String.class }, new Object[] { treePath });
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public BaseModel<?> getSyncDLObjectRemoteModel() {
 		return _syncDLObjectRemoteModel;
 	}
@@ -835,7 +1087,11 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void persist() throws SystemException {
+=======
+	public void persist() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (this.isNew()) {
 			SyncDLObjectLocalServiceUtil.addSyncDLObject(this);
 		}
@@ -856,10 +1112,19 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 
 		clone.setSyncDLObjectId(getSyncDLObjectId());
 		clone.setCompanyId(getCompanyId());
+<<<<<<< HEAD
+=======
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		clone.setCreateTime(getCreateTime());
 		clone.setModifiedTime(getModifiedTime());
 		clone.setRepositoryId(getRepositoryId());
 		clone.setParentFolderId(getParentFolderId());
+<<<<<<< HEAD
+=======
+		clone.setTreePath(getTreePath());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		clone.setName(getName());
 		clone.setExtension(getExtension());
 		clone.setMimeType(getMimeType());
@@ -867,6 +1132,10 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		clone.setChangeLog(getChangeLog());
 		clone.setExtraSettings(getExtraSettings());
 		clone.setVersion(getVersion());
+<<<<<<< HEAD
+=======
+		clone.setVersionId(getVersionId());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		clone.setSize(getSize());
 		clone.setChecksum(getChecksum());
 		clone.setEvent(getEvent());
@@ -884,6 +1153,7 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	public int compareTo(SyncDLObject syncDLObject) {
 		int value = 0;
 
+<<<<<<< HEAD
 		if (getCompanyId() < syncDLObject.getCompanyId()) {
 			value = -1;
 		}
@@ -898,6 +1168,8 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 			return value;
 		}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (getModifiedTime() < syncDLObject.getModifiedTime()) {
 			value = -1;
 		}
@@ -951,19 +1223,48 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
+=======
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(53);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("{syncDLObjectId=");
 		sb.append(getSyncDLObjectId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
+<<<<<<< HEAD
+=======
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", createTime=");
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
@@ -972,6 +1273,11 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		sb.append(getRepositoryId());
 		sb.append(", parentFolderId=");
 		sb.append(getParentFolderId());
+<<<<<<< HEAD
+=======
+		sb.append(", treePath=");
+		sb.append(getTreePath());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", extension=");
@@ -986,6 +1292,11 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		sb.append(getExtraSettings());
 		sb.append(", version=");
 		sb.append(getVersion());
+<<<<<<< HEAD
+=======
+		sb.append(", versionId=");
+		sb.append(getVersionId());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		sb.append(", size=");
 		sb.append(getSize());
 		sb.append(", checksum=");
@@ -1011,7 +1322,11 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 
 	@Override
 	public String toXmlString() {
+<<<<<<< HEAD
 		StringBundler sb = new StringBundler(70);
+=======
+		StringBundler sb = new StringBundler(82);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.sync.model.SyncDLObject");
@@ -1026,6 +1341,17 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+<<<<<<< HEAD
+=======
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			"<column><column-name>createTime</column-name><column-value><![CDATA[");
 		sb.append(getCreateTime());
 		sb.append("]]></column-value></column>");
@@ -1042,6 +1368,13 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		sb.append(getParentFolderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+<<<<<<< HEAD
+=======
+			"<column><column-name>treePath</column-name><column-value><![CDATA[");
+		sb.append(getTreePath());
+		sb.append("]]></column-value></column>");
+		sb.append(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -1070,6 +1403,13 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
+<<<<<<< HEAD
+=======
+			"<column><column-name>versionId</column-name><column-value><![CDATA[");
+		sb.append(getVersionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			"<column><column-name>size</column-name><column-value><![CDATA[");
 		sb.append(getSize());
 		sb.append("]]></column-value></column>");
@@ -1113,10 +1453,19 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 
 	private long _syncDLObjectId;
 	private long _companyId;
+<<<<<<< HEAD
+=======
+	private long _userId;
+	private String _userName;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private long _createTime;
 	private long _modifiedTime;
 	private long _repositoryId;
 	private long _parentFolderId;
+<<<<<<< HEAD
+=======
+	private String _treePath;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _name;
 	private String _extension;
 	private String _mimeType;
@@ -1124,15 +1473,28 @@ public class SyncDLObjectClp extends BaseModelImpl<SyncDLObject>
 	private String _changeLog;
 	private String _extraSettings;
 	private String _version;
+<<<<<<< HEAD
+=======
+	private long _versionId;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private long _size;
 	private String _checksum;
 	private String _event;
 	private Date _lockExpirationDate;
 	private long _lockUserId;
+<<<<<<< HEAD
 	private String _lockUserUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _lockUserName;
 	private String _type;
 	private long _typePK;
 	private String _typeUuid;
 	private BaseModel<?> _syncDLObjectRemoteModel;
+<<<<<<< HEAD
+=======
+	private Class<?> _clpSerializerClass = com.liferay.sync.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

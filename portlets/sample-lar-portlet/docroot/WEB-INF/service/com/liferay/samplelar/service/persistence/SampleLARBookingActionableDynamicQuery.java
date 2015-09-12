@@ -15,18 +15,31 @@
 package com.liferay.samplelar.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.samplelar.model.SampleLARBooking;
 import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
 
 /**
  * @author Mate Thurzo
+<<<<<<< HEAD
  * @generated
  */
 public abstract class SampleLARBookingActionableDynamicQuery
 	extends BaseActionableDynamicQuery {
 	public SampleLARBookingActionableDynamicQuery() throws SystemException {
+=======
+ * @deprecated As of 7.0.0, replaced by {@link SampleLARBookingLocalServiceUtil#getActionableDynamicQuery()}
+ * @generated
+ */
+@Deprecated
+public abstract class SampleLARBookingActionableDynamicQuery
+	extends BaseActionableDynamicQuery {
+	public SampleLARBookingActionableDynamicQuery() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		setBaseLocalService(SampleLARBookingLocalServiceUtil.getService());
 		setClass(SampleLARBooking.class);
 

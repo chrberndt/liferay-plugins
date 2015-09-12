@@ -14,6 +14,7 @@
 
 package com.liferay.pushnotifications.model;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -21,6 +22,20 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
+=======
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.service.UserLocalServiceUtil;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.pushnotifications.service.ClpSerializer;
 import com.liferay.pushnotifications.service.PushNotificationsDeviceLocalServiceUtil;
@@ -34,8 +49,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+<<<<<<< HEAD
  * @author Silvio Santos
  */
+=======
+ * @author Bruno Farache
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsDevice>
 	implements PushNotificationsDevice {
 	public PushNotificationsDeviceClp() {
@@ -82,6 +103,12 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 		attributes.put("platform", getPlatform());
 		attributes.put("token", getToken());
 
+<<<<<<< HEAD
+=======
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		return attributes;
 	}
 
@@ -117,6 +144,12 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 		if (token != null) {
 			setToken(token);
 		}
+<<<<<<< HEAD
+=======
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -168,13 +201,28 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 	}
 
 	@Override
+<<<<<<< HEAD
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+=======
+	public String getUserUuid() {
+		try {
+			User user = UserLocalServiceUtil.getUserById(getUserId());
+
+			return user.getUuid();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
 	public void setUserUuid(String userUuid) {
+<<<<<<< HEAD
 		_userUuid = userUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -297,7 +345,11 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void persist() throws SystemException {
+=======
+	public void persist() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (this.isNew()) {
 			PushNotificationsDeviceLocalServiceUtil.addPushNotificationsDevice(this);
 		}
@@ -363,12 +415,32 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
@@ -423,9 +495,18 @@ public class PushNotificationsDeviceClp extends BaseModelImpl<PushNotificationsD
 
 	private long _pushNotificationsDeviceId;
 	private long _userId;
+<<<<<<< HEAD
 	private String _userUuid;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private Date _createDate;
 	private String _platform;
 	private String _token;
 	private BaseModel<?> _pushNotificationsDeviceRemoteModel;
+<<<<<<< HEAD
+=======
+	private Class<?> _clpSerializerClass = com.liferay.pushnotifications.service.ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

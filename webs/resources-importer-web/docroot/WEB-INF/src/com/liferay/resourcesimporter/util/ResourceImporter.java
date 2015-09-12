@@ -14,6 +14,10 @@
 
 package com.liferay.resourcesimporter.util;
 
+import com.liferay.dynamic.data.lists.model.DDLRecordSet;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.DDMTemplateConstants;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -337,7 +341,11 @@ public class ResourceImporter extends FileSystemImporter {
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected void addLayoutTemplate(String dirName) throws Exception {
+=======
+	protected void addLayoutPrototype(String dirName) throws Exception {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		Set<String> resourcePaths = servletContext.getResourcePaths(
 			resourcesDir.concat(dirName));
 
@@ -356,7 +364,11 @@ public class ResourceImporter extends FileSystemImporter {
 
 			URLConnection urlConnection = url.openConnection();
 
+<<<<<<< HEAD
 			addLayoutTemplate(urlConnection.getInputStream());
+=======
+			addLayoutPrototype(urlConnection.getInputStream());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
@@ -373,6 +385,6 @@ public class ResourceImporter extends FileSystemImporter {
 		return urlConnection.getInputStream();
 	}
 
-	private Map<String, Long> _folderIds = new HashMap<String, Long>();
+	private Map<String, Long> _folderIds = new HashMap<>();
 
 }

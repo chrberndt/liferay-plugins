@@ -2,9 +2,16 @@
 <!DOCTYPE project>
 
 <project name="contacts-shared" basedir="." default="deploy">
+<<<<<<< HEAD
 	<property name="plugin.version" value="1" />
 
 	<import file="../build-common-shared.xml" />
 
 	<property name="import.shared" value="private-messaging-shared" />
+=======
+	<property name="import.shared" value="private-messaging-shared" />
+	<property name="plugin.version" value="1" />
+
+	<import file="../build-common-shared.xml" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 </project>

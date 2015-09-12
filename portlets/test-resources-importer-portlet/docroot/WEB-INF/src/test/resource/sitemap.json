@@ -15,10 +15,17 @@
 						"portletId": "58"
 					},
 					{
+<<<<<<< HEAD
 						"portletId": "71"
 					},
 					{
 						"portletId": "56",
+=======
+						"portletId": "com_liferay_site_navigation_menu_web_portlet_NavigationMenuPortlet"
+					},
+					{
+						"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						"portletPreferences": {
 							"articleId": "Without Border.html",
 							"groupId": "${groupId}",
@@ -26,7 +33,11 @@
 						}
 					},
 					{
+<<<<<<< HEAD
 						"portletId": "56",
+=======
+						"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						"portletPreferences": {
 							"articleId": "Custom Title.html",
 							"groupId": "${groupId}",
@@ -41,7 +52,11 @@
 						"portletId": "47"
 					},
 					{
+<<<<<<< HEAD
 						"portletId": "71_INSTANCE_${groupId}",
+=======
+						"portletId": "com_liferay_site_navigation_menu_web_portlet_NavigationMenuPortlet_INSTANCE_${groupId}",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						"portletPreferences": {
 							"displayStyle": "[custom]",
 							"headerType": "root-layout",
@@ -53,12 +68,20 @@
 					},
 					"Web Content with Image.html",
 					{
+<<<<<<< HEAD
 						"portletId": "118",
+=======
+						"portletId": "com_liferay_nested_portlets_web_portlet_NestedPortletsPortlet",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 						"portletPreferences": {
 							"columns": [
 								[
 									{
+<<<<<<< HEAD
 										"portletId": "56",
+=======
+										"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 										"portletPreferences": {
 											"articleId": "Child Web Content 1.xml",
 											"groupId": "${groupId}",
@@ -70,7 +93,11 @@
 								],
 								[
 									{
+<<<<<<< HEAD
 										"portletId": "56",
+=======
+										"portletId": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 										"portletPreferences": {
 											"articleId": "Child Web Content 2.xml",
 											"groupId": "${groupId}",
@@ -106,6 +133,41 @@
 					}
 				]
 			],
+<<<<<<< HEAD
+=======
+			"friendlyURL": "/layout-prototypes-parent-page",
+			"layouts": [
+				{
+					"friendlyURL": "/layout-prototypes-page-1",
+					"layoutPrototypeLinkEnabled": "true",
+					"layoutPrototypeUuid": "371647ba-3649-4039-bfe6-ae32cf404737",
+					"name": "Layout Prototypes Page 1",
+					"title": "Layout Prototypes Page 1"
+				},
+				{
+					"friendlyURL": "/layout-prototypes-page-2",
+					"layoutPrototypeUuid": "c98067d0-fc10-9556-7364-238d39693bc4",
+					"name": "Layout Prototypes Page 2",
+					"title": "Layout Prototypes Page 2"
+				}
+			],
+			"name": "Layout Prototypes",
+			"title": "Layout Prototypes"
+		},
+		{
+			"columns": [
+				[
+					{
+						"portletId": "58"
+					}
+				],
+				[
+					{
+						"portletId": "47"
+					}
+				]
+			],
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			"friendlyURL": "/parent-page",
 			"layouts": [
 				{
@@ -123,6 +185,15 @@
 			"title": "Parent Page"
 		},
 		{
+<<<<<<< HEAD
+=======
+			"friendlyURL": "/url-page",
+			"name": "URL Page",
+			"title": "URL Page",
+			"type": "url"
+		},
+		{
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			"friendlyURL": "/hidden-page",
 			"name": "Hidden Page",
 			"title": "Hidden Page",

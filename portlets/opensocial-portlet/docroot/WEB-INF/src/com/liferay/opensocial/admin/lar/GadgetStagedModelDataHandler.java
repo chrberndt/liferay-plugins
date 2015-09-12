@@ -17,14 +17,26 @@ package com.liferay.opensocial.admin.lar;
 import com.liferay.opensocial.model.Gadget;
 import com.liferay.opensocial.service.GadgetLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+<<<<<<< HEAD
+=======
+import com.liferay.portlet.exportimport.lar.BaseStagedModelDataHandler;
+import com.liferay.portlet.exportimport.lar.ExportImportPathUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Michael C. Han
@@ -35,9 +47,20 @@ public class GadgetStagedModelDataHandler
 	public static final String[] CLASS_NAMES = {Gadget.class.getName()};
 
 	@Override
+<<<<<<< HEAD
 	public void deleteStagedModel(
 			String uuid, long groupId, String className, String extraData)
 		throws PortalException, SystemException {
+=======
+	public void deleteStagedModel(Gadget gadget) {
+		GadgetLocalServiceUtil.deleteGadget(gadget);
+	}
+
+	@Override
+	public void deleteStagedModel(
+			String uuid, long groupId, String className, String extraData)
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -45,11 +68,31 @@ public class GadgetStagedModelDataHandler
 			uuid, group.getCompanyId());
 
 		if (gadget != null) {
+<<<<<<< HEAD
 			GadgetLocalServiceUtil.deleteGadget(gadget);
+=======
+			deleteStagedModel(gadget);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public List<Gadget> fetchStagedModelsByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		List<Gadget> gadgets = new ArrayList<>();
+
+		gadgets.add(
+			GadgetLocalServiceUtil.fetchGadgetByUuidAndCompanyId(
+				uuid, companyId));
+
+		return gadgets;
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}

@@ -15,17 +15,32 @@
 package com.liferay.wsrp.admin.lar;
 
 import com.liferay.portal.kernel.exception.PortalException;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+<<<<<<< HEAD
 import com.liferay.wsrp.model.WSRPConsumer;
 import com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil;
 
+=======
+import com.liferay.portlet.exportimport.lar.BaseStagedModelDataHandler;
+import com.liferay.portlet.exportimport.lar.ExportImportPathUtil;
+import com.liferay.portlet.exportimport.lar.PortletDataContext;
+import com.liferay.wsrp.model.WSRPConsumer;
+import com.liferay.wsrp.service.WSRPConsumerLocalServiceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /**
  * @author Michael C. Han
  */
@@ -37,7 +52,11 @@ public class WSRPConsumerStagedModelDataHandler
 	@Override
 	public void deleteStagedModel(
 			String uuid, long groupId, String className, String extraData)
+<<<<<<< HEAD
 		throws PortalException, SystemException {
+=======
+		throws PortalException {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -46,11 +65,38 @@ public class WSRPConsumerStagedModelDataHandler
 				uuid, group.getCompanyId());
 
 		if (wsrpConsumer != null) {
+<<<<<<< HEAD
 			WSRPConsumerLocalServiceUtil.deleteWSRPConsumer(wsrpConsumer);
+=======
+			deleteStagedModel(wsrpConsumer);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 
 	@Override
+<<<<<<< HEAD
+=======
+	public void deleteStagedModel(WSRPConsumer wsrpConsumer)
+		throws PortalException {
+
+		WSRPConsumerLocalServiceUtil.deleteWSRPConsumer(wsrpConsumer);
+	}
+
+	@Override
+	public List<WSRPConsumer> fetchStagedModelsByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		List<WSRPConsumer> wsrpConsumers = new ArrayList<>();
+
+		wsrpConsumers.add(
+			WSRPConsumerLocalServiceUtil.fetchWSRPConsumerByUuidAndCompanyId(
+				uuid, companyId));
+
+		return wsrpConsumers;
+	}
+
+	@Override
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -118,6 +164,7 @@ public class WSRPConsumerStagedModelDataHandler
 			}
 		}
 		else {
+<<<<<<< HEAD
 			importedWSRPConsumer =
 				WSRPConsumerLocalServiceUtil.addWSRPConsumer(
 					portletDataContext.getCompanyId(), null,
@@ -125,12 +172,20 @@ public class WSRPConsumerStagedModelDataHandler
 					wsrpConsumer.getForwardCookies(),
 					wsrpConsumer.getForwardHeaders(),
 					wsrpConsumer.getMarkupCharacterSets(), serviceContext);
+=======
+			importedWSRPConsumer = WSRPConsumerLocalServiceUtil.addWSRPConsumer(
+				portletDataContext.getCompanyId(), null, wsrpConsumer.getName(),
+				wsrpConsumer.getUrl(), wsrpConsumer.getForwardCookies(),
+				wsrpConsumer.getForwardHeaders(),
+				wsrpConsumer.getMarkupCharacterSets(), serviceContext);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 
 		portletDataContext.importClassedModel(
 			wsrpConsumer, importedWSRPConsumer);
 	}
 
+<<<<<<< HEAD
 	@Override
 	protected boolean validateMissingReference(
 			String uuid, long companyId, long groupId)
@@ -147,4 +202,6 @@ public class WSRPConsumerStagedModelDataHandler
 		return true;
 	}
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

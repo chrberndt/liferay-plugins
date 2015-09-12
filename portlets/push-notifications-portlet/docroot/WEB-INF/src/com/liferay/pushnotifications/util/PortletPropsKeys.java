@@ -31,4 +31,22 @@ public interface PortletPropsKeys {
 
 	public static final String APPLE_SANDBOX = "apple.sandbox";
 
+<<<<<<< HEAD
+=======
+	public static final String LIFERAY_PASSWORD = "liferay.password";
+
+	public static final String LIFERAY_SERVER = "liferay.server";
+
+	public static final String LIFERAY_TIMEOUT = "liferay.timeout";
+
+	public static final String LIFERAY_USERNAME = "liferay.username";
+
+	public static final String SMS_TWILIO_ACCOUNT_SID =
+		"sms.twilio.account.sid";
+
+	public static final String SMS_TWILIO_AUTH_TOKEN = "sms.twilio.auth.token";
+
+	public static final String SMS_TWILIO_NUMBER = "sms.twilio.number";
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

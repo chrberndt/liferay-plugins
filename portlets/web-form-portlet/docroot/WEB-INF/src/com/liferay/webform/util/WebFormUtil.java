@@ -16,7 +16,6 @@ package com.liferay.webform.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -24,6 +23,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
@@ -56,7 +56,7 @@ import org.mozilla.javascript.ScriptableObject;
 public class WebFormUtil {
 
 	public static ExpandoTable addTable(long companyId, String tableName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		try {
 			ExpandoTableLocalServiceUtil.deleteTable(
@@ -109,33 +109,44 @@ public class WebFormUtil {
 	}
 
 	public static String getEmailFromAddress(
-			PortletPreferences preferences, long companyId)
-		throws SystemException {
+		PortletPreferences preferences, long companyId) {
 
 		return PortalUtil.getEmailFromAddress(
 			preferences, companyId, PortletPropsValues.EMAIL_FROM_ADDRESS);
 	}
 
 	public static String getEmailFromName(
-			PortletPreferences preferences, long companyId)
-		throws SystemException {
+		PortletPreferences preferences, long companyId) {
 
 		return PortalUtil.getEmailFromName(
 			preferences, companyId, PortletPropsValues.EMAIL_FROM_NAME);
 	}
 
-	public static String getNewDatabaseTableName(String portletId)
-		throws SystemException {
+	public static String getFileName(
+		ThemeDisplay themeDisplay, String portletId) {
 
+		StringBuffer sb = new StringBuffer(8);
+
+		sb.append(PortletPropsValues.DATA_ROOT_DIR);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(themeDisplay.getScopeGroupId());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(themeDisplay.getPlid());
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(portletId);
+		sb.append(".csv");
+
+		return sb.toString();
+	}
+
+	public static String getNewDatabaseTableName(String portletId) {
 		long formId = CounterLocalServiceUtil.increment(
 			WebFormUtil.class.getName());
 
 		return portletId + StringPool.UNDERLINE + formId;
 	}
 
-	public static int getTableRowsCount(long companyId, String tableName)
-		throws SystemException {
-
+	public static int getTableRowsCount(long companyId, String tableName) {
 		return ExpandoRowLocalServiceUtil.getRowsCount(
 			companyId, WebFormUtil.class.getName(), tableName);
 	}
@@ -159,7 +170,7 @@ public class WebFormUtil {
 			return new String[0];
 		}
 
-		List<String> nodeValues = new ArrayList<String>();
+		List<String> nodeValues = new ArrayList<>();
 
 		if (delimiter.equals("\n") || delimiter.equals("\r")) {
 			try {

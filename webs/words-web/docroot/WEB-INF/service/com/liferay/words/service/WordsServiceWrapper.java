@@ -14,6 +14,11 @@
 
 package com.liferay.words.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
@@ -23,12 +28,25 @@ import com.liferay.portal.service.ServiceWrapper;
  * @see WordsService
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class WordsServiceWrapper implements WordsService,
 	ServiceWrapper<WordsService> {
 	public WordsServiceWrapper(WordsService wordsService) {
 		_wordsService = wordsService;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public java.util.List<java.lang.String> checkSpelling(java.lang.String text)
+		throws java.lang.Exception {
+		return _wordsService.checkSpelling(text);
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/**
 	* Returns the Spring bean ID for this bean.
 	*
@@ -39,6 +57,7 @@ public class WordsServiceWrapper implements WordsService,
 		return _wordsService.getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -47,6 +66,12 @@ public class WordsServiceWrapper implements WordsService,
 	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_wordsService.setBeanIdentifier(beanIdentifier);
+=======
+	@Override
+	public java.util.List<java.lang.String> getSuggestions(
+		java.lang.String word) throws java.lang.Exception {
+		return _wordsService.getSuggestions(word);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override
@@ -56,6 +81,7 @@ public class WordsServiceWrapper implements WordsService,
 		return _wordsService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+<<<<<<< HEAD
 	@Override
 	public java.util.List<java.lang.String> checkSpelling(java.lang.String text)
 		throws java.lang.Exception {
@@ -66,11 +92,25 @@ public class WordsServiceWrapper implements WordsService,
 	public java.util.List<java.lang.String> getSuggestions(
 		java.lang.String word) throws java.lang.Exception {
 		return _wordsService.getSuggestions(word);
+=======
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	@Override
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_wordsService.setBeanIdentifier(beanIdentifier);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public WordsService getWrappedWordsService() {
 		return _wordsService;
 	}
@@ -78,6 +118,10 @@ public class WordsServiceWrapper implements WordsService,
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setWrappedWordsService(WordsService wordsService) {
 		_wordsService = wordsService;
 	}

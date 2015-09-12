@@ -14,6 +14,8 @@
 
 package com.liferay.mail.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.mail.service.FolderLocalServiceUtil;
 
 import java.util.Arrays;
@@ -22,6 +24,7 @@ import java.util.Arrays;
  * @author Brian Wing Shun Chan
  * @generated
  */
+@ProviderType
 public class FolderLocalServiceClpInvoker {
 	public FolderLocalServiceClpInvoker() {
 		_methodName0 = "addFolder";
@@ -84,22 +87,33 @@ public class FolderLocalServiceClpInvoker {
 
 		_methodParameterTypes11 = new String[] { "long" };
 
-		_methodName12 = "getPersistedModel";
+		_methodName12 = "getActionableDynamicQuery";
 
-		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes12 = new String[] {  };
 
-		_methodName13 = "getFolders";
+		_methodName14 = "deletePersistedModel";
 
-		_methodParameterTypes13 = new String[] { "int", "int" };
+		_methodParameterTypes14 = new String[] {
+				"com.liferay.portal.model.PersistedModel"
+			};
 
-		_methodName14 = "getFoldersCount";
+		_methodName15 = "getPersistedModel";
 
-		_methodParameterTypes14 = new String[] {  };
+		_methodParameterTypes15 = new String[] { "java.io.Serializable" };
 
-		_methodName15 = "updateFolder";
+		_methodName16 = "getFolders";
 
-		_methodParameterTypes15 = new String[] { "com.liferay.mail.model.Folder" };
+		_methodParameterTypes16 = new String[] { "int", "int" };
 
+		_methodName17 = "getFoldersCount";
+
+		_methodParameterTypes17 = new String[] {  };
+
+		_methodName18 = "updateFolder";
+
+		_methodParameterTypes18 = new String[] { "com.liferay.mail.model.Folder" };
+
+<<<<<<< HEAD
 		_methodName50 = "getBeanIdentifier";
 
 		_methodParameterTypes50 = new String[] {  };
@@ -149,6 +163,57 @@ public class FolderLocalServiceClpInvoker {
 		_methodName65 = "updateFolder";
 
 		_methodParameterTypes65 = new String[] {
+=======
+		_methodName53 = "getBeanIdentifier";
+
+		_methodParameterTypes53 = new String[] {  };
+
+		_methodName54 = "setBeanIdentifier";
+
+		_methodParameterTypes54 = new String[] { "java.lang.String" };
+
+		_methodName59 = "addFolder";
+
+		_methodParameterTypes59 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String", "int"
+			};
+
+		_methodName60 = "deleteFolder";
+
+		_methodParameterTypes60 = new String[] { "com.liferay.mail.model.Folder" };
+
+		_methodName61 = "deleteFolder";
+
+		_methodParameterTypes61 = new String[] { "long" };
+
+		_methodName62 = "deleteFolders";
+
+		_methodParameterTypes62 = new String[] { "long" };
+
+		_methodName63 = "getFolder";
+
+		_methodParameterTypes63 = new String[] { "long", "java.lang.String" };
+
+		_methodName64 = "getFolders";
+
+		_methodParameterTypes64 = new String[] { "long" };
+
+		_methodName65 = "getLocalPageCount";
+
+		_methodParameterTypes65 = new String[] { "long", "int" };
+
+		_methodName66 = "getPercentDownloaded";
+
+		_methodParameterTypes66 = new String[] { "long" };
+
+		_methodName67 = "getRemotePageCount";
+
+		_methodParameterTypes67 = new String[] { "long", "int" };
+
+		_methodName68 = "updateFolder";
+
+		_methodParameterTypes68 = new String[] {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				"long", "java.lang.String", "java.lang.String", "int"
 			};
 	}
@@ -197,7 +262,7 @@ public class FolderLocalServiceClpInvoker {
 			return FolderLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
-				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
+				(com.liferay.portal.kernel.util.OrderByComparator<?>)arguments[3]);
 		}
 
 		if (_methodName8.equals(name) &&
@@ -223,25 +288,36 @@ public class FolderLocalServiceClpInvoker {
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return FolderLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
-		}
-
-		if (_methodName13.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return FolderLocalServiceUtil.getFolders(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return FolderLocalServiceUtil.getActionableDynamicQuery();
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return FolderLocalServiceUtil.getFoldersCount();
+			return FolderLocalServiceUtil.deletePersistedModel((com.liferay.portal.model.PersistedModel)arguments[0]);
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
+			return FolderLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+		}
+
+		if (_methodName16.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
+			return FolderLocalServiceUtil.getFolders(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName17.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
+			return FolderLocalServiceUtil.getFoldersCount();
+		}
+
+		if (_methodName18.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
 			return FolderLocalServiceUtil.updateFolder((com.liferay.mail.model.Folder)arguments[0]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return FolderLocalServiceUtil.getBeanIdentifier();
@@ -249,19 +325,34 @@ public class FolderLocalServiceClpInvoker {
 
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+=======
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return FolderLocalServiceUtil.getBeanIdentifier();
+		}
+
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			FolderLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
+<<<<<<< HEAD
 		if (_methodName56.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+=======
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return FolderLocalServiceUtil.addFolder(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
 				((Integer)arguments[4]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return FolderLocalServiceUtil.deleteFolder((com.liferay.mail.model.Folder)arguments[0]);
@@ -274,17 +365,37 @@ public class FolderLocalServiceClpInvoker {
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+=======
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+			return FolderLocalServiceUtil.deleteFolder((com.liferay.mail.model.Folder)arguments[0]);
+		}
+
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			return FolderLocalServiceUtil.deleteFolder(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			FolderLocalServiceUtil.deleteFolders(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
+<<<<<<< HEAD
 		if (_methodName60.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+=======
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return FolderLocalServiceUtil.getFolder(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
+<<<<<<< HEAD
 		if (_methodName61.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			return FolderLocalServiceUtil.getFolders(((Long)arguments[0]).longValue());
@@ -292,10 +403,20 @@ public class FolderLocalServiceClpInvoker {
 
 		if (_methodName62.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+=======
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return FolderLocalServiceUtil.getFolders(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return FolderLocalServiceUtil.getLocalPageCount(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName63.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return FolderLocalServiceUtil.getPercentDownloaded(((Long)arguments[0]).longValue());
@@ -303,12 +424,26 @@ public class FolderLocalServiceClpInvoker {
 
 		if (_methodName64.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+=======
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return FolderLocalServiceUtil.getPercentDownloaded(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return FolderLocalServiceUtil.getRemotePageCount(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
+<<<<<<< HEAD
 		if (_methodName65.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+=======
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			return FolderLocalServiceUtil.updateFolder(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Integer)arguments[3]).intValue());
@@ -343,12 +478,11 @@ public class FolderLocalServiceClpInvoker {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
-	private String _methodName13;
-	private String[] _methodParameterTypes13;
 	private String _methodName14;
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
+<<<<<<< HEAD
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
 	private String _methodName51;
@@ -359,6 +493,18 @@ public class FolderLocalServiceClpInvoker {
 	private String[] _methodParameterTypes57;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+=======
+	private String _methodName16;
+	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
 	private String _methodName60;
@@ -373,4 +519,13 @@ public class FolderLocalServiceClpInvoker {
 	private String[] _methodParameterTypes64;
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
+<<<<<<< HEAD
+=======
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 }

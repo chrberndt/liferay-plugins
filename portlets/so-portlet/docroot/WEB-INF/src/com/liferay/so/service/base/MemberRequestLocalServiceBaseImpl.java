@@ -14,10 +14,16 @@
 
 package com.liferay.so.service.base;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
@@ -34,6 +40,7 @@ import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.so.model.MemberRequest;
 import com.liferay.so.service.MemberRequestLocalService;
@@ -60,6 +67,7 @@ import javax.sql.DataSource;
  * @see com.liferay.so.service.MemberRequestLocalServiceUtil
  * @generated
  */
+@ProviderType
 public abstract class MemberRequestLocalServiceBaseImpl
 	extends BaseLocalServiceImpl implements MemberRequestLocalService,
 		IdentifiableBean {
@@ -74,12 +82,10 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 *
 	 * @param memberRequest the member request
 	 * @return the member request that was added
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public MemberRequest addMemberRequest(MemberRequest memberRequest)
-		throws SystemException {
+	public MemberRequest addMemberRequest(MemberRequest memberRequest) {
 		memberRequest.setNew(true);
 
 		return memberRequestPersistence.update(memberRequest);
@@ -102,12 +108,11 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param memberRequestId the primary key of the member request
 	 * @return the member request that was removed
 	 * @throws PortalException if a member request with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public MemberRequest deleteMemberRequest(long memberRequestId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return memberRequestPersistence.remove(memberRequestId);
 	}
 
@@ -116,12 +121,10 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 *
 	 * @param memberRequest the member request
 	 * @return the member request that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public MemberRequest deleteMemberRequest(MemberRequest memberRequest)
-		throws SystemException {
+	public MemberRequest deleteMemberRequest(MemberRequest memberRequest) {
 		return memberRequestPersistence.remove(memberRequest);
 	}
 
@@ -138,12 +141,9 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery) {
 		return memberRequestPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -158,12 +158,10 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param start the lower bound of the range of model instances
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) {
 		return memberRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
@@ -180,47 +178,41 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param end the upper bound of the range of model instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end, OrderByComparator<T> orderByComparator) {
 		return memberRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end, orderByComparator);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) {
 		return memberRequestPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
 	/**
-	 * Returns the number of rows that match the dynamic query.
+	 * Returns the number of rows matching the dynamic query.
 	 *
 	 * @param dynamicQuery the dynamic query
 	 * @param projection the projection to apply to the query
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
+	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) throws SystemException {
+		Projection projection) {
 		return memberRequestPersistence.countWithDynamicQuery(dynamicQuery,
 			projection);
 	}
 
 	@Override
-	public MemberRequest fetchMemberRequest(long memberRequestId)
-		throws SystemException {
+	public MemberRequest fetchMemberRequest(long memberRequestId) {
 		return memberRequestPersistence.fetchByPrimaryKey(memberRequestId);
 	}
 
@@ -230,17 +222,47 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param memberRequestId the primary key of the member request
 	 * @return the member request
 	 * @throws PortalException if a member request with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public MemberRequest getMemberRequest(long memberRequestId)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return memberRequestPersistence.findByPrimaryKey(memberRequestId);
 	}
 
 	@Override
+	public ActionableDynamicQuery getActionableDynamicQuery() {
+		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+
+		actionableDynamicQuery.setBaseLocalService(com.liferay.so.service.MemberRequestLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(MemberRequest.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("memberRequestId");
+
+		return actionableDynamicQuery;
+	}
+
+	protected void initActionableDynamicQuery(
+		ActionableDynamicQuery actionableDynamicQuery) {
+		actionableDynamicQuery.setBaseLocalService(com.liferay.so.service.MemberRequestLocalServiceUtil.getService());
+		actionableDynamicQuery.setClass(MemberRequest.class);
+		actionableDynamicQuery.setClassLoader(getClassLoader());
+
+		actionableDynamicQuery.setPrimaryKeyPropertyName("memberRequestId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
+		throws PortalException {
+		return memberRequestLocalService.deleteMemberRequest((MemberRequest)persistedModel);
+	}
+
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
-		throws PortalException, SystemException {
+		throws PortalException {
 		return memberRequestPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -254,11 +276,9 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param start the lower bound of the range of member requests
 	 * @param end the upper bound of the range of member requests (not inclusive)
 	 * @return the range of member requests
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<MemberRequest> getMemberRequests(int start, int end)
-		throws SystemException {
+	public List<MemberRequest> getMemberRequests(int start, int end) {
 		return memberRequestPersistence.findAll(start, end);
 	}
 
@@ -266,10 +286,9 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * Returns the number of member requests.
 	 *
 	 * @return the number of member requests
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getMemberRequestsCount() throws SystemException {
+	public int getMemberRequestsCount() {
 		return memberRequestPersistence.countAll();
 	}
 
@@ -278,12 +297,10 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 *
 	 * @param memberRequest the member request
 	 * @return the member request that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public MemberRequest updateMemberRequest(MemberRequest memberRequest)
-		throws SystemException {
+	public MemberRequest updateMemberRequest(MemberRequest memberRequest) {
 		return memberRequestPersistence.update(memberRequest);
 	}
 
@@ -348,7 +365,7 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 *
 	 * @return the member request local service
 	 */
-	public com.liferay.so.service.MemberRequestLocalService getMemberRequestLocalService() {
+	public MemberRequestLocalService getMemberRequestLocalService() {
 		return memberRequestLocalService;
 	}
 
@@ -358,7 +375,7 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	 * @param memberRequestLocalService the member request local service
 	 */
 	public void setMemberRequestLocalService(
-		com.liferay.so.service.MemberRequestLocalService memberRequestLocalService) {
+		MemberRequestLocalService memberRequestLocalService) {
 		this.memberRequestLocalService = memberRequestLocalService;
 	}
 
@@ -822,13 +839,18 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	}
 
 	/**
-	 * Performs an SQL query.
+	 * Performs a SQL query.
 	 *
 	 * @param sql the sql query
 	 */
-	protected void runSQL(String sql) throws SystemException {
+	protected void runSQL(String sql) {
 		try {
 			DataSource dataSource = memberRequestPersistence.getDataSource();
+
+			DB db = DBFactoryUtil.getDB();
+
+			sql = db.buildSQL(sql);
+			sql = PortalUtil.transformSQL(sql);
 
 			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
 					sql, new int[0]);
@@ -846,8 +868,8 @@ public abstract class MemberRequestLocalServiceBaseImpl
 	protected FavoriteSitePersistence favoriteSitePersistence;
 	@BeanReference(type = FavoriteSiteFinder.class)
 	protected FavoriteSiteFinder favoriteSiteFinder;
-	@BeanReference(type = com.liferay.so.service.MemberRequestLocalService.class)
-	protected com.liferay.so.service.MemberRequestLocalService memberRequestLocalService;
+	@BeanReference(type = MemberRequestLocalService.class)
+	protected MemberRequestLocalService memberRequestLocalService;
 	@BeanReference(type = MemberRequestPersistence.class)
 	protected MemberRequestPersistence memberRequestPersistence;
 	@BeanReference(type = com.liferay.so.service.ProjectsEntryLocalService.class)

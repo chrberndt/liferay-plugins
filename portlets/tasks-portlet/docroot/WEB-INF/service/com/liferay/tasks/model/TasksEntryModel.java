@@ -14,8 +14,9 @@
 
 package com.liferay.tasks.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscape;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -40,6 +41,7 @@ import java.util.Date;
  * @see com.liferay.tasks.model.impl.TasksEntryModelImpl
  * @generated
  */
+@ProviderType
 public interface TasksEntryModel extends BaseModel<TasksEntry>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -127,10 +129,9 @@ public interface TasksEntryModel extends BaseModel<TasksEntry>, GroupedModel {
 	 * Returns the user uuid of this tasks entry.
 	 *
 	 * @return the user uuid of this tasks entry
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public String getUserUuid() throws SystemException;
+	public String getUserUuid();
 
 	/**
 	 * Sets the user uuid of this tasks entry.
@@ -236,9 +237,8 @@ public interface TasksEntryModel extends BaseModel<TasksEntry>, GroupedModel {
 	 * Returns the assignee user uuid of this tasks entry.
 	 *
 	 * @return the assignee user uuid of this tasks entry
-	 * @throws SystemException if a system exception occurred
 	 */
-	public String getAssigneeUserUuid() throws SystemException;
+	public String getAssigneeUserUuid();
 
 	/**
 	 * Sets the assignee user uuid of this tasks entry.
@@ -265,9 +265,8 @@ public interface TasksEntryModel extends BaseModel<TasksEntry>, GroupedModel {
 	 * Returns the resolver user uuid of this tasks entry.
 	 *
 	 * @return the resolver user uuid of this tasks entry
-	 * @throws SystemException if a system exception occurred
 	 */
-	public String getResolverUserUuid() throws SystemException;
+	public String getResolverUserUuid();
 
 	/**
 	 * Sets the resolver user uuid of this tasks entry.
@@ -355,19 +354,19 @@ public interface TasksEntryModel extends BaseModel<TasksEntry>, GroupedModel {
 	public Object clone();
 
 	@Override
-	public int compareTo(TasksEntry tasksEntry);
+	public int compareTo(com.liferay.tasks.model.TasksEntry tasksEntry);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<TasksEntry> toCacheModel();
+	public CacheModel<com.liferay.tasks.model.TasksEntry> toCacheModel();
 
 	@Override
-	public TasksEntry toEscapedModel();
+	public com.liferay.tasks.model.TasksEntry toEscapedModel();
 
 	@Override
-	public TasksEntry toUnescapedModel();
+	public com.liferay.tasks.model.TasksEntry toUnescapedModel();
 
 	@Override
 	public String toString();

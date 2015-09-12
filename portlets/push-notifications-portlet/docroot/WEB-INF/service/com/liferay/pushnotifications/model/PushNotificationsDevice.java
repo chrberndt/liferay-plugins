@@ -14,17 +14,30 @@
 
 package com.liferay.pushnotifications.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.model.PersistedModel;
 
 /**
  * The extended model interface for the PushNotificationsDevice service. Represents a row in the &quot;PushNotificationsDevice&quot; database table, with each column mapped to a property of this class.
  *
+<<<<<<< HEAD
  * @author Silvio Santos
+=======
+ * @author Bruno Farache
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @see PushNotificationsDeviceModel
  * @see com.liferay.pushnotifications.model.impl.PushNotificationsDeviceImpl
  * @see com.liferay.pushnotifications.model.impl.PushNotificationsDeviceModelImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public interface PushNotificationsDevice extends PushNotificationsDeviceModel,
 	PersistedModel {
 	/*

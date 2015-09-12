@@ -32,13 +32,15 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelNameComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FolderNameComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelTitleComparator;
 
 import java.io.IOException;
 
@@ -66,6 +68,10 @@ public class EditorPortlet extends AdminPortlet {
 		throws IOException, PortletException {
 
 		try {
+			AuthTokenUtil.checkCSRFToken(
+				PortalUtil.getHttpServletRequest(resourceRequest),
+				this.getClass().getName());
+
 			String resourceID = resourceRequest.getResourceID();
 
 			if (resourceID.equals("addFileEntry")) {
@@ -304,8 +310,7 @@ public class EditorPortlet extends AdminPortlet {
 		List<Folder> folders = DLAppServiceUtil.getFolders(
 			repositoryId, folderId);
 
-		folders = ListUtil.sort(
-			folders, new RepositoryModelNameComparator(true));
+		folders = ListUtil.sort(folders, new FolderNameComparator(true));
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -331,7 +336,8 @@ public class EditorPortlet extends AdminPortlet {
 				repositoryId, folderId);
 
 			fileEntries = ListUtil.sort(
-				fileEntries, new RepositoryModelNameComparator(true));
+				fileEntries,
+				new RepositoryModelTitleComparator<FileEntry>(true));
 
 			for (FileEntry fileEntry : fileEntries) {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();

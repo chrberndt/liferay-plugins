@@ -34,10 +34,18 @@ import java.util.List;
 public class ChatVideoPollerProcessor extends BasePollerProcessor {
 
 	@Override
+<<<<<<< HEAD
 	protected void doReceive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws Exception {
 
+=======
+	protected PollerResponse doReceive(PollerRequest pollerRequest)
+		throws Exception {
+
+		PollerResponse pollerResponse = pollerRequest.createPollerResponse();
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		JSONObject webRTCResponseJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
@@ -78,6 +86,11 @@ public class ChatVideoPollerProcessor extends BasePollerProcessor {
 		webRTCResponseJSONObject.put("mails", webRTCMailsJSONArray);
 
 		pollerResponse.setParameter("webRTCResponse", webRTCResponseJSONObject);
+<<<<<<< HEAD
+=======
+
+		return pollerResponse;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	@Override

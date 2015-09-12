@@ -17,11 +17,15 @@
 
 package com.liferay.microblogs.microblogs.notifications;
 
+<<<<<<< HEAD
 import com.liferay.compat.portal.kernel.notifications.BaseUserNotificationHandler;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.microblogs.model.MicroblogsEntry;
 import com.liferay.microblogs.model.MicroblogsEntryConstants;
 import com.liferay.microblogs.service.MicroblogsEntryLocalServiceUtil;
 import com.liferay.microblogs.util.PortletKeys;
+<<<<<<< HEAD
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -34,18 +38,34 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
+=======
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetRenderer;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 /**
  * @author Jonathan Lee
  */
 public class MicroblogsUserNotificationHandler
+<<<<<<< HEAD
 	extends BaseUserNotificationHandler {
+=======
+	extends BaseModelUserNotificationHandler {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	public MicroblogsUserNotificationHandler() {
 		setPortletId(PortletKeys.MICROBLOGS);
 	}
 
 	@Override
+<<<<<<< HEAD
 	protected String getBody(
 			UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)
@@ -73,10 +93,31 @@ public class MicroblogsUserNotificationHandler
 			String userFullName = HtmlUtil.escape(
 				PortalUtil.getUserName(
 					microblogsEntry.getUserId(), StringPool.BLANK));
+=======
+	protected String getTitle(
+		JSONObject jsonObject, AssetRenderer assetRenderer,
+		ServiceContext serviceContext) {
+
+		MicroblogsEntry microblogsEntry =
+			MicroblogsEntryLocalServiceUtil.fetchMicroblogsEntry(
+				assetRenderer.getClassPK());
+
+		String title = StringPool.BLANK;
+
+		String userFullName = HtmlUtil.escape(
+			PortalUtil.getUserName(
+				microblogsEntry.getUserId(), StringPool.BLANK));
+
+		int notificationType = jsonObject.getInt("notificationType");
+
+		if (notificationType ==
+				MicroblogsEntryConstants.NOTIFICATION_TYPE_REPLY) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 			title = serviceContext.translate(
 				"x-commented-on-your-post", userFullName);
 		}
+<<<<<<< HEAD
 
 		return StringUtil.replace(
 			getBodyTemplate(), new String[] {"[$BODY$]", "[$TITLE$]"},
@@ -107,6 +148,39 @@ public class MicroblogsUserNotificationHandler
 		return assetRenderer.getURLViewInContext(
 			serviceContext.getLiferayPortletRequest(),
 			serviceContext.getLiferayPortletResponse(), null);
+=======
+		else if (notificationType ==
+					MicroblogsEntryConstants.
+						NOTIFICATION_TYPE_REPLY_TO_REPLIED) {
+
+			long parentMicroblogsEntryUserId =
+				microblogsEntry.fetchParentMicroblogsEntryUserId();
+
+			User user = UserLocalServiceUtil.fetchUser(
+				parentMicroblogsEntryUserId);
+
+			if (user != null) {
+				title = serviceContext.translate(
+					"x-also-commented-on-x's-post", userFullName,
+					user.getFullName());
+			}
+		}
+		else if (notificationType ==
+					MicroblogsEntryConstants.
+						NOTIFICATION_TYPE_REPLY_TO_TAGGED) {
+
+			title = serviceContext.translate(
+				"x-commented-on-a-post-you-are-tagged-in", userFullName);
+		}
+		else if (notificationType ==
+					MicroblogsEntryConstants.NOTIFICATION_TYPE_TAG) {
+
+			title = serviceContext.translate(
+				"x-tagged-you-in-a-post", userFullName);
+		}
+
+		return title;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 }

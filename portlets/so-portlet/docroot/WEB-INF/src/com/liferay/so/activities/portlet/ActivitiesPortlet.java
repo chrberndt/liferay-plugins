@@ -25,7 +25,9 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -48,9 +50,15 @@ import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateCompar
 import com.liferay.portlet.social.model.SocialActivitySet;
 import com.liferay.portlet.social.service.SocialActivitySetLocalServiceUtil;
 import com.liferay.so.activities.util.ActivitiesUtil;
+<<<<<<< HEAD
 import com.liferay.util.bridges.mvc.MVCPortlet;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import java.io.IOException;
+
+import java.text.DateFormat;
+import java.text.Format;
 
 import java.util.Date;
 import java.util.List;
@@ -126,7 +134,7 @@ public class ActivitiesPortlet extends MVCPortlet {
 
 		List<MicroblogsEntry> microblogsEntries =
 			MicroblogsEntryLocalServiceUtil.
-				getReceiverMicroblogsEntryMicroblogsEntries(
+				getParentMicroblogsEntryMicroblogsEntries(
 					MicroblogsEntryConstants.TYPE_REPLY,
 					activitySet.getClassPK(), QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS);
@@ -190,13 +198,12 @@ public class ActivitiesPortlet extends MVCPortlet {
 			MicroblogsEntryLocalServiceUtil.getMicroblogsEntry(
 				microblogsEntryId);
 
-		ServiceContext serviceContext =
-			ServiceContextFactory.getInstance(
-				MicroblogsEntry.class.getName(), actionRequest);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MicroblogsEntry.class.getName(), actionRequest);
 
 		MicroblogsEntryServiceUtil.addMicroblogsEntry(
 			themeDisplay.getUserId(), microblogsEntry.getContent(),
-			MicroblogsEntryConstants.TYPE_REPOST, microblogsEntry.getUserId(),
+			MicroblogsEntryConstants.TYPE_REPOST,
 			microblogsEntry.getMicroblogsEntryId(),
 			microblogsEntry.getSocialRelationType(), serviceContext);
 	}
@@ -273,9 +280,8 @@ public class ActivitiesPortlet extends MVCPortlet {
 			}
 			else if (cmd.equals(Constants.EDIT) && (mbMessageId > 0)) {
 				mbMessage = MBMessageServiceUtil.updateDiscussionMessage(
-					className, classPK, className, classPK,
-					themeDisplay.getUserId(), mbMessageId, StringPool.BLANK,
-					body, serviceContext);
+					className, classPK, mbMessageId, StringPool.BLANK, body,
+					serviceContext);
 			}
 			else {
 				MBMessageDisplay mbMessageDisplay =
@@ -290,8 +296,7 @@ public class ActivitiesPortlet extends MVCPortlet {
 				MBMessage rootMBMessage = mbTreeWalker.getRoot();
 
 				mbMessage = MBMessageServiceUtil.addDiscussionMessage(
-					groupId, className, classPK, className, classPK,
-					themeDisplay.getUserId(), mbThread.getThreadId(),
+					groupId, className, classPK, mbThread.getThreadId(),
 					rootMBMessage.getMessageId(), StringPool.BLANK, body,
 					serviceContext);
 			}
@@ -354,8 +359,7 @@ public class ActivitiesPortlet extends MVCPortlet {
 					microblogsEntry =
 						MicroblogsEntryServiceUtil.addMicroblogsEntry(
 							themeDisplay.getUserId(), body,
-							MicroblogsEntryConstants.TYPE_REPLY,
-							currentMicroblogsEntry.getUserId(), classPK,
+							MicroblogsEntryConstants.TYPE_REPLY, classPK,
 							currentMicroblogsEntry.getSocialRelationType(),
 							serviceContext);
 				}
@@ -394,11 +398,16 @@ public class ActivitiesPortlet extends MVCPortlet {
 
 		jsonObject.put(
 			"mbMessageIdOrMicroblogsEntryId", mbMessageIdOrMicroblogsEntryId);
+
+		Format dateFormat = FastDateFormatFactoryUtil.getDate(
+			DateFormat.FULL, themeDisplay.getLocale(),
+			themeDisplay.getTimeZone());
+
 		jsonObject.put(
 			"modifiedDate",
 			Time.getRelativeTimeDescription(
-				modifiedDate, themeDisplay.getLocale(),
-				themeDisplay.getTimeZone()));
+				modifiedDate.getTime(), themeDisplay.getLocale(),
+				themeDisplay.getTimeZone(), dateFormat));
 
 		User user = UserLocalServiceUtil.fetchUser(userId);
 

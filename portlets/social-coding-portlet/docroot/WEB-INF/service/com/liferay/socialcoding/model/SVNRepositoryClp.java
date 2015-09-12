@@ -14,8 +14,10 @@
 
 package com.liferay.socialcoding.model;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -34,6 +36,7 @@ import java.util.Map;
 /**
  * @author Brian Wing Shun Chan
  */
+@ProviderType
 public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 	implements SVNRepository {
 	public SVNRepositoryClp() {
@@ -77,6 +80,9 @@ public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 		attributes.put("url", getUrl());
 		attributes.put("revisionNumber", getRevisionNumber());
 
+		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
+		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
+
 		return attributes;
 	}
 
@@ -99,6 +105,9 @@ public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 		if (revisionNumber != null) {
 			setRevisionNumber(revisionNumber);
 		}
+
+		_entityCacheEnabled = GetterUtil.getBoolean("entityCacheEnabled");
+		_finderCacheEnabled = GetterUtil.getBoolean("finderCacheEnabled");
 	}
 
 	@Override
@@ -259,7 +268,7 @@ public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 	}
 
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			SVNRepositoryLocalServiceUtil.addSVNRepository(this);
 		}
@@ -320,9 +329,23 @@ public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _entityCacheEnabled;
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _finderCacheEnabled;
 	}
 
 	@Override
@@ -370,4 +393,7 @@ public class SVNRepositoryClp extends BaseModelImpl<SVNRepository>
 	private String _url;
 	private long _revisionNumber;
 	private BaseModel<?> _svnRepositoryRemoteModel;
+	private Class<?> _clpSerializerClass = ClpSerializer.class;
+	private boolean _entityCacheEnabled;
+	private boolean _finderCacheEnabled;
 }

@@ -28,18 +28,22 @@ PortletURL microblogsEntriesURL = (PortletURL)request.getAttribute(WebKeys.MICRO
 <c:if test="<%= microblogsEntries.isEmpty() %>">
 
 	<%
-	String message = LanguageUtil.get(pageContext, "there-are-no-microblog-entries");
+	String message = LanguageUtil.get(request, "there-are-no-microblog-entries");
 
 	Group group = themeDisplay.getScopeGroup();
 
 	if (group.isUser()) {
 		if (group.getGroupId() == user.getGroupId()) {
-			message = LanguageUtil.get(pageContext, "you-do-not-have-any-microblog-entries");
+			message = LanguageUtil.get(request, "you-do-not-have-any-microblog-entries");
 		}
 		else {
 			User user2 = UserLocalServiceUtil.getUser(group.getClassPK());
 
+<<<<<<< HEAD
 			message = LanguageUtil.format(pageContext, "x-does-not-have-any-microblog-entries" , HtmlUtil.escape(user2.getFullName()), false);
+=======
+			message = LanguageUtil.format(request, "x-does-not-have-any-microblog-entries" , HtmlUtil.escape(user2.getFullName()), false);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		}
 	}
 	%>
@@ -70,7 +74,7 @@ if (microblogsEntries != null) {
 
 		<div class="microblogs-entry" id="<portlet:namespace />microblogsEntry<%= microblogsEntry.getMicroblogsEntryId() %>">
 			<span class="thumbnail">
-				<a href="<%= userDisplayURL %>"><img alt="<%= userFullName %>" src="<%= userPortaitURL %>" /></a>
+				<a href="<%= userDisplayURL %>"><img alt="<%= HtmlUtil.escapeAttribute(userFullName) %>" src="<%= userPortaitURL %>" /></a>
 			</span>
 
 			<div class="entry-bubble">
@@ -78,14 +82,18 @@ if (microblogsEntries != null) {
 					<span><a href="<%= userDisplayURL %>"><%= userFullName %></a></span>
 
 					<c:if test="<%= microblogsEntry.getType() == MicroblogsEntryConstants.TYPE_REPOST %>">
+<<<<<<< HEAD
 						<span class="small"><liferay-ui:message key="reposted-from" /></span> <span><%= HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry.getReceiverUserId(), StringPool.BLANK)) %></span>
+=======
+						<span class="small"><liferay-ui:message key="reposted-from" /></span> <span><%= HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry.getParentMicroblogsEntryUserId(), StringPool.BLANK)) %></span>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					</c:if>
 				</div>
 
 				<div class="content">
 
 					<%
-					String content = MicroblogsUtil.getTaggedContent(microblogsEntry, ServiceContextFactory.getInstance(request));
+					String content = MicroblogsUtil.getProcessedContent(microblogsEntry, ServiceContextFactory.getInstance(request));
 					%>
 
 					<span>
@@ -104,13 +112,17 @@ if (microblogsEntries != null) {
 						<c:if test="<%= microblogsEntry.getType() != MicroblogsEntryConstants.TYPE_REPLY %>">
 
 							<%
-							int replyCount = MicroblogsEntryLocalServiceUtil.getReceiverMicroblogsEntryMicroblogsEntriesCount(MicroblogsEntryConstants.TYPE_REPLY, microblogsEntry.getMicroblogsEntryId());
+							int replyCount = MicroblogsEntryLocalServiceUtil.getParentMicroblogsEntryMicroblogsEntriesCount(MicroblogsEntryConstants.TYPE_REPLY, microblogsEntry.getMicroblogsEntryId());
 							%>
 
 							<span class="action comment">
 								<portlet:renderURL var="commentsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 									<portlet:param name="mvcPath" value="/microblogs/view_comments.jsp" />
+<<<<<<< HEAD
 									<portlet:param name="receiverMicroblogsEntryId" value="<%= String.valueOf(microblogsEntry.getMicroblogsEntryId()) %>" />
+=======
+									<portlet:param name="parentMicroblogsEntryId" value="<%= String.valueOf(microblogsEntry.getMicroblogsEntryId()) %>" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 								</portlet:renderURL>
 
 								<a data-microblogsEntryId="<%= microblogsEntry.getMicroblogsEntryId() %>" href="<%= commentsURL %>"><%= replyCount > 0 ? replyCount : StringPool.BLANK %> <liferay-ui:message key='<%= replyCount > 1 ? "comments" : "comment" %>' /></a>
@@ -125,7 +137,7 @@ if (microblogsEntries != null) {
 							</portlet:renderURL>
 
 							<%
-							String repostURL = "javascript:Liferay.Microblogs.displayPopup('" + repostMicroblogsEntryURL + "','" + LanguageUtil.get(pageContext, "repost") + "');";
+							String repostURL = "javascript:Liferay.Microblogs.displayPopup('" + repostMicroblogsEntryURL + "','" + LanguageUtil.get(request, "repost") + "');";
 							%>
 
 							<span class="action repost">

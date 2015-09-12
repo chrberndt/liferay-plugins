@@ -14,7 +14,11 @@
  */
 --%>
 
+<<<<<<< HEAD
 <span class="alert alert-error">
+=======
+<span class="alert alert-danger">
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 An unexpected error occurred.
 </span>
 

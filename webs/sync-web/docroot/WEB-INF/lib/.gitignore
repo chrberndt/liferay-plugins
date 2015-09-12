@@ -1,7 +1,13 @@
 /commons-logging.jar
+<<<<<<< HEAD
 /io-delta-shared.jar
 /log4j.jar
 /portal-compat-shared.jar
+=======
+/log4j.jar
+/portal-compat-shared.jar
+/sync-shared.jar
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /util-bridges.jar
 /util-java.jar
 /util-taglib.jar

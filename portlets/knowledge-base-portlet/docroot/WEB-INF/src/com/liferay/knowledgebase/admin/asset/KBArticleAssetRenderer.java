@@ -23,24 +23,33 @@ import com.liferay.knowledgebase.util.WebKeys;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.asset.model.BaseAssetRenderer;
+import com.liferay.portlet.asset.model.BaseJSPAssetRenderer;
 
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Peter Shin
  */
-public class KBArticleAssetRenderer extends BaseAssetRenderer {
+public class KBArticleAssetRenderer extends BaseJSPAssetRenderer<KBArticle> {
 
 	public KBArticleAssetRenderer(KBArticle kbArticle) {
 		_kbArticle = kbArticle;
+	}
+
+	@Override
+	public KBArticle getAssetObject() {
+		return _kbArticle;
 	}
 
 	@Override
@@ -59,8 +68,27 @@ public class KBArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	@Override
-	public String getSummary(Locale locale) {
-		return HtmlUtil.stripHtml(_kbArticle.getContent());
+	public String getJspPath(HttpServletRequest request, String template) {
+		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+			return "/admin/asset/" + template + ".jsp";
+		}
+		else {
+			return null;
+		}
+	}
+
+	@Override
+	public String getSummary(
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		String summary = _kbArticle.getDescription();
+
+		if (Validator.isNull(summary)) {
+			summary = StringUtil.shorten(
+				HtmlUtil.extractText(_kbArticle.getContent()), 200);
+		}
+
+		return summary;
 	}
 
 	@Override
@@ -128,24 +156,19 @@ public class KBArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	@Override
-	public boolean isPrintable() {
-		return true;
+	public boolean include(
+			HttpServletRequest request, HttpServletResponse response,
+			String template)
+		throws Exception {
+
+		request.setAttribute(WebKeys.KNOWLEDGE_BASE_KB_ARTICLE, _kbArticle);
+
+		return super.include(request, response, template);
 	}
 
 	@Override
-	public String render(
-		RenderRequest renderRequest, RenderResponse renderResponse,
-		String template) {
-
-		if (template.equals(TEMPLATE_FULL_CONTENT)) {
-			renderRequest.setAttribute(
-				WebKeys.KNOWLEDGE_BASE_KB_ARTICLE, _kbArticle);
-
-			return "/admin/asset/" + template + ".jsp";
-		}
-		else {
-			return null;
-		}
+	public boolean isPrintable() {
+		return true;
 	}
 
 	@Override

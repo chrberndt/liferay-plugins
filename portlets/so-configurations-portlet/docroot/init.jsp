@@ -29,7 +29,11 @@
 
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+<<<<<<< HEAD
 page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
+=======
+page import="com.liferay.portal.kernel.util.GetterUtil" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
 page import="com.liferay.portal.kernel.util.InstanceFactory" %><%@
 page import="com.liferay.portal.kernel.util.OrderByComparator" %><%@
@@ -38,15 +42,31 @@ page import="com.liferay.portal.kernel.util.PortalClassLoaderUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
 page import="com.liferay.portal.model.Group" %><%@
+<<<<<<< HEAD
 page import="com.liferay.portal.model.OrganizationConstants" %><%@
 page import="com.liferay.portal.model.Role" %><%@
 page import="com.liferay.portal.service.GroupLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %><%@
+=======
+page import="com.liferay.portal.model.LayoutConstants" %><%@
+page import="com.liferay.portal.model.OrganizationConstants" %><%@
+page import="com.liferay.portal.model.ResourceConstants" %><%@
+page import="com.liferay.portal.model.Role" %><%@
+page import="com.liferay.portal.security.permission.ActionKeys" %><%@
+page import="com.liferay.portal.service.GroupLocalServiceUtil" %><%@
+page import="com.liferay.portal.service.OrganizationLocalServiceUtil" %><%@
+page import="com.liferay.portal.service.PortletPreferencesLocalServiceUtil" %><%@
+page import="com.liferay.portal.service.ResourcePermissionLocalServiceUtil" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.portal.service.RoleLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.UserGroupLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.UserLocalServiceUtil" %><%@
 page import="com.liferay.portal.util.PortalUtil" %><%@
+<<<<<<< HEAD
 page import="com.liferay.portal.util.PortletKeys" %><%@
+=======
+page import="com.liferay.so.configurations.util.PortletKeys" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.so.util.RoleConstants" %>
 
 <%@ page import="java.util.LinkedHashMap" %><%@

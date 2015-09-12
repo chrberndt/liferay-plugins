@@ -14,6 +14,11 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -26,6 +31,10 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLFileVersionDiffSoap implements Serializable {
 	public static SyncDLFileVersionDiffSoap toSoapModel(
 		SyncDLFileVersionDiff model) {

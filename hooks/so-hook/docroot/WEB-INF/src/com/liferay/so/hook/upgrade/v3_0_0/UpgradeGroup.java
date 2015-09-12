@@ -17,23 +17,41 @@
 
 package com.liferay.so.hook.upgrade.v3_0_0;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+<<<<<<< HEAD
 import com.liferay.portal.service.persistence.GroupActionableDynamicQuery;
 import com.liferay.so.service.SocialOfficeServiceUtil;
 
 /**
  * @author Jonathan Lee
+=======
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+/**
+ * @author Jonathan Lee
+ * @author Sherry Yang
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  */
 public class UpgradeGroup extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
+<<<<<<< HEAD
 		ActionableDynamicQuery actionableDynamicQuery =
 			new GroupActionableDynamicQuery() {
 
@@ -57,6 +75,42 @@ public class UpgradeGroup extends UpgradeProcess {
 			};
 
 		actionableDynamicQuery.performActions();
+=======
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBuilder sb = new StringBuilder(10);
+
+			sb.append("select classPK from ExpandoValue inner join ");
+			sb.append("ExpandoColumn on ((ExpandoValue.columnId = ");
+			sb.append("ExpandoColumn.columnId) and (ExpandoColumn.name = ");
+			sb.append("'socialOfficeEnabled')) inner join ExpandoTable on ");
+			sb.append("((ExpandoValue.tableId = ExpandoTable.tableId) and ");
+			sb.append("(ExpandoTable.name = '");
+			sb.append(ExpandoTableConstants.DEFAULT_TABLE_NAME);
+			sb.append("')) where (ExpandoValue.classNameId = '");
+			sb.append(PortalUtil.getClassNameId(Group.class));
+			sb.append("') and (ExpandoValue.data_ = 'true')");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long classPK = rs.getLong("classPK");
+
+				LayoutSetLocalServiceUtil.updateLookAndFeel(
+					classPK, "so_WAR_sotheme", "01", StringPool.BLANK, false);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 }

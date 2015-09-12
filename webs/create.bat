@@ -4,7 +4,11 @@ if "" == "%1" goto errorCreate
 
 if "" == "%2" goto errorCreate
 
+<<<<<<< HEAD
 call ant -Dweb.name=%1 -Dweb.display.name=%2 create
+=======
+call ..\tools\gradle\gradlew.bat --build-file=..\sdk.gradle -PwebName=%1 -PwebDisplayName=%2 createWeb
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 rem call ant deploy
 

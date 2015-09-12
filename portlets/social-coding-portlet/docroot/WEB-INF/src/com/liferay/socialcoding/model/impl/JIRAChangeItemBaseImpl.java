@@ -14,7 +14,7 @@
 
 package com.liferay.socialcoding.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.socialcoding.model.JIRAChangeItem;
 import com.liferay.socialcoding.service.JIRAChangeItemLocalServiceUtil;
@@ -28,9 +28,10 @@ import com.liferay.socialcoding.service.JIRAChangeItemLocalServiceUtil;
  *
  * @author Brian Wing Shun Chan
  * @see JIRAChangeItemImpl
- * @see com.liferay.socialcoding.model.JIRAChangeItem
+ * @see JIRAChangeItem
  * @generated
  */
+@ProviderType
 public abstract class JIRAChangeItemBaseImpl extends JIRAChangeItemModelImpl
 	implements JIRAChangeItem {
 	/*
@@ -39,7 +40,7 @@ public abstract class JIRAChangeItemBaseImpl extends JIRAChangeItemModelImpl
 	 * Never modify or reference this class directly. All methods that expect a j i r a change item model instance should use the {@link JIRAChangeItem} interface instead.
 	 */
 	@Override
-	public void persist() throws SystemException {
+	public void persist() {
 		if (this.isNew()) {
 			JIRAChangeItemLocalServiceUtil.addJIRAChangeItem(this);
 		}

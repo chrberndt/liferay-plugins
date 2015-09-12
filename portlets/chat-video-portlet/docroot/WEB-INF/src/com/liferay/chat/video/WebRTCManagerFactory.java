@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+<<<<<<< HEAD
+=======
+ * Creates and stores a list of WebRTC managers.
+ *
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @author Brian Wing Shun Chan
  * @author Philippe Proulx
  */
@@ -36,6 +41,10 @@ public class WebRTCManagerFactory {
 	}
 
 	private static List<WebRTCManager> _webRTCManagers =
+<<<<<<< HEAD
 		new CopyOnWriteArrayList<WebRTCManager>();
+=======
+		new CopyOnWriteArrayList<>();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

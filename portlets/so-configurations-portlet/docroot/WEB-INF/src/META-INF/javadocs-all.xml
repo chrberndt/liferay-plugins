@@ -25,6 +25,27 @@
 			</throws>
 		</method>
 		<method>
+<<<<<<< HEAD
+=======
+			<name>updateGeneralConfigurations</name>
+			<param>
+				<name>actionRequest</name>
+				<type>javax.portlet.ActionRequest</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<param>
+				<name>actionResponse</name>
+				<type>javax.portlet.ActionResponse</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<throws>
+				<name>Exception</name>
+				<type>java.lang.Exception</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
+		</method>
+		<method>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 			<name>updateGroupsRole</name>
 			<param>
 				<name>actionRequest</name>
@@ -60,6 +81,27 @@
 				<comment><![CDATA[]]></comment>
 			</throws>
 		</method>
+<<<<<<< HEAD
+=======
+		<method>
+			<name>updateRolePermissions</name>
+			<param>
+				<name>companyId</name>
+				<type>long</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<param>
+				<name>addSitePermission</name>
+				<type>boolean</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<throws>
+				<name>Exception</name>
+				<type>java.lang.Exception</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
+		</method>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</javadoc>
 	<javadoc>
 		<name>ServicePostAction</name>

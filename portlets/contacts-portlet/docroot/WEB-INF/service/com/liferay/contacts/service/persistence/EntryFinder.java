@@ -14,41 +14,23 @@
 
 package com.liferay.contacts.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 /**
  * @author Brian Wing Shun Chan
+ * @generated
  */
+@ProviderType
 public interface EntryFinder {
 	public int countByKeywords(long companyId, long userId,
-		java.lang.String keywords)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		java.lang.String keywords);
 
-	public int countByKeywords(long userId, java.lang.String keywords)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByU_FN_EA(long userId, java.lang.String[] fullNames,
-		java.lang.String[] emailAddresses, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByC_U_FN_EA(long companyId, long userId,
-		java.lang.String[] fullNames, java.lang.String[] emailAddresses,
-		boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public int countByKeywords(long userId, java.lang.String keywords);
 
 	public java.util.List<com.liferay.portal.model.BaseModel<?>> findByKeywords(
 		long companyId, long userId, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+		int end);
 
 	public java.util.List<com.liferay.contacts.model.Entry> findByKeywords(
-		long userId, java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.contacts.model.Entry> findByU_FN_EA(
-		long userId, java.lang.String[] fullNames,
-		java.lang.String[] emailAddresses, boolean andOperator, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.BaseModel<?>> findByC_U_FN_EA(
-		long companyId, long userId, java.lang.String[] fullNames,
-		java.lang.String[] emailAddresses, boolean andOperator, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+		long userId, java.lang.String keywords, int start, int end);
 }

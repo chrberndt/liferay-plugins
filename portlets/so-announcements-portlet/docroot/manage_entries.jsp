@@ -96,11 +96,11 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, "no-entries-were-found");
 
-		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, portletName.equals(PortletKeys.ALERTS));
+		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, portletName.equals(alertsEntryPortletId));
 
 		searchContainer.setTotal(total);
 
-		List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(classNameId, classPK, portletName.equals(PortletKeys.ALERTS), searchContainer.getStart(), searchContainer.getEnd());
+		List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(classNameId, classPK, portletName.equals(alertsEntryPortletId), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -132,7 +132,7 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 			// Type
 
-			row.addText(LanguageUtil.get(pageContext, entry.getType()));
+			row.addText(LanguageUtil.get(request, entry.getType()));
 
 			// Modified date
 
@@ -168,7 +168,11 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 		function(event) {
 			event.preventDefault();
 
+<<<<<<< HEAD
 			if (confirm('<%= UnicodeLanguageUtil.get(pageContext,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
+=======
+			if (confirm('<%= UnicodeLanguageUtil.get(request,"are-you-sure-you-want-to-delete-the-selected-entry") %>')) {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 				var deleteNode = event.currentTarget.ancestor('.delete-entry');
 
 				var entryId = deleteNode.attr('data-entryId');
@@ -196,7 +200,11 @@ portletURL.setWindowState(LiferayWindowState.POP_UP);
 								}
 							}
 						},
+<<<<<<< HEAD
 						dataType: 'json'
+=======
+						dataType: 'JSON'
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 					}
 				);
 			}

@@ -21,6 +21,10 @@ import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
  */
 public class SyncConstants extends DLSyncConstants {
 
+<<<<<<< HEAD
 	public static final String TYPE_PRIVATE_WORKNG_COPY = "privateWorkingCopy";
+=======
+	public static final String TYPE_PRIVATE_WORKING_COPY = "privateWorkingCopy";
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 }

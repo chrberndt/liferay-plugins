@@ -23,7 +23,11 @@
 	</c:if>
 
 	<%
+<<<<<<< HEAD
 	List<Group> groups = SOAnnouncementsUtil.getGroups(themeDisplay);
+=======
+	List<Group> groups = AnnouncementsUtil.getGroups(themeDisplay);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	%>
 
 	<c:if test="<%= !groups.isEmpty() %>">
@@ -43,7 +47,11 @@
 	</c:if>
 
 	<%
+<<<<<<< HEAD
 	List<Organization> organizations = SOAnnouncementsUtil.getOrganizations(themeDisplay);
+=======
+	List<Organization> organizations = AnnouncementsUtil.getOrganizations(themeDisplay);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	%>
 
 	<c:if test="<%= !organizations.isEmpty() %>">
@@ -63,7 +71,11 @@
 	</c:if>
 
 	<%
+<<<<<<< HEAD
 	List<Role> roles = SOAnnouncementsUtil.getRoles(themeDisplay);
+=======
+	List<Role> roles = AnnouncementsUtil.getRoles(themeDisplay);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	%>
 
 	<c:if test="<%= !roles.isEmpty() %>">
@@ -83,7 +95,11 @@
 	</c:if>
 
 	<%
+<<<<<<< HEAD
 	List<UserGroup> userGroups = SOAnnouncementsUtil.getUserGroups(themeDisplay);
+=======
+	List<UserGroup> userGroups = AnnouncementsUtil.getUserGroups(themeDisplay);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	%>
 
 	<c:if test="<%= !userGroups.isEmpty() %>">

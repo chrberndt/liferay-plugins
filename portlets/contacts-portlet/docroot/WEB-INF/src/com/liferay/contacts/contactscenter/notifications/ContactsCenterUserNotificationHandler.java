@@ -17,11 +17,18 @@
 
 package com.liferay.contacts.contactscenter.notifications;
 
+<<<<<<< HEAD
 import com.liferay.compat.portal.kernel.notifications.BaseUserNotificationHandler;
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.contacts.util.PortletKeys;
 import com.liferay.contacts.util.SocialRelationConstants;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+<<<<<<< HEAD
+=======
+import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;

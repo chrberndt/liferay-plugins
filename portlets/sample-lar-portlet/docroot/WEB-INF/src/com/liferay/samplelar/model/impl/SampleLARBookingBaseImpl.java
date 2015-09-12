@@ -14,7 +14,11 @@
 
 package com.liferay.samplelar.model.impl;
 
+<<<<<<< HEAD
 import com.liferay.portal.kernel.exception.SystemException;
+=======
+import aQute.bnd.annotation.ProviderType;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 import com.liferay.samplelar.model.SampleLARBooking;
 import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
@@ -28,9 +32,16 @@ import com.liferay.samplelar.service.SampleLARBookingLocalServiceUtil;
  *
  * @author Mate Thurzo
  * @see SampleLARBookingImpl
+<<<<<<< HEAD
  * @see com.liferay.samplelar.model.SampleLARBooking
  * @generated
  */
+=======
+ * @see SampleLARBooking
+ * @generated
+ */
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public abstract class SampleLARBookingBaseImpl extends SampleLARBookingModelImpl
 	implements SampleLARBooking {
 	/*
@@ -39,7 +50,11 @@ public abstract class SampleLARBookingBaseImpl extends SampleLARBookingModelImpl
 	 * Never modify or reference this class directly. All methods that expect a sample l a r booking model instance should use the {@link SampleLARBooking} interface instead.
 	 */
 	@Override
+<<<<<<< HEAD
 	public void persist() throws SystemException {
+=======
+	public void persist() {
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		if (this.isNew()) {
 			SampleLARBookingLocalServiceUtil.addSampleLARBooking(this);
 		}

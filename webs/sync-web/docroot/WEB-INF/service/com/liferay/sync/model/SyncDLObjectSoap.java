@@ -14,6 +14,11 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -27,16 +32,29 @@ import java.util.List;
  * @see com.liferay.sync.service.http.SyncDLObjectServiceSoap
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class SyncDLObjectSoap implements Serializable {
 	public static SyncDLObjectSoap toSoapModel(SyncDLObject model) {
 		SyncDLObjectSoap soapModel = new SyncDLObjectSoap();
 
 		soapModel.setSyncDLObjectId(model.getSyncDLObjectId());
 		soapModel.setCompanyId(model.getCompanyId());
+<<<<<<< HEAD
+=======
+		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		soapModel.setCreateTime(model.getCreateTime());
 		soapModel.setModifiedTime(model.getModifiedTime());
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setParentFolderId(model.getParentFolderId());
+<<<<<<< HEAD
+=======
+		soapModel.setTreePath(model.getTreePath());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		soapModel.setName(model.getName());
 		soapModel.setExtension(model.getExtension());
 		soapModel.setMimeType(model.getMimeType());
@@ -44,6 +62,10 @@ public class SyncDLObjectSoap implements Serializable {
 		soapModel.setChangeLog(model.getChangeLog());
 		soapModel.setExtraSettings(model.getExtraSettings());
 		soapModel.setVersion(model.getVersion());
+<<<<<<< HEAD
+=======
+		soapModel.setVersionId(model.getVersionId());
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		soapModel.setSize(model.getSize());
 		soapModel.setChecksum(model.getChecksum());
 		soapModel.setEvent(model.getEvent());
@@ -121,6 +143,25 @@ public class SyncDLObjectSoap implements Serializable {
 		_companyId = companyId;
 	}
 
+<<<<<<< HEAD
+=======
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long getCreateTime() {
 		return _createTime;
 	}
@@ -153,6 +194,17 @@ public class SyncDLObjectSoap implements Serializable {
 		_parentFolderId = parentFolderId;
 	}
 
+<<<<<<< HEAD
+=======
+	public String getTreePath() {
+		return _treePath;
+	}
+
+	public void setTreePath(String treePath) {
+		_treePath = treePath;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public String getName() {
 		return _name;
 	}
@@ -209,6 +261,17 @@ public class SyncDLObjectSoap implements Serializable {
 		_version = version;
 	}
 
+<<<<<<< HEAD
+=======
+	public long getVersionId() {
+		return _versionId;
+	}
+
+	public void setVersionId(long versionId) {
+		_versionId = versionId;
+	}
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public long getSize() {
 		return _size;
 	}
@@ -283,10 +346,19 @@ public class SyncDLObjectSoap implements Serializable {
 
 	private long _syncDLObjectId;
 	private long _companyId;
+<<<<<<< HEAD
+=======
+	private long _userId;
+	private String _userName;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private long _createTime;
 	private long _modifiedTime;
 	private long _repositoryId;
 	private long _parentFolderId;
+<<<<<<< HEAD
+=======
+	private String _treePath;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private String _name;
 	private String _extension;
 	private String _mimeType;
@@ -294,6 +366,10 @@ public class SyncDLObjectSoap implements Serializable {
 	private String _changeLog;
 	private String _extraSettings;
 	private String _version;
+<<<<<<< HEAD
+=======
+	private long _versionId;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	private long _size;
 	private String _checksum;
 	private String _event;

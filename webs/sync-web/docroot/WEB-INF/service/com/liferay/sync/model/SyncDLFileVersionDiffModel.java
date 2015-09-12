@@ -14,6 +14,11 @@
 
 package com.liferay.sync.model;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -37,6 +42,10 @@ import java.util.Date;
  * @see com.liferay.sync.model.impl.SyncDLFileVersionDiffModelImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public interface SyncDLFileVersionDiffModel extends BaseModel<SyncDLFileVersionDiff> {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -193,12 +202,18 @@ public interface SyncDLFileVersionDiffModel extends BaseModel<SyncDLFileVersionD
 	public Object clone();
 
 	@Override
+<<<<<<< HEAD
 	public int compareTo(SyncDLFileVersionDiff syncDLFileVersionDiff);
+=======
+	public int compareTo(
+		com.liferay.sync.model.SyncDLFileVersionDiff syncDLFileVersionDiff);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public int hashCode();
 
 	@Override
+<<<<<<< HEAD
 	public CacheModel<SyncDLFileVersionDiff> toCacheModel();
 
 	@Override
@@ -206,6 +221,15 @@ public interface SyncDLFileVersionDiffModel extends BaseModel<SyncDLFileVersionD
 
 	@Override
 	public SyncDLFileVersionDiff toUnescapedModel();
+=======
+	public CacheModel<com.liferay.sync.model.SyncDLFileVersionDiff> toCacheModel();
+
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff toEscapedModel();
+
+	@Override
+	public com.liferay.sync.model.SyncDLFileVersionDiff toUnescapedModel();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	@Override
 	public String toString();

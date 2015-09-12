@@ -31,7 +31,11 @@ MailManager mailManager = MailManager.getInstance(request);
 	<%
 	Account mailAccount = AccountLocalServiceUtil.getAccount(accountId);
 
+<<<<<<< HEAD
 	String taglibLabel = LanguageUtil.format(pageContext, "please-enter-your-password-for-x", mailAccount.getAddress(), false);
+=======
+	String taglibLabel = LanguageUtil.format(request, "please-enter-your-password-for-x", mailAccount.getAddress(), false);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	%>
 
 	<aui:input label="<%= taglibLabel %>" name="password" type="password" />
@@ -52,7 +56,7 @@ MailManager mailManager = MailManager.getInstance(request);
 			A.io.request(
 				themeDisplay.getLayoutURL() + '/-/mail/store_password',
 				{
-					dataType: 'json',
+					dataType: 'JSON',
 					form: {
 						id: form.getDOMNode()
 					},

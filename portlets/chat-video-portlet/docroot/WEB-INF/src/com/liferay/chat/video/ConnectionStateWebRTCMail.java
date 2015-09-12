@@ -17,6 +17,12 @@ package com.liferay.chat.video;
 import com.liferay.portal.kernel.json.JSONObject;
 
 /**
+<<<<<<< HEAD
+=======
+ * Represents connection state WebRTC mail, providing a destination WebRTC
+ * client the state of its connection with a source WebRTC client.
+ *
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
  * @author Philippe Proulx
  */
 public class ConnectionStateWebRTCMail extends WebRTCMail {

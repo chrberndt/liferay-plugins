@@ -21,14 +21,13 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
+taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-<%@ page import="com.liferay.compat.portal.util.PortalUtil" %><%@
-page import="com.liferay.portal.NoSuchRoleException" %><%@
+<%@ page import="com.liferay.portal.NoSuchRoleException" %><%@
 page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.language.UnicodeLanguageUtil" %><%@
@@ -49,6 +48,7 @@ page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
 page import="com.liferay.portal.model.Group" %><%@
 page import="com.liferay.portal.model.Layout" %><%@
+page import="com.liferay.portal.model.LayoutConstants" %><%@
 page import="com.liferay.portal.model.LayoutSetPrototype" %><%@
 page import="com.liferay.portal.model.Portlet" %><%@
 page import="com.liferay.portal.model.Role" %><%@
@@ -59,11 +59,13 @@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.LayoutLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %><%@
 page import="com.liferay.portal.service.PortletLocalServiceUtil" %><%@
+page import="com.liferay.portal.service.PortletPreferencesLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.RoleLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.TeamLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.UserLocalServiceUtil" %><%@
 page import="com.liferay.portal.service.permission.GroupPermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.PortalPermissionUtil" %><%@
+page import="com.liferay.portal.util.PortalUtil" %><%@
 page import="com.liferay.portal.util.comparator.RoleNameComparator" %><%@
 page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %><%@
 page import="com.liferay.portlet.social.model.SocialRelationConstants" %><%@
@@ -77,14 +79,20 @@ page import="com.liferay.so.util.GroupConstants" %><%@
 page import="com.liferay.so.util.PortletKeys" %><%@
 page import="com.liferay.so.util.RoleConstants" %>
 
-<%@ page import="java.text.Format" %>
+<%@ page import="java.text.DateFormat" %><%@
+page import="java.text.Format" %>
 
 <%@ page import="java.util.ArrayList" %><%@
 page import="java.util.Calendar" %><%@
 page import="java.util.Date" %><%@
 page import="java.util.List" %>
 
+<<<<<<< HEAD
 <%@ page import="javax.portlet.PortletURL" %><%@
+=======
+<%@ page import="javax.portlet.PortletPreferences" %><%@
+page import="javax.portlet.PortletURL" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="javax.portlet.WindowState" %>
 
 <portlet:defineObjects />

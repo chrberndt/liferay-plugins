@@ -22,13 +22,18 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBCategory mbCategory = (MBCategory)row.getObject();
 %>
 
-<liferay-ui:icon-menu>
-	<liferay-portlet:renderURL plid="<%= PortalUtil.getPlidFromPortletId(mbCategory.getGroupId(), PortletKeys.MESSAGE_BOARDS) %>" portletName="<%= PortletKeys.MESSAGE_BOARDS %>" var="viewURL">
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
+
+	<%
+	String portletId = PortletProviderUtil.getPortletId(MBMessage.class.getName(), PortletProvider.Action.VIEW);
+	%>
+
+	<liferay-portlet:renderURL plid="<%= PortalUtil.getPlidFromPortletId(mbCategory.getGroupId(), portletId) %>" portletName="<%= portletId %>" var="viewURL">
 		<portlet:param name="struts_action" value="/message_boards/view" />
 		<portlet:param name="mbCategoryId" value="<%= String.valueOf(mbCategory.getCategoryId()) %>" />
 	</liferay-portlet:renderURL>
 
-	<liferay-ui:icon image="view" message="view" target="_blank" url="<%= viewURL %>" />
+	<liferay-ui:icon iconCssClass="icon-search" message="view" target="_blank" url="<%= viewURL %>" />
 
 	<liferay-portlet:renderURL var="editSubscriptionsURL">
 		<portlet:param name="mvcPath" value="/manage_subscriptions.jsp" />
@@ -37,7 +42,7 @@ MBCategory mbCategory = (MBCategory)row.getObject();
 	</liferay-portlet:renderURL>
 
 	<liferay-ui:icon
-		image="edit"
+		iconCssClass="icon-edit"
 		message="manage-subscriptions"
 		method="get"
 		url="<%= editSubscriptionsURL %>"

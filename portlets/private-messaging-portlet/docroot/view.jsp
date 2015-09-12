@@ -61,8 +61,13 @@ LayoutSet layoutSet = themeDisplay.getLayoutSet();
 		</aui:script>
 	</c:when>
 	<c:otherwise>
+<<<<<<< HEAD
 		<div class="alert alert-error">
 			<liferay-ui:message key="this-application-will-only-function-when-placed-on-a-user's-private-page" />
+=======
+		<div class="alert alert-danger">
+			<liferay-ui:message key="this-application-only-functions-when-placed-on-a-user's-private-page" />
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 		</div>
 	</c:otherwise>
 </c:choose>

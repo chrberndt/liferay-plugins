@@ -1,4 +1,5 @@
-*~
+**/.sonar
+**/pmd-reports
 *-ext.properties
 *.bak
 *.iml
@@ -6,27 +7,57 @@
 *.iws
 *.processed
 *.swp
-.ant_targets
+*~
 .ant-targets-build.xml
-.ivy
+.ant_targets
+.gh.json
 .sass-cache
 .sass_cache_*.css
+<<<<<<< HEAD
 _sass_cache_*.css
 
 /.bnd
 
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /*/*/bin
+/*/*/build
 /*/*/classes
+<<<<<<< HEAD
+=======
+/*/*/coverage-reports
+/*/*/docroot/WEB-INF/classes
+/*/*/docroot/WEB-INF/lib/portal-compat-shared.jar
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /*/*/javadoc
 /*/*/temp
 /*/*/test-classes
+/*/*/test-coverage
 /*/*/test-results
 /*/*/tmp
+<<<<<<< HEAD
 
 /*/*/docroot/WEB-INF/classes
 /*/*/docroot/WEB-INF/lib/portal-compat-shared.jar
 
+=======
+/.bnd
+/.gradle
+/.ivy
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 /baseline-reports
 /build.*.properties
 /dist
+/hooks/*/test/integration/arquillian.xml
+/portlets/*/test/integration/arquillian.xml
+/webs/*/test/integration/arquillian.xml
+/themes/*/docroot/WEB-INF/lib
+/themes/*/docroot/css
+/themes/*/docroot/images
+/themes/*/docroot/js
+/themes/*/docroot/layouttpl
+/themes/*/docroot/templates
+/tmp
 /tools/*/*/*/lib
+/tools/node*
+_sass_cache_*.css

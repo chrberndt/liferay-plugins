@@ -59,7 +59,7 @@
 					<c:when test="<%= spam %>">
 						<li>
 							<portlet:actionURL var="notSpamURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
+								<portlet:param name="struts_action" value="/message_boards/akismet_edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="updateStatus" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= messageId %>" />
@@ -67,7 +67,7 @@
 							</portlet:actionURL>
 
 							<liferay-ui:icon
-								image="../mail/compose"
+								iconCssClass="icon-envelope-alt"
 								label="<%= true %>"
 								message="not-spam"
 								url="<%= notSpamURL %>"
@@ -77,7 +77,7 @@
 					<c:otherwise>
 						<li>
 							<portlet:actionURL var="markAsSpamURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
+								<portlet:param name="struts_action" value="/message_boards/akismet_edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="updateStatus" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= messageId %>" />
@@ -85,7 +85,7 @@
 							</portlet:actionURL>
 
 							<liferay-ui:icon
-								image="../mail/delete"
+								iconCssClass="icon-remove"
 								label="<%= true %>"
 								message="mark-as-spam"
 								url="<%= markAsSpamURL %>"

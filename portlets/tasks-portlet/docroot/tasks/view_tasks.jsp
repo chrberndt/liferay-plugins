@@ -31,15 +31,28 @@ if (group.isRegularSite()) {
 	groupId = group.getGroupId();
 }
 
+<<<<<<< HEAD
 long assigneeUserId = 0;
 long reporterUserId = 0;
+=======
+long userId = 0;
+
+if (tabs1.equals("i-have-created")) {
+	userId = user.getUserId();
+}
+
+long assigneeUserId = 0;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 if (tabs1.equals("assigned-to-me")) {
 	assigneeUserId = user.getUserId();
 }
+<<<<<<< HEAD
 else if (tabs1.equals("i-have-created")) {
 	reporterUserId = user.getUserId();
 }
+=======
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 int status = TasksEntryConstants.STATUS_ALL;
 
@@ -67,10 +80,17 @@ taskListURL.setParameter("tabs2", tabs2);
 	emptyResultsMessage="no-tasks-were-found"
 	headerNames="description,due, "
 	iteratorURL="<%= portletURL %>"
+<<<<<<< HEAD
 	total= "<%= TasksEntryLocalServiceUtil.getTasksEntriesCount(groupId, 0, assigneeUserId, reporterUserId, status, assetTagIds, new long[0]) %>"
 >
 	<liferay-ui:search-container-results
 		results="<%= TasksEntryLocalServiceUtil.getTasksEntries(groupId, 0, assigneeUserId, reporterUserId, status, assetTagIds, new long[0], searchContainer.getStart(), searchContainer.getEnd()) %>"
+=======
+	total= "<%= TasksEntryLocalServiceUtil.getTasksEntriesCount(groupId, userId, 0, assigneeUserId, status, assetTagIds, new long[0]) %>"
+>
+	<liferay-ui:search-container-results
+		results="<%= TasksEntryLocalServiceUtil.getTasksEntries(groupId, userId, 0, assigneeUserId, status, assetTagIds, new long[0], searchContainer.getStart(), searchContainer.getEnd()) %>"
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	/>
 
 	<liferay-ui:search-container-row
@@ -86,7 +106,7 @@ taskListURL.setParameter("tabs2", tabs2);
 		if (TasksEntryPermission.contains(permissionChecker, tasksEntry, ActionKeys.UPDATE)) {
 			PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+			rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 			rowURL.setParameter("mvcPath", "/tasks/view_task.jsp");
 			rowURL.setParameter("tasksEntryId", String.valueOf(tasksEntry.getTasksEntryId()));
@@ -116,10 +136,18 @@ taskListURL.setParameter("tabs2", tabs2);
 			<div class="result-title">
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(rowHREF) %>">
-						<a class="<%= cssClass %>" href="javascript:;" onClick="Liferay.Tasks.openTask('<%= rowHREF %>');"><%= tasksEntry.getTitle() %></a>
+						<a class="<%= cssClass %>" href="javascript:;" onClick="Liferay.Tasks.openTask('<%= rowHREF %>', <%= tasksEntry.getTasksEntryId() %>);">
+							<i class="icon-circle"></i>
+
+							<%= tasksEntry.getTitle() %>
+						</a>
 					</c:when>
 					<c:otherwise>
-						<span class="<%= cssClass %>"><%= tasksEntry.getTitle() %></span>
+						<span class="<%= cssClass %>">
+							<i class="icon-circle"></i>
+
+							<%= tasksEntry.getTitle() %>
+						</span>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -127,13 +155,7 @@ taskListURL.setParameter("tabs2", tabs2);
 				<c:if test="<%= group.isUser() %>">
 
 					<%
-					Group curGroup = null;
-
-					try {
-						curGroup = GroupLocalServiceUtil.getGroup(tasksEntry.getGroupId());
-					}
-					catch (NoSuchGroupException nsge) {
-					}
+					Group curGroup = GroupLocalServiceUtil.fetchGroup(tasksEntry.getGroupId());
 					%>
 
 					<c:if test="<%= (curGroup != null) && curGroup.isRegularSite() %>">
@@ -161,10 +183,12 @@ taskListURL.setParameter("tabs2", tabs2);
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
-			buffer="buffer"
 			name="due"
 		>
+			<c:choose>
+				<c:when test="<%= (TasksEntryPermission.contains(permissionChecker, tasksEntry, ActionKeys.UPDATE)) %>">
 
+<<<<<<< HEAD
 			<%
 			if (TasksEntryPermission.contains(permissionChecker, tasksEntry, ActionKeys.UPDATE)) {
 				buffer.append("<div class=\"progress-wrapper\">");
@@ -218,45 +242,84 @@ taskListURL.setParameter("tabs2", tabs2);
 
 				for (int i = TasksEntryConstants.STATUS_PERCENT_TWENTY; i <= TasksEntryConstants.STATUS_RESOLVED; i++) {
 			%>
+=======
+					<%
+					int curStatus = tasksEntry.getStatus();
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-					<portlet:actionURL name="updateTasksEntryStatus" var="statusURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
-						<portlet:param name="redirect" value="<%= taskListURL.toString() %>" />
-						<portlet:param name="tasksEntryId" value="<%= String.valueOf(tasksEntry.getTasksEntryId()) %>" />
-						<portlet:param name="resolverUserId" value="<%= String.valueOf(user.getUserId()) %>" />
-						<portlet:param name="status" value="<%= String.valueOf(i) %>" />
-					</portlet:actionURL>
+					int width = 0;
 
-			<%
-					buffer.append("<a class=\"progress-");
-					buffer.append((i - 1) * 20);
-					buffer.append("\" href=\"");
-					buffer.append(statusURL);
-					buffer.append("\">");
-					buffer.append("<!-- -->");
-					buffer.append("</a>");
-				}
+					if (curStatus == TasksEntryConstants.STATUS_PERCENT_TWENTY) {
+						width = 20;
+					}
+					else if (curStatus == TasksEntryConstants.STATUS_PERCENT_FORTY) {
+						width = 40;
+					}
+					else if (curStatus == TasksEntryConstants.STATUS_PERCENT_SIXTY) {
+						width = 60;
+					}
+					else if (curStatus == TasksEntryConstants.STATUS_PERCENT_EIGHTY) {
+						width = 80;
+					}
+					else if (curStatus == TasksEntryConstants.STATUS_RESOLVED) {
+						width = 100;
+					}
+					%>
 
-				buffer.append("</div>");
-				buffer.append("</div>");
-				buffer.append("</div>");
-			}
-			else {
-				if (tasksEntry.getDueDate() != null) {
-					buffer.append(dateFormatDateTime.format(tasksEntry.getDueDate()));
-				}
-			}
-			%>
+					<div class="progress-wrapper">
+						<div class="current">
+							<div class="progress" style="width:<%= width %>%">
+								<!-- -->
+							</div>
 
+							<c:if test="<%= tasksEntry.getDueDate() != null %>">
+								<div class="due-date <%= (DateUtil.compareTo(new Date(), tasksEntry.getDueDate(), true) >= 0) ? "past-due" : StringPool.BLANK %>">
+									<%= dateFormatDateTime.format(tasksEntry.getDueDate()) %>
+								</div>
+							</c:if>
+						</div>
+
+						<div class="hide progress-picker">
+							<div class="new-progress"><!-- --></div>
+							<div class="progress-indicator"></div>
+							<div class="progress-selector">
+
+								<%
+								for (int i = TasksEntryConstants.STATUS_PERCENT_TWENTY; i <= TasksEntryConstants.STATUS_RESOLVED; i++) {
+								%>
+
+									<portlet:actionURL name="updateTasksEntryStatus" var="statusURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+										<portlet:param name="redirect" value="<%= taskListURL.toString() %>" />
+										<portlet:param name="tasksEntryId" value="<%= String.valueOf(tasksEntry.getTasksEntryId()) %>" />
+										<portlet:param name="resolverUserId" value="<%= String.valueOf(user.getUserId()) %>" />
+										<portlet:param name="status" value="<%= String.valueOf(i) %>" />
+									</portlet:actionURL>
+
+									<a class="progress-<%= (i - 1) * 20 %>" href="<%= statusURL %>"><!-- --></a>
+
+								<%
+								}
+								%>
+
+							</div>
+						</div>
+					</div>
+				</c:when>
+				<c:when test="<%= tasksEntry.getDueDate() != null %>">
+					<%= dateFormatDateTime.format(tasksEntry.getDueDate()) %>
+				</c:when>
+			</c:choose>
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name=" "
+			name="<%= StringPool.BLANK %>"
 		>
 
 			<%
 			List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(TasksEntry.class.getName(), tasksEntry.getTasksEntryId());
+			%>
 
+<<<<<<< HEAD
 			if (!assetTags.isEmpty()) {
 				buffer.append("<div class=\"tags-wrapper\"><div class=\"icon\"><!-- --></div><div class=\"tags hide\">");
 			}
@@ -274,11 +337,17 @@ taskListURL.setParameter("tabs2", tabs2);
 					buffer.append(", ");
 				}
 			}
+=======
+			<c:if test="<%= !assetTags.isEmpty() %>">
+				<div class="tags-wrapper">
+					<i class="icon-tag"></i>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-			if (!assetTags.isEmpty()) {
-				buffer.append("</div></div>");
-			}
-			%>
+					<div class="hide tags">
+						<%= ListUtil.toString(assetTags, AssetTag.NAME_ACCESSOR) %>
+					</div>
+				</div>
+			</c:if>
 
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>

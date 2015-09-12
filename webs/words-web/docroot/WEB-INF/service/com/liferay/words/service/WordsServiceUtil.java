@@ -14,6 +14,11 @@
 
 package com.liferay.words.service;
 
+<<<<<<< HEAD
+=======
+import aQute.bnd.annotation.ProviderType;
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableService;
@@ -32,12 +37,23 @@ import com.liferay.portal.service.InvokableService;
  * @see com.liferay.words.service.impl.WordsServiceImpl
  * @generated
  */
+<<<<<<< HEAD
+=======
+@ProviderType
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 public class WordsServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.words.service.impl.WordsServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+<<<<<<< HEAD
+=======
+	public static java.util.List<java.lang.String> checkSpelling(
+		java.lang.String text) throws java.lang.Exception {
+		return getService().checkSpelling(text);
+	}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 	/**
 	* Returns the Spring bean ID for this bean.
@@ -48,6 +64,7 @@ public class WordsServiceUtil {
 		return getService().getBeanIdentifier();
 	}
 
+<<<<<<< HEAD
 	/**
 	* Sets the Spring bean ID for this bean.
 	*
@@ -55,6 +72,11 @@ public class WordsServiceUtil {
 	*/
 	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
 		getService().setBeanIdentifier(beanIdentifier);
+=======
+	public static java.util.List<java.lang.String> getSuggestions(
+		java.lang.String word) throws java.lang.Exception {
+		return getService().getSuggestions(word);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static java.lang.Object invokeMethod(java.lang.String name,
@@ -63,6 +85,7 @@ public class WordsServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+<<<<<<< HEAD
 	public static java.util.List<java.lang.String> checkSpelling(
 		java.lang.String text) throws java.lang.Exception {
 		return getService().checkSpelling(text);
@@ -71,6 +94,15 @@ public class WordsServiceUtil {
 	public static java.util.List<java.lang.String> getSuggestions(
 		java.lang.String word) throws java.lang.Exception {
 		return getService().getSuggestions(word);
+=======
+	/**
+	* Sets the Spring bean ID for this bean.
+	*
+	* @param beanIdentifier the Spring bean ID for this bean
+	*/
+	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+		getService().setBeanIdentifier(beanIdentifier);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	}
 
 	public static void clearService() {
@@ -99,6 +131,10 @@ public class WordsServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
+<<<<<<< HEAD
+=======
+	@Deprecated
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	public void setService(WordsService service) {
 	}
 

@@ -1,2 +1,6 @@
+<<<<<<< HEAD
+=======
+create index IX_7758D8B1 on PushNotificationsDevice (platform);
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 create unique index IX_2F3EDC9F on PushNotificationsDevice (token);
 create index IX_2FBF066B on PushNotificationsDevice (userId, platform);

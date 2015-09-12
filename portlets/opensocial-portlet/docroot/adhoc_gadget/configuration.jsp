@@ -31,7 +31,11 @@ Map<String, OAuthService> oAuthServices = (Map<String, OAuthService>)renderReque
 <aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	<liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL">
 		<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	</liferay-portlet:renderURL>
@@ -71,7 +75,7 @@ Map<String, OAuthService> oAuthServices = (Map<String, OAuthService>)renderReque
 	<c:choose>
 		<c:when test='<%= tabs2.equals("gadget") || tabs2Names.equals("gadget") %>'>
 			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="url" name="preferences--url--" type="text" value="<%= url %>" />
+				<aui:input label="url" name="preferences--url--" type="text" value="<%= url %>" wrapperCssClass="lfr-input-text-container" />
 			</aui:fieldset>
 
 			<aui:button-row>

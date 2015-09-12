@@ -104,7 +104,7 @@ AUI.add(
 
 										Liferay.Util.checkAllBox(
 											instance._userThreadsContainer,
-											instance.get('namespace') + 'mbThreadCheckbox',
+											instance.get('namespace') + 'mbThread',
 											'.check-all'
 										);
 									},
@@ -224,6 +224,39 @@ AUI.add(
 						}
 					},
 
+					_bindMarkMessagesUnread: function() {
+						var instance = this;
+
+						var markMessagesUnread = instance.byId('markMessagesAsUnread');
+
+						if (markMessagesUnread) {
+							instance._eventHandles.push(
+								markMessagesUnread.on(
+									STR_CLICK,
+									function(event) {
+<<<<<<< HEAD
+										if (confirm(Liferay.Language.get('are-your-sure-you-want-to-mark-the-message-as-unread'))) {
+											var currentTarget = event.currentTarget;
+
+											instance._sendRequest(currentTarget.getAttribute('data-mark-as-unread-url'));
+=======
+										event.preventDefault();
+
+										var mbThreadIds = instance._getSelectedMessageIds();
+
+										if (mbThreadIds.length) {
+											if (confirm(Liferay.Language.get('are-your-sure-you-want-to-mark-the-selected-messages-as-unread'))) {
+												instance.markMessagesAsUnread(mbThreadIds);
+											}
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
+										}
+									},
+									instance
+								)
+							);
+						}
+					},
+
 					_bindMarkMessageUnread: function() {
 						var instance = this;
 
@@ -238,32 +271,6 @@ AUI.add(
 											var currentTarget = event.currentTarget;
 
 											instance._sendRequest(currentTarget.getAttribute('data-mark-as-unread-url'));
-										}
-									},
-									instance
-								)
-							);
-						}
-					},
-
-					_bindMarkMessagesUnread: function() {
-						var instance = this;
-
-						var markMessagesUnread = instance.byId('markMessagesAsUnread');
-
-						if (markMessagesUnread) {
-							instance._eventHandles.push(
-								markMessagesUnread.on(
-									STR_CLICK,
-									function(event) {
-										event.preventDefault();
-
-										var mbThreadIds = instance._getSelectedMessageIds();
-
-										if (mbThreadIds.length) {
-											if (confirm(Liferay.Language.get('are-your-sure-you-want-to-mark-the-selected-messages-as-unread'))) {
-												instance.markMessagesAsUnread(mbThreadIds);
-											}
 										}
 									},
 									instance
@@ -362,7 +369,7 @@ AUI.add(
 
 						redirectURL.setWindowState('NORMAL');
 
-						var portletURL =  new Liferay.PortletURL.createURL(instance.get('baseRenderURL'));
+						var portletURL = new Liferay.PortletURL.createURL(instance.get('baseRenderURL'));
 
 						portletURL.setPortletId(instance.get('portletId'));
 						portletURL.setWindowState('POP_UP');
@@ -398,7 +405,11 @@ AUI.add(
 					_sendRequest: function(request, mbThreadIds) {
 						var instance = this;
 
+<<<<<<< HEAD
 						var request = Liferay.Util.addParams(instance._namespace + 'mbThreadIds=' + mbThreadIds, request) || request;
+=======
+						request = Liferay.Util.addParams(instance._namespace + 'mbThreadIds=' + mbThreadIds, request) || request;
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
 						A.io.request(
 							request,

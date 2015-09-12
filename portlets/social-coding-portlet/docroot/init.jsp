@@ -18,15 +18,19 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
+<<<<<<< HEAD
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+=======
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 
-<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
-page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
-page import="com.liferay.portal.kernel.dao.search.SearchEntry" %><%@
-page import="com.liferay.portal.kernel.dao.search.TextSearchEntry" %><%@
+<%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.log.Log" %><%@
 page import="com.liferay.portal.kernel.log.LogFactoryUtil" %><%@
@@ -57,6 +61,12 @@ page import="com.liferay.socialcoding.service.SVNRepositoryLocalServiceUtil" %><
 page import="com.liferay.socialcoding.service.SVNRevisionLocalServiceUtil" %><%@
 page import="com.liferay.socialcoding.svn.util.SVNConstants" %><%@
 page import="com.liferay.socialcoding.util.PortletPropsValues" %><%@
+<<<<<<< HEAD
+=======
+page import="com.liferay.taglib.search.ResultRow" %><%@
+page import="com.liferay.taglib.search.SearchEntry" %><%@
+page import="com.liferay.taglib.search.TextSearchEntry" %><%@
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 page import="com.liferay.util.RSSUtil" %>
 
 <%@ page import="com.sun.syndication.feed.synd.SyndContent" %><%@

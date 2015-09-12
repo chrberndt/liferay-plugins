@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="portlets" basedir="." default="deploy" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portlets" basedir="." default="deploy">
 	<import file="../build-common-plugins.xml" />
 
 	<target name="create">
+<<<<<<< HEAD
 		<if>
 			<or>
 				<not>
@@ -255,5 +256,17 @@ portal-dependency-jars=vaadin.jar</echo>
 				<include name="liferay-util.tld" />
 			</fileset>
 		</copy>
+=======
+		<property name="portlet.display.name" value="" />
+		<property name="portlet.framework" value="" />
+		<property name="portlet.name" value="" />
+
+		<gradle-execute task="createPortlet">
+			<arg value="--build-file=../sdk.gradle" />
+			<arg value="-PportletDisplayName=${portlet.display.name}" />
+			<arg value="-PportletFramework=${portlet.framework}" />
+			<arg value="-PportletName=${portlet.name}" />
+		</gradle-execute>
+>>>>>>> e7cdf43148702e1699eea503c162f42b84cbcee1
 	</target>
 </project>
